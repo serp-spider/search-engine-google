@@ -5,6 +5,7 @@
 
 namespace Library;
 
-class Library {
+class Library
+{
 
 }
