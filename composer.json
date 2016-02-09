@@ -1,0 +1,44 @@
+{
+
+  "name": "serps/search-engine-google",
+  "description": "Google Rules and client for SERPS",
+  "type": "library",
+  "keywords": ["SERPS", "Google"],
+  "homepage": "https://github.com/serp-scrape/search-engine-google",
+  "license": "Fair",
+
+  "authors": [
+    {
+      "name": "Soufiane GHZAL",
+      "homepage": "https://github.com/gsouf"
+    }
+  ],
+
+  "autoload":{
+    "psr-4" : {
+      "Serps\\SearchEngine\\Google\\": "src/"
+    }
+  },
+
+  "autoload-dev":{
+    "psr-4" : {
+      "Serps\\Test\\SearchEngine\\Google\\": "test/suites"
+    }
+  },
+
+  "require": {
+    "php": ">=5.5.9",
+    "serps/serps": "dev-master"
+  },
+
+  "require-dev":{
+    "phpunit/phpunit": "4.1.2",
+    "squizlabs/php_codesniffer": "~2.5"
+  },
+
+  "scripts": {
+      "test": "vendor/bin/phpunit -c phpunit.dist.xml",
+      "csfix": "yes 2>/dev/null | test/bin/phpcbf.bash",
+      "cscheck": "test/bin/phpcs.bash emacs"
+  }
+}

@@ -1,0 +1,36 @@
+language: php
+
+sudo: false
+
+matrix:
+  include:
+  - php: 5.5
+    env: PROCESS_CODECLIMATE=true
+  - php: 5.6
+  - php: 7.0
+  - php: nightly
+  - php: hhvm
+    env: IGNORE_XDEBUG=true
+
+  fast_finish: true
+
+  allow_failures:
+  - php: nightly
+
+before_script:
+  - if [ -z "$IGNORE_XDEBUG" ];then phpenv config-rm xdebug.ini; fi
+  - composer config -g github-oauth.github.com $GITHUB_COMPOSER_AUTH
+  - travis_retry composer self-update
+  - travis_retry composer update --prefer-dist
+  - if [ -n "$PROCESS_CODECLIMATE" ];then echo 'zend_extension=xdebug.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi
+
+script: ./test/bin/ci.bash summary
+
+env:
+  global:
+    secure: kBRY5+RxotmB1NwI1GVJ9ndgsANkyuvMSrYtaDqYFdLo5c5Eow0HE+g8hpTkUCGethUz+/b5UzXl/w+ocCl3n4T17MSceLy1cY0gCTG+drRV+vAn8SOHx6QWB2Zp2ixFtQrv6ivOHq8Rjh244jkyDZrnNRjMHUkdUteSOC10o1bBzNpZ2iNR/Tnzr1uU4MilRCq9u2/QtrPZppu2ki0/h0vtb8K0Zi84S8fWHP+Qf8hMgsGTnOl3jhQHwEA/C+OEHAt3V0cxHIZ/rV6CC6k1c91XvCk4kI0gk2C14DIax5TDtvxif+SmlB2nDjRYbeHyTLuiXxJAXttjQ7mWB4w0D3YtxxLLu3h7CPnZjp+BF6KVLfXWu1T2+/WD/snvGChqkwLB/Z2VsTbxzYlXbZSIp13xXDKJa16jH2tWl3mr6o0UsuZq46zBERemoL3LWzj1wy6o2XJvSrbir/AaLZI5OADYhK7ZST95aHnm9QykKQzGNWVBuvYBPjIOQIrqnRGZSBQWMqVZQLjhEr7TR2GenGRdE8gvh3gWbP2yO8sCUUZO7klDSIrnIgMjvawtDautixoqmH9wlXUZgX1H8K2mBWc7ZoxIaVFBUhrv7+fHKM3zoqg6cBXhhAtgYQu5YieaZv9gnl8B77arfriARMAsKsn0Wh/nZP40AwUAk+ZFSps=
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
