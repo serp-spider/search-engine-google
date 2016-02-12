@@ -27,18 +27,12 @@ class GoogleClient
     protected $client;
 
     /**
-     * @var CaptchaSolverInterface|null
-     */
-    protected $captchaSolver;
-
-    /**
      * @param HttpClientInterface $client
      * @param CaptchaSolverInterface|null $captchaSolver
      */
-    public function __construct(HttpClientInterface $client, CaptchaSolverInterface $captchaSolver = null)
+    public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
-        $this->captchaSolver = $captchaSolver;
     }
 
     /**
@@ -91,18 +85,9 @@ class GoogleClient
 
     }
 
-    public function solveCaptcha(GoogleCaptcha $captchaPage)
+    public function solveCaptcha($code, $id, Proxy $proxy)
     {
-        if (!$this->captchaSolver) {
-            throw new Exception('The client does not have a captcha solver.');
-        }
-
-        $result = $this->captchaSolver->solve($captchaPage);
-
-        if ($result) {
-           // TODO send the captcha to google with the given proxy
-        } else {
-            throw new Exception('Could not solve captcha');
-        }
+        // TODO
+        throw new Exception('Not implemented');
     }
 }
