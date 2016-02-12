@@ -13,8 +13,8 @@ class GoogleSerp extends GoogleDom
 {
 
     /**
-     * Get the total number of results
-     * @return int the number of results
+     * Get the location detected by google
+     * @return string
      */
     public function getLocation()
     {
@@ -28,11 +28,15 @@ class GoogleSerp extends GoogleDom
         return null;
     }
 
+    /**
+     * @return \Serps\Core\Serp\ResultSet
+     */
     public function getNaturalResults()
     {
         $parser = new NaturalParser();
         return $parser->parse($this);
     }
+
 
     public function getAdwordsResults()
     {
