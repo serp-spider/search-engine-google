@@ -29,7 +29,8 @@ class GoogleSerpTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Nantes', $this->getDom()->getLocation());
     }
 
-    public function testGetNaturalResults(){
+    public function testGetNaturalResults()
+    {
         $dom = $this->getDom();
 
         $results = $dom->getNaturalResults();
@@ -37,5 +38,4 @@ class GoogleSerpTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(ResultSet::class, $results);
         $this->assertCount(10, $results);
     }
-
 }

@@ -32,5 +32,10 @@ class GoogleCaptchaTest extends \PHPUnit_Framework_TestCase
         $expected = 'https://ipv4.google.com/sorry/image?id=11933951502432445488&q=CGMSBIBOphkYlPS4tQUiGQDxp4NL98wGI3m9KmgfVcObdGm1KM4Kn_Y&hl=en';
         $this->assertEquals($expected, $captchaDom->getImageUrl());
 
+
+        $this->assertEquals('11933951502432445488', $captchaDom->getId());
+
+        $this->assertInstanceOf(GoogleError::class, $captchaDom->getErrorPage());
+
     }
 }

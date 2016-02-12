@@ -73,7 +73,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
 
 
         $inTheNews = $result->getResultsByType('inTheNews');
-        $this->assertEquals(3, $inTheNews[0]->getPosition());
+        $this->assertEquals(3, $inTheNews[0]->getRealPosition());
         $this->assertEquals(
             'How well do you know The Simpsons? Take our quiz',
             $inTheNews[0]->getDataValue('cards')[0]['title']
