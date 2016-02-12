@@ -17,6 +17,12 @@ use Serps\SearchEngine\Google\GoogleUrlArchive;
 class GoogleUrlTest extends \PHPUnit_Framework_TestCase
 {
 
+    public function testConstruct(){
+        $googleUrl = new GoogleUrl();
+        $this->assertEquals('google.com', $googleUrl->getHost());
+        $this->assertEquals('/search', $googleUrl->getPath());
+    }
+
     public function testGetArchive()
     {
         $googleUrl = GoogleUrl::fromString('https://google.com/search?q=simpsons');
