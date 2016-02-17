@@ -6,6 +6,7 @@
 namespace Serps\SearchEngine\Google\Page;
 
 use Serps\Exception;
+use Serps\SearchEngine\Google\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\NaturalParser;
 
@@ -42,5 +43,24 @@ class GoogleSerp extends GoogleDom
     {
         // TODO
         throw  new Exception('Not implemented');
+    }
+
+    public function javascriptIsEvaluated(){
+        $body = $this->getXpath()->query('//body');
+
+        if($body->length != 1){
+            throw new Exception('No body found');
+        }
+
+        $body = $body->item(0);
+        /** @var $body \DOMElement */
+        $class = $body->getAttribute('class');
+        if($class=='hsrp'){
+            return false;
+        }elseif(strstr($class, 'srp')){
+            return true;
+        }else{
+            throw new InvalidDOMException('Unable to check javascript status.');
+        }
     }
 }
