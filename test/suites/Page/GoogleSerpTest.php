@@ -48,7 +48,8 @@ class GoogleSerpTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(10, $results);
     }
 
-    public function testJavascriptEvaluated(){
+    public function testJavascriptEvaluated()
+    {
         $this->assertTrue($this->getDomJavascript()->javascriptIsEvaluated());
         $this->assertFalse($this->getDomNoJavascript()->javascriptIsEvaluated());
     }

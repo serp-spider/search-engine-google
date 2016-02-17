@@ -45,21 +45,22 @@ class GoogleSerp extends GoogleDom
         throw  new Exception('Not implemented');
     }
 
-    public function javascriptIsEvaluated(){
+    public function javascriptIsEvaluated()
+    {
         $body = $this->getXpath()->query('//body');
 
-        if($body->length != 1){
+        if ($body->length != 1) {
             throw new Exception('No body found');
         }
 
         $body = $body->item(0);
         /** @var $body \DOMElement */
         $class = $body->getAttribute('class');
-        if($class=='hsrp'){
+        if ($class=='hsrp') {
             return false;
-        }elseif(strstr($class, 'srp')){
+        } elseif (strstr($class, 'srp')) {
             return true;
-        }else{
+        } else {
             throw new InvalidDOMException('Unable to check javascript status.');
         }
     }
