@@ -34,7 +34,12 @@ class GoogleSerp extends GoogleDom
      */
     public function getNaturalResults()
     {
-        $parser = new NaturalParser();
+        if($this->javascriptIsEvaluated()){
+            $parser = new NaturalParser();
+        }else{
+            // TODO
+            throw new \Exception("Google parser does not currently support parsing non javascript results");
+        }
         return $parser->parse($this);
     }
 
