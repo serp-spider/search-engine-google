@@ -38,7 +38,7 @@ class GoogleClient
     /**
      * @param GoogleUrlInterface $googleUrl
      * @param Proxy|null $proxy
-     * @return GoogleDom
+     * @return GoogleDom|GoogleSerp
      * @throws Exception\CaptchaException
      * @throws Exception\PageNotFoundException
      * @throws Exception\RequestErrorException
@@ -48,24 +48,19 @@ class GoogleClient
         $request = $googleUrl->buildRequest();
         $response = $this->client->sendRequest($request, $proxy);
 
-        $statusCode = $response->getStatusCode();
+        $statusCode = $response->getHttpResponseStatus();
         $urlArchive = $googleUrl->getArchive();
 
-        $effectiveUrl = $response->getHeader('X-SERPS-EFFECTIVE-URL');
-        if (!count($effectiveUrl) > 0) {
-            throw new Exception('Response does not provide a value for the header X-SERPS-EFFECTIVE-URL');
-        }
-
-        $effectiveUrl = UrlArchive::fromString($effectiveUrl[0]);
+        $effectiveUrl = GoogleUrlArchive::fromString($response->getEffectiveUrl()->__toString());
 
         if (200 == $statusCode) {
 
             switch ($urlArchive->getResultType()) {
                 case GoogleUrl::RESULT_TYPE_ALL:
-                    $dom = new GoogleSerp((string)$response->getBody(), $urlArchive, $effectiveUrl, $proxy);
+                    $dom = new GoogleSerp($response->getPageContent(), $urlArchive, $effectiveUrl, $proxy);
                     break;
                 default:
-                    $dom = new GoogleDom((string)$response->getBody(), $urlArchive, $effectiveUrl, $proxy);
+                    $dom = new GoogleDom($response->getPageContent(), $urlArchive, $effectiveUrl, $proxy);
             }
 
             return $dom;
@@ -73,7 +68,7 @@ class GoogleClient
             if (404 == $statusCode) {
                 throw new Exception\PageNotFoundException();
             } else {
-                $errorDom = new GoogleError((string)$response->getBody(), $urlArchive, $effectiveUrl, $proxy);
+                $errorDom = new GoogleError($response->getPageContent(), $urlArchive, $effectiveUrl, $proxy);
 
                 if ($errorDom->isCaptcha()) {
                     throw new Exception\CaptchaException(new GoogleCaptcha($errorDom));

@@ -6,11 +6,13 @@
 namespace Serps\Test\TDD\SearchEngine\Google;
 
 use Serps\Core\Http\HttpClientInterface;
+use Serps\Core\Http\SearchEngineResponse;
+use Serps\Core\UrlArchive;
 use Serps\Exception\CaptchaException;
 use Serps\SearchEngine\Google\GoogleUrl;
 use Serps\SearchEngine\Google\GoogleClient;
+use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleCaptcha;
-use Zend\Diactoros\Response;
 use Serps\SearchEngine\Google\Page\GoogleSerp;
 
 /**
@@ -22,16 +24,17 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
     public function testValidDom()
     {
         $httpClientMock = $this->getMock(HttpClientInterface::class);
-        $responseFromMock = new Response();
-        $responseFromMock = $responseFromMock->withHeader('X-SERPS-EFFECTIVE-URL', 'https://www.google.fr/search?q=simpsons+movie+trailer');
-        $responseFromMock = $responseFromMock->withHeader('X-SERPS-PROXY', '');
-        $responseFromMock->getBody()->write(
-            file_get_contents('test/resources/simpsons+movie+trailer.html')
+        $responseFromMock = new SearchEngineResponse(
+            [],
+            200,
+            file_get_contents('test/resources/simpsons+movie+trailer.html'),
+            false,
+            GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
+            GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer')
         );
         $httpClientMock->method('sendRequest')->willReturn($responseFromMock);
 
-
-
+        /* @var $httpClientMock HttpClientInterface */
         $googleClient = new GoogleClient($httpClientMock);
         $url = GoogleUrl::fromString('https://www.google.fr/search?q=simpsons+movie+trailer');
 
@@ -43,15 +46,18 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
     public function testCaptchaDom()
     {
         $httpClientMock = $this->getMock(HttpClientInterface::class);
-        $responseFromMock = new Response();
-        $responseFromMock = $responseFromMock->withStatus(503);
-        $responseFromMock = $responseFromMock->withHeader('X-SERPS-EFFECTIVE-URL', 'https://www.google.fr/search?q=simpsons+movie+trailer');
-        $responseFromMock = $responseFromMock->withHeader('X-SERPS-PROXY', '');
-        $responseFromMock->getBody()->write(
-            file_get_contents('test/resources/captcha.html')
+        $responseFromMock = new SearchEngineResponse(
+            [],
+            503,
+            file_get_contents('test/resources/captcha.html'),
+            false,
+            GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
+            GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer')
         );
+
         $httpClientMock->method('sendRequest')->willReturn($responseFromMock);
 
+        /* @var $httpClientMock HttpClientInterface */
         $googleClient = new GoogleClient($httpClientMock);
         $url = GoogleUrl::fromString('https://www.google.fr/search?q=simpsons+movie+trailer');
 

@@ -28,7 +28,8 @@
 
   "require": {
     "php": ">=5.5.9",
-    "serps/serps": "dev-master"
+    "serps/serps": "dev-master",
+    "zendframework/zend-diactoros": "1.*"
   },
 
   "require-dev":{
