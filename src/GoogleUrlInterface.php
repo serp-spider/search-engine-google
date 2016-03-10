@@ -34,5 +34,8 @@ interface GoogleUrlInterface extends SerpUrlInterface
     public function getResultType();
 
 
+    /**
+     * @return GoogleUrlArchive
+     */
     public function getArchive();
 }

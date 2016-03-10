@@ -10,6 +10,7 @@ use Serps\Core\Http\HttpClientInterface;
 use Serps\Core\Http\Proxy;
 use Serps\Core\UrlArchive;
 use Serps\Exception;
+use Serps\SearchEngine\Google\Exception\GoogleCaptchaException;
 use Serps\SearchEngine\Google\Page\GoogleCaptcha;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Page\GoogleError;
@@ -28,7 +29,6 @@ class GoogleClient
 
     /**
      * @param HttpClientInterface $client
-     * @param CaptchaSolverInterface|null $captchaSolver
      */
     public function __construct(HttpClientInterface $client)
     {
@@ -71,7 +71,7 @@ class GoogleClient
                 $errorDom = new GoogleError($response->getPageContent(), $urlArchive, $effectiveUrl, $proxy);
 
                 if ($errorDom->isCaptcha()) {
-                    throw new Exception\CaptchaException(new GoogleCaptcha($errorDom));
+                    throw new GoogleCaptchaException(new GoogleCaptcha($errorDom));
                 } else {
                     throw new Exception\RequestErrorException($errorDom);
                 }

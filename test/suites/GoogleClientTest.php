@@ -9,6 +9,7 @@ use Serps\Core\Http\HttpClientInterface;
 use Serps\Core\Http\SearchEngineResponse;
 use Serps\Core\UrlArchive;
 use Serps\Exception\CaptchaException;
+use Serps\SearchEngine\Google\Exception\GoogleCaptchaException;
 use Serps\SearchEngine\Google\GoogleUrl;
 use Serps\SearchEngine\Google\GoogleClient;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
@@ -30,7 +31,9 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
             file_get_contents('test/resources/simpsons+movie+trailer.html'),
             false,
             GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
-            GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer')
+            GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
+            [],
+            null
         );
         $httpClientMock->method('sendRequest')->willReturn($responseFromMock);
 
@@ -52,7 +55,9 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
             file_get_contents('test/resources/captcha.html'),
             false,
             GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
-            GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer')
+            GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
+            [],
+            null
         );
 
         $httpClientMock->method('sendRequest')->willReturn($responseFromMock);
@@ -64,7 +69,7 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
         try {
             $googleClient->query($url);
             $this->fail('Exception not thrown');
-        } catch (CaptchaException $e) {
+        } catch (GoogleCaptchaException $e) {
             $this->assertInstanceOf(GoogleCaptcha::class, $e->getCaptcha());
             $this->assertEquals('128.78.166.25', $e->getCaptcha()->getDetectedIp());
         }
