@@ -3,7 +3,7 @@
  * @license see LICENSE
  */
 
-namespace Serps\Test\TDD\SearchEngine\Google\Parser;
+namespace Serps\Test\TDD\SearchEngine\Google\Parser\Evaluated;
 
 use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser;
 use Serps\SearchEngine\Google\Page\GoogleDom;
