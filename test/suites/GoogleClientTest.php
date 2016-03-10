@@ -28,7 +28,7 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
         $responseFromMock = new SearchEngineResponse(
             [],
             200,
-            file_get_contents('test/resources/simpsons+movie+trailer.html'),
+            file_get_contents('test/resources/pages-evaluated/simpsons+movie+trailer.html'),
             false,
             GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
             GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
@@ -52,7 +52,7 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
         $responseFromMock = new SearchEngineResponse(
             [],
             503,
-            file_get_contents('test/resources/captcha.html'),
+            file_get_contents('test/resources/pages-evaluated/captcha.html'),
             false,
             GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
             GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
