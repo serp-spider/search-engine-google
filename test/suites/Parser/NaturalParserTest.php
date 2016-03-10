@@ -32,16 +32,6 @@ use Serps\Core\Serp\ResultSet;
  */
 class NaturalParserTest extends \PHPUnit_Framework_TestCase
 {
-
-    /**
-     * @return \Serps\SearchEngine\Google\Page\GoogleDom
-     */
-    public function getDom()
-    {
-
-    }
-
-
     public function testParser1()
     {
 
