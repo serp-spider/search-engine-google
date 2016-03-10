@@ -3,12 +3,13 @@
  * @license see LICENSE
  */
 
-namespace Serps\SearchEngine\Google\Parser\Rule;
+namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule;
 
 use Serps\Core\Serp\ResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
+use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
 
-class Divider implements ParsingRuleInterace
+class Divider implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
 {
 
     public function match(\DOMElement $node)

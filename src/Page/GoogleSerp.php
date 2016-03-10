@@ -8,7 +8,7 @@ namespace Serps\SearchEngine\Google\Page;
 use Serps\Exception;
 use Serps\SearchEngine\Google\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\SearchEngine\Google\Parser\NaturalParser;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\NaturalParser;
 
 class GoogleSerp extends GoogleDom
 {

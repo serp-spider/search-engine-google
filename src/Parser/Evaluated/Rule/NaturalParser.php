@@ -3,19 +3,19 @@
  * @license see LICENSE
  */
 
-namespace Serps\SearchEngine\Google\Parser;
+namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule;
 
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\ResultSet;
-use Serps\SearchEngine\Google\Parser\Rule\ClassicalResult;
-use Serps\SearchEngine\Google\Parser\Rule\Divider;
-use Serps\SearchEngine\Google\Parser\Rule\ImageGroup;
-use Serps\SearchEngine\Google\Parser\Rule\InTheNews;
-use Serps\SearchEngine\Google\Parser\Rule\ParsingRuleInterace;
-use Serps\SearchEngine\Google\Parser\Rule\SearchResultGroup;
-use Serps\SearchEngine\Google\Parser\Rule\TweetsCarousel;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalResult;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Divider;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ImageGroup;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\InTheNews;
+use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\SearchResultGroup;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\TweetsCarousel;
 use Serps\SearchEngine\Google\Parser\Rule\TweetsResult;
-use Serps\SearchEngine\Google\Parser\Rule\Video;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Video;
 
 /**
  * Parses natural results from a google SERP

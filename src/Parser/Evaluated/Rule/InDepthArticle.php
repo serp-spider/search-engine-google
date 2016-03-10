@@ -3,42 +3,35 @@
  * @license see LICENSE
  */
 
-namespace Serps\SearchEngine\Google\Parser\Rule;
+namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule;
 
-use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\ResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\Test\TDD\SearchEngine\Google\GoogleDomTest;
+use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
 
-class InTheNews implements ParsingRuleInterace
+class InDepthArticle implements ParsingRuleInterace
 {
 
     public function match(\DOMElement $node)
     {
-        $child = $node->firstChild;
-        if (!$child || !($child instanceof \DOMElement)) {
-            return self::RULE_MATCH_NOMATCH;
-        }
-        if ($child->getAttribute('class') == 'mnr-c _yE') {
+        if ($node->getAttribute('class') == 'r-search-3') {
             return self::RULE_MATCH_MATCHED;
         }
         return self::RULE_MATCH_NOMATCH;
     }
-
-
     public function parse(GoogleDom $googleDOM, \DomElement $group, ResultSet $resultSet)
     {
+
         $item = [
             'cards' => []
         ];
-        $xpathCards = "div/div[contains(concat(' ',normalize-space(@class),' '),' card-section ')]";
+
+        $xpathCards = "li[contains(concat(' ',normalize-space(@class),' '),' card-section ')]";
         $cardNodes = $googleDOM->getXpath()->query($xpathCards, $group);
 
         foreach ($cardNodes as $cardNode) {
             $item['cards'][] = $this->parseItem($googleDOM, $cardNode);
         }
-
-        $resultSet->addItem(new BaseResult('inTheNews', $item));
     }
     /**
      * @param GoogleDOM $googleDOM
@@ -47,13 +40,14 @@ class InTheNews implements ParsingRuleInterace
      */
     protected function parseItem(GoogleDOM $googleDOM, \DomElement $node)
     {
-        $card = [];
-        $xpathTitle = "descendant::a[@class = '_Dk']";
+        $xpathTitle = "descendant::h3[@class = 'r']/a";
         $aTag = $googleDOM->getXpath()->query($xpathTitle, $node)->item(0);
-        if ($aTag) {
-            $card['title'] = $aTag->nodeValue;
-            $card['targetUrl'] = $aTag->getAttribute('href');
-        }
-        return $card;
+        $title = $aTag->nodeValue;
+        $targetUrl = $aTag->getAttribute('href');
+
+        return [
+            'title' => $title,
+            'targetUrl' => $targetUrl
+        ];
     }
 }
