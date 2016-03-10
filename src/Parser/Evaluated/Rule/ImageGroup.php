@@ -9,6 +9,7 @@ use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\ResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\ResultType;
 
 class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
 {
@@ -33,7 +34,7 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterac
             $item['images'][] = $this->parseItem($googleDOM, $imgNode);
 
         }
-        $resultSet->addItem(new BaseResult('imageGroup', $item));
+        $resultSet->addItem(new BaseResult(ResultType::IMAGE_GROUP, $item));
     }
     /**
      * @param GoogleDOM $googleDOM

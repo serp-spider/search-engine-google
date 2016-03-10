@@ -9,6 +9,7 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\ResultSet;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\ResultType;
 
 class TweetsCarousel implements ParsingRuleInterace
 {
@@ -46,7 +47,7 @@ class TweetsCarousel implements ParsingRuleInterace
                 'user'    => $user
             ];
 
-            $item = new BaseResult('tweetsCarousel', $data);
+            $item = new BaseResult(ResultType::TWEETS_CAROUSEL, $data);
             $resultSet->addItem($item);
         }
     }

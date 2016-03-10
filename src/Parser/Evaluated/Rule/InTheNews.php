@@ -9,6 +9,7 @@ use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\ResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\ResultType;
 use Serps\Test\TDD\SearchEngine\Google\GoogleDomTest;
 
 class InTheNews implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
@@ -39,7 +40,7 @@ class InTheNews implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
             $item['cards'][] = $this->parseItem($googleDOM, $cardNode);
         }
 
-        $resultSet->addItem(new BaseResult('inTheNews', $item));
+        $resultSet->addItem(new BaseResult(ResultType::IN_THE_NEWS, $item));
     }
     /**
      * @param GoogleDOM $googleDOM

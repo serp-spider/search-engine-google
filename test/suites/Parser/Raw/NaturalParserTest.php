@@ -44,9 +44,6 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             $types[] = $item->getType();
         }
 
-        var_dump($types);
-
         $this->markTestSkipped('TODO: add assertions');
-
     }
 }

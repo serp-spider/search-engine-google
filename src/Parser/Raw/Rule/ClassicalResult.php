@@ -11,6 +11,7 @@ use Serps\SearchEngine\Google\GoogleUrl;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\ResultType;
 
 class ClassicalResult implements ParsingRuleInterace
 {
@@ -46,7 +47,7 @@ class ClassicalResult implements ParsingRuleInterace
                     'url'     => $url
                     // TODO: image list
                 ];
-                $resultType = 'imageGroup';
+                $resultType = ResultType::IMAGE_GROUP;
             } else {
                 return;
             }
@@ -57,7 +58,7 @@ class ClassicalResult implements ParsingRuleInterace
                 'url'     => $url,
             ];
 
-            $resultType = 'classical';
+            $resultType = ResultType::CLASSICAL;
         }
 
         $item = new BaseResult($resultType, $data);

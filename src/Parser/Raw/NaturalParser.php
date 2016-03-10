@@ -39,8 +39,6 @@ class NaturalParser
         $xpathElementGroups = "//div[@id = 'ires']/descendant::*[self::div or self::li][@class='g']";
         $elementGroups = $xpathObject->query($xpathElementGroups);
 
-        var_dump($elementGroups->length);
-
         $startingAt = $googleDom->getUrl()->getResultsPerPage() * $googleDom->getUrl()->getPage();
         $resultSet = new ResultSet($startingAt);
 

@@ -9,6 +9,7 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\ResultSet;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\ResultType;
 
 class ClassicalResult implements ParsingRuleInterace
 {
@@ -44,7 +45,7 @@ class ClassicalResult implements ParsingRuleInterace
             'url'     => $aTag->getAttribute('href'),
         ];
 
-        $item = new BaseResult('classical', $data);
+        $item = new BaseResult(ResultType::CLASSICAL, $data);
         $resultSet->addItem($item);
     }
 }
