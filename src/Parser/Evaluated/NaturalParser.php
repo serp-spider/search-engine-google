@@ -3,7 +3,7 @@
  * @license see LICENSE
  */
 
-namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule;
+namespace Serps\SearchEngine\Google\Parser\Evaluated;
 
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\ResultSet;

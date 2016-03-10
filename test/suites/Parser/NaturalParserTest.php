@@ -5,7 +5,7 @@
 
 namespace Serps\Test\TDD\SearchEngine\Google\Parser;
 
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\NaturalParser;
+use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\Core\Serp\ResultSet;
@@ -21,7 +21,7 @@ use Serps\Core\Serp\ResultSet;
  * For instance if the previous test included a ``inDepthArticle`` the new test should do so.
  *
  *
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\NaturalParser
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalResult
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\SearchResultGroup
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\TweetsCarousel
@@ -86,7 +86,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $gUrl = GoogleUrlArchive::fromString('https://www.google.com.au/search?q=simpsons+donut');
         $dom = new GoogleDom(file_get_contents('test/resources/simpsons+donut.html'), $gUrl, $gUrl);
 
-        $naturalParser = new  \Serps\SearchEngine\Google\Parser\Evaluated\Rule\NaturalParser();
+        $naturalParser = new  \Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser();
         $result = $naturalParser->parse($dom);
 
         $types = [];
