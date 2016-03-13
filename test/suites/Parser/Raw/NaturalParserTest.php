@@ -9,6 +9,7 @@ use Serps\SearchEngine\Google\Parser\Raw\NaturalParser;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\Core\Serp\ResultSet;
+use Serps\SearchEngine\Google\Parser\ResultType;
 
 /**
  * Testing parser is hard, because it relies on google pages
@@ -44,6 +45,21 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             $types[] = $item->getType();
         }
 
-        $this->markTestSkipped('TODO: add assertions');
+
+        $this->assertInstanceOf(ResultSet::class, $result);
+        $this->assertCount(10, $result);
+        $this->assertEquals([
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::IMAGE_GROUP,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL
+        ], $types);
+
     }
 }
