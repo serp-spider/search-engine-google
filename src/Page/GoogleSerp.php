@@ -8,7 +8,8 @@ namespace Serps\SearchEngine\Google\Page;
 use Serps\Exception;
 use Serps\SearchEngine\Google\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser;
+use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser as EvaluatedNaturalParser;
+use Serps\SearchEngine\Google\Parser\Raw\NaturalParser as RawNaturalParser;
 
 class GoogleSerp extends GoogleDom
 {
@@ -35,10 +36,9 @@ class GoogleSerp extends GoogleDom
     public function getNaturalResults()
     {
         if ($this->javascriptIsEvaluated()) {
-            $parser = new NaturalParser();
+            $parser = new EvaluatedNaturalParser();
         } else {
-            // TODO
-            throw new \Exception('Google parser does not currently support parsing non javascript results');
+            $parser = new RawNaturalParser();
         }
         return $parser->parse($this);
     }

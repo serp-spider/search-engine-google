@@ -29,7 +29,7 @@ class GoogleSerpTest extends \PHPUnit_Framework_TestCase
     public function getDomNoJavascript()
     {
         $url = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons&hl=en_US');
-        return new GoogleSerp(file_get_contents('test/resources/pages-evaluated/simpsons-no-js.html'), $url, $url);
+        return new GoogleSerp(file_get_contents('test/resources/pages-raw/simpsons.html'), $url, $url);
     }
 
 
@@ -46,6 +46,15 @@ class GoogleSerpTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(ResultSet::class, $results);
         $this->assertCount(10, $results);
+
+
+        $dom = $this->getDomNoJavascript();
+
+        $results = $dom->getNaturalResults();
+
+        $this->assertInstanceOf(ResultSet::class, $results);
+        $this->assertCount(10, $results);
+
     }
 
     public function testJavascriptEvaluated()
