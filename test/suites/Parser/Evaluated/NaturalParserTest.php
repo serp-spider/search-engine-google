@@ -9,6 +9,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\Core\Serp\ResultSet;
+use Serps\SearchEngine\Google\Parser\ResultType;
 
 /**
  * Testing parser is hard, because it relies on google pages
@@ -33,7 +34,7 @@ use Serps\Core\Serp\ResultSet;
  */
 class NaturalParserTest extends \PHPUnit_Framework_TestCase
 {
-    public function testParser1()
+    public function testParserNatural()
     {
 
         $gUrl = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons&hl=en_US');
@@ -71,7 +72,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testParser2()
+    public function testParserWithImageGroup()
     {
 
         $gUrl = GoogleUrlArchive::fromString('https://www.google.com.au/search?q=simpsons+donut');
@@ -99,7 +100,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         ], $types);
     }
 
-    public function testParser3()
+    public function testParserWithVideo()
     {
 
         $gUrl = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer');
@@ -127,5 +128,37 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             'classical',
             'classical'
         ], $types);
+    }
+
+    public function testResultWithMap()
+    {
+
+        $gUrl = GoogleUrlArchive::fromString('https://www.google.fr/search?q=shop+near+paris');
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-evaluated/shop-near-paris.html'), $gUrl, $gUrl);
+
+        $naturalParser = new  NaturalParser();
+        $result = $naturalParser->parse($dom);
+
+        $types = [];
+        foreach ($result->getItems() as $item) {
+            $types[] = $item->getType();
+        }
+
+        $this->assertInstanceOf(ResultSet::class, $result);
+        $this->assertCount(11, $result);
+        $this->assertEquals([
+            ResultType::MAP,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::IMAGE_GROUP
+        ], $types);
+
     }
 }

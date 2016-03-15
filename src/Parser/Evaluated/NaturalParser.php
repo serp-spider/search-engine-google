@@ -10,7 +10,9 @@ use Serps\SearchEngine\Google\Parser\AbstractNaturalParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Divider;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ImageGroup;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\InDepthArticle;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\InTheNews;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Map;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\SearchResultGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\TweetsCarousel;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Video;
@@ -28,12 +30,14 @@ class NaturalParser extends AbstractNaturalParser
     {
         return [
             new Divider(),
-            new ClassicalResult(),
             new SearchResultGroup(),
-            new TweetsCarousel(),
+            new ClassicalResult(),
             new ImageGroup(),
+            new TweetsCarousel(),
             new Video(),
-            new InTheNews()
+            new InTheNews(),
+            new Map(),
+            new InDepthArticle()
         ];
     }
 
