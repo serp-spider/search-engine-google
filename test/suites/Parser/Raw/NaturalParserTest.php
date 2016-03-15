@@ -22,6 +22,7 @@ use Serps\SearchEngine\Google\Parser\ResultType;
  * For instance if the previous test included a ``inDepthArticle`` the new test should do so.
  *
  *
+ * @covers Serps\SearchEngine\Google\Parser\AbstractNaturalParser
  * @covers Serps\SearchEngine\Google\Parser\Raw\NaturalParser
  * @covers Serps\SearchEngine\Google\Parser\Raw\Rule\ClassicalResult
  */

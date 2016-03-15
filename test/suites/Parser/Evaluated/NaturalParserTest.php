@@ -21,6 +21,7 @@ use Serps\Core\Serp\ResultSet;
  * For instance if the previous test included a ``inDepthArticle`` the new test should do so.
  *
  *
+ * @covers Serps\SearchEngine\Google\Parser\AbstractNaturalParser
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalResult
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\SearchResultGroup
