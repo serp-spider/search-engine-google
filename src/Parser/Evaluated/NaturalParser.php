@@ -6,34 +6,27 @@
 namespace Serps\SearchEngine\Google\Parser\Evaluated;
 
 use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\Core\Serp\ResultSet;
+use Serps\SearchEngine\Google\Parser\AbstractNaturalParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Divider;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ImageGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\InTheNews;
-use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\SearchResultGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\TweetsCarousel;
-use Serps\SearchEngine\Google\Parser\Rule\TweetsResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Video;
 
 /**
  * Parses natural results from a google SERP
  */
-class NaturalParser
+class NaturalParser extends AbstractNaturalParser
 {
 
     /**
-     * @var ParsingRuleInterace[]
+     * @inheritdoc
      */
-    protected $rules;
-
-    /**
-     * NaturalParser constructor.
-     */
-    public function __construct()
+    protected function generateRules()
     {
-        $this->rules = [
+        return [
             new Divider(),
             new ClassicalResult(),
             new SearchResultGroup(),
@@ -44,48 +37,13 @@ class NaturalParser
         ];
     }
 
-
     /**
-     * @param \Serps\SearchEngine\Google\Page\GoogleDom $googleDom
-     * @return ResultSet $resultSet
+     * @inheritdoc
      */
-    public function parse(GoogleDom $googleDom)
+    protected function getParsableItems(GoogleDom $googleDom)
     {
         $xpathObject = $googleDom->getXpath();
         $xpathElementGroups = "//div[@id = 'ires']/ol/*";
-        $elementGroups = $xpathObject->query($xpathElementGroups);
-
-        $startingAt = $googleDom->getUrl()->getResultsPerPage() * $googleDom->getUrl()->getPage();
-        $resultSet = new ResultSet($startingAt);
-
-        return $this->parseGroups($elementGroups, $resultSet, $googleDom);
-    }
-
-    /**
-     * @param $elementGroups
-     * @param ResultSet $resultSet
-     * @param $googleDom
-     * @return ResultSet
-     */
-    protected function parseGroups($elementGroups, ResultSet $resultSet, $googleDom)
-    {
-        foreach ($elementGroups as $group) {
-            foreach ($this->rules as $rule) {
-                $match = $rule->match($group);
-                if ($match instanceof \DOMNodeList) {
-                    $this->parseGroups($group->childNodes, $resultSet, $googleDom);
-                    break;
-                } else {
-                    switch ($match) {
-                        case ParsingRuleInterace::RULE_MATCH_MATCHED:
-                            $rule->parse($googleDom, $group, $resultSet);
-                            break 2;
-                        case ParsingRuleInterace::RULE_MATCH_STOP:
-                            break 2;
-                    }
-                }
-            }
-        }
-        return $resultSet;
+        return $xpathObject->query($xpathElementGroups);
     }
 }

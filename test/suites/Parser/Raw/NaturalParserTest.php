@@ -31,7 +31,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
     /**
      * @codeCoverageIgnore
      */
-    public function testParser1()
+    public function testParserRawNatural()
     {
 
         $gUrl = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons&hl=en_US');
@@ -46,6 +46,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         }
 
 
+
         $this->assertInstanceOf(ResultSet::class, $result);
         $this->assertCount(10, $result);
         $this->assertEquals([
@@ -54,6 +55,39 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             ResultType::IMAGE_GROUP,
             ResultType::CLASSICAL,
             ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL
+        ], $types);
+
+    }
+
+
+    public function testResultWithMap()
+    {
+
+        $gUrl = GoogleUrlArchive::fromString('https://www.google.fr/search?q=shop+near+paris');
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-raw/shop-near-paris.html'), $gUrl, $gUrl);
+
+        $naturalParser = new  NaturalParser();
+        $result = $naturalParser->parse($dom);
+
+        $types = [];
+        foreach ($result->getItems() as $item) {
+            $types[] = $item->getType();
+        }
+
+        $this->assertInstanceOf(ResultSet::class, $result);
+        $this->assertCount(11, $result);
+        $this->assertEquals([
+            ResultType::MAP,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::CLASSICAL,
+            ResultType::IMAGE_GROUP,
             ResultType::CLASSICAL,
             ResultType::CLASSICAL,
             ResultType::CLASSICAL,

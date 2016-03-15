@@ -14,7 +14,7 @@ use Serps\SearchEngine\Google\Parser\ResultType;
 class Video implements ParsingRuleInterace
 {
 
-    public function match(\DOMElement $node)
+    public function match(GoogleDom $dom, \DOMElement $node)
     {
         if ($node->getAttribute('class') == 'g mnr-c g-blk') {
             return self::RULE_MATCH_MATCHED;
@@ -22,6 +22,7 @@ class Video implements ParsingRuleInterace
             return self::RULE_MATCH_NOMATCH;
         }
     }
+
     public function parse(GoogleDom $googleDOM, \DomElement $itemDom, ResultSet $resultSet)
     {
         $xpath = $googleDOM->getXpath();

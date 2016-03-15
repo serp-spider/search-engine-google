@@ -15,7 +15,7 @@ use Serps\Test\TDD\SearchEngine\Google\GoogleDomTest;
 class InTheNews implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
 {
 
-    public function match(\DOMElement $node)
+    public function match(GoogleDom $dom, \DOMElement $node)
     {
         $child = $node->firstChild;
         if (!$child || !($child instanceof \DOMElement)) {
@@ -26,7 +26,6 @@ class InTheNews implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
         }
         return self::RULE_MATCH_NOMATCH;
     }
-
 
     public function parse(GoogleDom $googleDOM, \DomElement $group, ResultSet $resultSet)
     {

@@ -14,7 +14,7 @@ use Serps\SearchEngine\Google\Parser\ResultType;
 class ClassicalResult implements ParsingRuleInterace
 {
 
-    public function match(\DOMElement $node)
+    public function match(GoogleDom $dom, \DOMElement $node)
     {
         if ($node->getAttribute('class') == 'g') {
             foreach ($node->childNodes as $node) {

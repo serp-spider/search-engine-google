@@ -13,7 +13,7 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
 use Serps\SearchEngine\Google\Parser\ResultType;
 
-class ClassicalResult implements ParsingRuleInterace
+class ImageGroup implements ParsingRuleInterace
 {
     public function match(GoogleDom $dom, \DOMElement $node)
     {
@@ -26,17 +26,24 @@ class ClassicalResult implements ParsingRuleInterace
             ->query("descendant::h3[@class='r'][1]/a", $node)
             ->item(0);
 
-        if (!$aTag) {
-            return ParsingRuleInterace::RULE_MATCH_NOMATCH;
+        if ($aTag) {
+            $url = $aTag->getAttribute('href');
+
+            if (strpos($url, '/search') == 0) {
+
+                // todo URLArchive::copy
+                $url = GoogleUrlArchive::fromString($dom->getEffectiveUrl()->resolve($url));
+
+                if ($url->getResultType() == GoogleUrl::RESULT_TYPE_IMAGES) {
+                    return  ParsingRuleInterace::RULE_MATCH_MATCHED;
+                }
+
+            }
         }
 
-        $url = $aTag->getAttribute('href');
 
-        if (strpos($url, '/url') !== 0) {
-            return ParsingRuleInterace::RULE_MATCH_NOMATCH;
-        }
+        return ParsingRuleInterace::RULE_MATCH_NOMATCH;
 
-        return ParsingRuleInterace::RULE_MATCH_MATCHED;
     }
 
     public function parse(GoogleDom $dom, \DomElement $node, ResultSet $resultSet)
@@ -51,12 +58,15 @@ class ClassicalResult implements ParsingRuleInterace
 
         $url=$aTag->getAttribute('href');
 
-        $resultSet->addItem(
-            new BaseResult(ResultType::CLASSICAL, [
-                'snippet' => $node->C14N(),
-                'title'   => $aTag->nodeValue,
-                'url'     => $url,
-            ])
-        );
+        $data = [
+            'snippet' => $node->C14N(),
+            'title'   => $aTag->nodeValue,
+            'url'     => $url
+            // TODO: image list
+        ];
+        $resultType = ResultType::IMAGE_GROUP;
+
+        $item = new BaseResult($resultType, $data);
+        $resultSet->addItem($item);
     }
 }

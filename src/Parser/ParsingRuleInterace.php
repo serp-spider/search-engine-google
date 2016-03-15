@@ -14,6 +14,6 @@ interface ParsingRuleInterace
     const RULE_MATCH_NOMATCH = 2;
     const RULE_MATCH_STOP = 3;
 
-    public function match(\DOMElement $node);
+    public function match(GoogleDom $dom, \DOMElement $node);
     public function parse(GoogleDom $dom, \DomElement $node, ResultSet $resultSet);
 }

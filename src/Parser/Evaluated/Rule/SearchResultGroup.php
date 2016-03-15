@@ -14,7 +14,7 @@ use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
  */
 class SearchResultGroup implements ParsingRuleInterace
 {
-    public function match(\DOMElement $node)
+    public function match(GoogleDom $dom, \DOMElement $node)
     {
         if ($node->getAttribute('class') == 'srg') {
             return $node->childNodes;

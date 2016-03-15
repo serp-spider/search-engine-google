@@ -14,4 +14,5 @@ abstract class ResultType
     const IN_THE_NEWS = 'inTheNews';
     const TWEETS_CAROUSEL= 'tweetsCarousel';
     const VIDEO = 'video';
+    const MAP = 'map';
 }

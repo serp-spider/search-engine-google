@@ -14,13 +14,14 @@ use Serps\SearchEngine\Google\Parser\ResultType;
 class InDepthArticle implements ParsingRuleInterace
 {
 
-    public function match(\DOMElement $node)
+    public function match(GoogleDom $dom, \DOMElement $node)
     {
         if ($node->getAttribute('class') == 'r-search-3') {
             return self::RULE_MATCH_MATCHED;
         }
         return self::RULE_MATCH_NOMATCH;
     }
+
     public function parse(GoogleDom $googleDOM, \DomElement $group, ResultSet $resultSet)
     {
 

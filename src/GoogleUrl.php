@@ -21,6 +21,7 @@ class GoogleUrl extends Url implements GoogleUrlInterface
     const RESULT_TYPE_SHOPPING = 'shop';
     const RESULT_TYPE_BOOKS = 'bks';
     const RESULT_TYPE_APPS = 'app';
+    const RESULT_TYPE_MAP = 'app';
 
     public function __construct(
         $host = 'google.com',
