@@ -32,7 +32,6 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
             false,
             GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
             GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
-            [],
             null
         );
         $httpClientMock->method('sendRequest')->willReturn($responseFromMock);
@@ -56,7 +55,6 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
             false,
             GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
             GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
-            [],
             null
         );
 
