@@ -30,7 +30,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\InTheNews
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Divider
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\ImageGroup
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Video
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalVideo
  */
 class NaturalParserTest extends \PHPUnit_Framework_TestCase
 {
@@ -51,16 +51,16 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(ResultSet::class, $result);
         $this->assertCount(10, $result);
         $this->assertEquals([
-            'classical',
-            'tweetsCarousel',
-            'classical',
-            'inTheNews',
-            'classical',
-            'classical',
-            'classical',
-            'classical',
-            'classical',
-            'classical'
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::TWEETS_CAROUSEL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::IN_THE_NEWS,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
         ], $types);
 
 
@@ -89,14 +89,14 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(ResultSet::class, $result);
         $this->assertCount(8, $result);
         $this->assertEquals([
-            'imageGroup',
-            'classical',
-            'classical',
-            'classical',
-            'classical',
-            'classical',
-            'classical',
-            'classical'
+            NaturalResultType::IMAGE_GROUP,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL
         ], $types);
     }
 
@@ -117,16 +117,17 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(ResultSet::class, $result);
         $this->assertCount(10, $result);
         $this->assertEquals([
-            'video',
-            'classical',
-            'classical',
-            'classical',
-            'classical',
-            'classical',
-            'classical',
-            'classical',
-            'classical',
-            'classical'
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL
+
         ], $types);
     }
 

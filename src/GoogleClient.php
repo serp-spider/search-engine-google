@@ -6,6 +6,8 @@
 namespace Serps\SearchEngine\Google;
 
 use Serps\Core\Captcha\CaptchaSolverInterface;
+use Serps\Core\Cookie\ArrayCookieJar;
+use Serps\Core\Cookie\CookieJarInterface;
 use Serps\Core\Http\HttpClientInterface;
 use Serps\Core\Http\Proxy;
 use Serps\Core\UrlArchive;
@@ -28,12 +30,50 @@ class GoogleClient
     protected $client;
 
     /**
+     * @var CookieJarInterface
+     */
+    protected $cookieJar;
+
+    protected $cookiesEnabled;
+
+    /**
      * @param HttpClientInterface $client
      */
     public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
+        $this->cookiesEnabled = false;
     }
+
+    /**
+     * Enable or disable usage of cookies
+     * @param $enabled
+     */
+    public function enableCookies($enabled)
+    {
+        $this->cookiesEnabled = $enabled;
+    }
+
+    /**
+     * @return CookieJarInterface
+     */
+    public function getCookieJar()
+    {
+        if (null == $this->cookieJar) {
+            $this->cookieJar = new ArrayCookieJar();
+        }
+        return $this->cookieJar;
+    }
+
+    /**
+     * @param CookieJarInterface $cookieJar
+     */
+    public function setCookieJar(CookieJarInterface $cookieJar)
+    {
+        $this->cookieJar = $cookieJar;
+    }
+
+
 
     /**
      * @param GoogleUrlInterface $googleUrl
@@ -45,9 +85,12 @@ class GoogleClient
      */
     public function query(GoogleUrlInterface $googleUrl, Proxy $proxy = null)
     {
-        $request = $googleUrl->buildRequest();
-        $response = $this->client->sendRequest($request, $proxy);
 
+        $cookieJar = $this->cookiesEnabled ? $this->getCookieJar() : null;
+
+        $request = $googleUrl->buildRequest();
+        $response = $this->client->sendRequest($request, $proxy, $cookieJar);
+        
         $statusCode = $response->getHttpResponseStatus();
         $urlArchive = $googleUrl->getArchive();
 
