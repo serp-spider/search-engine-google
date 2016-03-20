@@ -9,7 +9,7 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\ResultSet;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
-use Serps\SearchEngine\Google\Parser\ResultType;
+use Serps\SearchEngine\Google\ResultType;
 
 class ClassicalResult implements ParsingRuleInterace
 {

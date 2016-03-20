@@ -9,7 +9,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\Core\Serp\ResultSet;
-use Serps\SearchEngine\Google\Parser\ResultType;
+use Serps\SearchEngine\Google\ResultType;
 
 /**
  * Testing parser is hard, because it relies on google pages

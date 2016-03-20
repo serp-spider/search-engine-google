@@ -3,7 +3,7 @@
  * @license see LICENSE
  */
 
-namespace Serps\SearchEngine\Google\Parser;
+namespace Serps\SearchEngine\Google;
 
 abstract class ResultType
 {

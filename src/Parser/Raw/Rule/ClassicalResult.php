@@ -11,7 +11,7 @@ use Serps\SearchEngine\Google\GoogleUrl;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
-use Serps\SearchEngine\Google\Parser\ResultType;
+use Serps\SearchEngine\Google\ResultType;
 
 class ClassicalResult implements ParsingRuleInterace
 {
