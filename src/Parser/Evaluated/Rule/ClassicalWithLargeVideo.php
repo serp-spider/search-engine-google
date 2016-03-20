@@ -11,7 +11,7 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class ClassicalVideo implements ParsingRuleInterace
+class ClassicalWithLargeVideo implements ParsingRuleInterace
 {
 
     public function match(GoogleDom $dom, \DOMElement $node)
@@ -41,7 +41,18 @@ class ClassicalVideo implements ParsingRuleInterace
             'url'     => $dom->getEffectiveUrl()->resolve($aTag->getAttribute('href')),
             'destination' => $destinationTag ? $destinationTag->nodeValue : null,
             'description' => null,
-            'videoLarge'  => true
+            'videoLarge'  => true,
+            'videoCover'  => function () use ($node, $xpath) {
+                $imageTag = $xpath
+                    ->query("descendant::div[@class='_ELb']/img", $node)
+                    ->item(0);
+
+                if ($imageTag) {
+                    return $imageTag->getAttribute('src');
+                } else {
+                    return null;
+                }
+            }
         ];
 
         $resultSet->addItem(new BaseResult(NaturalResultType::CLASSICAL_VIDEO, $data));

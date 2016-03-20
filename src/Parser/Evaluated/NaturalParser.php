@@ -15,7 +15,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\InTheNews;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Map;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\SearchResultGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\TweetsCarousel;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalVideo;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalWithLargeVideo;
 
 /**
  * Parses natural results from a google SERP
@@ -34,7 +34,7 @@ class NaturalParser extends AbstractNaturalParser
             new ClassicalResult(),
             new ImageGroup(),
             new TweetsCarousel(),
-            new ClassicalVideo(),
+            new ClassicalWithLargeVideo(),
             new InTheNews(),
             new Map(),
             new InDepthArticle()

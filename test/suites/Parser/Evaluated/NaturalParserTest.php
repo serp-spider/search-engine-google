@@ -30,7 +30,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\InTheNews
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Divider
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\ImageGroup
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalVideo
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalWithLargeVideo
  */
 class NaturalParserTest extends \PHPUnit_Framework_TestCase
 {
