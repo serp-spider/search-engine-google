@@ -11,7 +11,7 @@ use Serps\SearchEngine\Google\GoogleUrl;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
-use Serps\SearchEngine\Google\ResultType;
+use Serps\SearchEngine\Google\NaturalResultType;
 
 class ImageGroup implements ParsingRuleInterace
 {
@@ -64,7 +64,7 @@ class ImageGroup implements ParsingRuleInterace
             'url'     => $url
             // TODO: image list
         ];
-        $resultType = ResultType::IMAGE_GROUP;
+        $resultType = NaturalResultType::IMAGE_GROUP;
 
         $item = new BaseResult($resultType, $data);
         $resultSet->addItem($item);

@@ -9,7 +9,7 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\ResultSet;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
-use Serps\SearchEngine\Google\ResultType;
+use Serps\SearchEngine\Google\NaturalResultType;
 
 class ClassicalResult implements ParsingRuleInterace
 {
@@ -39,13 +39,28 @@ class ClassicalResult implements ParsingRuleInterace
             return;
         }
 
+        $destinationTag = $xpath
+            ->query("descendant::div[@class='f kv _SWb']/cite", $node)
+            ->item(0);
+
+        $descriptionTag = $xpath
+            ->query("descendant::span[@class='st']", $node)
+            ->item(0);
+
+        // classical result can have a video thumbnail
+        $videoThumb = $xpath
+            ->query("descendant::span[@class='th _lyb _YQd']", $node)
+            ->item(0);
+
         $data = [
-            'snippet' => $node->C14N(),
             'title'   => $aTag->nodeValue,
-            'url'     => $aTag->getAttribute('href'),
+            'url'     => $dom->getEffectiveUrl()->resolve($aTag->getAttribute('href')),
+            'destination' => $destinationTag ? $destinationTag->nodeValue : null,
+            'description' => $descriptionTag ? $descriptionTag->nodeValue : null,
+            'hasVideo'    => $videoThumb ? true : false
         ];
 
-        $item = new BaseResult(ResultType::CLASSICAL, $data);
+        $item = new BaseResult(NaturalResultType::CLASSICAL, $data);
         $resultSet->addItem($item);
     }
 }

@@ -9,7 +9,7 @@ use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\ResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
-use Serps\SearchEngine\Google\ResultType;
+use Serps\SearchEngine\Google\NaturalResultType;
 
 class InDepthArticle implements ParsingRuleInterace
 {
@@ -36,7 +36,7 @@ class InDepthArticle implements ParsingRuleInterace
             $item['cards'][] = $this->parseItem($googleDOM, $cardNode);
         }
 
-        $resultSet->addItem(new BaseResult(ResultType::IN_DEPTH_ARTICLE, $item));
+        $resultSet->addItem(new BaseResult(NaturalResultType::IN_DEPTH_ARTICLE, $item));
     }
     /**
      * @param GoogleDOM $googleDOM

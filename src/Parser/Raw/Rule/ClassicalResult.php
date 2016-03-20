@@ -11,7 +11,7 @@ use Serps\SearchEngine\Google\GoogleUrl;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
-use Serps\SearchEngine\Google\ResultType;
+use Serps\SearchEngine\Google\NaturalResultType;
 
 class ClassicalResult implements ParsingRuleInterace
 {
@@ -52,7 +52,7 @@ class ClassicalResult implements ParsingRuleInterace
         $url=$aTag->getAttribute('href');
 
         $resultSet->addItem(
-            new BaseResult(ResultType::CLASSICAL, [
+            new BaseResult(NaturalResultType::CLASSICAL, [
                 'snippet' => $node->C14N(),
                 'title'   => $aTag->nodeValue,
                 'url'     => $url,

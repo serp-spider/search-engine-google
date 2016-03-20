@@ -9,7 +9,7 @@ use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\ResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
-use Serps\SearchEngine\Google\ResultType;
+use Serps\SearchEngine\Google\NaturalResultType;
 
 class Map implements ParsingRuleInterace
 {
@@ -26,7 +26,7 @@ class Map implements ParsingRuleInterace
     public function parse(GoogleDom $dom, \DomElement $node, ResultSet $resultSet)
     {
         $resultSet->addItem(
-            new BaseResult(ResultType::MAP, [
+            new BaseResult(NaturalResultType::MAP, [
                 'snippet' => $node->C14N()
                 // TODO
             ])

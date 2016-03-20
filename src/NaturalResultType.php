@@ -5,7 +5,7 @@
 
 namespace Serps\SearchEngine\Google;
 
-abstract class ResultType
+abstract class NaturalResultType
 {
 
     const CLASSICAL = 'classical';

@@ -9,7 +9,7 @@ use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\ResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
-use Serps\SearchEngine\Google\ResultType;
+use Serps\SearchEngine\Google\NaturalResultType;
 
 class Video implements ParsingRuleInterace
 {
@@ -28,7 +28,7 @@ class Video implements ParsingRuleInterace
         $xpath = $googleDOM->getXpath();
         $aTag=$xpath->query("descendant::h3[@class='r'][1]/a", $itemDom)->item(0);
 
-        $resultSet->addItem(new BaseResult(ResultType::VIDEO, [
+        $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO, [
             'targetUrl' => $aTag->getAttribute('href'),
             'title' => $aTag->nodeValue,
         ]));
