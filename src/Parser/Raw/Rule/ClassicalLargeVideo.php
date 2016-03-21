@@ -3,49 +3,55 @@
  * @license see LICENSE
  */
 
-namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule;
+namespace Serps\SearchEngine\Google\Parser\Raw\Rule;
 
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\ResultSet;
+use Serps\SearchEngine\Google\GoogleUrl;
+use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class ClassicalWithLargeVideo implements ParsingRuleInterace
+class ClassicalLargeVideo implements ParsingRuleInterace
 {
-
     public function match(GoogleDom $dom, \DOMElement $node)
     {
-        if ($node->getAttribute('class') == 'g mnr-c g-blk') {
-            return self::RULE_MATCH_MATCHED;
-        } else {
-            return self::RULE_MATCH_NOMATCH;
+        if ($node->childNodes->length > 0 && $node->childNodes[0]->getAttribute('class') == '_uXc hp-xpdbox') {
+            return ParsingRuleInterace::RULE_MATCH_MATCHED;
         }
+
+        return ParsingRuleInterace::RULE_MATCH_NOMATCH;
     }
 
     public function parse(GoogleDom $dom, \DomElement $node, ResultSet $resultSet)
     {
         $xpath = $dom->getXpath();
-        $aTag = $xpath->query("descendant::h3[@class='r'][1]/a", $node)->item(0);
 
-        if (!$aTag) {
-            return false;
-        }
+        // find the tilte/url
+        /* @var $aTag \DOMElement */
+        $aTag = $xpath
+            ->query("descendant::h3[@class='_X8d']/a", $node)
+            ->item(0);
+
+        $url=$aTag->getAttribute('href');
+        $url = urldecode($dom->getEffectiveUrl()->resolve($url)->getParamValue('q'));
 
         $destinationTag = $xpath
-            ->query("descendant::div[@class='f kv _SWb']/cite", $node)
+            ->query("descendant::div[@class='_Y8d']/cite", $node)
             ->item(0);
 
         $data = [
             'title'   => $aTag->nodeValue,
-            'url'     => $dom->getEffectiveUrl()->resolve($aTag->getAttribute('href')),
+            'url'     => GoogleUrlArchive::fromString($url),
             'destination' => $destinationTag ? $destinationTag->nodeValue : null,
             'description' => null,
             'videoLarge'  => true,
             'videoCover'  => function () use ($node, $xpath) {
                 $imageTag = $xpath
-                    ->query("descendant::div[@class='_ELb']/img", $node)
+                    ->query('descendant::a/img', $node)
                     ->item(0);
+
                 if ($imageTag) {
                     return $imageTag->getAttribute('src');
                 } else {
@@ -54,6 +60,8 @@ class ClassicalWithLargeVideo implements ParsingRuleInterace
             }
         ];
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::CLASSICAL_VIDEO, $data));
+        $resultSet->addItem(
+            new BaseResult([NaturalResultType::CLASSICAL_VIDEO, NaturalResultType::CLASSICAL], $data)
+        );
     }
 }

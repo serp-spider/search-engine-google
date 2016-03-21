@@ -49,13 +49,22 @@ class ClassicalResult implements ParsingRuleInterace
             ->query("descendant::h3[@class='r'][1]/a", $node)
             ->item(0);
 
+        $destinationTag = $xpath
+            ->query("descendant::div[@class='kv']/cite", $node)
+            ->item(0);
+
+        $descriptionTag = $xpath
+            ->query("descendant::span[@class='st']", $node)
+            ->item(0);
+
         $url=$aTag->getAttribute('href');
 
         $resultSet->addItem(
             new BaseResult(NaturalResultType::CLASSICAL, [
-                'snippet' => $node->C14N(),
                 'title'   => $aTag->nodeValue,
                 'url'     => $url,
+                'destination' => $destinationTag ? $destinationTag->nodeValue : null,
+                'description' => $descriptionTag ? $descriptionTag->nodeValue : null
             ])
         );
     }

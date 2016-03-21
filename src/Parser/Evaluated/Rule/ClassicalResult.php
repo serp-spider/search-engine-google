@@ -60,8 +60,10 @@ class ClassicalResult implements ParsingRuleInterace
             'description' => $descriptionTag ? $descriptionTag->nodeValue : null
         ];
 
+        $resultTypes = [NaturalResultType::CLASSICAL];
+
         if ($videoThumb) {
-            $resultType = NaturalResultType::CLASSICAL_VIDEO;
+            array_unshift($resultTypes, NaturalResultType::CLASSICAL_VIDEO);
             $data['videoLarge'] = false;
 
             $data['videoCover'] = function () use ($videoThumb) {
@@ -71,12 +73,9 @@ class ClassicalResult implements ParsingRuleInterace
                     return null;
                 }
             };
-        } else {
-            $resultType = NaturalResultType::CLASSICAL;
         }
 
-
-        $item = new BaseResult($resultType, $data);
+        $item = new BaseResult($resultTypes, $data);
         $resultSet->addItem($item);
     }
 }

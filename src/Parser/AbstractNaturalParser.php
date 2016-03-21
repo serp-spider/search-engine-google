@@ -35,6 +35,11 @@ abstract class AbstractNaturalParser
         return $this->rules;
     }
 
+    /**
+     * Parses the given google dom
+     * @param GoogleDom $googleDom
+     * @return ResultSet
+     */
     public function parse(GoogleDom $googleDom)
     {
 

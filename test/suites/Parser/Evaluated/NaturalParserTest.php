@@ -107,15 +107,15 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $dom = new GoogleDom(file_get_contents('test/resources/pages-evaluated/simpsons+movie+trailer.html'), $gUrl, $gUrl);
 
         $naturalParser = new  NaturalParser();
-        $result = $naturalParser->parse($dom);
+        $results = $naturalParser->parse($dom);
 
         $types = [];
-        foreach ($result->getItems() as $item) {
+        foreach ($results->getItems() as $item) {
             $types[] = $item->getTypes()[0];
         }
 
-        $this->assertInstanceOf(ResultSet::class, $result);
-        $this->assertCount(10, $result);
+        $this->assertInstanceOf(ResultSet::class, $results);
+        $this->assertCount(10, $results);
         $this->assertEquals([
             NaturalResultType::CLASSICAL_VIDEO,
             NaturalResultType::CLASSICAL_VIDEO,
@@ -129,6 +129,8 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             NaturalResultType::CLASSICAL
 
         ], $types);
+
+        $this->assertTrue($results->getItems()[0]->getDataValue('videoLarge'));
     }
 
     public function testResultWithMap()

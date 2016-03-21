@@ -65,6 +65,39 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function testParserWithVideo()
+    {
+
+        $gUrl = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer');
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-raw/simpsons+movie+trailer.html'), $gUrl, $gUrl);
+
+        $naturalParser = new  NaturalParser();
+        $results = $naturalParser->parse($dom);
+
+        $types = [];
+        foreach ($results->getItems() as $item) {
+            $types[] = $item->getTypes()[0];
+        }
+
+        $this->assertInstanceOf(ResultSet::class, $results);
+        $this->assertCount(10, $results);
+        $this->assertEquals([
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL
+
+        ], $types);
+
+        $this->assertTrue($results->getItems()[0]->getDataValue('videoLarge'));
+    }
+
 
     public function testResultWithMap()
     {
