@@ -43,7 +43,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
 
         $types = [];
         foreach ($result->getItems() as $item) {
-            $types[] = $item->getType();
+            $types[] = $item->getTypes()[0];
         }
 
 
@@ -77,7 +77,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
 
         $types = [];
         foreach ($result->getItems() as $item) {
-            $types[] = $item->getType();
+            $types[] = $item->getTypes()[0];
         }
 
         $this->assertInstanceOf(ResultSet::class, $result);
