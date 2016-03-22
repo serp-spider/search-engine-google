@@ -109,6 +109,10 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             'https://www.google.com.au/search?q=simpsons+donut&tbm=isch&imgil=PsgymH70iPP7VM%253A%253BeaF3My1vToZseM%253Bhttp%25253A%25252F%25252Fsuperawesomevectors.com%25252Ffree-vector-donut-drawing%25252F&source=iu&pf=m&fir=PsgymH70iPP7VM%253A%252CeaF3My1vToZseM%252C_&usg=___xAQ2PmWuTZdcZq_-t7ELD0Maqw%3D',
             $result->getItems()[0]->getDataValue('images')[0]->getDataValue('targetUrl')
         );
+        $this->assertEquals(
+            'https://www.google.com.au/search?q=simpsons+donut&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwiyo7ucrtvKAhUJHxoKHZBFAHYQsAQIGw',
+            $result->getItems()[0]->getDataValue('moreUrl')
+        );
     }
 
     public function testParserWithVideo()

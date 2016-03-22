@@ -23,14 +23,22 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterac
             return self::RULE_MATCH_NOMATCH;
         }
     }
-    public function parse(GoogleDom $googleDOM, \DomElement $group, ResultSet $resultSet)
+    public function parse(GoogleDom $googleDOM, \DomElement $node, ResultSet $resultSet)
     {
         $item = [
-            'images' => []
+            'images' => [],
+            'moreUrl' => function () use ($node, $googleDOM) {
+                $aTag = $googleDOM->getXpath()->query('descendant::div[@class="_Icb _kk _wI"]/a', $node)->item(0);
+                if (!$aTag) {
+                    return $googleDOM->getUrl()->resolve('/');
+                }
+                return $googleDOM->getUrl()->resolve($aTag->getAttribute('href'));
+
+            }
         ];
 
         $xpathCards = "descendant::ul[@class='rg_ul']/div[@class='_ZGc bili uh_r rg_el ivg-i']//a";
-        $imageNodes = $googleDOM->getXpath()->query($xpathCards, $group);
+        $imageNodes = $googleDOM->getXpath()->query($xpathCards, $node);
         foreach ($imageNodes as $imgNode) {
             $item['images'][] = $this->parseItem($googleDOM, $imgNode);
 
