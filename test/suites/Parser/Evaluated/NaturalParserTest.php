@@ -86,6 +86,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             $types[] = $item->getTypes()[0];
         }
 
+
         $this->assertInstanceOf(ResultSet::class, $result);
         $this->assertCount(8, $result);
         $this->assertEquals([
@@ -98,6 +99,16 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             NaturalResultType::CLASSICAL,
             NaturalResultType::CLASSICAL
         ], $types);
+
+        $this->assertCount(12, $result->getItems()[0]->getDataValue('images'));
+        $this->assertEquals(
+            'http://superawesomevectors.com/free-vector-donut-drawing/',
+            $result->getItems()[0]->getDataValue('images')[0]->getDataValue('sourceUrl')
+        );
+        $this->assertEquals(
+            'https://www.google.com.au/search?q=simpsons+donut&tbm=isch&imgil=PsgymH70iPP7VM%253A%253BeaF3My1vToZseM%253Bhttp%25253A%25252F%25252Fsuperawesomevectors.com%25252Ffree-vector-donut-drawing%25252F&source=iu&pf=m&fir=PsgymH70iPP7VM%253A%252CeaF3My1vToZseM%252C_&usg=___xAQ2PmWuTZdcZq_-t7ELD0Maqw%3D',
+            $result->getItems()[0]->getDataValue('images')[0]->getDataValue('targetUrl')
+        );
     }
 
     public function testParserWithVideo()

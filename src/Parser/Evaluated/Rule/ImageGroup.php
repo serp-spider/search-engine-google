@@ -7,6 +7,7 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule;
 
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\ResultSet;
+use Serps\Core\UrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
 use Serps\SearchEngine\Google\NaturalResultType;
@@ -43,15 +44,26 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterac
      */
     protected function parseItem(GoogleDOM $googleDOM, \DOMElement $imgNode)
     {
-        $data = [
-            'targetUrl' => $imgNode->getAttribute('href')
+        $data =  [
+            'sourceUrl' => function () use ($imgNode, $googleDOM) {
+                $img = $googleDOM->getXpath()->query('descendant::img', $imgNode)->item(0);
+                if (!$img) {
+                    return $googleDOM->getUrl()->resolve('/');
+                }
+                return $googleDOM->getUrl()->resolve($img->getAttribute('title'));
+            },
+            'targetUrl' => function () use ($imgNode, $googleDOM) {
+                return $googleDOM->getUrl()->resolve($imgNode->getAttribute('href'));
+            },
+            'image' => function () use ($imgNode, $googleDOM) {
+                $img = $googleDOM->getXpath()->query('descendant::img', $imgNode)->item(0);
+                if (!$img) {
+                    return '';
+                }
+                return $img->getAttribute('src');
+            },
         ];
-
-        $img = $imgNode->firstChild;
-        if ($img) {
-            $data['pageUrl'] = $img->getAttribute('title');
-        }
-
-        return $data;
+        
+        return new BaseResult(NaturalResultType::IMAGE_GROUP_IMAGE, $data);
     }
 }
