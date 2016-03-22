@@ -17,7 +17,7 @@ class ClassicalThumbVideo implements ParsingRuleInterace
 {
     public function match(GoogleDom $dom, \DOMElement $node)
     {
-        if ($node->childNodes->length > 0 && $node->childNodes[0]->getAttribute('class') == 'ts') {
+        if ($node->childNodes->length > 0 && $node->childNodes->item(0)->getAttribute('class') == 'ts') {
             return ParsingRuleInterace::RULE_MATCH_MATCHED;
         }
 
