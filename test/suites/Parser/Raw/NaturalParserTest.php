@@ -29,6 +29,8 @@ use Serps\SearchEngine\Google\NaturalResultType;
  * @covers Serps\SearchEngine\Google\Parser\Raw\Rule\ClassicalThumbVideo
  * @covers Serps\SearchEngine\Google\Parser\Raw\Rule\Map
  * @covers Serps\SearchEngine\Google\Parser\Raw\Rule\ImageGroup
+ *
+ * @group rawParser
  */
 class NaturalParserTest extends \PHPUnit_Framework_TestCase
 {
@@ -133,5 +135,50 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             NaturalResultType::CLASSICAL
         ], $types);
 
+    }
+
+    public function testParserWithImageGroup()
+    {
+
+        $gUrl = GoogleUrlArchive::fromString('https://www.google.com.au/search?q=simpsons+donut');
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-raw/simpsons+donuts.html'), $gUrl, $gUrl);
+
+        $naturalParser = new  \Serps\SearchEngine\Google\Parser\Raw\NaturalParser();
+        $result = $naturalParser->parse($dom);
+
+        $types = [];
+        foreach ($result->getItems() as $item) {
+            $types[] = $item->getTypes()[0];
+        }
+
+        $this->assertInstanceOf(ResultSet::class, $result);
+        $this->assertCount(10, $result);
+        $this->assertEquals([
+            NaturalResultType::IMAGE_GROUP,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL_VIDEO,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL
+        ], $types);
+
+        $this->assertCount(5, $result->getItems()[0]->getDataValue('images'));
+        $this->assertEquals(
+            'https://www.pinterest.com/tailaurindo/simpson/',
+            $result->getItems()[0]->getDataValue('images')[0]->getDataValue('sourceUrl')
+        );
+        $this->assertEquals(
+            'https://www.google.com.au/url?q=https%3A%2F%2Fwww.pinterest.com%2Ftailaurindo%2Fsimpson%2F&sa=U&ved=0ahUKEwip8OqE5tTLAhWCMBoKHRHaBzMQwW4IFjAA&usg=AFQjCNG1gX30QPinBxrX_o_uIqeDt33W-A',
+            $result->getItems()[0]->getDataValue('images')[0]->getDataValue('targetUrl')->__toString()
+        );
+
+        $this->assertEquals(
+            'https://www.google.com.au/search?q=simpsons+donut&gbv=1&prmd=ivns&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwip8OqE5tTLAhWCMBoKHRHaBzMQsAQIFA',
+            $result->getItems()[0]->getDataValue('moreUrl')->__toString()
+        );
     }
 }

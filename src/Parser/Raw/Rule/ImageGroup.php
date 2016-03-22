@@ -46,27 +46,49 @@ class ImageGroup implements ParsingRuleInterace
 
     }
 
-    public function parse(GoogleDom $dom, \DomElement $node, ResultSet $resultSet)
+    public function parse(GoogleDom $googleDOM, \DomElement $node, ResultSet $resultSet)
     {
-        $xpath = $dom->getXpath();
-
-        // find the tilte/url
-        /* @var $aTag \DOMElement */
+        $xpath = $googleDOM->getXpath();
         $aTag=$xpath
             ->query("descendant::h3[@class='r'][1]/a", $node)
             ->item(0);
 
-        $url=$aTag->getAttribute('href');
-
         $data = [
-            'snippet' => $node->C14N(),
-            'title'   => $aTag->nodeValue,
-            'url'     => $url
-            // TODO: image list
+            'moreUrl' => $googleDOM->getUrl()->resolve($aTag->getAttribute('href')),
+            'images'  => []
         ];
-        $resultType = NaturalResultType::IMAGE_GROUP;
 
-        $item = new BaseResult($resultType, $data);
-        $resultSet->addItem($item);
+        $imageNodes = $xpath->query('div/a', $node);
+
+        foreach ($imageNodes as $imgNode) {
+            $data['images'][] = $this->parseItem($googleDOM, $imgNode);
+        }
+
+        $resultSet->addItem(new BaseResult(NaturalResultType::IMAGE_GROUP, $data));
+    }
+
+    private function parseItem(GoogleDOM $googleDOM, \DOMElement $imgNode)
+    {
+        $data =  [
+            'sourceUrl' => function () use ($imgNode, $googleDOM) {
+                $img = $googleDOM->getXpath()->query('descendant::img', $imgNode)->item(0);
+                if (!$img) {
+                    return $googleDOM->getUrl()->resolve('/');
+                }
+                return $googleDOM->getUrl()->resolve($img->getAttribute('title'));
+            },
+            'targetUrl' => function () use ($imgNode, $googleDOM) {
+                return $googleDOM->getUrl()->resolve($imgNode->getAttribute('href'));
+            },
+            'image' => function () use ($imgNode, $googleDOM) {
+                $img = $googleDOM->getXpath()->query('descendant::img', $imgNode)->item(0);
+                if (!$img) {
+                    return '';
+                }
+                return $img->getAttribute('src');
+            },
+        ];
+
+        return new BaseResult(NaturalResultType::IMAGE_GROUP_IMAGE, $data);
     }
 }
