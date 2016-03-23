@@ -135,6 +135,27 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             NaturalResultType::CLASSICAL
         ], $types);
 
+        $map = $result->getItems()[0];
+
+        $this->assertEquals(
+            'https://www.google.fr/search?client=ubuntu&hs=ZbY&sa=G&gbv=1&q=shop+near+paris&npsic=0&rlst=f&rlha=0&ved=0ahUKEwiTg9Gp6tfLAhVJOxoKHX_6DxUQjGoIMg',
+            $map->getDataValue('mapUrl')
+        );
+
+        $this->assertCount(3, $map->getDataValue('localPack'));
+        $this->assertEquals('Paris Store', $map->getDataValue('localPack')[0]->getDataValue('title'));
+        $this->assertEquals('http://www.paris-store.com/', $map->getDataValue('localPack')[0]->getDataValue('url'));
+        $this->assertEquals('44 Avenue d\'Ivry', $map->getDataValue('localPack')[0]->getDataValue('street'));
+
+        $this->assertEquals('4,2', $map->getDataValue('localPack')[0]->getDataValue('stars'));
+        $this->assertEquals(null, $map->getDataValue('localPack')[1]->getDataValue('stars'));
+
+
+        $this->assertEquals(null, $map->getDataValue('localPack')[0]->getDataValue('review'));
+        $this->assertEquals('Aucun avis', $map->getDataValue('localPack')[1]->getDataValue('review'));
+        $this->assertEquals(null, $map->getDataValue('localPack')[2]->getDataValue('review'));
+
+
     }
 
     public function testParserWithImageGroup()
