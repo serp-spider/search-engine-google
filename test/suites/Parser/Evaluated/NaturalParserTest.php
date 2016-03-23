@@ -178,5 +178,26 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             NaturalResultType::IMAGE_GROUP
         ], $types);
 
+
+        $map = $result->getItems()[0];
+
+        $this->assertEquals(
+            'https://www.google.fr/search?q=shop+near+paris&npsic=0&rflfq=1&rlha=0&tbm=lcl&sa=X&ved=0ahUKEwjj9PCdqMDLAhUH0xoKHelvDxcQjGoIOw',
+            $map->getDataValue('mapUrl')
+        );
+
+        $this->assertCount(3, $map->getDataValue('localPack'));
+        $this->assertEquals('Bicycle Store', $map->getDataValue('localPack')[0]->getDataValue('title'));
+        $this->assertEquals('http://www.bicyclestore.fr/', $map->getDataValue('localPack')[0]->getDataValue('url'));
+        $this->assertEquals('17 Boulevard du Temple', $map->getDataValue('localPack')[0]->getDataValue('street'));
+
+        $this->assertEquals('4.0', $map->getDataValue('localPack')[0]->getDataValue('stars'));
+        $this->assertEquals(null, $map->getDataValue('localPack')[1]->getDataValue('stars'));
+
+
+        $this->assertEquals(null, $map->getDataValue('localPack')[0]->getDataValue('review'));
+        $this->assertEquals('No reviews', $map->getDataValue('localPack')[1]->getDataValue('review'));
+        $this->assertEquals(null, $map->getDataValue('localPack')[2]->getDataValue('review'));
+
     }
 }

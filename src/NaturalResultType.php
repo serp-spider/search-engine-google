@@ -17,5 +17,7 @@ abstract class NaturalResultType
     const IN_DEPTH_ARTICLE = 'inDepthArticle';
     const IN_THE_NEWS = 'inTheNews';
     const TWEETS_CAROUSEL= 'tweetsCarousel';
+
     const MAP = 'map';
+    const MAP_PLACE = 'map_place';
 }
