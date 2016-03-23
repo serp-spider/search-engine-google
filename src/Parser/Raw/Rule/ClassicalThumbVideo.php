@@ -35,7 +35,7 @@ class ClassicalThumbVideo implements ParsingRuleInterace
             ->item(0);
 
         $url=$aTag->getAttribute('href');
-        $url = urldecode($dom->getEffectiveUrl()->resolve($url)->getParamValue('q'));
+        $url = $dom->getEffectiveUrl()->resolve($url)->getParamRawValue('q');
 
         $destinationTag = $xpath
             ->query("descendant::td/cite[@class='kv']", $node)

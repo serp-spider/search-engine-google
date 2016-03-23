@@ -64,7 +64,7 @@ class Map implements ParsingRuleInterace
                 $item = $dom->getXpath()->query('descendant::td[@class="_HZj"]/a', $localPack)->item(0);
                 if ($item && $href = $item->getAttribute('href')) {
                     if (strpos($href, '/url') === 0) {
-                        $url = urldecode($dom->getUrl()->resolve($href)->getParamValue('q'));
+                        $url = $dom->getUrl()->resolve($href)->getParamRawValue('q');
                         return UrlArchive::fromString($url);
                     }
                 }
