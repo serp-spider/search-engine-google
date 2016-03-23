@@ -93,7 +93,7 @@ class Map implements ParsingRuleInterace
                     $localPack
                 )->item(0);
                 if ($item) {
-                    if ($item->childNodes[0] && !($item->childNodes[0] instanceof \DOMText)) {
+                    if ($item->childNodes->length > 0 && !($item->childNodes->item(0) instanceof \DOMText)) {
                         return null;
                     } else {
                         return trim(explode('·', $item->nodeValue)[0]);
