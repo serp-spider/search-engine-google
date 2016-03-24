@@ -7,6 +7,7 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule;
 
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\ResultSet;
+use Serps\Core\UrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
 use Serps\SearchEngine\Google\NaturalResultType;
@@ -53,8 +54,15 @@ class InTheNews implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
         $aTag = $googleDOM->getXpath()->query($xpathTitle, $node)->item(0);
         if ($aTag) {
             $card['title'] = $aTag->nodeValue;
-            $card['targetUrl'] = $aTag->getAttribute('href');
+            $card['url'] = UrlArchive::fromString($aTag->getAttribute('href'));
+            $card['description'] = function () use ($googleDOM, $node) {
+                $span = $googleDOM->getXpath()->query("descendant::span[@class='_dwd st s std']", $node);
+                if ($span) {
+                    return  $span->item(0)->nodeValue;
+                }
+                return null;
+            };
         }
-        return $card;
+        return new BaseResult('', $card);
     }
 }

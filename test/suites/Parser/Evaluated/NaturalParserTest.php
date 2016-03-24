@@ -69,9 +69,17 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $inTheNews[0]->getRealPosition());
         $this->assertEquals(
             "'The Simpsons': Greatest Political Moments",
-            $inTheNews[0]->getDataValue('cards')[0]['title']
+            $inTheNews[0]->getDataValue('cards')[0]->getDataValue('title')
         );
-
+        $this->assertEquals(
+            'http://www.rollingstone.com/politics/news/the-simpsons-greatest-political-moments-20160323',
+            $inTheNews[0]->getDataValue('cards')[0]->getDataValue('url')
+        );
+        $this->assertEquals(
+            "'The Simpsons' has lampooned political figures over four presidential administrations and ...",
+            $inTheNews[0]->getDataValue('cards')[0]->getDataValue('description')
+        );
+        
 
         // Test twitter tweet carousel
         $this->assertEquals('@TheSimpsons', $result->getItems()[1]->getDataValue('user'));
