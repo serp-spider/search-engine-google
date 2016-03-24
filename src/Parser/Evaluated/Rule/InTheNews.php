@@ -31,7 +31,7 @@ class InTheNews implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
     public function parse(GoogleDom $googleDOM, \DomElement $group, ResultSet $resultSet)
     {
         $item = [
-            'cards' => []
+            'news' => []
         ];
         $xpathCards = "div/div[contains(concat(' ',normalize-space(@class),' '),' card-section ')]";
         $cardNodes = $googleDOM->getXpath()->query($xpathCards, $group);

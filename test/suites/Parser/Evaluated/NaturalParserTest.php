@@ -79,7 +79,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             "'The Simpsons' has lampooned political figures over four presidential administrations and ...",
             $inTheNews[0]->getDataValue('cards')[0]->getDataValue('description')
         );
-        
+
 
         // Test twitter tweet carousel
         $this->assertEquals('@TheSimpsons', $result->getItems()[1]->getDataValue('user'));
