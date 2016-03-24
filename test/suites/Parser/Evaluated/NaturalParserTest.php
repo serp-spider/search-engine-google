@@ -64,11 +64,24 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         ], $types);
 
 
+        // Test in the news
         $inTheNews = $result->getResultsByType('inTheNews');
         $this->assertEquals(3, $inTheNews[0]->getRealPosition());
         $this->assertEquals(
-            'How well do you know The Simpsons? Take our quiz',
+            "'The Simpsons': Greatest Political Moments",
             $inTheNews[0]->getDataValue('cards')[0]['title']
+        );
+
+
+        // Test twitter tweet carousel
+        $this->assertEquals('@TheSimpsons', $result->getItems()[1]->getDataValue('user'));
+        $this->assertEquals(
+            'https://twitter.com/TheSimpsons?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor',
+            $result->getItems()[1]->getDataValue('url')
+        );
+        $this->assertEquals(
+            'The Simpsons (@TheSimpsons) | Twitter',
+            $result->getItems()[1]->getDataValue('title')
         );
     }
 

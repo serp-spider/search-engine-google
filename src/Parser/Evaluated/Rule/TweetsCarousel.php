@@ -38,13 +38,12 @@ class TweetsCarousel implements ParsingRuleInterace
         if ($aTag) {
             $title = $aTag->nodeValue;
 
-            $user = preg_match('/@([A-Za-z0-9_]{1,15})/', $title, $match);
+            preg_match('/@([A-Za-z0-9_]{1,15})/', $title, $match);
 
             $data = [
-                'snippet' => $node->C14N(),
                 'title'   => $title,
                 'url'     => $aTag->getAttribute('href'),
-                'user'    => $user
+                'user'    => $match[0]
             ];
 
             $item = new BaseResult(NaturalResultType::TWEETS_CAROUSEL, $data);
