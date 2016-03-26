@@ -46,12 +46,19 @@ class GoogleClient
     }
 
     /**
-     * Enable or disable usage of cookies
-     * @param $enabled
+     * Enable usage of cookies
      */
-    public function enableCookies($enabled)
+    public function enableCookies()
     {
-        $this->cookiesEnabled = $enabled;
+        $this->cookiesEnabled = true;
+    }
+
+    /**
+     * Disable usage of cookies
+     */
+    public function disableCookies()
+    {
+        $this->cookiesEnabled = false;
     }
 
     /**
