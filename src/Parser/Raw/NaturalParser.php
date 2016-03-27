@@ -6,14 +6,14 @@
 namespace Serps\SearchEngine\Google\Parser\Raw;
 
 use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\SearchEngine\Google\Parser\AbstractNaturalParser;
+use Serps\SearchEngine\Google\Parser\AbstractParser;
 use Serps\SearchEngine\Google\Parser\Raw\Rule\ClassicalLargeVideo;
 use Serps\SearchEngine\Google\Parser\Raw\Rule\ClassicalResult;
 use Serps\SearchEngine\Google\Parser\Raw\Rule\ClassicalThumbVideo;
 use Serps\SearchEngine\Google\Parser\Raw\Rule\ImageGroup;
 use Serps\SearchEngine\Google\Parser\Raw\Rule\Map;
 
-class NaturalParser extends AbstractNaturalParser
+class NaturalParser extends AbstractParser
 {
 
     /**

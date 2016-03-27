@@ -77,7 +77,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $gUrl = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer');
         $dom = new GoogleDom(file_get_contents('test/resources/pages-raw/simpsons+movie+trailer.html'), $gUrl, $gUrl);
 
-        $naturalParser = new  NaturalParser();
+        $naturalParser = new NaturalParser();
         $results = $naturalParser->parse($dom);
 
         $types = [];
@@ -111,7 +111,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $gUrl = GoogleUrlArchive::fromString('https://www.google.fr/search?q=shop+near+paris');
         $dom = new GoogleDom(file_get_contents('test/resources/pages-raw/shop-near-paris.html'), $gUrl, $gUrl);
 
-        $naturalParser = new  NaturalParser();
+        $naturalParser = new NaturalParser();
         $result = $naturalParser->parse($dom);
 
         $types = [];
@@ -164,7 +164,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $gUrl = GoogleUrlArchive::fromString('https://www.google.com.au/search?q=simpsons+donut');
         $dom = new GoogleDom(file_get_contents('test/resources/pages-raw/simpsons+donuts.html'), $gUrl, $gUrl);
 
-        $naturalParser = new  \Serps\SearchEngine\Google\Parser\Raw\NaturalParser();
+        $naturalParser = new NaturalParser();
         $result = $naturalParser->parse($dom);
 
         $types = [];

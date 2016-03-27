@@ -18,9 +18,9 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\TweetsCarousel;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalWithLargeVideo;
 
 /**
- * Parses natural results from a google SERP
+ * Parses adwords results from a google SERP
  */
-class NaturalParser extends AbstractParser
+class AdwordsParser extends AbstractParser
 {
 
     /**

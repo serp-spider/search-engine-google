@@ -8,7 +8,7 @@ namespace Serps\SearchEngine\Google\Parser;
 use Serps\Core\Serp\ResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 
-abstract class AbstractNaturalParser
+abstract class AbstractParser
 {
 
     /**
