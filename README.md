@@ -17,7 +17,11 @@ Install it through [composer](https://getcomposer.org/) with the package
 
 ``composer require 'serps/search-engine-google'``
 
-Doc
----
 
-Todo
+Documentation
+-------------
+
+Brose the [documentation](http://serp-spider.github.io/documentation/search-engine/google/)
+
+
+
