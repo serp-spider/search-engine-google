@@ -6,7 +6,7 @@
 namespace Serps\SearchEngine\Google\Parser\Raw\Rule\Natural;
 
 use Serps\Core\Serp\BaseResult;
-use Serps\Core\Serp\ResultSet;
+use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\GoogleUrl;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleDom;
@@ -46,7 +46,7 @@ class ImageGroup implements ParsingRuleInterace
 
     }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $node, ResultSet $resultSet)
+    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
     {
         $xpath = $googleDOM->getXpath();
         $aTag=$xpath

@@ -6,7 +6,7 @@
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
 use Serps\Core\Serp\BaseResult;
-use Serps\Core\Serp\ResultSet;
+use Serps\Core\Serp\IndexedResultSet;
 use Serps\Core\UrlArchive;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleDom;
@@ -24,7 +24,7 @@ class Map implements ParsingRuleInterace
         return self::RULE_MATCH_NOMATCH;
     }
 
-    public function parse(GoogleDom $dom, \DomElement $node, ResultSet $resultSet)
+    public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet)
     {
 
         $xPath = $dom->getXpath();

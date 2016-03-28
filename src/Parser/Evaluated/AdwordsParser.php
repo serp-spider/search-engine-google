@@ -5,49 +5,33 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated;
 
+use Serps\Core\Serp\CompositeResultSet;
+use Serps\SearchEngine\Google\AdwordsResultType;
 use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\SearchEngine\Google\Parser\AbstractParser;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalResult;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Divider;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ImageGroup;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\InDepthArticle;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\InTheNews;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Map;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\SearchResultGroup;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\TweetsCarousel;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalWithLargeVideo;
+use \Serps\SearchEngine\Google\Parser\Evaluated\AdwordsSectionParser;
 
-/**
- * Parses adwords results from a google SERP
- */
-class AdwordsParser extends AbstractParser
+class AdwordsParser
 {
 
     /**
-     * @inheritdoc
+     * @param GoogleDom $googleDom
+     * @return CompositeResultSet
      */
-    protected function generateRules()
+    public function parse(GoogleDom $googleDom)
     {
-        return [
-            new Divider(),
-            new SearchResultGroup(),
-            new ClassicalResult(),
-            new ImageGroup(),
-            new TweetsCarousel(),
-            new ClassicalWithLargeVideo(),
-            new InTheNews(),
-            new Map(),
-            new InDepthArticle()
+        $parsers = [
+            new AdwordsSectionParser(AdwordsSectionParser::ADS_SECTION_TOP_XPATH, AdwordsResultType::SECTION_TOP)
         ];
-    }
 
-    /**
-     * @inheritdoc
-     */
-    protected function getParsableItems(GoogleDom $googleDom)
-    {
-        $xpathObject = $googleDom->getXpath();
-        $xpathElementGroups = "//div[@id = 'ires']/*[@id = 'rso']/*";
-        return $xpathObject->query($xpathElementGroups);
+        $resultsSets = new CompositeResultSet();
+
+        foreach ($parsers as $parser) {
+            /* @var $parser \Serps\SearchEngine\Google\Parser\Evaluated\AdwordsSectionParser */
+            $resultsSets->addResultSet(
+                $parser->parse($googleDom)
+            );
+        }
+
+        return $resultsSets;
     }
 }

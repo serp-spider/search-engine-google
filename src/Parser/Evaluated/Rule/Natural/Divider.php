@@ -5,7 +5,7 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
-use Serps\Core\Serp\ResultSet;
+use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
 
@@ -23,7 +23,7 @@ class Divider implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
     }
 
 
-    public function parse(GoogleDom $googleDOM, \DomElement $group, ResultSet $resultSet)
+    public function parse(GoogleDom $googleDOM, \DomElement $group, IndexedResultSet $resultSet)
     {
     }
 }

@@ -6,7 +6,7 @@
 namespace Serps\SearchEngine\Google\Parser;
 
 use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\Core\Serp\ResultSet;
+use Serps\Core\Serp\IndexedResultSet;
 
 interface ParsingRuleInterace
 {
@@ -15,5 +15,5 @@ interface ParsingRuleInterace
     const RULE_MATCH_STOP = 3;
 
     public function match(GoogleDom $dom, \DOMElement $node);
-    public function parse(GoogleDom $dom, \DomElement $node, ResultSet $resultSet);
+    public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet);
 }

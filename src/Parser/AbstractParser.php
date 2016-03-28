@@ -5,7 +5,7 @@
 
 namespace Serps\SearchEngine\Google\Parser;
 
-use Serps\Core\Serp\ResultSet;
+use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 
 abstract class AbstractParser
@@ -38,26 +38,28 @@ abstract class AbstractParser
     /**
      * Parses the given google dom
      * @param GoogleDom $googleDom
-     * @return ResultSet
+     * @return IndexedResultSet
      */
     public function parse(GoogleDom $googleDom)
     {
-
         $elementGroups = $this->getParsableItems($googleDom);
-
-        $startingAt = $googleDom->getUrl()->getResultsPerPage() * $googleDom->getUrl()->getPage();
-        $resultSet = new ResultSet($startingAt);
-
+        $resultSet = $this->createResultSet($googleDom);
         return $this->parseGroups($elementGroups, $resultSet, $googleDom);
+    }
+
+    protected function createResultSet(GoogleDom $googleDom)
+    {
+        $startingAt = $googleDom->getUrl()->getResultsPerPage() * $googleDom->getUrl()->getPage();
+        return new IndexedResultSet($startingAt);
     }
 
     /**
      * @param $elementGroups
-     * @param ResultSet $resultSet
+     * @param IndexedResultSet $resultSet
      * @param $googleDom
-     * @return ResultSet
+     * @return IndexedResultSet
      */
-    protected function parseGroups($elementGroups, ResultSet $resultSet, $googleDom)
+    protected function parseGroups($elementGroups, IndexedResultSet $resultSet, $googleDom)
     {
 
         $rules = $this->getRules();

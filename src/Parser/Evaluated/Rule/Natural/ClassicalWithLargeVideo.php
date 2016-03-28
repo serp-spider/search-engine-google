@@ -6,7 +6,7 @@
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
 use Serps\Core\Serp\BaseResult;
-use Serps\Core\Serp\ResultSet;
+use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
 use Serps\SearchEngine\Google\NaturalResultType;
@@ -23,7 +23,7 @@ class ClassicalWithLargeVideo implements ParsingRuleInterace
         }
     }
 
-    public function parse(GoogleDom $dom, \DomElement $node, ResultSet $resultSet)
+    public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet)
     {
         $xpath = $dom->getXpath();
         $aTag = $xpath->query("descendant::h3[@class='r'][1]/a", $node)->item(0);

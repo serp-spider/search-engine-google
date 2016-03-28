@@ -6,7 +6,7 @@
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
 use Serps\Core\Serp\BaseResult;
-use Serps\Core\Serp\ResultSet;
+use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
 use Serps\SearchEngine\Google\NaturalResultType;
@@ -22,7 +22,7 @@ class InDepthArticle implements ParsingRuleInterace
         return self::RULE_MATCH_NOMATCH;
     }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $group, ResultSet $resultSet)
+    public function parse(GoogleDom $googleDOM, \DomElement $group, IndexedResultSet $resultSet)
     {
 
         $item = [

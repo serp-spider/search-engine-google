@@ -8,7 +8,7 @@ namespace Serps\Test\TDD\SearchEngine\Google\Parser\Raw;
 use Serps\SearchEngine\Google\Parser\Raw\NaturalParser;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
-use Serps\Core\Serp\ResultSet;
+use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\NaturalResultType;
 
 /**
@@ -54,7 +54,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
 
 
 
-        $this->assertInstanceOf(ResultSet::class, $result);
+        $this->assertInstanceOf(IndexedResultSet::class, $result);
         $this->assertCount(10, $result);
         $this->assertEquals([
             NaturalResultType::CLASSICAL,
@@ -85,7 +85,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             $types[] = $item->getTypes()[0];
         }
 
-        $this->assertInstanceOf(ResultSet::class, $results);
+        $this->assertInstanceOf(IndexedResultSet::class, $results);
         $this->assertCount(10, $results);
         $this->assertEquals([
             NaturalResultType::CLASSICAL_VIDEO,
@@ -119,7 +119,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             $types[] = $item->getTypes()[0];
         }
 
-        $this->assertInstanceOf(ResultSet::class, $result);
+        $this->assertInstanceOf(IndexedResultSet::class, $result);
         $this->assertCount(11, $result);
         $this->assertEquals([
             NaturalResultType::MAP,
@@ -172,7 +172,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             $types[] = $item->getTypes()[0];
         }
 
-        $this->assertInstanceOf(ResultSet::class, $result);
+        $this->assertInstanceOf(IndexedResultSet::class, $result);
         $this->assertCount(10, $result);
         $this->assertEquals([
             NaturalResultType::IMAGE_GROUP,

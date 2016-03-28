@@ -8,6 +8,7 @@ namespace Serps\SearchEngine\Google\Page;
 use Serps\Exception;
 use Serps\SearchEngine\Google\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleDom;
+use Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser as EvaluatedNaturalParser;
 use Serps\SearchEngine\Google\Parser\Raw\NaturalParser as RawNaturalParser;
 
@@ -31,7 +32,7 @@ class GoogleSerp extends GoogleDom
     }
 
     /**
-     * @return \Serps\Core\Serp\ResultSet
+     * @return \Serps\Core\Serp\IndexedResultSet
      */
     public function getNaturalResults()
     {
@@ -44,10 +45,19 @@ class GoogleSerp extends GoogleDom
     }
 
 
+    /**
+     * @return \Serps\Core\Serp\CompositeResultSet
+     * @throws Exception
+     * @throws InvalidDOMException
+     */
     public function getAdwordsResults()
     {
-        // TODO
-        throw  new Exception('Not implemented');
+        if ($this->javascriptIsEvaluated()) {
+            $parser = new AdwordsParser();
+        } else {
+            throw new Exception('Adwords parser is not available for non evaluated results');
+        }
+        return $parser->parse($this)->getResultsByType();
     }
 
     public function javascriptIsEvaluated()
