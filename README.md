@@ -21,7 +21,7 @@ Install it through [composer](https://getcomposer.org/) with the package
 Documentation
 -------------
 
-Brose the [documentation](http://serp-spider.github.io/documentation/search-engine/google/)
+Browse the [documentation](http://serp-spider.github.io/documentation/search-engine/google/)
 
 
 
