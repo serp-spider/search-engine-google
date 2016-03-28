@@ -24,13 +24,13 @@ use Serps\SearchEngine\Google\NaturalResultType;
  *
  * @covers Serps\SearchEngine\Google\Parser\AbstractParser
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalResult
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\SearchResultGroup
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\TweetsCarousel
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\InTheNews
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Divider
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\ImageGroup
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalWithLargeVideo
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ClassicalResult
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarousel
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InTheNews
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ClassicalWithLargeVideo
  */
 class NaturalParserTest extends \PHPUnit_Framework_TestCase
 {

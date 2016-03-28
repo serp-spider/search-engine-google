@@ -24,11 +24,11 @@ use Serps\SearchEngine\Google\NaturalResultType;
  *
  * @covers Serps\SearchEngine\Google\Parser\AbstractParser
  * @covers Serps\SearchEngine\Google\Parser\Raw\NaturalParser
- * @covers Serps\SearchEngine\Google\Parser\Raw\Rule\ClassicalResult
- * @covers Serps\SearchEngine\Google\Parser\Raw\Rule\ClassicalLargeVideo
- * @covers Serps\SearchEngine\Google\Parser\Raw\Rule\ClassicalThumbVideo
- * @covers Serps\SearchEngine\Google\Parser\Raw\Rule\Map
- * @covers Serps\SearchEngine\Google\Parser\Raw\Rule\ImageGroup
+ * @covers Serps\SearchEngine\Google\Parser\Raw\Rule\Natural\ClassicalResult
+ * @covers Serps\SearchEngine\Google\Parser\Raw\Rule\Natural\ClassicalLargeVideo
+ * @covers Serps\SearchEngine\Google\Parser\Raw\Rule\Natural\ClassicalThumbVideo
+ * @covers Serps\SearchEngine\Google\Parser\Raw\Rule\Natural\Map
+ * @covers Serps\SearchEngine\Google\Parser\Raw\Rule\Natural\ImageGroup
  *
  * @group rawParser
  */

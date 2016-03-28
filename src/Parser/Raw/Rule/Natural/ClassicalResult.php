@@ -3,7 +3,7 @@
  * @license see LICENSE
  */
 
-namespace Serps\SearchEngine\Google\Parser\Raw\Rule;
+namespace Serps\SearchEngine\Google\Parser\Raw\Rule\Natural;
 
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\ResultSet;

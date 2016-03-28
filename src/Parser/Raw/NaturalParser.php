@@ -7,11 +7,11 @@ namespace Serps\SearchEngine\Google\Parser\Raw;
 
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
-use Serps\SearchEngine\Google\Parser\Raw\Rule\ClassicalLargeVideo;
-use Serps\SearchEngine\Google\Parser\Raw\Rule\ClassicalResult;
-use Serps\SearchEngine\Google\Parser\Raw\Rule\ClassicalThumbVideo;
-use Serps\SearchEngine\Google\Parser\Raw\Rule\ImageGroup;
-use Serps\SearchEngine\Google\Parser\Raw\Rule\Map;
+use Serps\SearchEngine\Google\Parser\Raw\Rule\Natural\ClassicalLargeVideo;
+use Serps\SearchEngine\Google\Parser\Raw\Rule\Natural\ClassicalResult;
+use Serps\SearchEngine\Google\Parser\Raw\Rule\Natural\ClassicalThumbVideo;
+use Serps\SearchEngine\Google\Parser\Raw\Rule\Natural\ImageGroup;
+use Serps\SearchEngine\Google\Parser\Raw\Rule\Natural\Map;
 
 class NaturalParser extends AbstractParser
 {

@@ -7,15 +7,15 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated;
 
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalResult;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Divider;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ImageGroup;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\InDepthArticle;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\InTheNews;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Map;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\SearchResultGroup;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\TweetsCarousel;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\ClassicalWithLargeVideo;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ClassicalResult;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InDepthArticle;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InTheNews;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Map;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarousel;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ClassicalWithLargeVideo;
 
 /**
  * Parses natural results from a google SERP
