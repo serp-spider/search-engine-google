@@ -6,7 +6,6 @@
 namespace Serps\Test\TDD\SearchEngine\Google\Parser\Evaluated;
 
 use Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser;
-use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\Core\Serp\IndexedResultSet;
@@ -26,7 +25,8 @@ use Serps\Core\Serp\CompositeResultSet;
  *
  * @covers Serps\SearchEngine\Google\Parser\AbstractParser
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Adwords\Ad
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Adwords\AdwordsItem
+ * @covers Serps\SearchEngine\Google\Css
  */
 class AdwordsParserTest extends \PHPUnit_Framework_TestCase
 {
