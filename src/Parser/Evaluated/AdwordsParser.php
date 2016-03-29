@@ -20,8 +20,10 @@ class AdwordsParser
     public function parse(GoogleDom $googleDom)
     {
         $parsers = [
-            new AdwordsSectionParser(AdwordsSectionParser::ADS_SECTION_TOP_XPATH, AdwordsResultType::SECTION_TOP)
+            new AdwordsSectionParser(AdwordsSectionParser::ADS_SECTION_TOP_XPATH, AdwordsResultType::SECTION_TOP),
+            new AdwordsSectionParser(AdwordsSectionParser::ADS_SECTION_BOTTOM_XPATH, AdwordsResultType::SECTION_BOTTOM)
         ];
+
 
         $resultsSets = new CompositeResultSet();
 

@@ -17,7 +17,10 @@ class AdwordsItem implements ParsingRuleInterace
 
     public function match(GoogleDom $dom, \DOMElement $node)
     {
-        return self::RULE_MATCH_MATCHED;
+        if ($node->getAttribute('class') == 'ads-ad') {
+            return self::RULE_MATCH_MATCHED;
+        }
+        return self::RULE_MATCH_NOMATCH;
     }
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
     {
@@ -34,8 +37,8 @@ class AdwordsItem implements ParsingRuleInterace
                 if (!$aTag) {
                     return $googleDOM->getUrl()->resolve('/');
                 }
-                return $googleDOM->getUrl()->resolve($aTag->getAttribute('href'));
 
+                return $googleDOM->getUrl()->resolve($aTag->getAttribute('href'));
             },
             'visurl' => function () use ($node, $googleDOM) {
                 $aTag = $googleDOM->getXpath()->query(

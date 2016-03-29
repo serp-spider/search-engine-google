@@ -5,6 +5,7 @@
 
 namespace Serps\Test\TDD\SearchEngine\Google\Parser\Evaluated;
 
+use Serps\SearchEngine\Google\AdwordsResultType;
 use Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
@@ -41,16 +42,21 @@ class AdwordsParserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(CompositeResultSet::class, $results);
 
-        $this->assertCount(2, $results);
+        $this->assertCount(4, $results);
 
+        $this->assertCount(2, $results->getResultsByType(AdwordsResultType::SECTION_BOTTOM));
+        $this->assertCount(2, $results->getResultsByType(AdwordsResultType::SECTION_TOP));
+
+
+        // TESTING TOP
         $this->assertEquals(
             'Art Posters On Sale Today - allposters.com.au‎',
             utf8_decode($results->getItems()[0]->getDataValue('title'))
         );
 
         $this->assertEquals(
-            's:60:"http://www.allposters.com.au/?AID=1195529028&KWID=2003592128";',
-            serialize($results->getItems()[0]->getDataValue('url')->__toString())
+            'http://www.allposters.com.au/?AID=1195529028&KWID=2003592128',
+            $results->getItems()[0]->getDataValue('url')->__toString()
         );
 
         $this->assertEquals(
@@ -63,6 +69,26 @@ class AdwordsParserTest extends \PHPUnit_Framework_TestCase
             $results->getItems()[0]->getDataValue('description')
         );
 
+        // TESTING BOTTOM
+        $bottomItem = $results->getItems()[2];
+        $this->assertEquals(
+            'Votre Simpsons Poster‎',
+            utf8_decode($bottomItem->getDataValue('title'))
+        );
 
+        $this->assertEquals(
+            'http://www.allposters.fr/-st/Les-Simpsons-Affiches_c7902_.htm?AID=1410937278&KWID=705639909',
+            $bottomItem->getDataValue('url')->__toString()
+        );
+
+        $this->assertEquals(
+            'www.allposters.fr/',
+            $bottomItem->getDataValue('visurl')
+        );
+
+        $this->assertEquals(
+            'Vos Posters de Séries TV à Prix Bas 500.000 Posters, Cadres Disponibles',
+            utf8_decode($bottomItem->getDataValue('description'))
+        );
     }
 }

@@ -18,6 +18,7 @@ class AdwordsSectionParser extends AbstractParser
 {
 
     const ADS_SECTION_TOP_XPATH = "descendant::div[@id = 'tads']//li[@class='ads-ad']";
+    const ADS_SECTION_BOTTOM_XPATH = "descendant::div[@id = 'bottomads']//li[@class='ads-ad']";
 
     protected $pathToItems;
     protected $location;
