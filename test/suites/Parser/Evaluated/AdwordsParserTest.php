@@ -92,5 +92,18 @@ class AdwordsParserTest extends \PHPUnit_Framework_TestCase
             'Vos Posters de Séries TV à Prix Bas 500.000 Posters, Cadres Disponibles',
             utf8_decode($bottomItem->getDataValue('description'))
         );
+
+        // Testing Shopping
+        $shoppingItem = $results->getItems()[0];
+        $this->assertTrue($shoppingItem->is(AdwordsResultType::SHOPPING_GROUP));
+        $this->assertCount(5, $shoppingItem->getDataValue('products'));
+        $this->assertEquals('Affiche Simpsons-Cast', $shoppingItem->getDataValue('products')[0]->getDataValue('title'));
+        $this->assertStringStartsWith('data:image/jpeg;base64,/9j/4A', $shoppingItem->getDataValue('products')[0]->getDataValue('image'));
+        $this->assertStringEndsWith('K1lrSpf/2Q==', $shoppingItem->getDataValue('products')[0]->getDataValue('image'));
+        $this->assertEquals('https://www.google.com.au/aclk?sa=l&ai=CY0A_jlP5Vuu_FpDmzAal85fABeihh8sF4LeUmKwBl9bV_YcDCAQQASgFYPsBoAH7_Zf-A8gBB6oEJ0_QX-g3vvmVLal5IsrVSmuL8KuTKi8rF8WopQL8xEMXFSCmtG7iHMAFBaAGJoAH2KX4H5AHA6gHpr4b2AcB4BLxv6bTjuzD6I4B&sig=AOD64_1iHykYRDusLJqdU94-aFjnHM1TuA&ctype=5&clui=11&q=&ved=0ahUKEwi-g9rZ3uPLAhUG1RoKHWKYArQQww8IHw&adurl=http%3A%2F%2Fwww.allposters.fr%2F-sp%2FSimpsons-Cast-Names_i8574538_.htm%3FAID%3D815014090%26ProductTarget%3D105221810967', $shoppingItem->getDataValue('products')[0]->getDataValue('url')->__toString());
+        $this->assertEquals('AllPosters.fr', $shoppingItem->getDataValue('products')[0]->getDataValue('target'));
+        $this->assertEquals('EUR9.99', $shoppingItem->getDataValue('products')[0]->getDataValue('price'));
+
+
     }
 }

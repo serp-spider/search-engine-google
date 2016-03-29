@@ -13,4 +13,5 @@ class AdwordsResultType
 
     const AD = 'adws_ad';
     const SHOPPING_GROUP = 'adws_shopping_group';
+    const SHOPPING_GROUP_PRODUCT = 'adws_shopping_group_product';
 }

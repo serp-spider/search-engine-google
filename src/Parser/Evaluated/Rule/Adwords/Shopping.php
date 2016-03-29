@@ -28,24 +28,53 @@ class Shopping implements ParsingRuleInterace
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
     {
         $item = [
+            'products' => function() use ($googleDOM, $node) {
+                $items = [];
+                $xpathCards = Css::toXPath(".pla-unit");
+                $productNodes = $googleDOM->getXpath()->query($xpathCards, $node);
+                foreach ($productNodes as $productNode) {
+                    $items[] = $this->parseItem($googleDOM, $productNode);
+                }
+                return $items;
+            }
+        ];
+
+
+        $resultSet->addItem(new BaseResult(AdwordsResultType::SHOPPING_GROUP, $item));
+    }
+
+    public function parseItem(GoogleDom $googleDOM, \DOMNode $node){
+
+        return new BaseResult(AdwordsResultType::SHOPPING_GROUP_PRODUCT, [
             'title' => function () use ($googleDOM, $node) {
-                $aTag = $googleDOM->getXpath()->query('descendant::h3/a[2]', $node)->item(0);
+                $aTag = $googleDOM->getXpath()->query(Css::toXPath('.pla-unit-title-link'), $node)->item(0);
                 if (!$aTag) {
                     return null;
                 }
                 return $aTag->nodeValue;
             },
             'url' => function () use ($node, $googleDOM) {
-                $aTag = $googleDOM->getXpath()->query('descendant::h3/a[2]', $node)->item(0);
+                $aTag = $googleDOM->getXpath()->query(Css::toXPath('.pla-unit-title-link'), $node)->item(0);
                 if (!$aTag) {
                     return $googleDOM->getUrl()->resolve('/');
                 }
-
                 return $googleDOM->getUrl()->resolve($aTag->getAttribute('href'));
             },
-            'visurl' => function () use ($node, $googleDOM) {
+            'image' => function () use ($node, $googleDOM) {
+                $imgTag = $googleDOM->getXpath()->query(
+                    Css::toXPath('.pla-unit-img-container-link img'),
+                    $node
+                )->item(0);
+
+                if (!$imgTag) {
+                    return null;
+                }
+                return $imgTag->getAttribute('src');
+
+            },
+            'target' => function () use ($node, $googleDOM) {
                 $aTag = $googleDOM->getXpath()->query(
-                    Css::toXPath('div.ads-visurl>cite'),
+                    Css::toXPath('div._mC span.a'),
                     $node
                 )->item(0);
 
@@ -53,28 +82,19 @@ class Shopping implements ParsingRuleInterace
                     return null;
                 }
                 return $aTag->nodeValue;
-
             },
-            'description' => function () use ($node, $googleDOM) {
-                $aTag = $googleDOM->getXpath()->query(
-                    Css::toXPath('div.ads-creative'),
+            'price' => function () use ($node, $googleDOM) {
+                $priceTag = $googleDOM->getXpath()->query(
+                    Css::toXPath('._QD._pvi'),
                     $node
                 )->item(0);
 
-                if (!$aTag) {
+                if (!$priceTag) {
                     return null;
                 }
-                return $aTag->nodeValue;
+                return $priceTag->nodeValue;
+            }
+        ]);
 
-            },
-        ];
-
-//        $xpathCards = "descendant::ul[@class='rg_ul']/div[@class='_ZGc bili uh_r rg_el ivg-i']//a";
-//        $imageNodes = $googleDOM->getXpath()->query($xpathCards, $node);
-//        foreach ($imageNodes as $imgNode) {
-//            $item['images'][] = $this->parseItem($googleDOM, $imgNode);
-//
-//        }
-        $resultSet->addItem(new BaseResult(AdwordsResultType::SHOPPING_GROUP, $item));
     }
 }
