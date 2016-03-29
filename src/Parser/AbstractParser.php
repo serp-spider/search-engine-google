@@ -61,7 +61,6 @@ abstract class AbstractParser
      */
     protected function parseGroups($elementGroups, IndexedResultSet $resultSet, $googleDom)
     {
-
         $rules = $this->getRules();
 
         foreach ($elementGroups as $group) {

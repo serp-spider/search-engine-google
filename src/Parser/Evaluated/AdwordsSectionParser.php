@@ -9,6 +9,7 @@ use Serps\SearchEngine\Google\AdwordsResultType;
 use Serps\SearchEngine\Google\AdwordsSectionResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Adwords\AdwordsItem;
 
 /**
  * Parses adwords results from a google SERP
@@ -16,7 +17,7 @@ use Serps\SearchEngine\Google\Parser\AbstractParser;
 class AdwordsSectionParser extends AbstractParser
 {
 
-    const ADS_SECTION_TOP_XPATH = "//div[@id = 'tvap']//li[@class='ads-ad']";
+    const ADS_SECTION_TOP_XPATH = "descendant::div[@id = 'tads']//li[@class='ads-ad']";
 
     protected $pathToItems;
     protected $location;
@@ -42,10 +43,7 @@ class AdwordsSectionParser extends AbstractParser
     protected function generateRules()
     {
         return [
-            new AdwordsSectionParser(
-                self::ADS_SECTION_TOP_XPATH,
-                AdwordsResultType::SECTION_TOP
-            )
+            new AdwordsItem()
         ];
     }
 

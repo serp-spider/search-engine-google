@@ -25,14 +25,8 @@ use Serps\Core\Serp\CompositeResultSet;
  *
  *
  * @covers Serps\SearchEngine\Google\Parser\AbstractParser
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ClassicalResult
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarousel
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InTheNews
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ClassicalWithLargeVideo
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Adwords\Ad
  */
 class AdwordsParserTest extends \PHPUnit_Framework_TestCase
 {
@@ -47,6 +41,27 @@ class AdwordsParserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(CompositeResultSet::class, $results);
 
+        $this->assertCount(2, $results);
+
+        $this->assertEquals(
+            'Art Posters On Sale Today - allposters.com.au‎',
+            utf8_decode($results->getItems()[0]->getDataValue('title'))
+        );
+
+        $this->assertEquals(
+            's:60:"http://www.allposters.com.au/?AID=1195529028&KWID=2003592128";',
+            serialize($results->getItems()[0]->getDataValue('url')->__toString())
+        );
+
+        $this->assertEquals(
+            'www.allposters.com.au/OfficialSite',
+            $results->getItems()[0]->getDataValue('visurl')
+        );
+
+        $this->assertEquals(
+            'Save 30% Or More When You Buy Now. Plus Easy Returns & Fast Shipping!',
+            $results->getItems()[0]->getDataValue('description')
+        );
 
 
     }
