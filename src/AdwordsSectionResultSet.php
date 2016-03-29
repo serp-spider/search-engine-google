@@ -32,10 +32,8 @@ class AdwordsSectionResultSet extends IndexedResultSet
      */
     public function addItem(ResultDataInterface $item)
     {
-        $itemCount = count($this->items) + 1;
         $this->items[] = new AdwordsResultItem(
             $this->location,
-            $itemCount,
             $item
         );
     }

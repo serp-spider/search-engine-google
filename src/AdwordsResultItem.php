@@ -5,18 +5,25 @@
 
 namespace Serps\SearchEngine\Google;
 
-use Serps\Core\Serp\ItemPosition;
+use Serps\Core\Serp\BaseResult;
+use Serps\Core\Serp\ProxyResult;
 use Serps\Core\Serp\ResultDataInterface;
 
-class AdwordsResultItem extends ItemPosition
+class AdwordsResultItem extends ProxyResult
 {
 
     protected $location;
 
-    public function __construct($location, $positionOnPage, ResultDataInterface $itemData)
+
+    /**
+     * AdwordsResultItem constructor.
+     * @param string $location
+     * @param ResultDataInterface $itemData
+     */
+    public function __construct($location, ResultDataInterface $itemData)
     {
         $this->location = $location;
-        parent::__construct($positionOnPage, $positionOnPage, $itemData);
+        parent::__construct($itemData);
     }
 
     public function getTypes()
