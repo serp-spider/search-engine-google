@@ -26,6 +26,7 @@ use Serps\Core\Serp\CompositeResultSet;
  *
  * @covers Serps\SearchEngine\Google\Parser\AbstractParser
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\AdwordsSectionParser
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Adwords\AdwordsItem
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Adwords\Shopping
  * @covers Serps\SearchEngine\Google\Css

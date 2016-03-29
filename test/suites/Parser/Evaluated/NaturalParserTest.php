@@ -31,6 +31,8 @@ use Serps\SearchEngine\Google\NaturalResultType;
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ClassicalWithLargeVideo
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Map
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InDepthArticle
  */
 class NaturalParserTest extends \PHPUnit_Framework_TestCase
 {
