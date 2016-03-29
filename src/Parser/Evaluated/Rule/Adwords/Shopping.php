@@ -28,9 +28,9 @@ class Shopping implements ParsingRuleInterace
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
     {
         $item = [
-            'products' => function() use ($googleDOM, $node) {
+            'products' => function () use ($googleDOM, $node) {
                 $items = [];
-                $xpathCards = Css::toXPath(".pla-unit");
+                $xpathCards = Css::toXPath('.pla-unit');
                 $productNodes = $googleDOM->getXpath()->query($xpathCards, $node);
                 foreach ($productNodes as $productNode) {
                     $items[] = $this->parseItem($googleDOM, $productNode);
@@ -43,7 +43,8 @@ class Shopping implements ParsingRuleInterace
         $resultSet->addItem(new BaseResult(AdwordsResultType::SHOPPING_GROUP, $item));
     }
 
-    public function parseItem(GoogleDom $googleDOM, \DOMNode $node){
+    public function parseItem(GoogleDom $googleDOM, \DOMNode $node)
+    {
 
         return new BaseResult(AdwordsResultType::SHOPPING_GROUP_PRODUCT, [
             'title' => function () use ($googleDOM, $node) {
