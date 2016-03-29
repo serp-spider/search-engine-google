@@ -7,6 +7,7 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated;
 
 use Serps\Core\Serp\CompositeResultSet;
 use Serps\SearchEngine\Google\AdwordsResultType;
+use Serps\SearchEngine\Google\Css;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use \Serps\SearchEngine\Google\Parser\Evaluated\AdwordsSectionParser;
 
@@ -20,8 +21,17 @@ class AdwordsParser
     public function parse(GoogleDom $googleDom)
     {
         $parsers = [
-            new AdwordsSectionParser(AdwordsSectionParser::ADS_SECTION_TOP_XPATH, AdwordsResultType::SECTION_TOP),
-            new AdwordsSectionParser(AdwordsSectionParser::ADS_SECTION_BOTTOM_XPATH, AdwordsResultType::SECTION_BOTTOM)
+            // Adwords top
+            new AdwordsSectionParser(
+                Css::toXPath('div#tads li.ads-ad, div#tvcap ._oc'),
+                AdwordsResultType::SECTION_TOP
+            ),
+
+            // Adwords bottom
+            new AdwordsSectionParser(
+                "descendant::div[@id = 'bottomads']//li[@class='ads-ad']",
+                AdwordsResultType::SECTION_BOTTOM
+            )
         ];
 
 

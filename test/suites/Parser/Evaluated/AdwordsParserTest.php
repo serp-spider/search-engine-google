@@ -27,6 +27,7 @@ use Serps\Core\Serp\CompositeResultSet;
  * @covers Serps\SearchEngine\Google\Parser\AbstractParser
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Adwords\AdwordsItem
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Adwords\Shopping
  * @covers Serps\SearchEngine\Google\Css
  */
 class AdwordsParserTest extends \PHPUnit_Framework_TestCase
@@ -42,35 +43,36 @@ class AdwordsParserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(CompositeResultSet::class, $results);
 
-        $this->assertCount(4, $results);
+        $this->assertCount(5, $results);
 
         $this->assertCount(2, $results->getResultsByType(AdwordsResultType::SECTION_BOTTOM));
-        $this->assertCount(2, $results->getResultsByType(AdwordsResultType::SECTION_TOP));
+        $this->assertCount(3, $results->getResultsByType(AdwordsResultType::SECTION_TOP));
 
 
         // TESTING TOP
+        $topItemp = $results->getItems()[1];
         $this->assertEquals(
             'Art Posters On Sale Today - allposters.com.au‎',
-            utf8_decode($results->getItems()[0]->getDataValue('title'))
+            utf8_decode($topItemp->getDataValue('title'))
         );
 
         $this->assertEquals(
             'http://www.allposters.com.au/?AID=1195529028&KWID=2003592128',
-            $results->getItems()[0]->getDataValue('url')->__toString()
+            $topItemp->getDataValue('url')->__toString()
         );
 
         $this->assertEquals(
             'www.allposters.com.au/OfficialSite',
-            $results->getItems()[0]->getDataValue('visurl')
+            $topItemp->getDataValue('visurl')
         );
 
         $this->assertEquals(
             'Save 30% Or More When You Buy Now. Plus Easy Returns & Fast Shipping!',
-            $results->getItems()[0]->getDataValue('description')
+            $topItemp->getDataValue('description')
         );
 
         // TESTING BOTTOM
-        $bottomItem = $results->getItems()[2];
+        $bottomItem = $results->getItems()[3];
         $this->assertEquals(
             'Votre Simpsons Poster‎',
             utf8_decode($bottomItem->getDataValue('title'))

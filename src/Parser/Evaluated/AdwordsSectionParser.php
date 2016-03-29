@@ -10,15 +10,13 @@ use Serps\SearchEngine\Google\AdwordsSectionResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Adwords\AdwordsItem;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Adwords\Shopping;
 
 /**
  * Parses adwords results from a google SERP
  */
 class AdwordsSectionParser extends AbstractParser
 {
-
-    const ADS_SECTION_TOP_XPATH = "descendant::div[@id = 'tads']//li[@class='ads-ad']";
-    const ADS_SECTION_BOTTOM_XPATH = "descendant::div[@id = 'bottomads']//li[@class='ads-ad']";
 
     protected $pathToItems;
     protected $location;
@@ -44,7 +42,8 @@ class AdwordsSectionParser extends AbstractParser
     protected function generateRules()
     {
         return [
-            new AdwordsItem()
+            new AdwordsItem(),
+            new Shopping()
         ];
     }
 

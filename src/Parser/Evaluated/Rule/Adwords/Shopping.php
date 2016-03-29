@@ -13,12 +13,14 @@ use Serps\SearchEngine\Google\NaturalResultType;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
 
-class AdwordsItem implements ParsingRuleInterace
+class Shopping implements ParsingRuleInterace
 {
 
     public function match(GoogleDom $dom, \DOMElement $node)
     {
-        if ($node->getAttribute('class') == 'ads-ad') {
+        $class = $node->getAttribute('class');
+
+        if (strpos(' ' . $class . ' ', ' _oc ')) {
             return self::RULE_MATCH_MATCHED;
         }
         return self::RULE_MATCH_NOMATCH;
@@ -67,6 +69,12 @@ class AdwordsItem implements ParsingRuleInterace
             },
         ];
 
-        $resultSet->addItem(new BaseResult(AdwordsResultType::AD, $item));
+//        $xpathCards = "descendant::ul[@class='rg_ul']/div[@class='_ZGc bili uh_r rg_el ivg-i']//a";
+//        $imageNodes = $googleDOM->getXpath()->query($xpathCards, $node);
+//        foreach ($imageNodes as $imgNode) {
+//            $item['images'][] = $this->parseItem($googleDOM, $imgNode);
+//
+//        }
+        $resultSet->addItem(new BaseResult(AdwordsResultType::SHOPPING_GROUP, $item));
     }
 }
