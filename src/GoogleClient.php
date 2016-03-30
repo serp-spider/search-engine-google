@@ -81,17 +81,24 @@ class GoogleClient
     }
 
 
-
     /**
      * @param GoogleUrlInterface $googleUrl
      * @param Proxy|null $proxy
-     * @return GoogleDom|GoogleSerp
-     * @throws Exception\CaptchaException
+     * @return GoogleSerp
+     * @throws Exception
      * @throws Exception\PageNotFoundException
      * @throws Exception\RequestErrorException
+     * @throws GoogleCaptchaException
      */
     public function query(GoogleUrlInterface $googleUrl, Proxy $proxy = null)
     {
+
+        if ($googleUrl->getResultType() !== GoogleUrl::RESULT_TYPE_ALL) {
+            throw new Exception(
+                'The requested url is not valid for the google client.'
+                . 'Google client only supports general searches. See GoogleUrl::setResultType() for more infos.'
+            );
+        }
 
         $cookieJar = $this->cookiesEnabled ? $this->getCookieJar() : null;
 
@@ -104,16 +111,7 @@ class GoogleClient
         $effectiveUrl = GoogleUrlArchive::fromString($response->getEffectiveUrl()->__toString());
 
         if (200 == $statusCode) {
-
-            switch ($urlArchive->getResultType()) {
-                case GoogleUrl::RESULT_TYPE_ALL:
-                    $dom = new GoogleSerp($response->getPageContent(), $urlArchive, $effectiveUrl, $proxy);
-                    break;
-                default:
-                    $dom = new GoogleDom($response->getPageContent(), $urlArchive, $effectiveUrl, $proxy);
-            }
-
-            return $dom;
+            return new GoogleSerp($response->getPageContent(), $urlArchive, $effectiveUrl, $proxy);
         } else {
             if (404 == $statusCode) {
                 throw new Exception\PageNotFoundException();
