@@ -98,10 +98,11 @@ class GoogleUrl extends Url implements GoogleUrlInterface
      * This allows to enable or disable google auto-correction
      * @param bool $enabled by default auto correction is enable, set it to false to disable it
      */
-    public function setAutoCorrectionEnabled($enabled){
-        if($enabled){
+    public function setAutoCorrectionEnabled($enabled)
+    {
+        if ($enabled) {
             $this->removeParam('nfpr');
-        }else{
+        } else {
             $this->setParam('nfpr', 1);
         }
     }

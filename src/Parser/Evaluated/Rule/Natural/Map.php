@@ -101,6 +101,19 @@ class Map implements ParsingRuleInterace
                 }
                 return null;
             },
+
+            'phone' => function () use ($localPack, $dom) {
+                $item = $dom->getXpath()->query(
+                    'descendant::div[@class="_pl"]/span[@class="rllt__details"]/div[3]',
+                    $localPack
+                )->item(0);
+                if ($item) {
+                    if ($item->childNodes->length > 1 && $item->childNodes->item(1) instanceof \DOMText) {
+                        return trim($item->childNodes->item(1)->nodeValue, ' ·');
+                    }
+                }
+                return null;
+            },
         ];
     }
 }
