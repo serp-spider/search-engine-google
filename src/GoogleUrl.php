@@ -95,6 +95,18 @@ class GoogleUrl extends Url implements GoogleUrlInterface
     }
 
     /**
+     * This allows to enable or disable google auto-correction
+     * @param bool $enabled by default auto correction is enable, set it to false to disable it
+     */
+    public function setAutoCorrectionEnabled($enabled){
+        if($enabled){
+            $this->removeParam('nfpr');
+        }else{
+            $this->setParam('nfpr', 1);
+        }
+    }
+
+    /**
      * Sets the google result type. That's the result type in the top bar 'all', 'images', 'videos'...
      * You can use the special constant beginning with ``RESULT_TYPE_`` e.g: ``GoogleUrl::RESULT_TYPE_IMAGES``
      *

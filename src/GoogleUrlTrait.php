@@ -65,6 +65,15 @@ trait GoogleUrlTrait
     }
 
     /**
+     * Check whether or not the auto correction of search term is enabled
+     * @return bool true if it enabled (it is by default)
+     */
+    public function getAutoCorrectionEnabled()
+    {
+        return 1 == $this->getParamValue('nfpr');
+    }
+
+    /**
      * Get the keywords to search
      * @return string
      */
