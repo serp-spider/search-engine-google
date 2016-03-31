@@ -36,8 +36,7 @@ class NaturalParser extends AbstractParser
             new TweetsCarousel(),
             new ClassicalWithLargeVideo(),
             new InTheNews(),
-            new Map(),
-            new InDepthArticle()
+            new Map()
         ];
     }
 
