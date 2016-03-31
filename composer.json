@@ -29,7 +29,7 @@
   "require": {
     "php": ">=5.5",
     "symfony/css-selector": ">=2",
-    "serps/serps": "dev-master",
+    "serps/core": "dev-master",
     "zendframework/zend-diactoros": "1.*"
   },
 
