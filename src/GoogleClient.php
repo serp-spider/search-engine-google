@@ -5,6 +5,7 @@
 
 namespace Serps\SearchEngine\Google;
 
+use Psr\Http\Message\RequestInterface;
 use Serps\Core\Captcha\CaptchaSolverInterface;
 use Serps\Core\Cookie\ArrayCookieJar;
 use Serps\Core\Cookie\CookieJarInterface;
@@ -35,6 +36,8 @@ class GoogleClient
     protected $cookieJar;
 
     protected $cookiesEnabled;
+
+    protected $userAgent;
 
     /**
      * @param HttpClientInterface $client
@@ -80,6 +83,35 @@ class GoogleClient
         $this->cookieJar = $cookieJar;
     }
 
+    /**
+     * Gets the user agent string to use with requests
+     * @return string|null
+     */
+    public function getUserAgent()
+    {
+        return $this->userAgent;
+    }
+
+    /**
+     * Sets the user agent string to use with requests
+     * @param string|null $userAgent
+     */
+    public function setUserAgent($userAgent)
+    {
+        if (!is_string($userAgent) && !is_null($userAgent)) {
+            throw new \InvalidArgumentException('User agent must be a string.');
+        }
+        $this->userAgent = $userAgent;
+    }
+
+    public function prepareRequest(RequestInterface $request)
+    {
+        if (($userAgent = $this->getUserAgent()) && !$request->hasHeader('user-agent')) {
+            $request = $request->withHeader('user-agent', $userAgent);
+        }
+
+        return $request;
+    }
 
     /**
      * @param GoogleUrlInterface $googleUrl
@@ -102,9 +134,10 @@ class GoogleClient
 
         $cookieJar = $this->cookiesEnabled ? $this->getCookieJar() : null;
 
-        $request = $googleUrl->buildRequest();
+        $request = $this->prepareRequest($googleUrl->buildRequest());
+
         $response = $this->client->sendRequest($request, $proxy, $cookieJar);
-        
+
         $statusCode = $response->getHttpResponseStatus();
         $urlArchive = $googleUrl->getArchive();
 
