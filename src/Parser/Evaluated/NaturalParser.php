@@ -10,7 +10,6 @@ use Serps\SearchEngine\Google\Parser\AbstractParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InDepthArticle;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InTheNews;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Map;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup;

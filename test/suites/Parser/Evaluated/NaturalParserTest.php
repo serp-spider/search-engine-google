@@ -19,7 +19,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
  * happens the saved html and the following tests must be updated.
  *
  * When the tests are updated, make sure that the new one include the same kind of results.
- * For instance if the previous test included a ``inDepthArticle`` the new test should do so.
+ * For instance if the previous test included a ``TweetsCarousel`` the new test should do so.
  *
  *
  * @covers Serps\SearchEngine\Google\Parser\AbstractParser
@@ -32,7 +32,6 @@ use Serps\SearchEngine\Google\NaturalResultType;
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ClassicalWithLargeVideo
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Map
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InDepthArticle
  */
 class NaturalParserTest extends \PHPUnit_Framework_TestCase
 {

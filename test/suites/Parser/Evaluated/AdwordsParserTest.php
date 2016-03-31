@@ -21,7 +21,7 @@ use Serps\Core\Serp\CompositeResultSet;
  * happens the saved html and the following tests must be updated.
  *
  * When the tests are updated, make sure that the new one include the same kind of results.
- * For instance if the previous test included a ``inDepthArticle`` the new test should do so.
+ * For instance if the previous test included a ``Shopping`` item, then the new test should do so.
  *
  *
  * @covers Serps\SearchEngine\Google\Parser\AbstractParser
