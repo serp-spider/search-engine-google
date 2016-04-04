@@ -15,6 +15,11 @@ use Serps\SearchEngine\Google\Parser\Raw\NaturalParser as RawNaturalParser;
 class GoogleSerp extends GoogleDom
 {
 
+    public function getDom()
+    {
+        return  $this->dom;
+    }
+
     /**
      * Get the location detected by google
      * @return string
