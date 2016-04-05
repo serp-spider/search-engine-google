@@ -55,7 +55,7 @@ class ClassicalResult implements ParsingRuleInterace
 
         $data = [
             'title'   => $aTag->nodeValue,
-            'url'     => $dom->getEffectiveUrl()->resolve($aTag->getAttribute('href')),
+            'url'     => $dom->getUrl()->resolve($aTag->getAttribute('href')),
             'destination' => $destinationTag ? $destinationTag->nodeValue : null,
             'description' => $descriptionTag ? $descriptionTag->nodeValue : null
         ];

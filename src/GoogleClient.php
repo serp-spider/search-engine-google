@@ -139,17 +139,16 @@ class GoogleClient
         $response = $this->client->sendRequest($request, $proxy, $cookieJar);
 
         $statusCode = $response->getHttpResponseStatus();
-        $urlArchive = $googleUrl->getArchive();
 
         $effectiveUrl = GoogleUrlArchive::fromString($response->getEffectiveUrl()->__toString());
 
         if (200 == $statusCode) {
-            return new GoogleSerp($response->getPageContent(), $urlArchive, $effectiveUrl, $proxy);
+            return new GoogleSerp($response->getPageContent(), $effectiveUrl);
         } else {
             if (404 == $statusCode) {
                 throw new Exception\PageNotFoundException();
             } else {
-                $errorDom = new GoogleError($response->getPageContent(), $urlArchive, $effectiveUrl, $proxy);
+                $errorDom = new GoogleError($response->getPageContent(), $effectiveUrl);
 
                 if ($errorDom->isCaptcha()) {
                     throw new GoogleCaptchaException(new GoogleCaptcha($errorDom));

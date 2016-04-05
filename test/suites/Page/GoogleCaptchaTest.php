@@ -21,7 +21,7 @@ class GoogleCaptchaTest extends \PHPUnit_Framework_TestCase
 
         $url = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons&hl=en_US');
         $effectiveUrl = GoogleUrlArchive::fromString('https://ipv4.google.com/sorry');
-        $errorDom = new GoogleError(file_get_contents('test/resources/pages-evaluated/captcha.html'), $url, $effectiveUrl);
+        $errorDom = new GoogleError(file_get_contents('test/resources/pages-evaluated/captcha.html'), $effectiveUrl);
 
         $this->assertTrue($errorDom->isCaptcha());
 

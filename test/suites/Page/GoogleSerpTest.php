@@ -21,7 +21,7 @@ class GoogleSerpTest extends \PHPUnit_Framework_TestCase
     public function getDomJavascript()
     {
         $url = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons&hl=en_US');
-        return new GoogleSerp(file_get_contents('test/resources/pages-evaluated/simpsons.html'), $url, $url);
+        return new GoogleSerp(file_get_contents('test/resources/pages-evaluated/simpsons.html'), $url);
     }
     /**
      * @return GoogleSerp
@@ -29,7 +29,7 @@ class GoogleSerpTest extends \PHPUnit_Framework_TestCase
     public function getDomNoJavascript()
     {
         $url = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons&hl=en_US');
-        return new GoogleSerp(file_get_contents('test/resources/pages-raw/simpsons.html'), $url, $url);
+        return new GoogleSerp(file_get_contents('test/resources/pages-raw/simpsons.html'), $url);
     }
 
 

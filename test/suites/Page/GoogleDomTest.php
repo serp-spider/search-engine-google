@@ -18,10 +18,10 @@ class GoogleDomTest extends \PHPUnit_Framework_TestCase
     /**
      * @return \Serps\SearchEngine\Google\Page\GoogleDom
      */
-    public function getDom($proxy = null)
+    public function getDom()
     {
         $url = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons&hl=en_US');
-        return new GoogleDom(file_get_contents('test/resources/pages-evaluated/simpsons.html'), $url, $url, $proxy);
+        return new GoogleDom(file_get_contents('test/resources/simple-dom.html'), $url);
     }
 
     public function testGetXPath()
@@ -30,34 +30,36 @@ class GoogleDomTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(\DOMXPath::class, $xpath);
     }
 
-
-
-    public function testBuildUrl()
-    {
-        $dom = $this->getDom();
-        $this->assertInstanceOf(GoogleUrlArchive::class, $dom->getUrl());
-        $this->assertEquals('https://www.google.fr/search?q=simpsons&hl=en_US', $dom->getUrl()->buildUrl());
-    }
-
     public function testGetDom()
     {
         $googleDom = $this->getDom();
-
         $this->assertInstanceOf(\DOMDocument::class, $googleDom->getDom());
-
     }
 
-    public function testGetProxy()
+    public function testXPathQuery()
     {
-        $proxy = Proxy::createFromString('1.1.1.1:80');
-        $googleDom = $this->getDom($proxy);
-        $this->assertSame($proxy, $googleDom->getProxy());
+        $dom = $this->getDom();
+
+        $fooSpan = $dom->xpathQuery('descendant::div[@class="baz"]/span[@class="foo"]');
+
+        $this->assertEquals(1, $fooSpan->length);
+        $this->assertEquals('<span class="foo">baz - foo span</span>', $fooSpan->item(0)->C14N());
     }
 
-    public function testGetEffectiveUrl()
+
+    public function testCssQuery()
     {
-        $proxy = Proxy::createFromString('1.1.1.1:80');
-        $googleDom = $this->getDom($proxy);
-        $this->assertSame('https://www.google.fr/search?q=simpsons&hl=en_US', $googleDom->getEffectiveUrl()->buildUrl());
+        $dom = $this->getDom();
+
+        $fooSpan = $dom->cssQuery('.foo>.foo');
+
+        $this->assertEquals(1, $fooSpan->length);
+        $this->assertEquals('<span class="foo">foo bar - foo span</span>', $fooSpan->item(0)->C14N());
+    }
+
+    public function testGetUrl()
+    {
+        $googleDom = $this->getDom();
+        $this->assertSame('https://www.google.fr/search?q=simpsons&hl=en_US', $googleDom->getUrl()->buildUrl());
     }
 }

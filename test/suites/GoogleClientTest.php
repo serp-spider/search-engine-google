@@ -44,7 +44,7 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
 
         $dom = $googleClient->query($url);
         $this->assertInstanceOf(GoogleSerp::class, $dom);
-        $this->assertEquals('https://www.google.fr/search?q=simpsons+movie+trailer', (string)$dom->getEffectiveUrl());
+        $this->assertEquals('https://www.google.fr/search?q=simpsons+movie+trailer', (string)$dom->getUrl());
     }
 
     public function testCaptchaDom()

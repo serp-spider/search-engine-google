@@ -30,14 +30,12 @@ class ImageGroup implements ParsingRuleInterace
             $url = $aTag->getAttribute('href');
 
             if (strpos($url, '/search') == 0) {
-
                 // todo URLArchive::copy
-                $url = GoogleUrlArchive::fromString($dom->getEffectiveUrl()->resolve($url));
+                $url = GoogleUrlArchive::fromString($dom->getUrl()->resolve($url));
 
                 if ($url->getResultType() == GoogleUrl::RESULT_TYPE_IMAGES) {
                     return  ParsingRuleInterace::RULE_MATCH_MATCHED;
                 }
-
             }
         }
 

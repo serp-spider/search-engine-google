@@ -40,7 +40,7 @@
 
   "scripts": {
       "test": "vendor/bin/phpunit -c phpunit.dist.xml && echo \"\\n>> Checking code standards\\n\" && test/bin/phpcs.bash emacs",
-      "csfix": "yes 2>/dev/null | test/bin/phpcbf.bash",
+      "csfix": "test/bin/phpcbf.bash",
       "cscheck": "test/bin/phpcs.bash emacs"
   }
 }

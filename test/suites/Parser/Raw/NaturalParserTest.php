@@ -42,7 +42,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
     {
 
         $gUrl = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons&hl=en_US');
-        $dom = new GoogleDom(file_get_contents('test/resources/pages-raw/simpsons.html'), $gUrl, $gUrl);
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-raw/simpsons.html'), $gUrl);
 
         $naturalParser = new  NaturalParser();
         $result = $naturalParser->parse($dom);
@@ -75,7 +75,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
     {
 
         $gUrl = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer');
-        $dom = new GoogleDom(file_get_contents('test/resources/pages-raw/simpsons+movie+trailer.html'), $gUrl, $gUrl);
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-raw/simpsons+movie+trailer.html'), $gUrl);
 
         $naturalParser = new NaturalParser();
         $results = $naturalParser->parse($dom);
@@ -109,7 +109,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
     {
 
         $gUrl = GoogleUrlArchive::fromString('https://www.google.fr/search?q=shop+near+paris');
-        $dom = new GoogleDom(file_get_contents('test/resources/pages-raw/shop-near-paris.html'), $gUrl, $gUrl);
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-raw/shop-near-paris.html'), $gUrl);
 
         $naturalParser = new NaturalParser();
         $result = $naturalParser->parse($dom);
@@ -162,7 +162,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
     {
 
         $gUrl = GoogleUrlArchive::fromString('https://www.google.com.au/search?q=simpsons+donut');
-        $dom = new GoogleDom(file_get_contents('test/resources/pages-raw/simpsons+donuts.html'), $gUrl, $gUrl);
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-raw/simpsons+donuts.html'), $gUrl);
 
         $naturalParser = new NaturalParser();
         $result = $naturalParser->parse($dom);

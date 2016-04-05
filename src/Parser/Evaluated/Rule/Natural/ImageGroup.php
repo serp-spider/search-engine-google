@@ -41,7 +41,6 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterac
         $imageNodes = $googleDOM->getXpath()->query($xpathCards, $node);
         foreach ($imageNodes as $imgNode) {
             $item['images'][] = $this->parseItem($googleDOM, $imgNode);
-
         }
         $resultSet->addItem(new BaseResult(NaturalResultType::IMAGE_GROUP, $item));
     }

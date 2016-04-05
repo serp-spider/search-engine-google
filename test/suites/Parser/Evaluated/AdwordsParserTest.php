@@ -37,7 +37,7 @@ class AdwordsParserTest extends \PHPUnit_Framework_TestCase
     {
 
         $gUrl = GoogleUrlArchive::fromString('https://www.google.com.au/search?q=simpsons+poster&hl=en_US');
-        $dom = new GoogleDom(file_get_contents('test/resources/pages-evaluated/adwords/simpsons+poster.html'), $gUrl, $gUrl);
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-evaluated/adwords/simpsons+poster.html'), $gUrl);
 
         $parser = new  AdwordsParser();
         $results = $parser->parse($dom);
