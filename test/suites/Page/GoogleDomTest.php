@@ -44,6 +44,16 @@ class GoogleDomTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, $fooSpan->length);
         $this->assertEquals('<span class="foo">baz - foo span</span>', $fooSpan->item(0)->C14N());
+
+        $fooSpan = $dom->xpathQuery('descendant::div[@class="baz"]');
+        $fooSpan = $dom->xpathQuery('span[@class="foo"]', $fooSpan->item(0));
+
+        $this->assertEquals(1, $fooSpan->length);
+        $this->assertEquals('<span class="foo">baz - foo span</span>', $fooSpan->item(0)->C14N());
+
+        $fooSpan = $dom->xpathQuery('span[@class="foo"]', $fooSpan->item(0));
+        $this->assertEquals(0, $fooSpan->length);
+
     }
 
 
@@ -51,10 +61,12 @@ class GoogleDomTest extends \PHPUnit_Framework_TestCase
     {
         $dom = $this->getDom();
 
-        $fooSpan = $dom->cssQuery('.foo>.foo');
+        $fooSpan = $dom->cssQuery('.foo');
+        $this->assertEquals(3, $fooSpan->length);
 
+        $fooSpan = $dom->cssQuery('.foo', $dom->cssQuery('.baz')->item(0));
         $this->assertEquals(1, $fooSpan->length);
-        $this->assertEquals('<span class="foo">foo bar - foo span</span>', $fooSpan->item(0)->C14N());
+        $this->assertEquals('<span class="foo">baz - foo span</span>', $fooSpan->item(0)->C14N());
     }
 
     public function testGetUrl()
