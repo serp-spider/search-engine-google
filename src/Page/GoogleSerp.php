@@ -54,10 +54,10 @@ class GoogleSerp extends GoogleDom
     {
         if ($this->javascriptIsEvaluated()) {
             $parser = new AdwordsParser();
+            return $parser->parse($this);
         } else {
             throw new Exception('Adwords parser is not available for non evaluated results');
         }
-        return $parser->parse($this)->getResultsByType();
     }
 
     public function javascriptIsEvaluated()
