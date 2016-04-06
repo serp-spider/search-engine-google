@@ -60,6 +60,38 @@ class GoogleSerp extends GoogleDom
         }
     }
 
+    /**
+     * Get the total number of results available for the search terms
+     * @return int the number of results
+     * @throws InvalidDOMException
+     */
+    public function getNumberOfResults()
+    {
+        $item = $this->cssQuery('#resultStats');
+        if ($item->length != 1) {
+            return null;
+        }
+        $nodeText = $item->item(0)->childNodes->item(0);
+
+        if (!$nodeText) {
+            return null;
+        }
+
+        // WARNING: The number of result is explained in different format according to the country. Fon instance:
+        // UK:  6,200,000
+        // FR:  6 200 000
+        // DE:  2.200.000
+        // IN:  62,00,000
+        // We have to use a global matcher
+        $matched = preg_match('/([0-9]+[ \.,\x{00a0}])+/u', $nodeText->textContent, $countMatch);
+
+        if (!$matched) {
+            return null;
+        }
+
+        return (int) preg_replace('/[^0-9]/', '', $countMatch[0]);
+    }
+
     public function javascriptIsEvaluated()
     {
         $body = $this->getXpath()->query('//body');
