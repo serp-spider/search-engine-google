@@ -82,27 +82,6 @@ trait GoogleUrlTrait
         return $this->getParamRawValue('q');
     }
 
-    /**
-     *
-     * @return RequestInterface
-     */
-    public function buildRequest()
-    {
-        $headers = [];
-        if ($lr = $this->getLanguageRestriction()) {
-            $headers['Accept-Language'] = $lr;
-        }
-
-        $request = new Request(
-            $this->buildUrl(),
-            'GET',
-            'php://memory',
-            $headers
-        );
-
-        return $request;
-    }
-
     public function getArchive()
     {
         return new GoogleUrlArchive(

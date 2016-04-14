@@ -101,14 +101,4 @@ class GoogleUrlTest extends \PHPUnit_Framework_TestCase
         $googleUrl->setResultType(GoogleUrl::RESULT_TYPE_ALL);
         $this->assertFalse($googleUrl->hasParam('tbm'));
     }
-
-    public function testBuildRequest()
-    {
-        $googleUrl = GoogleUrl::fromString('https://google.com/search?q=simpsons');
-
-        $request = $googleUrl->buildRequest();
-
-        $this->assertInstanceOf(RequestInterface::class, $request);
-        $this->assertEquals('https://google.com/search?q=simpsons', $request->getUri());
-    }
 }

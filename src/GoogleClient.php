@@ -14,6 +14,7 @@ use Serps\Core\Http\Proxy;
 use Serps\Core\UrlArchive;
 use Serps\Exception;
 use Serps\SearchEngine\Google\Exception\GoogleCaptchaException;
+use Serps\SearchEngine\Google\GoogleClient\RequestBuilder;
 use Serps\SearchEngine\Google\Page\GoogleCaptcha;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Page\GoogleError;
@@ -40,12 +41,28 @@ class GoogleClient
     protected $userAgent;
 
     /**
+     * @var RequestBuilder|null
+     */
+    protected $requestBuilder;
+
+    /**
      * @param HttpClientInterface $client
      */
     public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
         $this->cookiesEnabled = false;
+    }
+
+    /**
+     * @return RequestBuilder
+     */
+    public function getRequestBuilder()
+    {
+        if (null == $this->requestBuilder) {
+            $this->requestBuilder = new RequestBuilder();
+        }
+        return $this->requestBuilder;
     }
 
     /**
@@ -84,36 +101,6 @@ class GoogleClient
     }
 
     /**
-     * Gets the user agent string to use with requests
-     * @return string|null
-     */
-    public function getUserAgent()
-    {
-        return $this->userAgent;
-    }
-
-    /**
-     * Sets the user agent string to use with requests
-     * @param string|null $userAgent
-     */
-    public function setUserAgent($userAgent)
-    {
-        if (!is_string($userAgent) && !is_null($userAgent)) {
-            throw new \InvalidArgumentException('User agent must be a string.');
-        }
-        $this->userAgent = $userAgent;
-    }
-
-    public function prepareRequest(RequestInterface $request)
-    {
-        if (($userAgent = $this->getUserAgent()) && !$request->hasHeader('user-agent')) {
-            $request = $request->withHeader('user-agent', $userAgent);
-        }
-
-        return $request;
-    }
-
-    /**
      * @param GoogleUrlInterface $googleUrl
      * @param Proxy|null $proxy
      * @return GoogleSerp
@@ -134,7 +121,9 @@ class GoogleClient
 
         $cookieJar = $this->cookiesEnabled ? $this->getCookieJar() : null;
 
-        $request = $this->prepareRequest($googleUrl->buildRequest());
+
+        $request = $this->getRequestBuilder()
+                ->buildRequest($googleUrl);
 
         $response = $this->client->sendRequest($request, $proxy, $cookieJar);
 
