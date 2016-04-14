@@ -23,6 +23,11 @@ use Serps\SearchEngine\Google\GoogleUrl;
 use Serps\SearchEngine\Google\GoogleUrlTrait;
 use Zend\Diactoros\Request;
 
+/**
+ * Google client the handles google url routing, dom object constructions and request errors
+ *
+ * @property RequestBuilder $request
+ */
 class GoogleClient
 {
 
@@ -43,7 +48,7 @@ class GoogleClient
     /**
      * @var RequestBuilder|null
      */
-    protected $requestBuilder;
+    private $requestBuilder;
 
     /**
      * @param HttpClientInterface $client
@@ -149,9 +154,10 @@ class GoogleClient
 
     }
 
-    public function solveCaptcha($code, $id, Proxy $proxy)
+    public function __get($name)
     {
-        // TODO
-        throw new Exception('Not implemented');
+        if ($name=='request') {
+            return $this->getRequestBuilder();
+        }
     }
 }

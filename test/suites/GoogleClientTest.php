@@ -17,6 +17,7 @@ use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleCaptcha;
 use Serps\SearchEngine\Google\Page\GoogleSerp;
 use Zend\Diactoros\Request;
+use Serps\SearchEngine\Google\GoogleClient\RequestBuilder;
 
 /**
  * @covers Serps\SearchEngine\Google\GoogleClient
@@ -114,5 +115,14 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(1, $request->getHeader('user-agent'));
         $this->assertEquals('foo-ua', $request->getHeader('user-agent')[0]);
+    }
+
+    public function testRequestAccesor()
+    {
+        $googlelient = new GoogleClient($this->getMock(HttpClientInterface::class));
+
+        $requestBuilder = $googlelient->getRequestBuilder();
+        $this->assertInstanceOf(RequestBuilder::class, $requestBuilder);
+        $this->assertSame($requestBuilder, $googlelient->request);
     }
 }
