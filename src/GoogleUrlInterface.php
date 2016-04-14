@@ -5,13 +5,13 @@
 
 namespace Serps\SearchEngine\Google;
 
-use Serps\Core\Url\SerpUrlInterface;
+use Serps\Core\Url\UrlArchiveInterface;
 
 /**
  * The only purpose of this interface is to offer a type hinting fot GoogleUrlTrait
  * Because traits are not support as type hinting
  */
-interface GoogleUrlInterface extends SerpUrlInterface
+interface GoogleUrlInterface extends UrlArchiveInterface
 {
 
     /**
