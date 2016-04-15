@@ -39,7 +39,7 @@ class GoogleCaptcha implements CaptchaResponse
 
     /**
      * Gets the url of the image. Be aware that each call to this method will regenerate the captcha image
-     * and the previous generated image will be invalid
+     * and the previous generated image will be invalided
      *
      * @return mixed
      * @throws Exception
@@ -59,18 +59,28 @@ class GoogleCaptcha implements CaptchaResponse
         return $d->buildUrl();
     }
 
+    public function getCaptchaType()
+    {
+        return self::CAPTCHA_TYPE_IMAGE;
+    }
+
     /**
      * Gets the captcha image. Be aware that each call to this method will regenerate the captcha image
      * and the previous generated image will be invalid
      * @return string
      * @throws Exception
      */
-    public function getImage()
+    public function getData()
     {
         $imageUrl = $this->getImageUrl();
         return file_get_contents($imageUrl);
     }
 
+    /**
+     * The captcha resolution id to send with the form to solve the captcha
+     * @return mixed
+     * @throws Exception
+     */
     public function getId()
     {
         $inputTag = $this->googleError

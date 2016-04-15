@@ -5,7 +5,7 @@
 
 namespace Serps\SearchEngine\Google\Exception;
 
-use Serps\Exception\CaptchaException;
+use Serps\Exception\RequestError\CaptchaException;
 use Serps\SearchEngine\Google\Page\GoogleCaptcha;
 
 /**
