@@ -254,28 +254,5 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $itemLarge = $result->getItems()[0];
         $this->assertEquals([NaturalResultType::CLASSICAL, NaturalResultType::CLASSICAL_LARGE], $itemLarge->getTypes());
 
-//
-//        // Test MAP item
-//        $map = $result->getItems()[0];
-//
-//        $this->assertEquals(
-//            'https://www.google.fr/search?q=shop+near+paris&npsic=0&rflfq=1&rlha=0&tbm=lcl&sa=X&ved=0ahUKEwjj9PCdqMDLAhUH0xoKHelvDxcQjGoIOw',
-//            $map->getDataValue('mapUrl')
-//        );
-//        $this->assertCount(3, $map->localPack);
-//        $this->assertEquals('Bicycle Store', $map->localPack[0]->title);
-//        $this->assertEquals('http://www.bicyclestore.fr/', $map->localPack[0]->url);
-//        $this->assertEquals('17 Boulevard du Temple', $map->localPack[0]->street);
-//        // Stars
-//        $this->assertEquals('4.0', $map->localPack[0]->stars);
-//        $this->assertEquals(null, $map->localPack[1]->stars);
-//        // Review
-//        $this->assertEquals(null, $map->localPack[0]->review);
-//        $this->assertEquals('No reviews', $map->localPack[1]->review);
-//        $this->assertEquals(null, $map->localPack[2]->review);
-//        // Phone
-//        $this->assertEquals('09 51 61 68 29', $map->localPack[0]->phone);
-//        $this->assertEquals('01 44 61 90 26', $map->localPack[1]->phone);
-//        $this->assertEquals('09 83 38 04 88', $map->localPack[2]->phone);
     }
 }
