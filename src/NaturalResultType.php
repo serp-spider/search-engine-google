@@ -9,6 +9,7 @@ abstract class NaturalResultType
 {
 
     const CLASSICAL = 'classical';
+    const CLASSICAL_LARGE = 'classical_large';
     const CLASSICAL_VIDEO = 'classical_video';
 
     const IMAGE_GROUP = 'imageGroup';

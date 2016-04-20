@@ -26,7 +26,7 @@ class ClassicalResult implements ParsingRuleInterace
         return self::RULE_MATCH_NOMATCH;
     }
 
-    public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet)
+    protected function parseNode(GoogleDom $dom, \DomElement $node)
     {
         $xpath = $dom->getXpath();
 
@@ -47,20 +47,27 @@ class ClassicalResult implements ParsingRuleInterace
             ->query("descendant::span[@class='st']", $node)
             ->item(0);
 
-        // classical result can have a video thumbnail
-        $videoThumb = $xpath
-            ->query("descendant::g-img[@class='_ygd']/img", $node)
-            ->item(0);
 
 
-        $data = [
+
+        return [
             'title'   => $aTag->nodeValue,
             'url'     => $dom->getUrl()->resolve($aTag->getAttribute('href')),
             'destination' => $destinationTag ? $destinationTag->nodeValue : null,
             'description' => $descriptionTag ? $descriptionTag->nodeValue : null
         ];
+    }
+
+    public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet)
+    {
+        $data = $this->parseNode($dom, $node);
 
         $resultTypes = [NaturalResultType::CLASSICAL];
+
+        // classical result can have a video thumbnail
+        $videoThumb = $dom->getXpath()
+            ->query("descendant::g-img[@class='_ygd']/img", $node)
+            ->item(0);
 
         if ($videoThumb) {
             array_unshift($resultTypes, NaturalResultType::CLASSICAL_VIDEO);
