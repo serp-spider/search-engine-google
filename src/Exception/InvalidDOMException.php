@@ -3,7 +3,7 @@
  * @license see LICENSE
  */
 
-namespace Serps\SearchEngine\Google;
+namespace Serps\SearchEngine\Google\Exception;
 
 use Serps\Exception;
 

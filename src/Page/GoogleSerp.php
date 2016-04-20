@@ -6,7 +6,7 @@
 namespace Serps\SearchEngine\Google\Page;
 
 use Serps\Exception;
-use Serps\SearchEngine\Google\InvalidDOMException;
+use Serps\SearchEngine\Google\Exception\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser as EvaluatedNaturalParser;
