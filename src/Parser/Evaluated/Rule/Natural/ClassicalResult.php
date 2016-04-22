@@ -16,6 +16,24 @@ class ClassicalResult implements ParsingRuleInterace
 
     public function match(GoogleDom $dom, \DOMElement $node)
     {
+        /*
+         * The code below catches the "srg" element which sometimes
+         * comes as an intermediate descendant of the "rso" div.
+         *
+         * The <div class="srg"> element contains <div class="g">
+         * elements which are returned for further parsing.
+         */
+        $xpath = $dom->getXpath();
+
+        /* @var $srg \DOMElement */
+        $srg = $xpath->query("descendant::div[@class='srg'][1]", $node)
+                     ->item(0);
+        if ($srg)
+            return $srg->childNodes;
+
+        /*
+         * Parse simple Google result instead.
+         */
         if ($node->getAttribute('class') == 'g') {
             foreach ($node->childNodes as $node) {
                 if ($node instanceof \DOMElement && $node->getAttribute('class') == 'rc') {
