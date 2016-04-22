@@ -255,4 +255,39 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([NaturalResultType::CLASSICAL, NaturalResultType::CLASSICAL_LARGE], $itemLarge->getTypes());
 
     }
+
+    public function testNidGroup()
+    {
+        // Some result group are wrapped into an element with a div that has the class "_NId".
+        // right now it only showed up on some google.es serp
+        $gUrl = GoogleUrlArchive::fromString('https://www.google.es/search?q=alarmas+para+casa&lr=lang_es');
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-evaluated/alarmas+para+casa.html'), $gUrl);
+
+        $naturalParser = new NaturalParser();
+        $result = $naturalParser->parse($dom);
+
+        $types = [];
+        foreach ($result->getItems() as $item) {
+            $types[] = $item->getTypes()[0];
+        }
+
+        $this->assertInstanceOf(IndexedResultSet::class, $result);
+        $this->assertCount(10, $result);
+        $this->assertEquals([
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL
+        ], $types);
+
+        $item0 = $result->getItems()[0];
+        $this->assertEquals([NaturalResultType::CLASSICAL], $item0->getTypes());
+        $this->assertEquals('Alarmas para Hogar - Securitas Direct', $item0->title);
+    }
 }

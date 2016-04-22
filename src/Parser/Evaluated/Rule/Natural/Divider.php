@@ -17,11 +17,10 @@ class Divider implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
         /**
          * Divider should not be parsed and for performance we just skip the parsing
          */
-        if ($node->getAttribute('class') == 'rgsep') {
+        if ('hr' == $node->tagName || 'rgsep' == $node->getAttribute('class')) {
             return self::RULE_MATCH_STOP;
         }
     }
-
 
     public function parse(GoogleDom $googleDOM, \DomElement $group, IndexedResultSet $resultSet)
     {

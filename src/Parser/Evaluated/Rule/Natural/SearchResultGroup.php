@@ -16,7 +16,9 @@ class SearchResultGroup implements ParsingRuleInterace
 {
     public function match(GoogleDom $dom, \DOMElement $node)
     {
-        if ($node->getAttribute('class') == 'srg') {
+        $class = $node->getAttribute('class');
+
+        if ('srg' == $class || '_NId' == $class) {
             return $node->childNodes;
         } else {
             return self::RULE_MATCH_NOMATCH;
