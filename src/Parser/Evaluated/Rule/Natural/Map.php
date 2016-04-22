@@ -18,7 +18,7 @@ class Map implements ParsingRuleInterace
 
     public function match(GoogleDom $dom, \DOMElement $node)
     {
-        if ($dom->getXpath()->query("descendant::h3[@class='_Xhb']", $node)) {
+        if ($dom->getXpath()->query("descendant::div[@class='_Xhb']", $node)->length == 1) {
             return self::RULE_MATCH_MATCHED;
         }
         return self::RULE_MATCH_NOMATCH;
