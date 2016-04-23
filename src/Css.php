@@ -5,6 +5,7 @@
 
 namespace Serps\SearchEngine\Google;
 
+use Symfony\Component\CssSelector\CssSelector;
 use Symfony\Component\CssSelector\CssSelectorConverter;
 
 /**
@@ -14,18 +15,25 @@ abstract class Css
 {
 
     /**
-     * @var CssSelectorConverter
+     * @var CssSelector|CssSelectorConverter
      */
     private static $converter;
 
 
     /**
-     * @return CssSelectorConverter
+     * @return CssSelector|CssSelectorConverter
      */
     private static function getConverter()
     {
         if (null == self::$converter) {
-            self::$converter = new CssSelectorConverter();
+            // We want this class to be compatible with either syfony/cssselector version 2 and 3
+            if (class_exists('Symfony\Component\CssSelector\CssSelectorConverter')) {
+                // Version >= 2.8
+                self::$converter = new CssSelectorConverter();
+            } else {
+                // Version < 2.8
+                self::$converter = new CssSelector();
+            }
         }
         return self::$converter;
     }
