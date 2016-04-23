@@ -38,8 +38,12 @@ class GoogleUrlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $googleUrl->getLanguageRestriction());
 
         $googleUrl->setLanguageRestriction('de');
-        $this->assertEquals('de', $googleUrl->getLanguageRestriction());
-        $this->assertEquals('de', $googleUrl->getParamValue('lr'));
+        $this->assertEquals('lang_de', $googleUrl->getLanguageRestriction());
+        $this->assertEquals('lang_de', $googleUrl->getParamValue('lr'));
+
+        $googleUrl->setLanguageRestriction('lang_fr');
+        $this->assertEquals('lang_fr', $googleUrl->getLanguageRestriction());
+        $this->assertEquals('lang_fr', $googleUrl->getParamValue('lr'));
     }
 
     public function testPage()

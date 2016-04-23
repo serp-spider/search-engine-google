@@ -33,11 +33,20 @@ class GoogleUrl extends Url implements GoogleUrlInterface
     }
 
     /**
-     * @param $lang
+     * Set the 'lr' param for the search and auto prepend 'lang_' if not present
+     * @param string $lang the lang to restrict with the format "lang_en" or "en"
      * @return $this
      */
     public function setLanguageRestriction($lang)
     {
+
+        // lr format is lang_[ISO]
+        // if $lang starts with "lang_" do nothing
+        // else we prepend lang_
+        if (substr($lang, 0, 5) !== 'lang_') {
+            $lang = 'lang_' . $lang;
+        }
+
         $this->setParam('lr', $lang);
         return $this;
     }
