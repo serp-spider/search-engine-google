@@ -5,6 +5,7 @@
 
 namespace Serps\Test\TDD\SearchEngine\Google\Page;
 
+use Serps\Core\Serp\CompositeResultSet;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleSerp;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
@@ -63,7 +64,17 @@ class GoogleSerpTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(IndexedResultSet::class, $results);
         $this->assertCount(10, $results);
+    }
 
+    public function testGetAdwordsResults()
+    {
+        $dom = $this->getDomJavascript();
+        $results = $dom->getAdwordsResults();
+        $this->assertInstanceOf(CompositeResultSet::class, $results);
+
+        $dom = $this->getDomNoJavascript();
+        $results = $dom->getAdwordsResults();
+        $this->assertInstanceOf(CompositeResultSet::class, $results);
     }
 
     public function testJavascriptEvaluated()
