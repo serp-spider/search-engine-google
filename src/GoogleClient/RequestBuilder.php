@@ -19,7 +19,12 @@ class RequestBuilder
     {
         $headers = [];
         if ($this->acceptLanguageFromUrl && $lr = $googleUrl->getLanguageRestriction()) {
-            $headers['Accept-Language'] = $lr;
+            if (substr($lr, 0, 5) == 'lang_') {
+                $lang = substr($lr, 5);
+            } else {
+                $lang = $lr;
+            }
+            $headers['Accept-Language'] = $lang;
         } elseif ($this->defaultAcceptLanguage) {
             $headers['Accept-Language'] = $this->defaultAcceptLanguage;
         }

@@ -21,6 +21,7 @@ use Serps\SearchEngine\Google\GoogleClient\RequestBuilder;
 
 /**
  * @covers Serps\SearchEngine\Google\GoogleClient
+ * @covers Serps\SearchEngine\Google\GoogleClient\RequestBuilder
  */
 class GoogleClientTest extends \PHPUnit_Framework_TestCase
 {
@@ -91,6 +92,27 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(InvalidArgumentException::class);
         $googleClient->getRequestBuilder()->setUserAgent(true);
     }
+
+    public function testAcceptLanguage()
+    {
+        $googleClient = new GoogleClient($this->getMock(HttpClientInterface::class));
+        $request = $googleClient->getRequestBuilder()->buildRequest(new GoogleUrl());
+        $this->assertEquals(['en'], $request->getHeader('Accept-language'));
+
+        $googleClient->getRequestBuilder()->setDefaultAcceptLanguage('fr');
+        $request = $googleClient->getRequestBuilder()->buildRequest(new GoogleUrl());
+        $this->assertEquals(['fr'], $request->getHeader('Accept-language'));
+
+        $url = new GoogleUrl();
+        $url->setLanguageRestriction('es');
+        $request = $googleClient->getRequestBuilder()->buildRequest($url);
+        $this->assertEquals(['es'], $request->getHeader('Accept-language'));
+
+        $googleClient->getRequestBuilder()->setAcceptLanguageFromUrl(false);
+        $request = $googleClient->getRequestBuilder()->buildRequest(new GoogleUrl());
+        $this->assertEquals(['fr'], $request->getHeader('Accept-language'));
+    }
+
 
     public function testUserAgentWithOnRequest()
     {
