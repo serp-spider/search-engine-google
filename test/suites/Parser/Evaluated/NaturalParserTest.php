@@ -254,6 +254,13 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $itemLarge = $result->getItems()[0];
         $this->assertEquals([NaturalResultType::CLASSICAL, NaturalResultType::CLASSICAL_LARGE], $itemLarge->getTypes());
 
+        $sitelinks = $itemLarge->sitelinks;
+        $this->assertCount(6, $sitelinks);
+
+        $this->assertEquals('GitHub Pages', $sitelinks[1]->title);
+        $this->assertEquals('GitHub Pages ... Hosted directly from your GitHub repository ...', $sitelinks[1]->description);
+        $this->assertEquals('https://pages.github.com/', $sitelinks[1]->url);
+
     }
 
     public function testNidGroup()

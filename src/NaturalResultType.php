@@ -11,6 +11,7 @@ abstract class NaturalResultType
     const CLASSICAL = 'classical';
     const CLASSICAL_LARGE = 'classical_large';
     const CLASSICAL_VIDEO = 'classical_video';
+    const CLASSICAL_SITELINK = 'classical_sitelink';
 
     const IMAGE_GROUP = 'image_group';
     const IMAGE_GROUP_IMAGE = 'image_group_image';

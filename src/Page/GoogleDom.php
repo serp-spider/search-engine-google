@@ -33,13 +33,13 @@ class GoogleDom
     {
 
         // in xml tag is already specified we leave it as it is
-        if(substr($domString, 0, 5) !== '<?xml'){
+        if (substr($domString, 0, 5) !== '<?xml') {
             $currentEncoding = $url->getParamValue('oe');
-            if(!$currentEncoding){
+            if (!$currentEncoding) {
                 $currentEncoding = 'UTF-8';
             }
 
-            if(strtoupper($currentEncoding) !== 'ISO-8859-1'){
+            if (strtoupper($currentEncoding) !== 'ISO-8859-1') {
                 $domString = '<?xml encoding="' . $currentEncoding . '">' . $domString;
             }
         }

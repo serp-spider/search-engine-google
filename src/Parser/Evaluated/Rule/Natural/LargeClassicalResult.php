@@ -31,6 +31,32 @@ class LargeClassicalResult extends ClassicalResult
     public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet)
     {
         $data = $this->parseNode($dom, $node);
+
+        $data['sitelinks'] = function () use ($dom, $node) {
+            $items = $dom->cssQuery('.nrgt tr.mslg>td>.sld', $node);
+            $siteLinksData = [];
+            foreach ($items as $item) {
+                $siteLinksData[] = new BaseResult(NaturalResultType::CLASSICAL_SITELINK, [
+                    'title' => function () use ($dom, $item) {
+                        return $dom->cssQuery('h3.r a', $item)
+                            ->item(0)
+                            ->textContent;
+
+                    },
+                    'description' => function () use ($dom, $item) {
+                        return $dom->cssQuery('.st', $item)
+                            ->item(0)
+                            ->textContent;
+                    },
+                    'url' => function () use ($dom, $item) {
+                        return $dom->cssQuery('h3.r a', $item)
+                            ->item(0)
+                            ->getAttribute('href');
+                    },
+                ]);
+            }
+            return $siteLinksData;
+        };
         
         $resultTypes = [NaturalResultType::CLASSICAL, NaturalResultType::CLASSICAL_LARGE];
 
