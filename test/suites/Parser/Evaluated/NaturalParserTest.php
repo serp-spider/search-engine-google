@@ -67,7 +67,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
 
 
         // Test in the news
-        $inTheNews = $result->getResultsByType('inTheNews');
+        $inTheNews = $result->getResultsByType(NaturalResultType::IN_THE_NEWS);
         $this->assertEquals(3, $inTheNews[0]->getRealPosition());
         $this->assertEquals(
             "'The Simpsons': Greatest Political Moments",
