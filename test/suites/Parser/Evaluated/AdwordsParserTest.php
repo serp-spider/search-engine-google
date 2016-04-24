@@ -54,7 +54,7 @@ class AdwordsParserTest extends \PHPUnit_Framework_TestCase
         $topItemp = $results->getItems()[1];
         $this->assertEquals(
             'Art Posters On Sale Today - allposters.com.au‎',
-            utf8_decode($topItemp->getDataValue('title'))
+            $topItemp->getDataValue('title')
         );
 
         $this->assertEquals(
@@ -76,7 +76,7 @@ class AdwordsParserTest extends \PHPUnit_Framework_TestCase
         $bottomItem = $results->getItems()[3];
         $this->assertEquals(
             'Votre Simpsons Poster‎',
-            utf8_decode($bottomItem->getDataValue('title'))
+            $bottomItem->getDataValue('title')
         );
 
         $this->assertEquals(
@@ -91,7 +91,7 @@ class AdwordsParserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             'Vos Posters de Séries TV à Prix Bas 500.000 Posters, Cadres Disponibles',
-            utf8_decode($bottomItem->getDataValue('description'))
+            $bottomItem->getDataValue('description')
         );
 
         // Testing Shopping
