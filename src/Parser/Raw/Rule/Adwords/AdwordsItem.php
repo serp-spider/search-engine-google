@@ -43,7 +43,7 @@ class AdwordsItem implements ParsingRuleInterace
 
                 $url = $googleDOM->getUrl()->resolve($aTag->getAttribute('href'));
                 if ($url->hasParam('adurl')) {
-                    return UrlArchive::fromString($url->getParamRawValue('adurl'));
+                    return $url->getParamRawValue('adurl');
                 } else {
                     throw new InvalidDOMException('Unable to find the real url of adword result');
                 }

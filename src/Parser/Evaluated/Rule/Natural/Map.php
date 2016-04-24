@@ -41,7 +41,7 @@ class Map implements ParsingRuleInterace
             'mapUrl'    => function () use ($xPath, $node, $dom) {
                 $mapATag = $xPath->query('descendant::div[@class="_wNi"]//a', $node)->item(0);
                 if ($mapATag) {
-                    return $dom->getUrl()->resolve($mapATag->getAttribute('href'));
+                    return $dom->getUrl()->resolve($mapATag->getAttribute('href'), 'string');
                 }
                 return null;
             }
@@ -64,7 +64,7 @@ class Map implements ParsingRuleInterace
             'url' => function () use ($localPack, $dom) {
                 $item = $dom->getXpath()->query('descendant::div[@class="_gt"]/a', $localPack)->item(1);
                 if ($item) {
-                    return UrlArchive::fromString($item->getAttribute('href'));
+                    return $item->getAttribute('href');
                 }
                 return null;
             },

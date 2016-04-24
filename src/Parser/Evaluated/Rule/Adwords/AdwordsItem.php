@@ -39,7 +39,7 @@ class AdwordsItem implements ParsingRuleInterace
                     return $googleDOM->getUrl()->resolve('/');
                 }
 
-                return $googleDOM->getUrl()->resolve($aTag->getAttribute('href'));
+                return $googleDOM->getUrl()->resolve($aTag->getAttribute('href'), 'string');
             },
             'visurl' => function () use ($node, $googleDOM) {
                 $aTag = $googleDOM->getXpath()->query(

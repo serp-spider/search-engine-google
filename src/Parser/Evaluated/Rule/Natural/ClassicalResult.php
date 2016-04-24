@@ -47,12 +47,9 @@ class ClassicalResult implements ParsingRuleInterace
             ->query("descendant::span[@class='st']", $node)
             ->item(0);
 
-
-
-
         return [
             'title'   => $aTag->nodeValue,
-            'url'     => $dom->getUrl()->resolve($aTag->getAttribute('href')),
+            'url'     => $dom->getUrl()->resolve($aTag->getAttribute('href'), 'string'),
             'destination' => $destinationTag ? $destinationTag->nodeValue : null,
             'description' => $descriptionTag ? $descriptionTag->nodeValue : null
         ];

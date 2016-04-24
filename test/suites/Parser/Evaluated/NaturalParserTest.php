@@ -123,18 +123,18 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             NaturalResultType::CLASSICAL
         ], $types);
 
-        $this->assertCount(12, $result->getItems()[0]->getDataValue('images'));
+        $this->assertCount(12, $result->getItems()[0]->images);
         $this->assertEquals(
             'http://superawesomevectors.com/free-vector-donut-drawing/',
-            $result->getItems()[0]->getDataValue('images')[0]->getDataValue('sourceUrl')
+            $result->getItems()[0]->getDataValue('images')[0]->sourceUrl
         );
         $this->assertEquals(
             'https://www.google.com.au/search?q=simpsons+donut&tbm=isch&imgil=PsgymH70iPP7VM%253A%253BeaF3My1vToZseM%253Bhttp%25253A%25252F%25252Fsuperawesomevectors.com%25252Ffree-vector-donut-drawing%25252F&source=iu&pf=m&fir=PsgymH70iPP7VM%253A%252CeaF3My1vToZseM%252C_&usg=___xAQ2PmWuTZdcZq_-t7ELD0Maqw%3D',
-            $result->getItems()[0]->getDataValue('images')[0]->getDataValue('targetUrl')
+            $result->getItems()[0]->getDataValue('images')[0]->targetUrl
         );
         $this->assertEquals(
             'https://www.google.com.au/search?q=simpsons+donut&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwiyo7ucrtvKAhUJHxoKHZBFAHYQsAQIGw',
-            $result->getItems()[0]->getDataValue('moreUrl')
+            $result->getItems()[0]->moreUrl
         );
     }
 
@@ -206,7 +206,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $map = $result->getItems()[0];
 
         $this->assertEquals(
-            'https://www.google.fr/search?q=shop+near+paris&npsic=0&rflfq=1&rlha=0&rllag=48857610%2C2368833%2C3837&tbm=lcl&sa=X&ved=0ahUKEwjnofTgoKfMAhVIEpoKHd0eDlkQjGoIOA',
+            'https://www.google.fr/search?q=shop+near+paris&npsic=0&rflfq=1&rlha=0&rllag=48857610,2368833,3837&tbm=lcl&sa=X&ved=0ahUKEwjnofTgoKfMAhVIEpoKHd0eDlkQjGoIOA',
             (string)$map->getDataValue('mapUrl')
         );
         $this->assertCount(3, $map->localPack);

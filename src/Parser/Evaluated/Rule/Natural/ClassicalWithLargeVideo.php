@@ -38,7 +38,7 @@ class ClassicalWithLargeVideo implements ParsingRuleInterace
 
         $data = [
             'title'   => $aTag->nodeValue,
-            'url'     => $dom->getUrl()->resolve($aTag->getAttribute('href')),
+            'url'     => $dom->getUrl()->resolve($aTag->getAttribute('href'), 'string'),
             'destination' => $destinationTag ? $destinationTag->nodeValue : null,
             'description' => null,
             'videoLarge'  => true,

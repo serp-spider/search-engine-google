@@ -42,7 +42,7 @@ class Map implements ParsingRuleInterace
                 'mapUrl'    => function () use ($xPath, $node, $dom) {
                     $mapATag = $xPath->query('descendant::a[@class="_Tbj"]', $node)->item(0);
                     if ($mapATag) {
-                        return $dom->getUrl()->resolve($mapATag->getAttribute('href'));
+                        return $dom->getUrl()->resolve($mapATag->getAttribute('href'), 'string');
                     }
                     return null;
                 }
@@ -65,7 +65,7 @@ class Map implements ParsingRuleInterace
                 if ($item && $href = $item->getAttribute('href')) {
                     if (strpos($href, '/url') === 0) {
                         $url = $dom->getUrl()->resolve($href)->getParamRawValue('q');
-                        return UrlArchive::fromString($url);
+                        return $url;
                     }
                 }
                 return null;

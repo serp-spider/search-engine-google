@@ -187,19 +187,19 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             NaturalResultType::CLASSICAL
         ], $types);
 
-        $this->assertCount(5, $result->getItems()[0]->getDataValue('images'));
+        $this->assertCount(5, $result->getItems()[0]->images);
         $this->assertEquals(
             'https://www.pinterest.com/tailaurindo/simpson/',
-            $result->getItems()[0]->getDataValue('images')[0]->getDataValue('sourceUrl')
+            $result->getItems()[0]->getDataValue('images')[0]->sourceUrl
         );
         $this->assertEquals(
-            'https://www.google.com.au/url?q=https%3A%2F%2Fwww.pinterest.com%2Ftailaurindo%2Fsimpson%2F&sa=U&ved=0ahUKEwip8OqE5tTLAhWCMBoKHRHaBzMQwW4IFjAA&usg=AFQjCNG1gX30QPinBxrX_o_uIqeDt33W-A',
-            $result->getItems()[0]->getDataValue('images')[0]->getDataValue('targetUrl')->__toString()
+            'https://www.google.com.au/url?q=https://www.pinterest.com/tailaurindo/simpson/&sa=U&ved=0ahUKEwip8OqE5tTLAhWCMBoKHRHaBzMQwW4IFjAA&usg=AFQjCNG1gX30QPinBxrX_o_uIqeDt33W-A',
+            $result->getItems()[0]->getDataValue('images')[0]->targetUrl
         );
 
         $this->assertEquals(
             'https://www.google.com.au/search?q=simpsons+donut&gbv=1&prmd=ivns&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwip8OqE5tTLAhWCMBoKHRHaBzMQsAQIFA',
-            $result->getItems()[0]->getDataValue('moreUrl')->__toString()
+            $result->getItems()[0]->moreUrl
         );
     }
 }

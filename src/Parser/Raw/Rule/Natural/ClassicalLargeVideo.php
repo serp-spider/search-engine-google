@@ -43,7 +43,7 @@ class ClassicalLargeVideo implements ParsingRuleInterace
 
         $data = [
             'title'   => $aTag->nodeValue,
-            'url'     => GoogleUrlArchive::fromString($url),
+            'url'     => $url,
             'destination' => $destinationTag ? $destinationTag->nodeValue : null,
             'description' => null,
             'videoLarge'  => true,

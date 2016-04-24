@@ -32,7 +32,7 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterac
                 if (!$aTag) {
                     return $googleDOM->getUrl()->resolve('/');
                 }
-                return $googleDOM->getUrl()->resolve($aTag->getAttribute('href'));
+                return $googleDOM->getUrl()->resolve($aTag->getAttribute('href'), 'string');
 
             }
         ];
@@ -57,10 +57,10 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterac
                 if (!$img) {
                     return $googleDOM->getUrl()->resolve('/');
                 }
-                return $googleDOM->getUrl()->resolve($img->getAttribute('title'));
+                return $googleDOM->getUrl()->resolve($img->getAttribute('title'), 'string');
             },
             'targetUrl' => function () use ($imgNode, $googleDOM) {
-                return $googleDOM->getUrl()->resolve($imgNode->getAttribute('href'));
+                return $googleDOM->getUrl()->resolve($imgNode->getAttribute('href'), 'string');
             },
             'image' => function () use ($imgNode, $googleDOM) {
                 $img = $googleDOM->getXpath()->query('descendant::img', $imgNode)->item(0);
