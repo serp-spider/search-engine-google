@@ -197,8 +197,8 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             NaturalResultType::CLASSICAL,
             NaturalResultType::CLASSICAL,
             NaturalResultType::CLASSICAL,
-            NaturalResultType::CLASSICAL,
-            NaturalResultType::IMAGE_GROUP
+            NaturalResultType::IMAGE_GROUP,
+            NaturalResultType::CLASSICAL
         ], $types);
 
 
@@ -206,24 +206,24 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $map = $result->getItems()[0];
 
         $this->assertEquals(
-            'https://www.google.fr/search?q=shop+near+paris&npsic=0&rflfq=1&rlha=0&tbm=lcl&sa=X&ved=0ahUKEwjj9PCdqMDLAhUH0xoKHelvDxcQjGoIOw',
-            $map->getDataValue('mapUrl')
+            'https://www.google.fr/search?q=shop+near+paris&npsic=0&rflfq=1&rlha=0&rllag=48857610%2C2368833%2C3837&tbm=lcl&sa=X&ved=0ahUKEwjnofTgoKfMAhVIEpoKHd0eDlkQjGoIOA',
+            (string)$map->getDataValue('mapUrl')
         );
         $this->assertCount(3, $map->localPack);
-        $this->assertEquals('Bicycle Store', $map->localPack[0]->title);
-        $this->assertEquals('http://www.bicyclestore.fr/', $map->localPack[0]->url);
-        $this->assertEquals('17 Boulevard du Temple', $map->localPack[0]->street);
+        $this->assertEquals('Paris Store', $map->localPack[0]->title);
+        $this->assertequals('http://www.paris-store.com/', $map->localPack[0]->url);
+        $this->assertEquals('44 Avenue d\'Ivry', $map->localPack[0]->street);
         // Stars
-        $this->assertEquals('4.0', $map->localPack[0]->stars);
+        $this->assertEquals('4,0', $map->localPack[0]->stars);
         $this->assertEquals(null, $map->localPack[1]->stars);
         // Review
         $this->assertEquals(null, $map->localPack[0]->review);
-        $this->assertEquals('No reviews', $map->localPack[1]->review);
+        $this->assertEquals('Aucun avis', $map->localPack[1]->review);
         $this->assertEquals(null, $map->localPack[2]->review);
         // Phone
-        $this->assertEquals('09 51 61 68 29', $map->localPack[0]->phone);
-        $this->assertEquals('01 44 61 90 26', $map->localPack[1]->phone);
-        $this->assertEquals('09 83 38 04 88', $map->localPack[2]->phone);
+        $this->assertEquals('01 44 06 88 18', $map->localPack[0]->phone);
+        $this->assertEquals('01 42 06 98 44', $map->localPack[1]->phone);
+        $this->assertEquals('01 44 72 88 88', $map->localPack[2]->phone);
     }
 
     public function testLargeResult()

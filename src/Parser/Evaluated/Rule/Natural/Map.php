@@ -55,7 +55,7 @@ class Map implements ParsingRuleInterace
     {
         return [
             'title' => function () use ($localPack, $dom) {
-                $item = $dom->getXpath()->query('descendant::div[@class="_pl"]/div[@class="_rl"]', $localPack)->item(0);
+                $item = $dom->cssQuery('._rl', $localPack)->item(0);
                 if ($item) {
                     return $item->nodeValue;
                 }
@@ -70,7 +70,7 @@ class Map implements ParsingRuleInterace
             },
             'street' => function () use ($localPack, $dom) {
                 $item = $dom->getXpath()->query(
-                    'descendant::div[@class="_pl"]/span[@class="rllt__details"]/div[3]/span',
+                    'descendant::div[@class="_iPk"]/span[@class="rllt__details"]/div[3]/span',
                     $localPack
                 )->item(0);
                 if ($item) {
@@ -89,7 +89,7 @@ class Map implements ParsingRuleInterace
 
             'review' => function () use ($localPack, $dom) {
                 $item = $dom->getXpath()->query(
-                    'descendant::div[@class="_pl"]/span[@class="rllt__details"]/div[1]',
+                    'descendant::div[@class="_iPk"]/span[@class="rllt__details"]/div[1]',
                     $localPack
                 )->item(0);
                 if ($item) {
@@ -104,7 +104,7 @@ class Map implements ParsingRuleInterace
 
             'phone' => function () use ($localPack, $dom) {
                 $item = $dom->getXpath()->query(
-                    'descendant::div[@class="_pl"]/span[@class="rllt__details"]/div[3]',
+                    'descendant::div[@class="_iPk"]/span[@class="rllt__details"]/div[3]',
                     $localPack
                 )->item(0);
                 if ($item) {
