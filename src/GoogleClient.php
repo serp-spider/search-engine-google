@@ -5,8 +5,6 @@
 
 namespace Serps\SearchEngine\Google;
 
-use Psr\Http\Message\RequestInterface;
-use Serps\Core\Captcha\CaptchaSolverInterface;
 use Serps\Core\Cookie\ArrayCookieJar;
 use Serps\Core\Cookie\CookieJarInterface;
 use Serps\Core\Http\HttpClientInterface;
@@ -16,12 +14,12 @@ use Serps\Exception;
 use Serps\SearchEngine\Google\Exception\GoogleCaptchaException;
 use Serps\SearchEngine\Google\GoogleClient\RequestBuilder;
 use Serps\SearchEngine\Google\Page\GoogleCaptcha;
-use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Page\GoogleError;
 use Serps\SearchEngine\Google\Page\GoogleSerp;
 use Serps\SearchEngine\Google\GoogleUrl;
-use Serps\SearchEngine\Google\GoogleUrlTrait;
 use Zend\Diactoros\Request;
+use Serps\Exception\RequestError\PageNotFoundException;
+use Serps\Exception\RequestError\RequestErrorException;
 
 /**
  * Google client the handles google url routing, dom object constructions and request errors
@@ -110,8 +108,8 @@ class GoogleClient
      * @param Proxy|null $proxy
      * @return GoogleSerp
      * @throws Exception
-     * @throws Exception\PageNotFoundException
-     * @throws Exception\RequestErrorException
+     * @throws PageNotFoundException
+     * @throws RequestErrorException
      * @throws GoogleCaptchaException
      */
     public function query(GoogleUrlInterface $googleUrl, Proxy $proxy = null)
@@ -140,14 +138,14 @@ class GoogleClient
             return new GoogleSerp($response->getPageContent(), $effectiveUrl);
         } else {
             if (404 == $statusCode) {
-                throw new Exception\PageNotFoundException();
+                throw new PageNotFoundException();
             } else {
                 $errorDom = new GoogleError($response->getPageContent(), $effectiveUrl);
 
                 if ($errorDom->isCaptcha()) {
                     throw new GoogleCaptchaException(new GoogleCaptcha($errorDom));
                 } else {
-                    throw new Exception\RequestErrorException($errorDom);
+                    throw new RequestErrorException($errorDom);
                 }
             }
         }
