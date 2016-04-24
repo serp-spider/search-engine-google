@@ -69,41 +69,6 @@ class GoogleClient
     }
 
     /**
-     * Enable usage of cookies
-     */
-    public function enableCookies()
-    {
-        $this->cookiesEnabled = true;
-    }
-
-    /**
-     * Disable usage of cookies
-     */
-    public function disableCookies()
-    {
-        $this->cookiesEnabled = false;
-    }
-
-    /**
-     * @return CookieJarInterface
-     */
-    public function getCookieJar()
-    {
-        if (null == $this->cookieJar) {
-            $this->cookieJar = new ArrayCookieJar();
-        }
-        return $this->cookieJar;
-    }
-
-    /**
-     * @param CookieJarInterface $cookieJar
-     */
-    public function setCookieJar(CookieJarInterface $cookieJar)
-    {
-        $this->cookieJar = $cookieJar;
-    }
-
-    /**
      * @param GoogleUrlInterface $googleUrl
      * @param Proxy|null $proxy
      * @return GoogleSerp
@@ -112,7 +77,7 @@ class GoogleClient
      * @throws RequestErrorException
      * @throws GoogleCaptchaException
      */
-    public function query(GoogleUrlInterface $googleUrl, Proxy $proxy = null)
+    public function query(GoogleUrlInterface $googleUrl, Proxy $proxy = null, CookieJarInterface $cookieJar = null)
     {
 
         if ($googleUrl->getResultType() !== GoogleUrl::RESULT_TYPE_ALL) {
@@ -121,9 +86,6 @@ class GoogleClient
                 . 'Google client only supports general searches. See GoogleUrl::setResultType() for more infos.'
             );
         }
-
-        $cookieJar = $this->cookiesEnabled ? $this->getCookieJar() : null;
-
 
         $request = $this->getRequestBuilder()
                 ->buildRequest($googleUrl);
