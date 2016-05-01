@@ -36,7 +36,7 @@ class InTheNews implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
         $cardNodes = $googleDOM->getXpath()->query($xpathCards, $group);
 
         foreach ($cardNodes as $cardNode) {
-            $item['cards'][] = $this->parseItem($googleDOM, $cardNode);
+            $item['news'][] = $this->parseItem($googleDOM, $cardNode);
         }
 
         $resultSet->addItem(new BaseResult(NaturalResultType::IN_THE_NEWS, $item));
