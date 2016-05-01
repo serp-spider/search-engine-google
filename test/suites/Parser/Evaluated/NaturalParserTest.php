@@ -297,4 +297,35 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([NaturalResultType::CLASSICAL], $item0->getTypes());
         $this->assertEquals('Alarmas para Hogar - Securitas Direct', $item0->title);
     }
+
+    public function testFlights()
+    {
+
+        $gUrl = GoogleUrlArchive::fromString('https://www.google.fr/search?q=flights&oq=flights');
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-evaluated/flights.html'), $gUrl);
+
+        $naturalParser = new NaturalParser();
+        $result = $naturalParser->parse($dom);
+
+        $types = [];
+        foreach ($result->getItems() as $item) {
+            $types[] = $item->getTypes()[0];
+        }
+
+        $this->assertInstanceOf(IndexedResultSet::class, $result);
+        $this->assertCount(11, $result);
+        $this->assertEquals([
+            NaturalResultType::FLIGHTS,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL
+        ], $types);
+    }
 }

@@ -9,6 +9,7 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flight;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InTheNews;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\LargeClassicalResult;
@@ -37,7 +38,8 @@ class NaturalParser extends AbstractParser
             new TweetsCarousel(),
             new ClassicalWithLargeVideo(),
             new InTheNews(),
-            new Map()
+            new Map(),
+            new Flight(),
         ];
     }
 

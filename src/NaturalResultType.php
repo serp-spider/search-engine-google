@@ -21,4 +21,6 @@ abstract class NaturalResultType
 
     const MAP = 'map';
     const MAP_PLACE = 'map_place';
+
+    const FLIGHTS = 'flights';
 }
