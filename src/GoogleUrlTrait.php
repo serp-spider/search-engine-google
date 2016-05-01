@@ -28,13 +28,13 @@ trait GoogleUrlTrait
     public abstract function getHash();
 
     /**
-     * Get the number of the page.
+     * Get the number of the page, the pages are 1 indexed
      * @return int
      */
     public function getPage()
     {
         $resultsPerPage = $this->getResultsPerPage();
-        return $this->getParamValue('start', 0) / ($resultsPerPage > 0 ? $resultsPerPage : 10);
+        return 1 + $this->getParamValue('start', 0) / ($resultsPerPage > 0 ? $resultsPerPage : 10);
     }
 
     /**

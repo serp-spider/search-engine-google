@@ -49,14 +49,18 @@ class GoogleUrlTest extends \PHPUnit_Framework_TestCase
     public function testPage()
     {
         $googleUrl = GoogleUrl::fromString('https://google.com/search?q=simpsons');
-        $this->assertEquals(0, $googleUrl->getPage());
+        $this->assertEquals(1, $googleUrl->getPage());
 
         $googleUrl->setPage(1);
         $this->assertEquals(1, $googleUrl->getPage());
+        $this->assertFalse($googleUrl->hasParam('start'));
+
+        $googleUrl->setPage(2);
+        $this->assertEquals(2, $googleUrl->getPage());
         $this->assertEquals(10, $googleUrl->getParamValue('start'));
 
         $googleUrl->setPage(0);
-        $this->assertEquals(0, $googleUrl->getPage());
+        $this->assertEquals(1, $googleUrl->getPage());
         $this->assertFalse($googleUrl->hasParam('start'));
     }
 

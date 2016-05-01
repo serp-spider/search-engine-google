@@ -15,7 +15,7 @@ interface GoogleUrlInterface extends UrlArchiveInterface
 {
 
     /**
-     * Get the number of the page.
+     * Get the number of the page, the pages are 1 indexed
      * @return int
      */
     public function getPage();

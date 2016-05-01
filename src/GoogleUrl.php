@@ -52,12 +52,13 @@ class GoogleUrl extends Url implements GoogleUrlInterface
     }
 
     /**
-     * Set the page number of the page. Starting from 0
+     * Set the page number of the page. Starting from 1
      * @param int $pageNumber
      * @return $this
      */
     public function setPage($pageNumber)
     {
+        $pageNumber--;
         if ($pageNumber <= 0) {
             $this->removeParam('start');
         } else {
