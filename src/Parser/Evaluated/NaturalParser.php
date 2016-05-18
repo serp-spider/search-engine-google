@@ -7,6 +7,7 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated;
 
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AnswerBox;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flight;
@@ -39,6 +40,7 @@ class NaturalParser extends AbstractParser
             new ClassicalWithLargeVideo(),
             new InTheNews(),
             new Map(),
+            new AnswerBox(),
             new Flight(),
         ];
     }

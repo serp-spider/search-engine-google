@@ -12,11 +12,11 @@ use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\NaturalResultType;
 
 /**
- * Testing parser is hard, because it relies on google pages
+ * Testing parser is hard because it relies on google pages
  *
- * The tests here are parsing a saved html version of a google page.
- * They do not prevent google from changing its dom. If it
- * happens the saved html and the following tests must be updated.
+ * The tests bellow parse a saved html version of a google page.
+ * They do not prevent google from changing its dom.
+ * If it happens the saved html and the following tests must be updated.
  *
  * When the tests are updated, make sure that the new one include the same kind of results.
  * For instance if the previous test included a ``TweetsCarousel`` the new test should do so.
@@ -327,5 +327,44 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             NaturalResultType::CLASSICAL,
             NaturalResultType::CLASSICAL
         ], $types);
+    }
+
+    public function testAnswerBox()
+    {
+
+        $gUrl = GoogleUrlArchive::fromString('https://www.google.co.uk/search?q=how+is+homer+simpsons&lr=lang_en&hl=en');
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-evaluated/how+is+homer+simpsons.html'), $gUrl);
+
+        $naturalParser = new NaturalParser();
+        $result = $naturalParser->parse($dom);
+
+        $types = [];
+        foreach ($result->getItems() as $item) {
+            $types[] = $item->getTypes()[0];
+        }
+
+        $this->assertInstanceOf(IndexedResultSet::class, $result);
+        $this->assertCount(11, $result);
+        $this->assertEquals([
+            NaturalResultType::ANSWER_BOX,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::IN_THE_NEWS,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL
+        ], $types);
+
+        $answerBox = $result->getItems()[0];
+
+        $expectedDescription = 'Homer Jay Simpson is the protagonist of the American animated television series The Simpsons as the patriarch of the eponymous family. He is voiced by Dan Castellaneta and first appeared on television, along with the rest of his family, in The Tracey Ullman Show short "Good Night" on April 19, 1987.';
+        $this->assertEquals($expectedDescription, $answerBox->description);
+        $this->assertEquals('Homer Simpson - Wikipedia, the free encyclopedia', $answerBox->title);
+        $this->assertEquals('https://en.wikipedia.org/wiki/Homer_Simpson', $answerBox->destination);
+        $this->assertEquals('https://en.wikipedia.org/wiki/Homer_Simpson', $answerBox->url);
     }
 }

@@ -16,7 +16,9 @@ class ClassicalWithLargeVideo implements ParsingRuleInterace
 
     public function match(GoogleDom $dom, \DOMElement $node)
     {
-        if ($node->getAttribute('class') == 'g mnr-c g-blk') {
+        if ($node->getAttribute('class') == 'g mnr-c g-blk'
+            && $dom->cssQuery('.knowledge-block__video-nav-block', $node)->length == 1
+        ) {
             return self::RULE_MATCH_MATCHED;
         } else {
             return self::RULE_MATCH_NOMATCH;
