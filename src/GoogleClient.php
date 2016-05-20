@@ -107,7 +107,7 @@ class GoogleClient
                 if ($errorDom->isCaptcha()) {
                     throw new GoogleCaptchaException(new GoogleCaptcha($errorDom));
                 } else {
-                    throw new RequestErrorException();
+                    throw new RequestErrorException($response->getPageContent());
                 }
             }
         }
