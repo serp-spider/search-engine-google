@@ -20,6 +20,7 @@ use Serps\SearchEngine\Google\GoogleUrl;
 use Zend\Diactoros\Request;
 use Serps\Exception\RequestError\PageNotFoundException;
 use Serps\Exception\RequestError\RequestErrorException;
+use Serps\Exception\RequestError\InvalidResponseException;
 
 /**
  * Google client the handles google url routing, dom object constructions and request errors
@@ -100,14 +101,18 @@ class GoogleClient
             return new GoogleSerp($response->getPageContent(), $effectiveUrl);
         } else {
             if (404 == $statusCode) {
-                throw new PageNotFoundException();
+                throw new PageNotFoundException($response);
             } else {
                 $errorDom = new GoogleError($response->getPageContent(), $effectiveUrl);
 
                 if ($errorDom->isCaptcha()) {
                     throw new GoogleCaptchaException(new GoogleCaptcha($errorDom));
                 } else {
-                    throw new RequestErrorException($errorDom);
+                    $failledUrl = $response->getInitialUrl();
+                    throw new InvalidResponseException(
+                        $response,
+                        "The http response from $failledUrl has an invalid status code: '$statusCode'"
+                    );
                 }
             }
         }

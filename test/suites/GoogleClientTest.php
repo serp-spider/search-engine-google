@@ -10,6 +10,7 @@ use Serps\Core\Http\HttpClientInterface;
 use Serps\Core\Http\SearchEngineResponse;
 use Serps\Core\UrlArchive;
 use Serps\Exception\CaptchaException;
+use Serps\Exception\RequestError\InvalidResponseException;
 use Serps\SearchEngine\Google\Exception\GoogleCaptchaException;
 use Serps\SearchEngine\Google\GoogleUrl;
 use Serps\SearchEngine\Google\GoogleClient;
@@ -47,6 +48,33 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
         $dom = $googleClient->query($url);
         $this->assertInstanceOf(GoogleSerp::class, $dom);
         $this->assertEquals('https://www.google.fr/search?q=simpsons+movie+trailer', (string)$dom->getUrl());
+    }
+
+    public function testInvalidHttpResponse()
+    {
+        $httpClientMock = $this->getMock(HttpClientInterface::class);
+        $responseFromMock = new SearchEngineResponse(
+            [],
+            400,
+            file_get_contents('test/resources/pages-evaluated/simpsons+movie+trailer.html'),
+            false,
+            GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
+            GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
+            null
+        );
+        $httpClientMock->method('sendRequest')->willReturn($responseFromMock);
+
+        /* @var $httpClientMock HttpClientInterface */
+        $googleClient = new GoogleClient($httpClientMock);
+        $url = GoogleUrl::fromString('https://www.google.fr/search?q=simpsons+movie+trailer');
+
+        try {
+            $googleClient->query($url);
+            $this->fail('Excetpion should be thrown');
+        } catch (InvalidResponseException $e) {
+            $this->assertEquals(400, $e->getHttpStatusCode());
+        }
+
     }
 
     public function testCaptchaDom()
