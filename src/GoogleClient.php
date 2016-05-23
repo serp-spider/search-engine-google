@@ -75,7 +75,8 @@ class GoogleClient
      * @return GoogleSerp
      * @throws Exception
      * @throws PageNotFoundException
-     * @throws RequestErrorException
+     * @throws InvalidResponseException
+     * @throws PageNotFoundException
      * @throws GoogleCaptchaException
      */
     public function query(GoogleUrlInterface $googleUrl, Proxy $proxy = null, CookieJarInterface $cookieJar = null)
