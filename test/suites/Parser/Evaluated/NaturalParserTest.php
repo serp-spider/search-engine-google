@@ -384,5 +384,16 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(11, $results);
         $this->assertEquals(1, $results[0]->getRealPosition());
         $this->assertEquals(1, $results[0]->getOnPagePosition());
+
+        // Page 2
+        $gUrl = GoogleUrlArchive::fromString('https://www.google.co.uk/search?q=how+is+homer+simpsons&lr=lang_en&hl=en&start=10');
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-evaluated/how+is+homer+simpsons.html'), $gUrl);
+
+        $naturalParser = new NaturalParser();
+        $results = $naturalParser->parse($dom);
+
+        $this->assertCount(11, $results);
+        $this->assertEquals(11, $results[0]->getRealPosition());
+        $this->assertEquals(1, $results[0]->getOnPagePosition());
     }
 }
