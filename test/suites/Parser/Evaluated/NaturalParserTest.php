@@ -68,7 +68,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
 
         // Test in the news
         $inTheNews = $result->getResultsByType(NaturalResultType::IN_THE_NEWS);
-        $this->assertEquals(3, $inTheNews[0]->getRealPosition());
+        $this->assertEquals(4, $inTheNews[0]->getRealPosition());
         $this->assertEquals(
             "'The Simpsons': Greatest Political Moments",
             $inTheNews[0]->getDataValue('news')[0]->getDataValue('title')
@@ -366,5 +366,23 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Homer Simpson - Wikipedia, the free encyclopedia', $answerBox->title);
         $this->assertEquals('https://en.wikipedia.org/wiki/Homer_Simpson', $answerBox->destination);
         $this->assertEquals('https://en.wikipedia.org/wiki/Homer_Simpson', $answerBox->url);
+    }
+
+    /**
+     * spotted by #21 https://github.com/serp-spider/search-engine-google/pull/21
+     */
+    public function testResultPosition()
+    {
+
+        // Page 1
+        $gUrl = GoogleUrlArchive::fromString('https://www.google.co.uk/search?q=how+is+homer+simpsons&lr=lang_en&hl=en');
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-evaluated/how+is+homer+simpsons.html'), $gUrl);
+
+        $naturalParser = new NaturalParser();
+        $results = $naturalParser->parse($dom);
+
+        $this->assertCount(11, $results);
+        $this->assertEquals(1, $results[0]->getRealPosition());
+        $this->assertEquals(1, $results[0]->getOnPagePosition());
     }
 }

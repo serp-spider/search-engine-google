@@ -50,7 +50,7 @@ abstract class AbstractParser
     protected function createResultSet(GoogleDom $googleDom)
     {
         $startingAt = (int) $googleDom->getUrl()->getParamValue('start', 0);
-        return new IndexedResultSet($startingAt);
+        return new IndexedResultSet($startingAt + 1);
     }
 
     /**
