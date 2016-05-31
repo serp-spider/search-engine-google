@@ -37,8 +37,8 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterac
             }
         ];
 
-        $xpathCards = "descendant::ul[@class='rg_ul']/div[@class='_ZGc bili uh_r rg_el ivg-i']//a";
-        $imageNodes = $googleDOM->getXpath()->query($xpathCards, $node);
+        // TODO: detect no image (google dom update)
+        $imageNodes = $googleDOM->cssQuery('.rg_ul>div._ZGc a', $node);
         foreach ($imageNodes as $imgNode) {
             $item['images'][] = $this->parseItem($googleDOM, $imgNode);
         }
@@ -70,7 +70,7 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterac
                 return $img->getAttribute('src');
             },
         ];
-        
+
         return new BaseResult(NaturalResultType::IMAGE_GROUP_IMAGE, $data);
     }
 }

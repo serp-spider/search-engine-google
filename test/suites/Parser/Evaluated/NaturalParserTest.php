@@ -115,9 +115,9 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([
             NaturalResultType::IMAGE_GROUP,
             NaturalResultType::CLASSICAL,
+            NaturalResultType::CLASSICAL_VIDEO, // TODO change as classical (recipe)
+            NaturalResultType::CLASSICAL_VIDEO,
             NaturalResultType::CLASSICAL,
-            NaturalResultType::CLASSICAL_VIDEO,
-            NaturalResultType::CLASSICAL_VIDEO,
             NaturalResultType::CLASSICAL,
             NaturalResultType::CLASSICAL,
             NaturalResultType::CLASSICAL
@@ -125,15 +125,15 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(12, $result->getItems()[0]->images);
         $this->assertEquals(
-            'http://superawesomevectors.com/free-vector-donut-drawing/',
+            'https://www.pinterest.com/tailaurindo/simpson/',
             $result->getItems()[0]->getDataValue('images')[0]->sourceUrl
         );
         $this->assertEquals(
-            'https://www.google.com.au/search?q=simpsons+donut&tbm=isch&imgil=PsgymH70iPP7VM%253A%253BeaF3My1vToZseM%253Bhttp%25253A%25252F%25252Fsuperawesomevectors.com%25252Ffree-vector-donut-drawing%25252F&source=iu&pf=m&fir=PsgymH70iPP7VM%253A%252CeaF3My1vToZseM%252C_&usg=___xAQ2PmWuTZdcZq_-t7ELD0Maqw%3D',
+            'https://www.google.com.au/search?q=simpsons+donut&tbm=isch&imgil=xo4ZbYgvwQiXxM%253A%253BesZLHUJ3kmTgyM%253Bhttps%25253A%25252F%25252Fwww.pinterest.com%25252Ftailaurindo%25252Fsimpson%25252F&source=iu&pf=m&fir=xo4ZbYgvwQiXxM%253A%252CesZLHUJ3kmTgyM%252C_&usg=__Z-32x0kYL_G1X_tyz88rdtHi_D0%3D',
             $result->getItems()[0]->getDataValue('images')[0]->targetUrl
         );
         $this->assertEquals(
-            'https://www.google.com.au/search?q=simpsons+donut&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwiyo7ucrtvKAhUJHxoKHZBFAHYQsAQIGw',
+            'https://www.google.com.au/search?q=simpsons+donut&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwi25M6i44PNAhXEWBoKHVSRBGkQsAQIGw',
             $result->getItems()[0]->moreUrl
         );
     }
