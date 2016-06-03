@@ -12,6 +12,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser as EvaluatedAdwords
 use Serps\SearchEngine\Google\Parser\Raw\AdwordsParser as RawAdwordsParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser as EvaluatedNaturalParser;
 use Serps\SearchEngine\Google\Parser\Raw\NaturalParser as RawNaturalParser;
+use Serps\Stubs\RelatedSearch;
 
 class GoogleSerp extends GoogleDom
 {
@@ -112,5 +113,25 @@ class GoogleSerp extends GoogleDom
         } else {
             throw new InvalidDOMException('Unable to check javascript status.');
         }
+    }
+
+    /**
+     * @return array|RelatedSearch[]
+     */
+    public function getRelatedSearches()
+    {
+        $relatedSearches = [];
+        $items = $this->cssQuery('#brs ._e4b>a');
+        if ($items->length > 0) {
+            foreach ($items as $item) {
+                /* @var $item \DOMElement */
+                $result = new \stdClass();
+                $result->title = $item->nodeValue;
+                $result->url = $this->getUrl()->resolve($item->getAttribute('href'), 'string');
+                $relatedSearches[] = $result;
+            }
+        }
+
+        return $relatedSearches;
     }
 }

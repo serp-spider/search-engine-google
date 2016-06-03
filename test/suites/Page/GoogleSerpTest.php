@@ -82,4 +82,34 @@ class GoogleSerpTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->getDomJavascript()->javascriptIsEvaluated());
         $this->assertFalse($this->getDomNoJavascript()->javascriptIsEvaluated());
     }
+
+    public function testRelatedSearches()
+    {
+        $gUrl = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+related');
+        $dom = new GoogleSerp(file_get_contents('test/resources/pages-evaluated/simpsons(related).html'), $gUrl);
+
+        $rs = $dom->getRelatedSearches();
+
+        $this->assertCount(8, $rs);
+
+        $this->assertEquals((array)$rs[0], [
+            'title' => 'simpsons watch online',
+            'url' => 'https://www.google.fr/search?client=ubuntu&hs=mPo&biw=1920&bih=992&q=simpsons+watch+online&revid=1278607378&sa=X&ved=0ahUKEwisvuHvz4vNAhVDI8AKHXh5AKAQ1QIIfygA'
+        ]);
+
+        $this->assertEquals((array)$rs[1], [
+            'title' => 'simpsons tv',
+            'url' => 'https://www.google.fr/search?client=ubuntu&hs=mPo&biw=1920&bih=992&q=simpsons+tv&revid=1278607378&sa=X&ved=0ahUKEwisvuHvz4vNAhVDI8AKHXh5AKAQ1QIIgAEoAQ'
+        ]);
+
+        $this->assertEquals((array)$rs[4], [
+            'title' => 'the simpsons episode 1',
+            'url' => 'https://www.google.fr/search?client=ubuntu&hs=mPo&biw=1920&bih=992&q=the+simpsons+episode+1&revid=1278607378&sa=X&ved=0ahUKEwisvuHvz4vNAhVDI8AKHXh5AKAQ1QIIgwEoBA'
+        ]);
+
+        $this->assertEquals((array)$rs[7], [
+            'title' => 'the simpsons barthood',
+            'url' => 'https://www.google.fr/search?client=ubuntu&hs=mPo&biw=1920&bih=992&q=the+simpsons+barthood&revid=1278607378&sa=X&ved=0ahUKEwisvuHvz4vNAhVDI8AKHXh5AKAQ1QIIhgEoBw'
+        ]);
+    }
 }
