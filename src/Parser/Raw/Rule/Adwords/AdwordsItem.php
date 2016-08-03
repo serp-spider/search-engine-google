@@ -58,7 +58,6 @@ class AdwordsItem implements ParsingRuleInterace
                     return null;
                 }
                 return $aTag->nodeValue;
-
             },
             'description' => function () use ($node, $googleDOM) {
                 $tag = $googleDOM->getXpath()->query(
@@ -70,7 +69,6 @@ class AdwordsItem implements ParsingRuleInterace
                     return null;
                 }
                 return $tag->nodeValue;
-
             },
         ];
 

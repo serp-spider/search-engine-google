@@ -206,24 +206,24 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $map = $result->getItems()[0];
 
         $this->assertEquals(
-            'https://www.google.fr/search?q=shop+near+paris&npsic=0&rflfq=1&rlha=0&rllag=48857610,2368833,3837&tbm=lcl&sa=X&ved=0ahUKEwjnofTgoKfMAhVIEpoKHd0eDlkQjGoIOA',
+            'https://www.google.fr/search?client=ubuntu&hs=k8t&q=shop+near+paris&npsic=0&rflfq=1&rlha=0&rllag=48865798,2325372,1412&tbm=lcl&ved=0ahUKEwj9h5Ha7aTOAhWEAxoKHRlCAI4QtgMIJw&tbs=lf:1,lf_ui:2',
             (string)$map->getDataValue('mapUrl')
         );
         $this->assertCount(3, $map->localPack);
-        $this->assertEquals('Paris Store', $map->localPack[0]->title);
-        $this->assertequals('http://www.paris-store.com/', $map->localPack[0]->url);
-        $this->assertEquals('44 Avenue d\'Ivry', $map->localPack[0]->street);
+        $this->assertEquals('Disney Store', $map->localPack[0]->title);
+        $this->assertequals('http://www.disneystore.fr/', $map->localPack[0]->url);
+        $this->assertEquals('44 Av. des Champs-Élysées', $map->localPack[0]->street);
         // Stars
-        $this->assertEquals('4,0', $map->localPack[0]->stars);
-        $this->assertEquals(null, $map->localPack[1]->stars);
+        $this->assertEquals('4.1', $map->localPack[0]->stars);
+        $this->assertEquals('4.0', $map->localPack[1]->stars);
         // Review
         $this->assertEquals(null, $map->localPack[0]->review);
-        $this->assertEquals('Aucun avis', $map->localPack[1]->review);
+        $this->assertEquals(null, $map->localPack[1]->review);
         $this->assertEquals(null, $map->localPack[2]->review);
         // Phone
-        $this->assertEquals('01 44 06 88 18', $map->localPack[0]->phone);
-        $this->assertEquals('01 42 06 98 44', $map->localPack[1]->phone);
-        $this->assertEquals('01 44 72 88 88', $map->localPack[2]->phone);
+        $this->assertEquals('01 45 61 45 25', $map->localPack[0]->phone);
+        $this->assertEquals('01 44 94 09 40', $map->localPack[1]->phone);
+        $this->assertEquals('01 40 13 99 93', $map->localPack[2]->phone);
     }
 
     public function testLargeResult()
@@ -260,7 +260,6 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('GitHub Pages', $sitelinks[1]->title);
         $this->assertEquals('GitHub Pages ... Hosted directly from your GitHub repository ...', $sitelinks[1]->description);
         $this->assertEquals('https://pages.github.com/', $sitelinks[1]->url);
-
     }
 
     public function testNidGroup()

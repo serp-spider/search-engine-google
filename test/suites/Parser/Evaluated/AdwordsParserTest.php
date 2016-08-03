@@ -104,7 +104,5 @@ class AdwordsParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('https://www.google.com.au/aclk?sa=l&ai=CY0A_jlP5Vuu_FpDmzAal85fABeihh8sF4LeUmKwBl9bV_YcDCAQQASgFYPsBoAH7_Zf-A8gBB6oEJ0_QX-g3vvmVLal5IsrVSmuL8KuTKi8rF8WopQL8xEMXFSCmtG7iHMAFBaAGJoAH2KX4H5AHA6gHpr4b2AcB4BLxv6bTjuzD6I4B&sig=AOD64_1iHykYRDusLJqdU94-aFjnHM1TuA&ctype=5&clui=11&q=&ved=0ahUKEwi-g9rZ3uPLAhUG1RoKHWKYArQQww8IHw&adurl=http://www.allposters.fr/-sp/Simpsons-Cast-Names_i8574538_.htm%3FAID%3D815014090%26ProductTarget%3D105221810967', $shoppingItem->getDataValue('products')[0]->url);
         $this->assertEquals('AllPosters.fr', $shoppingItem->getDataValue('products')[0]->target);
         $this->assertEquals('EUR9.99', $shoppingItem->getDataValue('products')[0]->price);
-
-
     }
 }

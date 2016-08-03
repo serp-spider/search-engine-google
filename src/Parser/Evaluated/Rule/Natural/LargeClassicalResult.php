@@ -41,7 +41,6 @@ class LargeClassicalResult extends ClassicalResult
                         return $dom->cssQuery('h3.r a', $item)
                             ->item(0)
                             ->textContent;
-
                     },
                     'description' => function () use ($dom, $item) {
                         return $dom->cssQuery('.st', $item)

@@ -117,7 +117,6 @@ class GoogleClient
                 }
             }
         }
-
     }
 
     public function __get($name)

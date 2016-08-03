@@ -89,7 +89,6 @@ class GoogleUrl extends Url implements GoogleUrlInterface
         }
         // need to refresh the page because it's based on the index of the first item
         $this->setPage($currentPage);
-
     }
 
     /**

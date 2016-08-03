@@ -71,7 +71,6 @@ class Shopping implements ParsingRuleInterace
                     return null;
                 }
                 return $imgTag->getAttribute('src');
-
             },
             'target' => function () use ($node, $googleDOM) {
                 $aTag = $googleDOM->getXpath()->query(
@@ -96,6 +95,5 @@ class Shopping implements ParsingRuleInterace
                 return $priceTag->nodeValue;
             }
         ]);
-
     }
 }

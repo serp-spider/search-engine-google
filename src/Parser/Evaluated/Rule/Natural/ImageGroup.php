@@ -33,7 +33,6 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterac
                     return $googleDOM->getUrl()->resolve('/');
                 }
                 return $googleDOM->getUrl()->resolve($aTag->getAttribute('href'), 'string');
-
             }
         ];
 

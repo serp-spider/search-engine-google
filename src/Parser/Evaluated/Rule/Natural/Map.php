@@ -18,7 +18,7 @@ class Map implements ParsingRuleInterace
 
     public function match(GoogleDom $dom, \DOMElement $node)
     {
-        if ($dom->getXpath()->query("descendant::div[@class='_M4k']", $node)->length == 1) {
+        if ($dom->cssQuery('._RBh', $node)->length  > 1) {
             return self::RULE_MATCH_MATCHED;
         }
         return self::RULE_MATCH_NOMATCH;
@@ -28,20 +28,6 @@ class Map implements ParsingRuleInterace
     {
 
         $xPath = $dom->getXpath();
-        /*
-         * Samples taken to parse :
-         * https://www.google.co.in/search?q=schools+near+by&start=0&uule=w+CAIQICIHQ2hlbm5haQ&gws_rd=cr
-         * https://www.google.co.in/search?q=beauty+parlours+near+by&start=0&uule=w+CAIQICIHQ2hlbm5haQ&gws_rd=cr
-         * https://www.google.co.in/search?q=restaurants+near+by&start=0&uule=w+CAIQICIHQ2hlbm5haQ&gws_rd=cr
-         */
-        /*
-         * changes in vendor/serps/search-engine-google/src/Parser/Evaluated/Rule/Natural/Map.php
-         * These changes are for Local Results (with MAP)
-         * match function : class='_Xhb' to class='_M4k'
-         * localPack array : div[@class="_oL"]/div to div[@class="_gt"]
-         * url array : 'descendant::div[@class="_gt"]/a' to 'descendant::a'
-         * street array : added new xpath as alternate option
-         */
 
         $item = [
             'localPack' => function () use ($xPath, $node, $dom) {
@@ -53,7 +39,7 @@ class Map implements ParsingRuleInterace
                 return $data;
             },
             'mapUrl'    => function () use ($xPath, $node, $dom) {
-                $mapATag = $xPath->query('descendant::div[@class="_wNi"]//a', $node)->item(0);
+                $mapATag = $dom->cssQuery('#lu_map', $node)->item(0)->parentNode;
                 if ($mapATag) {
                     return $dom->getUrl()->resolve($mapATag->getAttribute('href'), 'string');
                 }
@@ -84,15 +70,8 @@ class Map implements ParsingRuleInterace
                 return null;
             },
             'street' => function () use ($localPack, $dom) {
-                $item = $dom->getXpath()->query(
-                    'descendant::div[@class="_iPk"]/span[@class="rllt__details"]/div[3]/span',
-                    $localPack
-                )->item(0);
-                if ($item) {
-                    return $item->nodeValue;
-                }
-                $item = $dom->getXpath()->query(
-                    'descendant::div[@class="_iPk _Ml"]/span[@class="rllt__details"]/div[3]/span',
+                $item = $dom->cssQuery(
+                    '._iPk>span.rllt__details>div:nth-child(3)>span',
                     $localPack
                 )->item(0);
                 if ($item) {
@@ -102,7 +81,7 @@ class Map implements ParsingRuleInterace
             },
 
             'stars' => function () use ($localPack, $dom) {
-                $item = $dom->getXpath()->query('descendant::span[@class="_PXi"]', $localPack)->item(0);
+                $item = $dom->cssQuery('._PXi', $localPack)->item(0);
                 if ($item) {
                     return $item->nodeValue;
                 }
@@ -110,8 +89,8 @@ class Map implements ParsingRuleInterace
             },
 
             'review' => function () use ($localPack, $dom) {
-                $item = $dom->getXpath()->query(
-                    'descendant::div[@class="_iPk"]/span[@class="rllt__details"]/div[1]',
+                $item = $dom->cssQuery(
+                    '._iPk>span.rllt__details>div:nth-child(1)',
                     $localPack
                 )->item(0);
                 if ($item) {
@@ -125,8 +104,8 @@ class Map implements ParsingRuleInterace
             },
 
             'phone' => function () use ($localPack, $dom) {
-                $item = $dom->getXpath()->query(
-                    'descendant::div[@class="_iPk"]/span[@class="rllt__details"]/div[3]',
+                $item = $dom->cssQuery(
+                    '._iPk>span.rllt__details>div:nth-child(3)',
                     $localPack
                 )->item(0);
                 if ($item) {

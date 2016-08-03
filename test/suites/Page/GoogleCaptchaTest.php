@@ -36,6 +36,5 @@ class GoogleCaptchaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('11933951502432445488', $captchaDom->getId());
 
         $this->assertInstanceOf(GoogleError::class, $captchaDom->getErrorPage());
-
     }
 }

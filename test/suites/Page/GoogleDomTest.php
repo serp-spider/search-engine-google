@@ -53,7 +53,6 @@ class GoogleDomTest extends \PHPUnit_Framework_TestCase
 
         $fooSpan = $dom->xpathQuery('span[@class="foo"]', $fooSpan->item(0));
         $this->assertEquals(0, $fooSpan->length);
-
     }
 
 

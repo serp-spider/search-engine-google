@@ -41,7 +41,6 @@ class ImageGroup implements ParsingRuleInterace
 
 
         return ParsingRuleInterace::RULE_MATCH_NOMATCH;
-
     }
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)

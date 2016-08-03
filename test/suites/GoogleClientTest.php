@@ -74,7 +74,6 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
         } catch (InvalidResponseException $e) {
             $this->assertEquals(400, $e->getHttpStatusCode());
         }
-
     }
 
     public function testCaptchaDom()

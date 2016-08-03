@@ -94,7 +94,6 @@ class GoogleUrlTest extends \PHPUnit_Framework_TestCase
         $googleUrl->setSearchTerm('bart simpsons');
         $this->assertEquals('bart simpsons', $googleUrl->getSearchTerm());
         $this->assertEquals('bart+simpsons', $googleUrl->getParamValue('q'));
-
     }
 
     public function testResultType()

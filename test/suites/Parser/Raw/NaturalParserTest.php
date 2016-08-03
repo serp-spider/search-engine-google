@@ -68,7 +68,6 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             NaturalResultType::CLASSICAL,
             NaturalResultType::CLASSICAL
         ], $types);
-
     }
 
     public function testParserWithVideo()
@@ -154,8 +153,6 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $map->getDataValue('localPack')[0]->getDataValue('review'));
         $this->assertEquals('Aucun avis', $map->getDataValue('localPack')[1]->getDataValue('review'));
         $this->assertEquals(null, $map->getDataValue('localPack')[2]->getDataValue('review'));
-
-
     }
 
     public function testParserWithImageGroup()
