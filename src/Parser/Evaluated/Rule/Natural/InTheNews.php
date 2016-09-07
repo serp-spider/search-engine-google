@@ -56,7 +56,7 @@ class InTheNews implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
             $card['url'] = $aTag->getAttribute('href');
             $card['description'] = function () use ($googleDOM, $node) {
                 $span = $googleDOM->getXpath()->query("descendant::span[@class='_dwd st s std']", $node);
-                if ($span) {
+                if ($span && $span->length > 0) {
                     return  $span->item(0)->nodeValue;
                 }
                 return null;
