@@ -39,11 +39,12 @@ use Symfony\Component\Yaml\Yaml;
 class NaturalParserTest extends GoogleSerpTestCase
 {
 
-    public function serpProvider(){
-        $iterator = new \DirectoryIterator(__DIR__ . "/natural-parser-data");
+    public function serpProvider()
+    {
+        $iterator = new \DirectoryIterator(__DIR__ . '/natural-parser-data');
         $data = [];
         foreach ($iterator as $file) {
-            if ($file->getExtension() === "yml") {
+            if ($file->getExtension() === 'yml') {
                 $data[] = [$file->getRealPath()];
             }
         }
@@ -54,7 +55,8 @@ class NaturalParserTest extends GoogleSerpTestCase
     /**
      * @dataProvider serpProvider
      */
-    public function testSerps($file){
+    public function testSerps($file)
+    {
         $data = Yaml::parse(file_get_contents($file));
 
         $gUrl = GoogleUrlArchive::fromString($data['url']);
@@ -68,56 +70,16 @@ class NaturalParserTest extends GoogleSerpTestCase
         foreach ($data['results'] as $k => $expectedResult) {
             $item = $result->getItems()[$k];
             $this->assertResultHasTypes($expectedResult['types'], $item);
-            if(isset($expectedResult['data'])) {
+            if (isset($expectedResult['data'])) {
                 $this->assertResultHasData($expectedResult['data'], $item);
+            }
+            if (isset($expectedResult['data-count'])) {
+                $this->assertResultDataCount($expectedResult['data-count'], $item);
             }
         }
     }
 
 
-
-    public function testParserWithImageGroup()
-    {
-
-        $gUrl = GoogleUrlArchive::fromString('https://www.google.com.au/search?q=simpsons+donut');
-        $dom = new GoogleDom(file_get_contents('test/resources/pages-evaluated/simpsons+donut.html'), $gUrl);
-
-        $naturalParser = new  \Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser();
-        $result = $naturalParser->parse($dom);
-
-        $types = [];
-        foreach ($result->getItems() as $item) {
-            $types[] = $item->getTypes()[0];
-        }
-
-
-        $this->assertInstanceOf(IndexedResultSet::class, $result);
-        $this->assertCount(8, $result);
-        $this->assertEquals([
-            NaturalResultType::IMAGE_GROUP,
-            NaturalResultType::CLASSICAL,
-            NaturalResultType::CLASSICAL_VIDEO, // TODO change as classical (recipe)
-            NaturalResultType::CLASSICAL_VIDEO,
-            NaturalResultType::CLASSICAL,
-            NaturalResultType::CLASSICAL,
-            NaturalResultType::CLASSICAL,
-            NaturalResultType::CLASSICAL
-        ], $types);
-
-        $this->assertCount(12, $result->getItems()[0]->images);
-        $this->assertEquals(
-            'https://www.pinterest.com/tailaurindo/simpson/',
-            $result->getItems()[0]->getDataValue('images')[0]->sourceUrl
-        );
-        $this->assertEquals(
-            'https://www.google.com.au/search?q=simpsons+donut&tbm=isch&imgil=xo4ZbYgvwQiXxM%253A%253BesZLHUJ3kmTgyM%253Bhttps%25253A%25252F%25252Fwww.pinterest.com%25252Ftailaurindo%25252Fsimpson%25252F&source=iu&pf=m&fir=xo4ZbYgvwQiXxM%253A%252CesZLHUJ3kmTgyM%252C_&usg=__Z-32x0kYL_G1X_tyz88rdtHi_D0%3D',
-            $result->getItems()[0]->getDataValue('images')[0]->targetUrl
-        );
-        $this->assertEquals(
-            'https://www.google.com.au/search?q=simpsons+donut&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwi25M6i44PNAhXEWBoKHVSRBGkQsAQIGw',
-            $result->getItems()[0]->moreUrl
-        );
-    }
 
     public function testParserWithVideo()
     {

@@ -1,0 +1,38 @@
+url: https://www.google.com.au/search?q=simpsons+donut
+file: test/resources/pages-evaluated/simpsons+donut.html
+results:
+
+  - types:
+    - IMAGE_GROUP
+    data-count:
+      images: 12
+    data:
+      moreUrl: https://www.google.com.au/search?q=simpsons+donut&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwi25M6i44PNAhXEWBoKHVSRBGkQsAQIGw
+      images:
+        - sourceUrl: https://www.pinterest.com/tailaurindo/simpson/
+          targetUrl: https://www.google.com.au/search?q=simpsons+donut&tbm=isch&imgil=xo4ZbYgvwQiXxM%253A%253BesZLHUJ3kmTgyM%253Bhttps%25253A%25252F%25252Fwww.pinterest.com%25252Ftailaurindo%25252Fsimpson%25252F&source=iu&pf=m&fir=xo4ZbYgvwQiXxM%253A%252CesZLHUJ3kmTgyM%252C_&usg=__Z-32x0kYL_G1X_tyz88rdtHi_D0%3D
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+    - CLASSICAL_ILLUSTRATED
+
+
+  - types:
+    - CLASSICAL
+    - CLASSICAL_ILLUSTRATED
+    - CLASSICAL_VIDEO
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL

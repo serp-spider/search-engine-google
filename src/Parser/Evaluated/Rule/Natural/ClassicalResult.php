@@ -62,22 +62,28 @@ class ClassicalResult implements ParsingRuleInterace
         $resultTypes = [NaturalResultType::CLASSICAL];
 
         // classical result can have a video thumbnail
-        $videoThumb = $dom->getXpath()
+        $thumb = $dom->getXpath()
             ->query("descendant::g-img[@class='_ygd']/img", $node)
             ->item(0);
 
-        if ($videoThumb) {
-            array_unshift($resultTypes, NaturalResultType::CLASSICAL_VIDEO);
-            $data['videoLarge'] = false;
+        if ($thumb) {
+            $resultTypes[] = NaturalResultType::CLASSICAL_ILLUSTRATED;
 
-            $data['videoCover'] = function () use ($videoThumb) {
-                if ($videoThumb) {
-                    return $videoThumb->getAttribute('src');
+            $data['thumb'] = function () use ($thumb) {
+                if ($thumb) {
+                    return $thumb->getAttribute('src');
                 } else {
                     return null;
                 }
             };
         }
+
+        $videoDuration = $dom->cssQuery('.vdur', $node);
+        if ($videoDuration->length == 1) {
+            $resultTypes[] = array_unshift($resultTypes, NaturalResultType::CLASSICAL_VIDEO);
+            $data['videoLarge'] = false;
+        }
+
 
         $item = new BaseResult($resultTypes, $data);
         $resultSet->addItem($item);
