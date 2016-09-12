@@ -1,0 +1,44 @@
+url: https://www.google.fr/search?q=simpsons&hl=en_US
+file: test/resources/pages-evaluated/simpsons.html
+results:
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - TWEETS_CAROUSEL
+    data:
+      user: @TheSimpsons
+      url: https://twitter.com/TheSimpsons?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor
+
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - IN_THE_NEWS
+    data:
+      news:
+        - title: "'The Simpsons': Greatest Political Moments"
+          url: http://www.rollingstone.com/politics/news/the-simpsons-greatest-political-moments-20160323
+          description: "'The Simpsons' has lampooned political figures over four presidential administrations and ..."
+          title: The Simpsons (@TheSimpsons) | Twitter
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL

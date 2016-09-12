@@ -10,6 +10,8 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\NaturalResultType;
+use Serps\Test\SearchEngine\Google\GoogleSerpTestCase;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Testing parser is hard because it relies on google pages
@@ -34,66 +36,45 @@ use Serps\SearchEngine\Google\NaturalResultType;
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ClassicalWithLargeVideo
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Map
  */
-class NaturalParserTest extends \PHPUnit_Framework_TestCase
+class NaturalParserTest extends GoogleSerpTestCase
 {
-    public function testParserNatural()
-    {
 
-        $gUrl = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons&hl=en_US');
-        $dom = new GoogleDom(file_get_contents('test/resources/pages-evaluated/simpsons.html'), $gUrl);
+    public function serpProvider(){
+        $iterator = new \DirectoryIterator(__DIR__ . "/natural-parser-data");
+        $data = [];
+        foreach ($iterator as $file) {
+            if ($file->getExtension() === "yml") {
+                $data[] = [$file->getRealPath()];
+            }
+        }
+        return $data;
+    }
+
+
+    /**
+     * @dataProvider serpProvider
+     */
+    public function testSerps($file){
+        $data = Yaml::parse(file_get_contents($file));
+
+        $gUrl = GoogleUrlArchive::fromString($data['url']);
+        $dom = new GoogleDom(file_get_contents($data['file']), $gUrl);
 
         $naturalParser = new  NaturalParser();
         $result = $naturalParser->parse($dom);
 
-        $types = [];
-        foreach ($result->getItems() as $item) {
-            $types[] = $item->getTypes()[0];
+        $this->assertCount(count($data['results']), $result->getItems());
+
+        foreach ($data['results'] as $k => $expectedResult) {
+            $item = $result->getItems()[$k];
+            $this->assertResultHasTypes($expectedResult['types'], $item);
+            if(isset($expectedResult['data'])) {
+                $this->assertResultHasData($expectedResult['data'], $item);
+            }
         }
-
-        $this->assertInstanceOf(IndexedResultSet::class, $result);
-        $this->assertCount(10, $result);
-        $this->assertEquals([
-            NaturalResultType::CLASSICAL,
-            NaturalResultType::TWEETS_CAROUSEL,
-            NaturalResultType::CLASSICAL,
-            NaturalResultType::IN_THE_NEWS,
-            NaturalResultType::CLASSICAL,
-            NaturalResultType::CLASSICAL,
-            NaturalResultType::CLASSICAL,
-            NaturalResultType::CLASSICAL,
-            NaturalResultType::CLASSICAL,
-            NaturalResultType::CLASSICAL,
-        ], $types);
-
-
-        // Test in the news
-        $inTheNews = $result->getResultsByType(NaturalResultType::IN_THE_NEWS);
-        $this->assertEquals(4, $inTheNews[0]->getRealPosition());
-        $this->assertEquals(
-            "'The Simpsons': Greatest Political Moments",
-            $inTheNews[0]->getDataValue('news')[0]->getDataValue('title')
-        );
-        $this->assertEquals(
-            'http://www.rollingstone.com/politics/news/the-simpsons-greatest-political-moments-20160323',
-            $inTheNews[0]->getDataValue('news')[0]->getDataValue('url')
-        );
-        $this->assertEquals(
-            "'The Simpsons' has lampooned political figures over four presidential administrations and ...",
-            $inTheNews[0]->getDataValue('news')[0]->getDataValue('description')
-        );
-
-
-        // Test twitter tweet carousel
-        $this->assertEquals('@TheSimpsons', $result->getItems()[1]->getDataValue('user'));
-        $this->assertEquals(
-            'https://twitter.com/TheSimpsons?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor',
-            $result->getItems()[1]->getDataValue('url')
-        );
-        $this->assertEquals(
-            'The Simpsons (@TheSimpsons) | Twitter',
-            $result->getItems()[1]->getDataValue('title')
-        );
     }
+
+
 
     public function testParserWithImageGroup()
     {
