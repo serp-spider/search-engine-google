@@ -5,13 +5,12 @@ set -e
 SCRIPTFILE=$(readlink -f "$0")
 SCRIPTDIR=$(dirname "$SCRIPTFILE")
 
-
 echo -e "\e[34m"
 echo "======================"
 echo -e "= \e[1m\e[33mRunning unit tests\e[0m\e[34m ="
 echo -e "======================\e[39m"
 
-phpunit -c "$SCRIPTDIR/../../phpunit.dist.xml"
+composer test
 
 
 echo -e "\e[34m"
