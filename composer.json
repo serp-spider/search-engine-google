@@ -29,7 +29,7 @@
   "require": {
     "php": ">=5.5",
     "symfony/css-selector": ">=2",
-    "serps/core": "~0.1.0",
+    "serps/core": "~0.2.0",
     "zendframework/zend-diactoros": "1.*"
   },
 
@@ -43,5 +43,11 @@
       "test": "vendor/bin/phpunit -c phpunit.dist.xml && echo \"\\n>> Checking code standards\\n\" && test/bin/phpcs.bash emacs",
       "csfix": "test/bin/phpcbf.bash",
       "cscheck": "test/bin/phpcs.bash emacs"
+  },
+
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.2.*-dev"
+    }
   }
 }
