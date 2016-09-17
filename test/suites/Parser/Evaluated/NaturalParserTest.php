@@ -76,6 +76,9 @@ class NaturalParserTest extends GoogleSerpTestCase
             if (isset($expectedResult['data-count'])) {
                 $this->assertResultDataCount($expectedResult['data-count'], $item);
             }
+            if (isset($expectedResult['data-media'])) {
+                $this->assertResultHasDataMedia($expectedResult['data-media'], $item);
+            }
         }
     }
 

@@ -18,6 +18,11 @@ results:
   - types:
     - CLASSICAL
     - CLASSICAL_ILLUSTRATED
+    data:
+      title: The Simpsons Doughnuts! (or Do'h-nuts) | The Flavor Bender
+
+    data-media:
+      thumb: test/resources/pages-evaluated/simpsons+donut/donut-recipe-thumb.jpg
 
 
   - types:

@@ -5,6 +5,7 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
+use Serps\Core\Media\MediaFactory;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
@@ -71,7 +72,7 @@ class ClassicalResult implements ParsingRuleInterace
 
             $data['thumb'] = function () use ($thumb) {
                 if ($thumb) {
-                    return $thumb->getAttribute('src');
+                    return MediaFactory::createMediaFromSrc($thumb->getAttribute('src'));
                 } else {
                     return null;
                 }
