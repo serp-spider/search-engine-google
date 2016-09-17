@@ -7,6 +7,9 @@
   "homepage": "https://github.com/serp-spider/search-engine-google",
   "license": "Fair",
 
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+
   "authors": [
     {
       "name": "Soufiane GHZAL",
