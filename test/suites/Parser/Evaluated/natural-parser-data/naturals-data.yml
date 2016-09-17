@@ -1,4 +1,3 @@
-# image-group recipes
 url: https://www.google.fr/search?q=simpsons&hl=en_US
 file: test/resources/pages-evaluated/simpsons.html
 results:

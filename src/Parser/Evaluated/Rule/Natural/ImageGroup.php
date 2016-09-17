@@ -5,6 +5,7 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
+use Serps\Core\Media\MediaFactory;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\Core\UrlArchive;
@@ -66,7 +67,7 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterac
                 if (!$img) {
                     return '';
                 }
-                return $img->getAttribute('src');
+                return MediaFactory::createMediaFromSrc($img->getAttribute('src'));
             },
         ];
 

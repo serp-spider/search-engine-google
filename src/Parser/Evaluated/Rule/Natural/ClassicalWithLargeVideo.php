@@ -5,6 +5,7 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
+use Serps\Core\Media\MediaFactory;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
@@ -44,18 +45,19 @@ class ClassicalWithLargeVideo implements ParsingRuleInterace
             'destination' => $destinationTag ? $destinationTag->nodeValue : null,
             'description' => null,
             'videoLarge'  => true,
-            'videoCover'  => function () use ($node, $xpath) {
-                $imageTag = $xpath
-                    ->query("descendant::div[@class='_ELb']/img", $node)
+            'thumb' => null,
+            'videoCover'  => function () use ($dom, $node) {
+                $imageTag = $dom
+                    ->cssQuery('._ELb img', $node)
                     ->item(0);
                 if ($imageTag) {
-                    return $imageTag->getAttribute('src');
+                    return MediaFactory::createMediaFromSrc($imageTag->getAttribute('src')); // TODO 1p gif ?
                 } else {
                     return null;
                 }
             }
         ];
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::CLASSICAL_VIDEO, $data));
+        $resultSet->addItem(new BaseResult([NaturalResultType::CLASSICAL_VIDEO, NaturalResultType::CLASSICAL], $data));
     }
 }

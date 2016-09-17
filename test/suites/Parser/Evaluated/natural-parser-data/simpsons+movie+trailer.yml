@@ -1,0 +1,44 @@
+# image-group recipes
+url: https://www.google.fr/search?q=simpsons+movie+trailer
+file: test/resources/pages-evaluated/simpsons+movie+trailer.html
+results:
+
+
+  - types:
+    - CLASSICAL_VIDEO
+    - CLASSICAL
+    data:
+      videoLarge: true
+
+  - types:
+    - CLASSICAL_VIDEO
+    - CLASSICAL
+    - CLASSICAL_ILLUSTRATED
+
+  - types:
+    - CLASSICAL_VIDEO
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL_VIDEO
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL_VIDEO
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL_VIDEO
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
