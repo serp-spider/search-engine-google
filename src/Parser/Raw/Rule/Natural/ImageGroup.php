@@ -51,7 +51,7 @@ class ImageGroup implements ParsingRuleInterace
             ->item(0);
 
         $data = [
-            'moreUrl' => $googleDOM->getUrl()->resolve($aTag->getAttribute('href'), 'string'),
+            'moreUrl' => $googleDOM->getUrl()->resolveAsString($aTag->getAttribute('href')),
             'images'  => []
         ];
 
@@ -72,10 +72,10 @@ class ImageGroup implements ParsingRuleInterace
                 if (!$img) {
                     return $googleDOM->getUrl()->resolve('/');
                 }
-                return $googleDOM->getUrl()->resolve($img->getAttribute('title'), 'string');
+                return $googleDOM->getUrl()->resolveAsString($img->getAttribute('title'));
             },
             'targetUrl' => function () use ($imgNode, $googleDOM) {
-                return $googleDOM->getUrl()->resolve($imgNode->getAttribute('href'), 'string');
+                return $googleDOM->getUrl()->resolveAsString($imgNode->getAttribute('href'));
             },
             'image' => function () use ($imgNode, $googleDOM) {
                 $img = $googleDOM->getXpath()->query('descendant::img', $imgNode)->item(0);

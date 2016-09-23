@@ -58,7 +58,7 @@ class Shopping implements ParsingRuleInterace
                 if (!$aTag) {
                     return $googleDOM->getUrl()->resolve('/');
                 }
-                return $googleDOM->getUrl()->resolve($aTag->getAttribute('href'), 'string');
+                return $googleDOM->getUrl()->resolveAsString($aTag->getAttribute('href'));
             },
             'image' => function () use ($node, $googleDOM) {
                 $imgTag = $googleDOM->cssQuery('a img', $node)->item(0);

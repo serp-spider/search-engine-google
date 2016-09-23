@@ -41,7 +41,7 @@ class Map implements ParsingRuleInterace
             'mapUrl'    => function () use ($xPath, $node, $dom) {
                 $mapATag = $dom->cssQuery('#lu_map', $node)->item(0)->parentNode;
                 if ($mapATag) {
-                    return $dom->getUrl()->resolve($mapATag->getAttribute('href'), 'string');
+                    return $dom->getUrl()->resolveAsString($mapATag->getAttribute('href'));
                 }
                 return null;
             }

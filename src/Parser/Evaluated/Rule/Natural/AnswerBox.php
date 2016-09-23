@@ -43,7 +43,7 @@ class AnswerBox implements ParsingRuleInterace
                     // TODO ERROR
                     return;
                 }
-                return $dom->getUrl()->resolve($aTag->getAttribute('href'), 'string');
+                return $dom->getUrl()->resolveAsString($aTag->getAttribute('href'));
             },
             'destination' => function () use ($dom, $node) {
                 $citeTag = $dom->cssQuery('.rc .s cite', $node)
