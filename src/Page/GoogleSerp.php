@@ -13,6 +13,7 @@ use Serps\SearchEngine\Google\Parser\Raw\AdwordsParser as RawAdwordsParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser as EvaluatedNaturalParser;
 use Serps\SearchEngine\Google\Parser\Raw\NaturalParser as RawNaturalParser;
 use Serps\Stubs\RelatedSearch;
+use Serps\SearchEngine\Google\Parser\Evaluated\WikiBoxParser;
 
 class GoogleSerp extends GoogleDom
 {
@@ -133,5 +134,18 @@ class GoogleSerp extends GoogleDom
         }
 
         return $relatedSearches;
+    }
+
+    /**
+     * @return \Serps\Core\Serp\IndexedResultSet
+     */
+    public function getWikiBox()
+    {
+        $result = null;
+        if ($this->javascriptIsEvaluated()) {
+            $parser = new WikiBoxParser();
+            $result = $parser->parse($this);
+        }
+        return $result;
     }
 }
