@@ -15,6 +15,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InTheNews;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\LargeClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Map;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\NewDesignClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarousel;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ClassicalWithLargeVideo;
@@ -34,6 +35,7 @@ class NaturalParser extends AbstractParser
             new Divider(),
             new SearchResultGroup(),
             new ClassicalResult(),
+            new NewDesignClassicalResult(),
             new LargeClassicalResult(),
             new ImageGroup(),
             new TweetsCarousel(),

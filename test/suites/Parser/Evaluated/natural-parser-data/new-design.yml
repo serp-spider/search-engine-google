@@ -1,0 +1,41 @@
+# image-group recipes
+url: https://www.google.fr/search?q=simpsons&hl=en_US
+file: test/resources/pages-evaluated/new_design.html
+results:
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - IMAGE_GROUP
+    data-count:
+      images: 5
+    data:
+      moreUrl: https://www.google.fr/search?q=florida+usa&client=firefox-b&hl=com&noj=1&nomo=1&nota=1&igu=1&glp=1&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwiKg83E7a7PAhWCTxoKHfFKDXcQsAQIPg
+      images:
+        - sourceUrl: http://www.nationsonline.org/oneworld/map/USA/florida_map.htm
+          targetUrl: https://www.google.fr/search?q=florida+usa&client=firefox-b&hl=com&noj=1&nomo=1&nota=1&igu=1&glp=1&tbm=isch&imgil=ASKOFq0GQQZiNM%253A%253BaaaOellMdBjLiM%253Bhttp%25253A%25252F%25252Fwww.nationsonline.org%25252Foneworld%25252Fmap%25252FUSA%25252Fflorida_map.htm&source=iu&pf=m&fir=ASKOFq0GQQZiNM%253A%252CaaaOellMdBjLiM%252C_&usg=__DsSoDd9iWBl1euPDoOUc90OXBtw%3D
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
