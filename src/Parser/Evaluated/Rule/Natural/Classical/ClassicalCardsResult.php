@@ -3,7 +3,7 @@
  * @license see LICENSE
  */
 
-namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
+namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical;
 
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
@@ -11,7 +11,7 @@ use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class NewDesignClassicalResult extends ClassicalResult
+class ClassicalCardsResult extends ClassicalResult
 {
 
     public function match(GoogleDom $dom, \DOMElement $node)

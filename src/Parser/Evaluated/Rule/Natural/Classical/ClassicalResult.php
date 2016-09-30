@@ -3,7 +3,7 @@
  * @license see LICENSE
  */
 
-namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
+namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical;
 
 use Serps\Core\Media\MediaFactory;
 use Serps\SearchEngine\Google\Page\GoogleDom;
