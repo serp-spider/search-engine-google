@@ -100,7 +100,6 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
             $this->fail('Exception not thrown');
         } catch (GoogleCaptchaException $e) {
             $this->assertInstanceOf(GoogleCaptcha::class, $e->getCaptcha());
-            $this->assertEquals('128.78.166.25', $e->getCaptcha()->getDetectedIp());
         }
     }
 
