@@ -14,6 +14,7 @@
     <!-- Long lines do no apply on test files -->
     <rule ref="Generic.Files.LineLength.TooLong">
         <exclude-pattern>./test/*</exclude-pattern>
+        <severity>0</severity>
     </rule>
     <!-- When test method have weird signatures -->
     <rule ref="PEAR.Functions.ValidDefaultValue.NotAtEnd">
