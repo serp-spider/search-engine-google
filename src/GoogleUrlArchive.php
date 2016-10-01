@@ -15,14 +15,4 @@ use Serps\SearchEngine\Google\GoogleUrlTrait;
 class GoogleUrlArchive extends UrlArchive implements GoogleUrlInterface
 {
     use GoogleUrlTrait;
-
-    public function __construct(
-        $host = 'google.com',
-        $path = '/search',
-        $scheme = 'https',
-        array $query = [],
-        $hash = ''
-    ) {
-        parent::__construct($host, $path, $scheme, $query, $hash);
-    }
 }

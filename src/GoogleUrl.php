@@ -22,15 +22,6 @@ class GoogleUrl extends Url implements GoogleUrlInterface
     const RESULT_TYPE_APPS = 'app';
     const RESULT_TYPE_MAP = 'app';
 
-    public function __construct(
-        $host = 'google.com',
-        $path = '/search',
-        $scheme = 'https',
-        array $query = [],
-        $hash = ''
-    ) {
-        parent::__construct($host, $path, $scheme, $query, $hash);
-    }
 
     /**
      * Set the 'lr' param for the search and auto prepend 'lang_' if not present
