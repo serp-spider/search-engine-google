@@ -7,13 +7,12 @@ namespace Serps\SearchEngine\Google\Page;
 
 use Serps\Core\Captcha\CaptchaResponse;
 use Serps\Exception;
+use Serps\SearchEngine\Google\Exception\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleError;
 
 class GoogleCaptcha implements CaptchaResponse
 {
 
-    protected $captchaImageUrlXpath = '//body/div/img';
-    protected $captchaIdXpath = "//body/div/form/input[@name='id']";
 
     /**
      * @var GoogleError
@@ -46,12 +45,10 @@ class GoogleCaptcha implements CaptchaResponse
      */
     public function getImageUrl()
     {
-        $imageTag = $this->googleError
-            ->getXpath()
-            ->query($this->captchaImageUrlXpath);
+        $imageTag = $this->googleError->cssQuery('img');
 
-        if (!$imageTag) {
-            throw new Exception('Unable to find the captcha image');
+        if ($imageTag->length !== 1) {
+            throw new InvalidDOMException('Unable to find the captcha image.');
         }
 
         $src =  $imageTag->item(0)->getAttribute('src');
@@ -83,11 +80,9 @@ class GoogleCaptcha implements CaptchaResponse
      */
     public function getId()
     {
-        $inputTag = $this->googleError
-            ->getXpath()
-            ->query($this->captchaIdXpath);
-        if (!$inputTag) {
-            throw new Exception('Unable to find the captcha image');
+        $inputTag = $this->googleError->cssQuery('input[name="q"]');
+        if ($inputTag->length == 0) {
+            throw new InvalidDOMException('Unable to find the captcha id.');
         }
         $id = $inputTag->item(0)->getAttribute('value');
         return $id;
