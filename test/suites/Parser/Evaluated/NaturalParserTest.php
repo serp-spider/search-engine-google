@@ -119,7 +119,7 @@ class NaturalParserTest extends GoogleSerpTestCase
         $map = $result->getItems()[0];
 
         $this->assertEquals(
-            'https://www.google.fr/search?client=ubuntu&hs=k8t&q=shop+near+paris&npsic=0&rflfq=1&rlha=0&rllag=48865798,2325372,1412&tbm=lcl&ved=0ahUKEwj9h5Ha7aTOAhWEAxoKHRlCAI4QtgMIJw&tbs=lf:1,lf_ui:2',
+            'https://www.google.fr/search?client=ubuntu&hs=k8t&q=shop+near+paris&npsic=0&rflfq=1&rlha=0&rllag=48865798%2C2325372%2C1412&tbm=lcl&ved=0ahUKEwj9h5Ha7aTOAhWEAxoKHRlCAI4QtgMIJw&tbs=lf%3A1%2Clf_ui%3A2',
             (string)$map->getDataValue('mapUrl')
         );
         $this->assertCount(3, $map->localPack);

@@ -190,7 +190,7 @@ class NaturalParserTest extends \PHPUnit_Framework_TestCase
             $result->getItems()[0]->getDataValue('images')[0]->sourceUrl
         );
         $this->assertEquals(
-            'https://www.google.com.au/url?q=https://www.pinterest.com/tailaurindo/simpson/&sa=U&ved=0ahUKEwip8OqE5tTLAhWCMBoKHRHaBzMQwW4IFjAA&usg=AFQjCNG1gX30QPinBxrX_o_uIqeDt33W-A',
+            'https://www.google.com.au/url?q=https%3A%2F%2Fwww.pinterest.com%2Ftailaurindo%2Fsimpson%2F&sa=U&ved=0ahUKEwip8OqE5tTLAhWCMBoKHRHaBzMQwW4IFjAA&usg=AFQjCNG1gX30QPinBxrX_o_uIqeDt33W-A',
             $result->getItems()[0]->getDataValue('images')[0]->targetUrl
         );
 

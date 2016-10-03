@@ -94,7 +94,7 @@ class AdwordsParserTest extends \PHPUnit_Framework_TestCase
             'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRfqtzy1dIsPU0bITtAoNXs97_pOAaJHeGIWCIGZWn06INt7mCxMJc7H8aY0qhRwQScH4Dm&usqp=CAc',
             $shoppingItem->getDataValue('products')[0]->getDataValue('image')
         );
-        $this->assertEquals('http://www.google.co.uk/aclk?sa=l&ai=CawT9OrMUV9naMaKdywPcnLlI6KGHywXgt5SYrAGX1tX9hwMIBhABKARg-wGgAfv9l_4DyAEHqgQnT9B1IP6jfLu6QBobxCOfm7V4WhGKn4FhBypaeSSqWkv2GHrxY6dlwAUFoAYmgAfYpfgfkAcDqAemvhvYBwHgEvG_ptOO7MPojgE&sig=AOD64_2iNaDbYjPJE7CvLDxjaiK79qA10g&ctype=5&clui=15&ved=0ahUKEwiuhM7e-ZfMAhVLEpoKHU-LDNYQ9A4IbQ&adurl=http://www.allposters.fr/-sp/Simpsons-Cast-Names_i8574538_.htm%3FAID%3D815014090%26ProductTarget%3D105221810967', $shoppingItem->products[0]->url);
+        $this->assertEquals('http://www.google.co.uk/aclk?sa=l&ai=CawT9OrMUV9naMaKdywPcnLlI6KGHywXgt5SYrAGX1tX9hwMIBhABKARg-wGgAfv9l_4DyAEHqgQnT9B1IP6jfLu6QBobxCOfm7V4WhGKn4FhBypaeSSqWkv2GHrxY6dlwAUFoAYmgAfYpfgfkAcDqAemvhvYBwHgEvG_ptOO7MPojgE&sig=AOD64_2iNaDbYjPJE7CvLDxjaiK79qA10g&ctype=5&clui=15&ved=0ahUKEwiuhM7e-ZfMAhVLEpoKHU-LDNYQ9A4IbQ&adurl=http%3A%2F%2Fwww.allposters.fr%2F-sp%2FSimpsons-Cast-Names_i8574538_.htm%3FAID%3D815014090%26ProductTarget%3D105221810967', $shoppingItem->products[0]->url);
         $this->assertEquals('AllPosters.fr', $shoppingItem->getDataValue('products')[0]->target);
         $this->assertEquals('€9.99', $shoppingItem->getDataValue('products')[0]->price);
     }
