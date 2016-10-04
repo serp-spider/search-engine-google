@@ -1,13 +1,23 @@
 # image-group recipes
 url: https://www.google.fr/search?q=simpsons&hl=en_US
-file: test/resources/pages-evaluated/new_design.html
+file: test/resources/pages-evaluated/cards-design.html
 results:
 
   - types:
     - CLASSICAL
+    data:
+      title: Florida - Wikipedia, the free encyclopedia
+      url: https://en.wikipedia.org/wiki/Florida
+      destination: https://en.wikipedia.org/wiki/Florida
+      description: Spring naar Joining the United States; Indian Removal - Florida Listen/ˈflɒrɪdə is a state located in the southeastern region of the United States.
 
   - types:
     - CLASSICAL
+    data:
+      title: Florida (staat) - Wikipedia
+      url: https://nl.wikipedia.org/wiki/Florida_(staat)
+      destination: https://nl.wikipedia.org/wiki/Florida_(staat)
+      description: Map of USA FL.svg. Over deze ... Florida is een staat van de Verenigde Staten. Florida ligt in het zuidoosten van het land en heeft een subtropisch klimaat.
 
   - types:
     - IMAGE_GROUP
@@ -39,3 +49,5 @@ results:
 
   - types:
     - CLASSICAL
+    data:
+      title: 110 vakantiehuizen in Florida, USA | Interhome
