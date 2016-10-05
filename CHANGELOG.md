@@ -7,6 +7,7 @@
 ### Breaking Changes:
 
 * Images data are returned MediaInterface (#35)
+* Drop support for raw parser (5f41dde)
 
 ### Features:
 
