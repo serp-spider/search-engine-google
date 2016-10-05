@@ -14,9 +14,11 @@ Conding Standards
 
 The code follow the PSR-2 coding standards
 
+- Check Coding standards: ``composer cscheck``
+- auto fix standards: ``.composer csfix``
+
 Tools
 -----
 
 - run test suit: ``composer test``
-- Check Coding standards: ``composer cscheck``
-- auto fix standards: ``.composer csfix``
+
