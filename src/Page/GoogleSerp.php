@@ -9,9 +9,7 @@ use Serps\Exception;
 use Serps\SearchEngine\Google\Exception\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser as EvaluatedAdwordsParser;
-use Serps\SearchEngine\Google\Parser\Raw\AdwordsParser as RawAdwordsParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser as EvaluatedNaturalParser;
-use Serps\SearchEngine\Google\Parser\Raw\NaturalParser as RawNaturalParser;
 use Serps\Stubs\RelatedSearch;
 
 class GoogleSerp extends GoogleDom
@@ -41,7 +39,7 @@ class GoogleSerp extends GoogleDom
         if ($this->javascriptIsEvaluated()) {
             $parser = new EvaluatedNaturalParser();
         } else {
-            $parser = new RawNaturalParser();
+            throw new InvalidDOMException('Raw dom is not supported, please provide an evaluated version of the dom');
         }
         return $parser->parse($this);
     }
@@ -58,8 +56,7 @@ class GoogleSerp extends GoogleDom
             $parser = new EvaluatedAdwordsParser();
             return $parser->parse($this);
         } else {
-            $parser = new RawAdwordsParser();
-            return $parser->parse($this);
+            throw new InvalidDOMException('Raw dom is not supported, please provide an evaluated version of the dom');
         }
     }
 

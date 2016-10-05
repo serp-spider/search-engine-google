@@ -9,6 +9,7 @@ use Serps\Core\Serp\CompositeResultSet;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleSerp;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
+use Serps\SearchEngine\Google\Exception\InvalidDOMException;
 
 /**
  * @covers Serps\SearchEngine\Google\Page\GoogleSerp
@@ -59,11 +60,8 @@ class GoogleSerpTest extends \PHPUnit_Framework_TestCase
 
 
         $dom = $this->getDomNoJavascript();
-
+        $this->setExpectedException(InvalidDOMException::class);
         $results = $dom->getNaturalResults();
-
-        $this->assertInstanceOf(IndexedResultSet::class, $results);
-        $this->assertCount(10, $results);
     }
 
     public function testGetAdwordsResults()
@@ -73,8 +71,8 @@ class GoogleSerpTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(CompositeResultSet::class, $results);
 
         $dom = $this->getDomNoJavascript();
+        $this->setExpectedException(InvalidDOMException::class);
         $results = $dom->getAdwordsResults();
-        $this->assertInstanceOf(CompositeResultSet::class, $results);
     }
 
     public function testJavascriptEvaluated()
