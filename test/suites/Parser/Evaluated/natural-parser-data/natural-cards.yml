@@ -1,6 +1,12 @@
 # image-group recipes
 url: https://www.google.fr/search?q=simpsons&hl=en_US
 file: test/resources/pages-evaluated/cards-design.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: 261000000
+  isMobile: false
+
 results:
 
   - types:

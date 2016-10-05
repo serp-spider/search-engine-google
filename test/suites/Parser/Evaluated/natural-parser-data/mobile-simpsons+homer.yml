@@ -1,0 +1,10 @@
+# image-group recipes
+url: https://www.google.fr/search?q=simpsons+movie+trailer
+file: test/resources/pages-mobile/simpsons+homer.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: null
+  isMobile: true
+
+results:

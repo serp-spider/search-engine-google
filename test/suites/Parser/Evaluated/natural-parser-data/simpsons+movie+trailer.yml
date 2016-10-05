@@ -1,6 +1,12 @@
 # image-group recipes
 url: https://www.google.fr/search?q=simpsons+movie+trailer
 file: test/resources/pages-evaluated/simpsons+movie+trailer.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: 10200000
+  isMobile: false
+
 results:
 
 

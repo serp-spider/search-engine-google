@@ -1,6 +1,12 @@
 # image-group recipes
 url: https://www.google.com.au/search?q=simpsons+donut
 file: test/resources/pages-evaluated/simpsons+donut.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: 537000
+  isMobile: false
+
 results:
 
   - types:

@@ -1,5 +1,11 @@
 url: https://www.google.fr/search?q=simpsons&hl=en_US
 file: test/resources/pages-evaluated/simpsons.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: 65200000
+  isMobile: false
+
 results:
 
   - types:

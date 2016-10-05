@@ -5,6 +5,7 @@
 
 namespace Serps\Test\TDD\SearchEngine\Google\Parser\Evaluated;
 
+use Serps\SearchEngine\Google\Page\GoogleSerp;
 use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
@@ -61,24 +62,32 @@ class NaturalParserTest extends GoogleSerpTestCase
         $data = Yaml::parse(file_get_contents($file));
 
         $gUrl = GoogleUrlArchive::fromString($data['url']);
-        $dom = new GoogleDom(file_get_contents($data['file']), $gUrl);
+        $dom = new GoogleSerp(file_get_contents($data['file']), $gUrl);
 
         $naturalParser = new  NaturalParser();
         $result = $naturalParser->parse($dom);
 
-        $this->assertCount(count($data['results']), $result->getItems());
+        if (isset($data['test-methods'])) {
+            foreach ($data['test-methods'] as $method => $methodData) {
+                $this->assertEquals($methodData, call_user_func([$dom, $method]), "Method $method failed.");
+            }
+        }
 
-        foreach ($data['results'] as $k => $expectedResult) {
-            $item = $result->getItems()[$k];
-            $this->assertResultHasTypes($expectedResult['types'], $item);
-            if (isset($expectedResult['data'])) {
-                $this->assertResultHasData($expectedResult['data'], $item);
-            }
-            if (isset($expectedResult['data-count'])) {
-                $this->assertResultDataCount($expectedResult['data-count'], $item);
-            }
-            if (isset($expectedResult['data-media'])) {
-                $this->assertResultHasDataMedia($expectedResult['data-media'], $item);
+        if (isset($data['results'])) {
+            $this->assertCount(count($data['results']), $result->getItems(), 'Failed asserting that number of results matched.');
+
+            foreach ($data['results'] as $k => $expectedResult) {
+                $item = $result->getItems()[$k];
+                $this->assertResultHasTypes($expectedResult['types'], $item);
+                if (isset($expectedResult['data'])) {
+                    $this->assertResultHasData($expectedResult['data'], $item);
+                }
+                if (isset($expectedResult['data-count'])) {
+                    $this->assertResultDataCount($expectedResult['data-count'], $item);
+                }
+                if (isset($expectedResult['data-media'])) {
+                    $this->assertResultHasDataMedia($expectedResult['data-media'], $item);
+                }
             }
         }
     }

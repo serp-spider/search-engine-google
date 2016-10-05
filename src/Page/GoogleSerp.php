@@ -131,4 +131,10 @@ class GoogleSerp extends GoogleDom
 
         return $relatedSearches;
     }
+
+    public function isMobile()
+    {
+        $item = $this->cssQuery('head meta[name="viewport"]');
+        return $item->length == 1;
+    }
 }
