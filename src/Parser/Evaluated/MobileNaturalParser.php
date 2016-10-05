@@ -36,7 +36,8 @@ class MobileNaturalParser extends AbstractParser
             new Divider(),
             new SearchResultGroup(),
             new ClassicalCardsResult(),
-            new ImageGroup()
+            new ImageGroup(),
+            new VideoGroup()
         ];
     }
 

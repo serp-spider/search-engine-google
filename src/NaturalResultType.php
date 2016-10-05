@@ -17,6 +17,8 @@ abstract class NaturalResultType
     const IMAGE_GROUP = 'image_group';
     const IMAGE_GROUP_IMAGE = 'image_group_image';
 
+    const VIDEO_GROUP = 'video_group';
+
     const IN_THE_NEWS = 'in_the_news';
     const TWEETS_CAROUSEL= 'tweets_carousel';
 

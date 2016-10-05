@@ -66,8 +66,7 @@ class NaturalParserTest extends GoogleSerpTestCase
         $gUrl = GoogleUrlArchive::fromString($data['url']);
         $dom = new GoogleSerp(file_get_contents($data['file']), $gUrl);
 
-        $naturalParser = new  NaturalParser();
-        $result = $naturalParser->parse($dom);
+        $result = $dom->getNaturalResults();
 
         if (isset($data['test-methods'])) {
             foreach ($data['test-methods'] as $method => $methodData) {

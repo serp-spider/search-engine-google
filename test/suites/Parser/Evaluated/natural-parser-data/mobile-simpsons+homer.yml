@@ -8,3 +8,31 @@ test-methods:
   isMobile: true
 
 results:
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - VIDEO_GROUP
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
