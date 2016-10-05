@@ -11,10 +11,19 @@ results:
 
   - types:
     - CLASSICAL
-
+    data:
+      title: Homer Simpson — Wikipedia
+      url: https://fr.m.wikipedia.org/wiki/Homer_Simpson
+      destination: https://fr.m.wikipedia.org › wiki › Home...
+      description: Homer Jay Simpson est le principal personnage fictif de la serie televisee d'animation Les Simpson et le pere de la famille du meme nom. Il est double par Dan Castellaneta dans la version originale, ...
 
   - types:
     - CLASSICAL
+    data:
+      title: Homer Simpson - Wikipedia, the free encyclopedia
+      url: https://en.m.wikipedia.org/wiki/Homer_Simpson
+      destination: https://en.m.wikipedia.org › wiki › Home...
+      description: Homer Jay Simpson is a fictional character and the main protagonist of the American animated television series The Simpsons as the patriarch of the eponymous family. He is voiced by Dan Castellaneta and ...
 
   - types:
     - CLASSICAL
@@ -36,3 +45,6 @@ results:
 
   - types:
     - CLASSICAL
+
+    data:
+      title: "Les Simpson : Homer et Marge ont-ils vraiment divorce ? (spoilers ..."

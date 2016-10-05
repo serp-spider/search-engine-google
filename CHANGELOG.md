@@ -10,5 +10,7 @@
 * Features:
     * Google cards results are now supported [#38](https://github.com/serp-spider/search-engine-google/pull/38)
     * Mobile page detection: GoogleSerp::isMobile() [564057ce0ee255cfa138440e033776b85f239acb](https://github.com/serp-spider/search-engine-google/commit/564057ce0ee255cfa138440e033776b85f239acb)
+    * Mobile results have now their own parser
+    * Parsing rule for mobile video groups [#41](https://github.com/serp-spider/search-engine-google/issues/41)
 * Bug fixes:
     * Large video have the CLASSICAL type as mentioned in the doc [#36](https://github.com/serp-spider/search-engine-google/issues/36)

@@ -29,30 +29,30 @@ class ClassicalResult implements ParsingRuleInterace
 
     protected function parseNode(GoogleDom $dom, \DomElement $node)
     {
-        $xpath = $dom->getXpath();
 
         // find the tilte/url
         /* @var $aTag \DOMElement */
-        $aTag=$xpath
-            ->query("descendant::h3[@class='r'][1]/a", $node)
+        $aTag=$dom
+            ->xpathQuery("descendant::h3[@class='r'][1]/a", $node)
             ->item(0);
         if (!$aTag) {
             return;
         }
 
-        $destinationTag = $xpath
-            ->query("descendant::div[@class='f kv _SWb']/cite", $node)
+        $destinationTag = $dom
+            ->cssQuery('div.f.kv>cite', $node)
             ->item(0);
 
-        $descriptionTag = $xpath
-            ->query("descendant::span[@class='st']", $node)
+        $descriptionTag = $dom
+            ->xpathQuery("descendant::span[@class='st']", $node)
             ->item(0);
 
         return [
             'title'   => $aTag->nodeValue,
             'url'     => $dom->getUrl()->resolveAsString($aTag->getAttribute('href')),
             'destination' => $destinationTag ? $destinationTag->nodeValue : null,
-            'description' => $descriptionTag ? $descriptionTag->nodeValue : null
+            // trim needed for mobile results coming with an initial space
+            'description' => $descriptionTag ? trim($descriptionTag->nodeValue) : null
         ];
     }
 
