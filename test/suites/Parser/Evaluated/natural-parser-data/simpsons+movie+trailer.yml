@@ -20,6 +20,8 @@ results:
     - CLASSICAL_VIDEO
     - CLASSICAL
     - CLASSICAL_ILLUSTRATED
+    data:
+      videoLarge: false
 
   - types:
     - CLASSICAL_VIDEO
