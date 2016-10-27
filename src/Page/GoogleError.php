@@ -5,9 +5,10 @@
 
 namespace Serps\SearchEngine\Google\Page;
 
+use Serps\Core\Dom\WebPage;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 
-class GoogleError extends GoogleDom
+class GoogleError extends WebPage
 {
 
     /**
