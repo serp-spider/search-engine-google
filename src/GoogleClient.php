@@ -5,6 +5,7 @@
 
 namespace Serps\SearchEngine\Google;
 
+use Serps\Core\Browser\BrowserInterface;
 use Serps\Core\Cookie\ArrayCookieJar;
 use Serps\Core\Cookie\CookieJarInterface;
 use Serps\Core\Http\HttpClientInterface;
@@ -25,53 +26,20 @@ use Serps\Exception\RequestError\InvalidResponseException;
 /**
  * Google client the handles google url routing, dom object constructions and request errors
  *
- * @property RequestBuilder $request
  */
 class GoogleClient
 {
 
-    /**
-     * @var HttpClientInterface
-     */
-    protected $client;
+    protected $defaultBrowser;
 
-    /**
-     * @var CookieJarInterface
-     */
-    protected $cookieJar;
-
-    protected $cookiesEnabled;
-
-    protected $userAgent;
-
-    /**
-     * @var RequestBuilder|null
-     */
-    private $requestBuilder;
-
-    /**
-     * @param HttpClientInterface $client
-     */
-    public function __construct(HttpClientInterface $client)
+    public function __construct(BrowserInterface $browser = null)
     {
-        $this->client = $client;
-        $this->cookiesEnabled = false;
+        $this->defaultBrowser = $browser;
     }
-
-    /**
-     * @return RequestBuilder
-     */
-    public function getRequestBuilder()
-    {
-        if (null == $this->requestBuilder) {
-            $this->requestBuilder = new RequestBuilder();
-        }
-        return $this->requestBuilder;
-    }
-
+    
     /**
      * @param GoogleUrlInterface $googleUrl
-     * @param Proxy|null $proxy
+     * @param BrowserInterface|null $browser
      * @return GoogleSerp
      * @throws Exception
      * @throws PageNotFoundException
@@ -79,7 +47,7 @@ class GoogleClient
      * @throws PageNotFoundException
      * @throws GoogleCaptchaException
      */
-    public function query(GoogleUrlInterface $googleUrl, Proxy $proxy = null, CookieJarInterface $cookieJar = null)
+    public function query(GoogleUrlInterface $googleUrl, BrowserInterface $browser = null)
     {
 
         if ($googleUrl->getResultType() !== GoogleUrl::RESULT_TYPE_ALL) {
@@ -89,10 +57,15 @@ class GoogleClient
             );
         }
 
-        $request = $this->getRequestBuilder()
-                ->buildRequest($googleUrl);
+        if (null === $browser) {
+            $browser = $this->defaultBrowser;
+        }
 
-        $response = $this->client->sendRequest($request, $proxy, $cookieJar);
+        if (!$browser) {
+            throw new Exception('No browser given for query and no default browser was found');
+        }
+
+        $response = $browser->navigateToUrl($googleUrl);
 
         $statusCode = $response->getHttpResponseStatus();
 
@@ -116,13 +89,6 @@ class GoogleClient
                     );
                 }
             }
-        }
-    }
-
-    public function __get($name)
-    {
-        if ($name=='request') {
-            return $this->getRequestBuilder();
         }
     }
 }

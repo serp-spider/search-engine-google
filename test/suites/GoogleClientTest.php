@@ -6,6 +6,7 @@
 namespace Serps\Test\TDD\SearchEngine\Google;
 
 use \InvalidArgumentException;
+use Serps\Core\Browser\Browser;
 use Serps\Core\Http\HttpClientInterface;
 use Serps\Core\Http\SearchEngineResponse;
 use Serps\Core\UrlArchive;
@@ -42,7 +43,7 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
         $httpClientMock->method('sendRequest')->willReturn($responseFromMock);
 
         /* @var $httpClientMock HttpClientInterface */
-        $googleClient = new GoogleClient($httpClientMock);
+        $googleClient = new GoogleClient(new Browser($httpClientMock));
         $url = GoogleUrl::fromString('https://www.google.fr/search?q=simpsons+movie+trailer');
 
         $dom = $googleClient->query($url);
@@ -65,7 +66,7 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
         $httpClientMock->method('sendRequest')->willReturn($responseFromMock);
 
         /* @var $httpClientMock HttpClientInterface */
-        $googleClient = new GoogleClient($httpClientMock);
+        $googleClient = new GoogleClient(new Browser($httpClientMock));
         $url = GoogleUrl::fromString('https://www.google.fr/search?q=simpsons+movie+trailer');
 
         try {
@@ -92,7 +93,7 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
         $httpClientMock->method('sendRequest')->willReturn($responseFromMock);
 
         /* @var $httpClientMock HttpClientInterface */
-        $googleClient = new GoogleClient($httpClientMock);
+        $googleClient = new GoogleClient(new Browser($httpClientMock));
         $url = GoogleUrl::fromString('https://www.google.fr/search?q=simpsons+movie+trailer');
 
         try {
@@ -101,76 +102,5 @@ class GoogleClientTest extends \PHPUnit_Framework_TestCase
         } catch (GoogleCaptchaException $e) {
             $this->assertInstanceOf(GoogleCaptcha::class, $e->getCaptcha());
         }
-    }
-
-    public function testUserAgentAccessors()
-    {
-        $googleClient = new GoogleClient($this->getMock(HttpClientInterface::class));
-        $googleClient->getRequestBuilder()->setUserAgent('test-user-agent');
-        $this->assertEquals('test-user-agent', $googleClient->getRequestBuilder()->getUserAgent());
-
-        $googleClient->getRequestBuilder()->setUserAgent('foo-user-agent');
-        $this->assertEquals('foo-user-agent', $googleClient->getRequestBuilder()->getUserAgent());
-
-        $googleClient->getRequestBuilder()->setUserAgent(null);
-        $this->assertEquals(null, $googleClient->getRequestBuilder()->getUserAgent());
-
-        $this->setExpectedException(InvalidArgumentException::class);
-        $googleClient->getRequestBuilder()->setUserAgent(true);
-    }
-
-    public function testAcceptLanguage()
-    {
-        $googleClient = new GoogleClient($this->getMock(HttpClientInterface::class));
-        $request = $googleClient->getRequestBuilder()->buildRequest(new GoogleUrl());
-        $this->assertEquals(['en'], $request->getHeader('Accept-language'));
-
-        $googleClient->getRequestBuilder()->setDefaultAcceptLanguage('fr');
-        $request = $googleClient->getRequestBuilder()->buildRequest(new GoogleUrl());
-        $this->assertEquals(['fr'], $request->getHeader('Accept-language'));
-
-        $url = new GoogleUrl();
-        $url->setLanguageRestriction('es');
-        $request = $googleClient->getRequestBuilder()->buildRequest($url);
-        $this->assertEquals(['es'], $request->getHeader('Accept-language'));
-
-        $googleClient->getRequestBuilder()->setAcceptLanguageFromUrl(false);
-        $request = $googleClient->getRequestBuilder()->buildRequest(new GoogleUrl());
-        $this->assertEquals(['fr'], $request->getHeader('Accept-language'));
-    }
-
-
-    public function testUserAgentWithOnRequest()
-    {
-        $httpClientMock = $this->getMock(HttpClientInterface::class);
-        $responseFromMock = new SearchEngineResponse(
-            [],
-            200,
-            file_get_contents('test/resources/pages-evaluated/simpsons+movie+trailer.html'),
-            false,
-            GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
-            GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons+movie+trailer'),
-            null
-        );
-        $httpClientMock->method('sendRequest')->willReturn($responseFromMock);
-
-
-        /* @var $httpClientMock HttpClientInterface */
-        $googleClient = new GoogleClient($httpClientMock);
-        $googleClient->getRequestBuilder()->setUserAgent('foo-ua');
-        $url = GoogleUrl::fromString('https://www.google.fr/search?q=simpsons+movie+trailer');
-        $request = $googleClient->getRequestBuilder()->buildRequest($url);
-
-        $this->assertCount(1, $request->getHeader('user-agent'));
-        $this->assertEquals('foo-ua', $request->getHeader('user-agent')[0]);
-    }
-
-    public function testRequestAccesor()
-    {
-        $googlelient = new GoogleClient($this->getMock(HttpClientInterface::class));
-
-        $requestBuilder = $googlelient->getRequestBuilder();
-        $this->assertInstanceOf(RequestBuilder::class, $requestBuilder);
-        $this->assertSame($requestBuilder, $googlelient->request);
     }
 }
