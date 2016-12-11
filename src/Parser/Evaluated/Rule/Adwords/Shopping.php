@@ -8,7 +8,7 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Adwords;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\AdwordsResultType;
-use Serps\SearchEngine\Google\Css;
+use Serps\Core\Dom\Css;
 use Serps\SearchEngine\Google\NaturalResultType;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;

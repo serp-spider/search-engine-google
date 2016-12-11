@@ -10,6 +10,9 @@
     * ``Serps\SearchEngine\Google\GoogleDom`` now extends ``Serps\Core\Dom\WebPage``
     * ``Serps\SearchEngine\Google\GoogleError`` now extends ``Serps\Core\Dom\WebPage`` 
     and does not extend ``Serps\SearchEngine\Google\GoogleDom`` anymore
+    * Class ``Serps\SearchEngine\Google\Css`` was removed and an equivalent is now provided from the core package in
+    ``Serps\Core\Dom\Css``
+    * Vendor ``symfony/css-selector`` is not provided anymore, instead it moved in core package
  
 * Features:
     * Google cards results are now supported [#38](https://github.com/serp-spider/search-engine-google/pull/38)

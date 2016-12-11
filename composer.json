@@ -31,7 +31,6 @@
 
   "require": {
     "php": ">=5.5",
-    "symfony/css-selector": ">=2",
     "serps/core": "~0.2.0",
     "zendframework/zend-diactoros": "1.*"
   },

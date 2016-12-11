@@ -7,7 +7,7 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated;
 
 use Serps\Core\Serp\CompositeResultSet;
 use Serps\SearchEngine\Google\AdwordsResultType;
-use Serps\SearchEngine\Google\Css;
+use Serps\Core\Dom\Css;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use \Serps\SearchEngine\Google\Parser\Evaluated\AdwordsSectionParser;
 
