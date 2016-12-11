@@ -19,6 +19,7 @@
     * ``GoogleClient::query`` does not auto set language header anymore, that's now done from the browser instance [a6fe671](https://github.com/serp-spider/search-engine-google/commit/a6fe6711d6fac42977cfc30212e438d8ab933584)
     * ``GoogleClient::request`` and ``GoogleClient::getRequestBuilder()`` were removed and are replaced with
     browser implementation [a6fe671](https://github.com/serp-spider/search-engine-google/commit/a6fe6711d6fac42977cfc30212e438d8ab933584)
+    * class ``Serps\SearchEngine\Google\GoogleClient\RequestBuilder`` was removed
     
 * Features:
     * Google cards results are now supported [#38](https://github.com/serp-spider/search-engine-google/pull/38)

@@ -13,7 +13,6 @@ use Serps\Core\Http\Proxy;
 use Serps\Core\UrlArchive;
 use Serps\Exception;
 use Serps\SearchEngine\Google\Exception\GoogleCaptchaException;
-use Serps\SearchEngine\Google\GoogleClient\RequestBuilder;
 use Serps\SearchEngine\Google\Page\GoogleCaptcha;
 use Serps\SearchEngine\Google\Page\GoogleError;
 use Serps\SearchEngine\Google\Page\GoogleSerp;
@@ -36,7 +35,7 @@ class GoogleClient
     {
         $this->defaultBrowser = $browser;
     }
-    
+
     /**
      * @param GoogleUrlInterface $googleUrl
      * @param BrowserInterface|null $browser

@@ -19,7 +19,6 @@ use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleCaptcha;
 use Serps\SearchEngine\Google\Page\GoogleSerp;
 use Zend\Diactoros\Request;
-use Serps\SearchEngine\Google\GoogleClient\RequestBuilder;
 
 /**
  * @covers Serps\SearchEngine\Google\GoogleClient
