@@ -7,22 +7,19 @@
 * Breaking Changes:
     * Images data are returned MediaInterface [#35](https://github.com/serp-spider/search-engine-google/issues/35)
     * Drop support for raw parser [5f41ddeb6a9076b363a83071e0f27a0254f1e330](https://github.com/serp-spider/search-engine-google/commit/5f41ddeb6a9076b363a83071e0f27a0254f1e330)
-<<<<<<< HEAD
     * ``Serps\SearchEngine\Google\GoogleDom`` now extends ``Serps\Core\Dom\WebPage``
     * ``Serps\SearchEngine\Google\GoogleError`` now extends ``Serps\Core\Dom\WebPage`` 
     and does not extend ``Serps\SearchEngine\Google\GoogleDom`` anymore
     * Class ``Serps\SearchEngine\Google\Css`` was removed and an equivalent is now provided from the core package in
     ``Serps\Core\Dom\Css``
     * Vendor ``symfony/css-selector`` is not provided anymore, instead it moved in core package
- 
-=======
     * ``GoogleClient::query($googleUrl, $proxy, $cookieJar)`` was refactored
     to ``GoogleClient::query($googleUrl, $browser)`` in order to provide a more fluent management
     of browser specifications
     * ``GoogleClient::query`` does not auto set language header anymore, that's now done from the browser instance
     * ``GoogleClient::request`` and ``GoogleClient::getRequestBuilder()`` were removed and are replaced with
     browser implementation
->>>>>>> google client using browser implementation
+    
 * Features:
     * Google cards results are now supported [#38](https://github.com/serp-spider/search-engine-google/pull/38)
     * Mobile page detection: GoogleSerp::isMobile() [564057ce0ee255cfa138440e033776b85f239acb](https://github.com/serp-spider/search-engine-google/commit/564057ce0ee255cfa138440e033776b85f239acb)
