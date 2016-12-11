@@ -7,9 +7,9 @@
 * Breaking Changes:
     * Images data are returned MediaInterface [#35](https://github.com/serp-spider/search-engine-google/issues/35)
     * Drop support for raw parser [5f41ddeb6a9076b363a83071e0f27a0254f1e330](https://github.com/serp-spider/search-engine-google/commit/5f41ddeb6a9076b363a83071e0f27a0254f1e330)
-    * ``Serps\SearchEngine\Google\PageGoogleDom`` now extends ``Serps\Core\Dom\WebPage``
+    * ``Serps\SearchEngine\Google\GoogleDom`` now extends ``Serps\Core\Dom\WebPage``
     * ``Serps\SearchEngine\Google\GoogleError`` now extends ``Serps\Core\Dom\WebPage`` 
-    and does not extend ``Serps\SearchEngine\Google\GoogleError`` anymore
+    and does not extend ``Serps\SearchEngine\Google\GoogleDom`` anymore
  
 * Features:
     * Google cards results are now supported [#38](https://github.com/serp-spider/search-engine-google/pull/38)
