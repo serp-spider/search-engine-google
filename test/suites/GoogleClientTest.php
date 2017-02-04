@@ -22,7 +22,6 @@ use Zend\Diactoros\Request;
 
 /**
  * @covers Serps\SearchEngine\Google\GoogleClient
- * @covers Serps\SearchEngine\Google\GoogleClient\RequestBuilder
  */
 class GoogleClientTest extends \PHPUnit_Framework_TestCase
 {
