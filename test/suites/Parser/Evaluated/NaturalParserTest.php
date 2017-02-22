@@ -346,5 +346,7 @@ class NaturalParserTest extends GoogleSerpTestCase
 
         $naturalParser = new NaturalParser();
         $results = $naturalParser->parse($dom);
+
+        $this->assertCount(10, $results);
     }
 }
