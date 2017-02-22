@@ -338,4 +338,13 @@ class NaturalParserTest extends GoogleSerpTestCase
         $this->assertEquals(11, $results[0]->getRealPosition());
         $this->assertEquals(1, $results[0]->getOnPagePosition());
     }
+
+    public function testResultWithDomText()
+    {
+        $gUrl = GoogleUrlArchive::fromString('https://www.google.co.uk/search?q=foo');
+        $dom = new GoogleDom(file_get_contents('test/resources/pages-evaluated/with-DOMText.html'), $gUrl);
+
+        $naturalParser = new NaturalParser();
+        $results = $naturalParser->parse($dom);
+    }
 }
