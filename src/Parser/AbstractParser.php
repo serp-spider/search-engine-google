@@ -64,6 +64,9 @@ abstract class AbstractParser
         $rules = $this->getRules();
 
         foreach ($elementGroups as $group) {
+            if (!($group instanceof \DOMElement)) {
+                continue;
+            }
             foreach ($rules as $rule) {
                 $match = $rule->match($googleDom, $group);
                 if ($match instanceof \DOMNodeList) {
