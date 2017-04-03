@@ -19,16 +19,21 @@ class GoogleSerpTestCase extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function assertResultHasData(array $dataArray, $result)
+    public function assertResultHasData(array $dataArray, $result, $currentPath = null)
     {
+        if (null == $currentPath) {
+            $currentPath = '/';
+        }
+
         foreach ($dataArray as $k => $data) {
+            $currentPathForItem = $currentPath . $k . '/';
             if (is_array($data)) {
                 if (is_object($result)) {
-                    $this->assertResultHasData($data, $result->$k);
+                    $this->assertResultHasData($data, $result->$k, $currentPathForItem);
                 } elseif (is_array($result)) {
-                    $this->assertResultHasData($data, $result[$k]);
+                    $this->assertResultHasData($data, $result[$k], $currentPathForItem);
                 } else {
-                    $this->fail('Asserting that data has key ' . $k);
+                    $this->fail('Asserting that data has key "' . $k . '"". Path: "' . $currentPathForItem . '"');
                 }
             } else {
                 $this->assertEquals($data, $result->$k);

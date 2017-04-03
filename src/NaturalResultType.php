@@ -18,6 +18,7 @@ abstract class NaturalResultType
     const IMAGE_GROUP_IMAGE = 'image_group_image';
 
     const IN_THE_NEWS = 'in_the_news';
+    const TOP_STORIES = 'top_stories';
     const TWEETS_CAROUSEL= 'tweets_carousel';
 
     const MAP = 'map';

@@ -10,7 +10,7 @@ results:
   - types:
     - TWEETS_CAROUSEL
     data:
-      user: @TheSimpsons
+      user: '@TheSimpsons'
       url: https://twitter.com/TheSimpsons?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor
 
 
