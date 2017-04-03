@@ -20,6 +20,7 @@ abstract class NaturalResultType
     const VIDEO_GROUP = 'video_group';
 
     const IN_THE_NEWS = 'in_the_news';
+    const TOP_STORIES = 'top_stories';
     const TWEETS_CAROUSEL= 'tweets_carousel';
 
     const MAP = 'map';

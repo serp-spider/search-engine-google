@@ -1,0 +1,47 @@
+# image-group recipes
+url: https://www.google.fr/search?q=inde&hl=fr_FR
+file: test/resources/pages-evaluated/inde(top-stories).html
+results:
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - TOP_STORIES
+    data:
+      is_carousel: true
+      news:
+        - url: http://www.jeuneafrique.com/424970/politique/agressions-dafricains-inde-diplomates-demandent-louverture-dune-enquete-independante/
+          title: |-
+            Agressions d'Africains en Inde : des diplomates demandent l'ouverture d'une
+                enquête indépendante - JeuneAfrique.com
+
+        - url: https://www.letemps.ch/monde/2017/04/04/inde-afrique-tirs-vue-contre-braconniers
+          title: En Inde et en Afrique, tirs à vue contre les braconniers
+
+        - url: http://www.rfi.fr/afrique/20170403-agressions-inde-diplomates-africains-denoncent-manque-reaction-autorites
+          title: 'Agressions en Inde: des diplomates africains dénoncent le manque de réaction'
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - IMAGE_GROUP
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
