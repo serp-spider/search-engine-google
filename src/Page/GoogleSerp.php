@@ -16,6 +16,11 @@ use Serps\Stubs\RelatedSearch;
 class GoogleSerp extends GoogleDom
 {
 
+    public function getDom()
+    {
+        return  $this->dom;
+    }
+
     /**
      * Get the location detected by google
      * @return string
