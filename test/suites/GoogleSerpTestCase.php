@@ -21,6 +21,14 @@ class GoogleSerpTestCase extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function assertResultDoesNotHaveTypes(array $types, ResultDataInterface $result)
+    {
+        foreach ($types as $type) {
+            $typeValue = constant(NaturalResultType::class . '::' . $type);
+            $this->assertFalse($result->is($typeValue), 'Expects that item[' . implode(', ', $result->getTypes()) . '] does NOT have the type: ' . $typeValue);
+        }
+    }
+
     public function assertResultHasData(array $dataArray, $result, $currentPath = null)
     {
         if (null == $currentPath) {

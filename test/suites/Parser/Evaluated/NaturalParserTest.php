@@ -29,7 +29,6 @@ use Symfony\Component\Yaml\Yaml;
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AnswerBox
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResult
- * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\LargeClassicalResult
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalWithLargeVideo
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResult
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider
@@ -80,6 +79,11 @@ class NaturalParserTest extends GoogleSerpTestCase
             foreach ($data['results'] as $k => $expectedResult) {
                 $item = $result->getItems()[$k];
                 $this->assertResultHasTypes($expectedResult['types'], $item);
+
+                if (isset($expectedResult['not-types'])) {
+                    $this->assertResultDoesNotHaveTypes($expectedResult['not-types'], $item);
+                }
+
                 if (isset($expectedResult['data'])) {
                     $this->assertResultHasData($expectedResult['data'], $item);
                 }
