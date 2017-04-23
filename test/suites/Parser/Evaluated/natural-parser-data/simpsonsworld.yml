@@ -1,0 +1,58 @@
+url: https://www.google.fr/search?q=simpsonsworld
+file: test/resources/pages-evaluated/simpsonsworld.html
+results:
+
+
+  - types:
+      - CLASSICAL
+      - CLASSICAL_LARGE
+    data:
+      title: Episodes | Simpsons World on FXX
+      url: http://www.simpsonsworld.com/browse/episodes
+      destination: www.simpsonsworld.com/browse/episodes
+      description: Browse Every. Simpsons Episode. Ever. Whenever. Access full episodes, clips, extras, exclusive playlists and more.
+      sitelinks:
+        - title: Most Popular
+          url: http://www.simpsonsworld.com/browse/popular
+          description: POPULAR PLAYLISTS. (23 Videos) The Best of Lisa: Full Episodes ...
+        - title: Browse Commentary
+          url: http://www.simpsonsworld.com/browse/commentary
+          description: Browse Every. ... Episodes; Audio Commentary; Clips · Playlists ...
+
+
+  - types:
+      - CLASSICAL
+    not-types:
+      - CLASSICAL_LARGE
+    data:
+      title: Everything Simpsons | Simpsons World on FXX
+      url: http://www.simpsonsworld.com/
+      destination: www.simpsonsworld.com/
+      description: Watch Every. Simpsons Episode. Ever. Whenever. Access full episodes, clips, extras, exclusive playlists and more.
+
+
+  - types:
+    - CLASSICAL
+    data:
+      title: Simpsons TV | Simpsons World on FXX
+
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+    data:
+      title: A Review Of Simpsons World, An App For “Simpsons” Fans That Gets ...

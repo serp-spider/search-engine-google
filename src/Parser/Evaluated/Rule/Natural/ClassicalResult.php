@@ -17,10 +17,8 @@ class ClassicalResult implements ParsingRuleInterace
     public function match(GoogleDom $dom, \DOMElement $node)
     {
         if ($node->getAttribute('class') == 'g') {
-            foreach ($node->childNodes as $node) {
-                if ($node instanceof \DOMElement && $node->getAttribute('class') == 'rc') {
-                    return self::RULE_MATCH_MATCHED;
-                }
+            if ($dom->cssQuery('.rc', $node)->length == 1) {
+                return self::RULE_MATCH_MATCHED;
             }
         }
         return self::RULE_MATCH_NOMATCH;
@@ -55,11 +53,47 @@ class ClassicalResult implements ParsingRuleInterace
         ];
     }
 
+    protected function parseSiteLink(GoogleDom $dom, \DomElement $node)
+    {
+        return function () use ($dom, $node) {
+            $items = $dom->cssQuery('.nrgt tr.mslg>td>.sld', $node);
+            $siteLinksData = [];
+            foreach ($items as $item) {
+                $siteLinksData[] = new BaseResult(NaturalResultType::CLASSICAL_SITELINK, [
+                    'title' => function () use ($dom, $item) {
+                        return $dom->cssQuery('h3.r a', $item)
+                            ->item(0)
+                            ->textContent;
+                    },
+                    'description' => function () use ($dom, $item) {
+                        return $dom->cssQuery('.st', $item)
+                            ->item(0)
+                            ->textContent;
+                    },
+                    'url' => function () use ($dom, $item) {
+                        return $dom->cssQuery('h3.r a', $item)
+                            ->item(0)
+                            ->getAttribute('href');
+                    },
+                ]);
+            }
+            return $siteLinksData;
+        };
+    }
+
     public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet)
     {
         $data = $this->parseNode($dom, $node);
 
         $resultTypes = [NaturalResultType::CLASSICAL];
+
+
+        // CLASSICAL RESULT MIGHT BE ENLARGED WITH SITELINKS
+        if ($dom->cssQuery('.nrgt', $node)->length == 1) {
+            $data['sitelinks'] = $this->parseSiteLink($dom, $node);
+            $resultTypes[] = NaturalResultType::CLASSICAL_LARGE;
+        }
+
 
         // classical result can have a video thumbnail
         $thumb = $dom->getXpath()

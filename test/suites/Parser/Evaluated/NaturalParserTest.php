@@ -27,7 +27,6 @@ use Symfony\Component\Yaml\Yaml;
  * @covers Serps\SearchEngine\Google\Parser\AbstractParser
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ClassicalResult
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\LargeClassicalResult
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarousel
  * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InTheNews
@@ -70,6 +69,11 @@ class NaturalParserTest extends GoogleSerpTestCase
         foreach ($data['results'] as $k => $expectedResult) {
             $item = $result->getItems()[$k];
             $this->assertResultHasTypes($expectedResult['types'], $item);
+
+            if (isset($expectedResult['not-types'])) {
+                $this->assertResultDoesNotHaveTypes($expectedResult['not-types'], $item);
+            }
+
             if (isset($expectedResult['data'])) {
                 $this->assertResultHasData($expectedResult['data'], $item);
             }
