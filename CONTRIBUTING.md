@@ -31,7 +31,7 @@ Code contribution
 All contributions must be tested following as much as possible the current test structure.
 Look at current tests in ``test/suites`` for more details.
 
-### Conding Standards
+### Coding Standards
 
 The code follows the PSR-2 coding standards. 
 We provided two useful commands to check and fix automatically code standards:
