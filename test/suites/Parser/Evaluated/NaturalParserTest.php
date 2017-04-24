@@ -35,9 +35,12 @@ use Symfony\Component\Yaml\Yaml;
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flight
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InTheNews
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesVertical
+ * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesCarousel
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Map
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarousel
+ *
  */
 class NaturalParserTest extends GoogleSerpTestCase
 {
