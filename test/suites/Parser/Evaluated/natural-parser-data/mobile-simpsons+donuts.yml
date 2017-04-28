@@ -1,0 +1,50 @@
+# image-group recipes
+url: https://www.google.fr/search?q=simpsons+donuts
+file: test/resources/pages-mobile/simpsons+donuts.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: null
+  isMobile: true
+
+results:
+#
+#  - types:
+#    - IMAGE_GROUP
+
+
+  - types:
+    - VIDEO_GROUP
+
+
+  - types:
+      - CLASSICAL
+      - CLASSICAL_ILLUSTRATED
+    data:
+      url: http://recettes-series.com/les-donuts-dhomer/
+      title: Les donuts d'Homer ~ The Simpsons - Recettes de séries
+      description: Aujourd'hui, je vais vous donner la recette des fameux donuts d'Homer, qui ont donné naissance à la phrase culte « MmmMmM des  ...
+      destination: recettes-series.com › les-donuts-dhomer
+
+
+  - types:
+      - CLASSICAL
+      - CLASSICAL_ILLUSTRATED
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
