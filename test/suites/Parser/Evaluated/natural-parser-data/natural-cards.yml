@@ -30,6 +30,7 @@ results:
     data-count:
       images: 5
     data:
+      isCarousel: false
       moreUrl: https://www.google.fr/search?q=florida+usa&client=firefox-b&hl=com&noj=1&nomo=1&nota=1&igu=1&glp=1&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwiKg83E7a7PAhWCTxoKHfFKDXcQsAQIPg
       images:
         - sourceUrl: http://www.nationsonline.org/oneworld/map/USA/florida_map.htm

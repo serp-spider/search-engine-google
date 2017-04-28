@@ -29,6 +29,12 @@ class GoogleDom extends WebPage
      */
     protected $url;
 
+    /**
+     * store parsed json from parseJsonNode
+     * @var array
+     */
+    protected $parsedJsonStore = [];
+
     public function __construct($domString, GoogleUrlInterface $url)
     {
         $currentEncoding = $url->getParamValue('oe');
@@ -37,5 +43,11 @@ class GoogleDom extends WebPage
         }
 
         parent::__construct($domString, $url, $currentEncoding);
+    }
+
+
+    public function parseJsonNode(\DOMNode $node)
+    {
+        $hash = spl_object_hash($node);
     }
 }

@@ -13,12 +13,12 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
+class ImageGroupCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
 {
 
     public function match(GoogleDom $dom, \DOMElement $node)
     {
-        if ($node->hasAttribute('id') && $node->getAttribute('id') == 'imagebox_bigimages') {
+        if ($dom->cssQuery('._ekh image-viewer-group g-scrolling-carousel', $node)->length == 1) {
             return self::RULE_MATCH_MATCHED;
         } else {
             return self::RULE_MATCH_NOMATCH;
@@ -27,22 +27,31 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterac
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
     {
         $item = [
-            'images' => [],
-            'isCarousel' => false,
-            'moreUrl' => function () use ($node, $googleDOM) {
-                $aTag = $googleDOM->getXpath()->query('descendant::div[@class="_Icb _kk _wI"]/a', $node)->item(0);
-                if (!$aTag) {
-                    return $googleDOM->getUrl()->resolve('/');
+            'images' => function () use ($node, $googleDOM) {
+                $items = [];
+
+                $imageNodes = $googleDOM->cssQuery('.rg_ul>._sqh g-inner-card', $node);
+                foreach ($imageNodes as $imageNode) {
+                    $items[] = $this->parseItem($googleDOM, $imageNode);
                 }
-                return $googleDOM->getUrl()->resolveAsString($aTag->getAttribute('href'));
+
+                return $items;
+            },
+            'isCarousel' => true,
+            'moreUrl' => function () use ($node, $googleDOM) {
+                $a = $googleDOM->cssQuery('g-tray-header ._Nbi a');
+                $a = $a->item(0);
+                if ($a instanceof \DOMElement) {
+                    return $googleDOM->getUrl()->resolveAsString($a->getAttribute('href'));
+                }
+                return null;
             }
         ];
 
-        // TODO: detect no image (google dom update)
-        $imageNodes = $googleDOM->cssQuery('.rg_ul>div._ZGc a', $node);
-        foreach ($imageNodes as $imgNode) {
-            $item['images'][] = $this->parseItem($googleDOM, $imgNode);
-        }
+//        $imageNodes = $googleDOM->cssQuery('.rg_ul>div._ZGc a', $node);
+//        foreach ($imageNodes as $imgNode) {
+//            $item['images'][] = $this->parseItem($googleDOM, $imgNode);
+//        }
         $resultSet->addItem(new BaseResult(NaturalResultType::IMAGE_GROUP, $item));
     }
     /**
@@ -54,21 +63,13 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterac
     {
         $data =  [
             'sourceUrl' => function () use ($imgNode, $googleDOM) {
-                $img = $googleDOM->getXpath()->query('descendant::img', $imgNode)->item(0);
-                if (!$img) {
-                    return $googleDOM->getUrl()->resolve('/');
-                }
-                return $googleDOM->getUrl()->resolveAsString($img->getAttribute('title'));
+                // TODO parse json content in .rg_meta
             },
             'targetUrl' => function () use ($imgNode, $googleDOM) {
-                return $googleDOM->getUrl()->resolveAsString($imgNode->getAttribute('href'));
+                // TODO parse json content in .rg_meta
             },
             'image' => function () use ($imgNode, $googleDOM) {
-                $img = $googleDOM->getXpath()->query('descendant::img', $imgNode)->item(0);
-                if (!$img) {
-                    return '';
-                }
-                return MediaFactory::createMediaFromSrc($img->getAttribute('src'));
+                // TODO parse json content in .rg_meta
             },
         ];
 

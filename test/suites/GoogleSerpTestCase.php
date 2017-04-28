@@ -46,6 +46,9 @@ class GoogleSerpTestCase extends \PHPUnit_Framework_TestCase
                     $this->fail('Asserting that data has key "' . $k . '"". Path: "' . $currentPathForItem . '"');
                 }
             } else {
+                if (!is_object($result)) {
+                    $this->fail('Data is not an object. Evaluating key "' . $k . '"". Path: "' . $currentPathForItem . '"');
+                }
                 $this->assertEquals($data, $result->$k);
             }
         }
@@ -73,9 +76,9 @@ class GoogleSerpTestCase extends \PHPUnit_Framework_TestCase
         foreach ($dataArray as $k => $data) {
             if (is_array($data)) {
                 if (is_object($result)) {
-                    $this->assertResultHasData($data, $result->$k);
+                    $this->assertResultHasDataMedia($data, $result->$k);
                 } elseif (is_array($result)) {
-                    $this->assertResultHasData($data, $result[$k]);
+                    $this->assertResultHasDataMedia($data, $result[$k]);
                 } else {
                     $this->fail('Asserting that data has key ' . $k);
                 }
