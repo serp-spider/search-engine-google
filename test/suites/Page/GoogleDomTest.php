@@ -73,4 +73,31 @@ class GoogleDomTest extends \PHPUnit_Framework_TestCase
         $googleDom = $this->getDom();
         $this->assertSame('https://www.google.fr/search?q=simpsons&hl=en_US', $googleDom->getUrl()->buildUrl());
     }
+
+    public function testGetJsonNodeProperty()
+    {
+        $url = GoogleUrlArchive::fromString('https://www.google.fr/search?q=simpsons&hl=en_US');
+        $domString = '<html>
+            <div id="foo1">"{"foo":"bar", "bar":"baz"}"</div>
+            <div id="foo2">"{"foo":"qux", "baz":"boo"}"</div>
+            <div id="foo3">"":"boo"}"</div>
+        </html>';
+
+        $dom = new GoogleDom($domString, $url);
+
+        $nodeFoo1 = $dom->cssQuery('#foo1')->item(0);
+        $nodeFoo2 = $dom->cssQuery('#foo2')->item(0);
+        $nodeFoo3 = $dom->cssQuery('#foo3')->item(0);
+
+        $this->assertEquals('bar', $dom->getJsonNodeProperty('foo', $nodeFoo1));
+        $this->assertEquals('qux', $dom->getJsonNodeProperty('foo', $nodeFoo2));
+
+        $this->assertEquals('baz', $dom->getJsonNodeProperty('bar', $nodeFoo1));
+        $this->assertEquals(null, $dom->getJsonNodeProperty('bar', $nodeFoo2));
+
+        $this->assertEquals(null, $dom->getJsonNodeProperty('baz', $nodeFoo1));
+        $this->assertEquals('boo', $dom->getJsonNodeProperty('baz', $nodeFoo2));
+
+        $this->assertEquals(null, $dom->getJsonNodeProperty('baz', $nodeFoo3));
+    }
 }

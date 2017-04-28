@@ -33,7 +33,7 @@ class GoogleDom extends WebPage
      * store parsed json from parseJsonNode
      * @var array
      */
-    protected $parsedJsonStore = [];
+    private $parsedJsonStore = [];
 
     public function __construct($domString, GoogleUrlInterface $url)
     {
@@ -46,8 +46,31 @@ class GoogleDom extends WebPage
     }
 
 
-    public function parseJsonNode(\DOMNode $node)
+    /**
+     * Get a property from a google json node.
+     * Google json nodes are invisible dom nodes that contain json text (found in mobile carousels for instance)
+     *
+     * @param string $propertyName name of the property to get
+     * @param \DOMNode $node
+     * @return mixed
+     */
+    public function getJsonNodeProperty($propertyName, \DOMNode $node)
     {
         $hash = spl_object_hash($node);
+
+        if (!isset($this->parsedJsonStore[$hash])) {
+            $nodeValue = $node->nodeValue;
+            $nodeValue = trim($nodeValue, '"');
+
+            $this->parsedJsonStore[$hash] = json_decode($nodeValue, true);
+        }
+
+        $item = $this->parsedJsonStore[$hash];
+
+        if ($item && is_array($item) && isset($item[$propertyName])) {
+            return $item[$propertyName];
+        } else {
+            return null;
+        }
     }
 }
