@@ -36,15 +36,19 @@
   },
 
   "require-dev":{
-    "phpunit/phpunit": "4.1.2",
+    "phpunit/phpunit": "~4.1",
     "symfony/yaml": ">=2.0",
     "squizlabs/php_codesniffer": "~2.5"
   },
 
   "scripts": {
-      "test": "vendor/bin/phpunit -c phpunit.dist.xml && echo \"\\n>> Checking code standards\\n\" && test/bin/phpcs.bash emacs",
-      "csfix": "test/bin/phpcbf.bash",
-      "cscheck": "test/bin/phpcs.bash emacs"
+    "phpunit": "test/bin/test.bash",
+    "test": [
+      "@phpunit",
+      "@cscheck"
+    ],
+    "csfix": "test/bin/phpcbf.bash",
+    "cscheck": "test/bin/phpcs.bash emacs"
   },
 
   "extra": {

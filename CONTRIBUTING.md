@@ -42,4 +42,6 @@ We provided two useful commands to check and fix automatically code standards:
 
 ### Tools
 
-- run test suit: ``composer test``
+- run full test suit: ``composer test``
+- run some tests only: ``composer test testName`` 
+(``testName`` will be used in [phpunit --filter](https://phpunit.de/manual/current/en/textui.html#textui.examples.filter-patterns))
