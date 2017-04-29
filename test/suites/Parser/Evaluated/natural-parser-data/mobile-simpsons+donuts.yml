@@ -14,9 +14,19 @@ results:
     data:
       isCarousel: true
       moreUrl: https://www.google.fr/search?q=simpsons+donuts&client=ubuntu-browser&prmd=isvn&tbm=isch&tbo=u&source=univ&fir=5pf6apgzcM_1AM%253A%252Cw9PWfLhS5NhIJM%252C_%253BT1mGMZ1G3UqIZM%253A%252CULbgNRldUTz54M%252C_%253BNXAKVKQBuIUioM%253A%252CefXeqgQgXM3-sM%252C_%253ByfwiLrFBCoJREM%253A%252C13d6-FL7ZdmbrM%252C_%253B2CXI4Cmj5X3dGM%253A%252CoXZN5y098HMw3M%252C_%253Bw7pPh0tSmS9fQM%253A%252CefXeqgQgXM3-sM%252C_%253BMykB36G8HPSOvM%253A%252CDFZBMzL58xSNiM%252C_%253BPsgymH70iPP7VM%253A%252CeaF3My1vToZseM%252C_%253BOV0EHIRtJyKfDM%253A%252C48UHaPs_HHMC4M%252C_%253BZZzcaNFrtOfdeM%253A%252CzR1d_Tio42JKKM%252C_&usg=__EgYELg3Q4TWqNXLgl6ZSlZzIpao%3D&sa=X&ved=0ahUKEwjat_2AnMnTAhVHWxQKHTSjA78Q7AkIHA
+
+      images:
+        - sourceUrl: https://www.pinterest.com/explore/simpsons-donut/
+        - sourceUrl: http://www.cdiscount.com/telephonie/r-donuts+simpsons.html
+
     data-count:
       images: 10
 
+    data-media:
+      images:
+        # Image is 1px gif
+        # TODO parse it from javacscript source
+        - image: test/resources/pages-mobile/simpsons+donuts/thumb1.png
 
   - types:
       - VIDEO_GROUP

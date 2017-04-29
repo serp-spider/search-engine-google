@@ -27,6 +27,7 @@ use Symfony\Component\Yaml\Yaml;
  *
  * @covers \Serps\SearchEngine\Google\Parser\AbstractParser
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\MobileNaturalParser
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AnswerBox
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResult
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalWithLargeVideo
@@ -34,12 +35,14 @@ use Symfony\Component\Yaml\Yaml;
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flight
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroupCarousel
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InTheNews
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesVertical
- * @covers Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesCarousel
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Map
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesVertical
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesCarousel
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarousel
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideoGroup
  *
  */
 class NaturalParserTest extends GoogleSerpTestCase

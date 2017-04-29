@@ -48,28 +48,36 @@ class ImageGroupCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRul
             }
         ];
 
-//        $imageNodes = $googleDOM->cssQuery('.rg_ul>div._ZGc a', $node);
-//        foreach ($imageNodes as $imgNode) {
-//            $item['images'][] = $this->parseItem($googleDOM, $imgNode);
-//        }
         $resultSet->addItem(new BaseResult(NaturalResultType::IMAGE_GROUP, $item));
     }
     /**
      * @param GoogleDOM $googleDOM
      * @param \DOMElement $imgNode
      * @return array
+     *
      */
     private function parseItem(GoogleDOM $googleDOM, \DOMElement $imgNode)
     {
         $data =  [
             'sourceUrl' => function () use ($imgNode, $googleDOM) {
-                // TODO parse json content in .rg_meta
+                $node = $googleDOM->cssQuery('.rg_meta', $imgNode)->item(0);
+                if (!$node) {
+                    return null;
+                }
+                $url = $googleDOM->getJsonNodeProperty('ru', $node);
+                return $url;
             },
             'targetUrl' => function () use ($imgNode, $googleDOM) {
-                // TODO parse json content in .rg_meta
+                // not available for mobile results
+                return null;
             },
             'image' => function () use ($imgNode, $googleDOM) {
-                // TODO parse json content in .rg_meta
+                // TODO: maybe parse from javascript source
+                $img = $googleDOM->cssquery('.iuth>img')->item(0);
+                if (!$img) {
+                    return null;
+                }
+                return mediafactory::createmediafromsrc($img->getattribute('src'));
             },
         ];
 
