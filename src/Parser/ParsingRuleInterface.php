@@ -8,7 +8,7 @@ namespace Serps\SearchEngine\Google\Parser;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\IndexedResultSet;
 
-interface ParsingRuleInterace
+interface ParsingRuleInterface
 {
     const RULE_MATCH_MATCHED = 1;
     const RULE_MATCH_NOMATCH = 2;

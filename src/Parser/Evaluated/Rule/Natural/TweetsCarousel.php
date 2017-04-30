@@ -8,10 +8,10 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
-use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class TweetsCarousel implements ParsingRuleInterace
+class TweetsCarousel implements ParsingRuleInterface
 {
 
     public function match(GoogleDom $dom, \DOMElement $node)

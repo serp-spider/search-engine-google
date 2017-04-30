@@ -10,10 +10,10 @@ use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\Core\UrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class ImageGroupCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
+class ImageGroupCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
 
     public function match(GoogleDom $dom, \DOMElement $node)

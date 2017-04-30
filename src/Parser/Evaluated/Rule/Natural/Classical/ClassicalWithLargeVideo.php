@@ -9,10 +9,10 @@ use Serps\Core\Media\MediaFactory;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class ClassicalWithLargeVideo implements ParsingRuleInterace
+class ClassicalWithLargeVideo implements ParsingRuleInterface
 {
 
     public function match(GoogleDom $dom, \DOMElement $node)

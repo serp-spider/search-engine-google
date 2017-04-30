@@ -10,10 +10,10 @@ use Serps\Core\Serp\IndexedResultSet;
 use Serps\Core\UrlArchive;
 use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class Map implements ParsingRuleInterace
+class Map implements ParsingRuleInterface
 {
 
     public function match(GoogleDom $dom, \DOMElement $node)

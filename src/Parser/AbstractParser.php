@@ -12,12 +12,12 @@ abstract class AbstractParser
 {
 
     /**
-     * @var ParsingRuleInterace[]
+     * @var ParsingRuleInterface[]
      */
     protected $rules = null;
 
     /**
-     * @return ParsingRuleInterace[]
+     * @return ParsingRuleInterface[]
      */
     abstract protected function generateRules();
 
@@ -25,7 +25,7 @@ abstract class AbstractParser
 
 
     /**
-     * @return ParsingRuleInterace[]
+     * @return ParsingRuleInterface[]
      */
     public function getRules()
     {
@@ -74,10 +74,10 @@ abstract class AbstractParser
                     break;
                 } else {
                     switch ($match) {
-                        case ParsingRuleInterace::RULE_MATCH_MATCHED:
+                        case ParsingRuleInterface::RULE_MATCH_MATCHED:
                             $rule->parse($googleDom, $group, $resultSet);
                             break 2;
-                        case ParsingRuleInterace::RULE_MATCH_STOP:
+                        case ParsingRuleInterface::RULE_MATCH_STOP:
                             break 2;
                     }
                 }

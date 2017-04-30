@@ -9,9 +9,9 @@ use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\NaturalResultType;
 use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 
-class Flight implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterace
+class Flight implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
 
     public function match(GoogleDom $dom, \DOMElement $node)

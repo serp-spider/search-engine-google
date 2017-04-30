@@ -11,9 +11,9 @@ use Serps\SearchEngine\Google\AdwordsResultType;
 use Serps\Core\Dom\Css;
 use Serps\SearchEngine\Google\NaturalResultType;
 use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 
-class AdwordsItem implements ParsingRuleInterace
+class AdwordsItem implements ParsingRuleInterface
 {
 
     public function match(GoogleDom $dom, \DOMElement $node)

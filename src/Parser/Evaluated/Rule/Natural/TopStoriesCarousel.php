@@ -9,9 +9,9 @@ use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\NaturalResultType;
 use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 
-class TopStoriesCarousel implements ParsingRuleInterace
+class TopStoriesCarousel implements ParsingRuleInterface
 {
     public function match(GoogleDom $dom, \DOMElement $node)
     {

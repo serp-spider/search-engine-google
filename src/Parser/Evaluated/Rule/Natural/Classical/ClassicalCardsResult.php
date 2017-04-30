@@ -8,7 +8,7 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
-use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 
 class ClassicalCardsResult extends ClassicalResult

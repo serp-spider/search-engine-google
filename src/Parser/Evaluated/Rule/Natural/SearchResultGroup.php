@@ -7,12 +7,12 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\SearchEngine\Google\Parser\ParsingRuleInterace;
+use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 
 /**
  * This is a group of results that need to be sub-parsed
  */
-class SearchResultGroup implements ParsingRuleInterace
+class SearchResultGroup implements ParsingRuleInterface
 {
     public function match(GoogleDom $dom, \DOMElement $node)
     {
