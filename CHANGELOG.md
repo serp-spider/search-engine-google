@@ -21,6 +21,7 @@
     browser implementation [a6fe671](https://github.com/serp-spider/search-engine-google/commit/a6fe6711d6fac42977cfc30212e438d8ab933584)
     * class ``Serps\SearchEngine\Google\GoogleClient\RequestBuilder`` was removed
     * fix the typo in the interface name ``ParsingRuleInterace`` that is now ``ParsingRuleInterface``
+    * the property ``is_carousel`` from top stories is now named ``isCarousel``
     
 * Features:
     * Google cards results are now supported [#38](https://github.com/serp-spider/search-engine-google/pull/38)

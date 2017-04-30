@@ -24,7 +24,7 @@ results:
   - types:
       - TOP_STORIES
     data:
-      is_carousel: false
+      isCarousel: false
       news:
         - title: GitHub met à jour son programme Developer
           url: http://www.itrnews.com/articles/168507/github-met-jour-son-programme-developer.html

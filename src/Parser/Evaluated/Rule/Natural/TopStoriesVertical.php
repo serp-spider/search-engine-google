@@ -28,7 +28,7 @@ class TopStoriesVertical implements ParsingRuleInterface
     private function parseNode(GoogleDom $dom, $node)
     {
         return [
-            'is_carousel' => false,
+            'isCarousel' => false,
             'news' => function () use ($dom, $node) {
 
                 $news = [];

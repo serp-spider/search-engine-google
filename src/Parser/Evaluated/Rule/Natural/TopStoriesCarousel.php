@@ -29,7 +29,7 @@ class TopStoriesCarousel implements ParsingRuleInterface
     private function parseNode(GoogleDom $dom, $node)
     {
         return [
-            'is_carousel' => true,
+            'isCarousel' => true,
             'news' => function () use ($dom, $node) {
 
                 $news = [];

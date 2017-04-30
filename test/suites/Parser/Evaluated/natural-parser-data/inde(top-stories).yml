@@ -13,7 +13,7 @@ results:
   - types:
     - TOP_STORIES
     data:
-      is_carousel: true
+      isCarousel: true
       news:
         - url: http://www.jeuneafrique.com/424970/politique/agressions-dafricains-inde-diplomates-demandent-louverture-dune-enquete-independante/
           title: |-
