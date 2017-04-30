@@ -5,6 +5,7 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical;
 
+use Serps\Core\Dom\DomElement;
 use Serps\Core\Media\MediaFactory;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
@@ -15,7 +16,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class ClassicalResult implements ParsingRuleInterface
 {
 
-    public function match(GoogleDom $dom, \DOMElement $node)
+    public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->getAttribute('class') == 'g') {
             if ($dom->cssQuery('.rc', $node)->length == 1) {
@@ -82,6 +83,15 @@ class ClassicalResult implements ParsingRuleInterface
         };
     }
 
+    public function getThumb()
+    {
+    }
+
+    protected function isLarge(GoogleDom $dom, \DomElement $node)
+    {
+        return $dom->cssQuery('.nrgt', $node)->length == 1;
+    }
+
     public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet)
     {
         $data = $this->parseNode($dom, $node);
@@ -90,7 +100,7 @@ class ClassicalResult implements ParsingRuleInterface
 
 
         // CLASSICAL RESULT MIGHT BE ENLARGED WITH SITELINKS
-        if ($dom->cssQuery('.nrgt', $node)->length == 1) {
+        if ($this->isLarge($dom, $node)) {
             $data['sitelinks'] = $this->parseSiteLink($dom, $node);
             $resultTypes[] = NaturalResultType::CLASSICAL_LARGE;
         }
@@ -115,7 +125,7 @@ class ClassicalResult implements ParsingRuleInterface
 
         $videoDuration = $dom->cssQuery('.vdur', $node);
         if ($videoDuration->length == 1) {
-            $resultTypes[] = array_unshift($resultTypes, NaturalResultType::CLASSICAL_VIDEO);
+            $resultTypes[] = NaturalResultType::CLASSICAL_VIDEO;
             $data['videoLarge'] = false;
         }
 

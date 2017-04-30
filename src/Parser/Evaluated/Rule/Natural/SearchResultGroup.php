@@ -14,7 +14,7 @@ use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
  */
 class SearchResultGroup implements ParsingRuleInterface
 {
-    public function match(GoogleDom $dom, \DOMElement $node)
+    public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         $class = $node->getAttribute('class');
 

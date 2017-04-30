@@ -14,7 +14,7 @@ use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 class Flight implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
 
-    public function match(GoogleDom $dom, \DOMElement $node)
+    public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ('flun' == $node->getAttribute('id')) {
             return self::RULE_MATCH_MATCHED;

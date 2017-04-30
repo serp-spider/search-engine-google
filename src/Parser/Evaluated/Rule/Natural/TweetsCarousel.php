@@ -14,7 +14,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class TweetsCarousel implements ParsingRuleInterface
 {
 
-    public function match(GoogleDom $dom, \DOMElement $node)
+    public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->getAttribute('class') == 'g') {
             foreach ($node->childNodes as $node) {

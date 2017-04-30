@@ -12,7 +12,7 @@ use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 class Divider implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
 
-    public function match(GoogleDom $dom, \DOMElement $node)
+    public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         /**
          * Divider should not be parsed and for performance we just skip the parsing

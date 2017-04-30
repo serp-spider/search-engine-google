@@ -16,7 +16,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
 
-    public function match(GoogleDom $dom, \DOMElement $node)
+    public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->hasAttribute('id') && $node->getAttribute('id') == 'imagebox_bigimages') {
             return self::RULE_MATCH_MATCHED;

@@ -80,11 +80,11 @@ class NaturalParserTest extends GoogleSerpTestCase
         }
 
         if (isset($data['results'])) {
-            $this->assertCount(count($data['results']), $result->getItems(), 'Failed asserting that number of results matched.');
+            $this->assertCount(count($data['results']), $result->getItems(), 'Failed asserting that number of results matched. Using file ' . $file);
 
             foreach ($data['results'] as $k => $expectedResult) {
                 $item = $result->getItems()[$k];
-                $this->assertResultHasTypes($expectedResult['types'], $item);
+                $this->assertResultHasTypes($expectedResult['types'], $item, $file, $k);
 
                 if (isset($expectedResult['not-types'])) {
                     $this->assertResultDoesNotHaveTypes($expectedResult['not-types'], $item);

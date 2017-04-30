@@ -14,7 +14,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class AnswerBox implements ParsingRuleInterface
 {
 
-    public function match(GoogleDom $dom, \DOMElement $node)
+    public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->getAttribute('class') == 'g mnr-c g-blk'
             && $dom->cssQuery('._Z7', $node)->length == 1

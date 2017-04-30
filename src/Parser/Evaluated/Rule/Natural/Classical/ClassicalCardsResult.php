@@ -5,22 +5,34 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical;
 
-use Serps\SearchEngine\Google\Page\GoogleDom;
+use Serps\Core\Dom\DomElement;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
-use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
+use Serps\SearchEngine\Google\Page\GoogleDom;
 
 class ClassicalCardsResult extends ClassicalResult
 {
 
-    public function match(GoogleDom $dom, \DOMElement $node)
+    public function match(GoogleDom $dom, DomElement $node)
     {
-        if ($node->getAttribute('class') == 'mnr-c' && null !== $node->childNodes->item(0)) {
-            if ($dom->cssQuery('.rc', $node)->length == 1) {
+        if ($node->hasClass('mnr-c')) {
+            $hasgblk = $node->hasClass('g-blk');
+            // class g-blk is common to classical large, answer box, and some other cards results,
+            // but not present on base classical results
+            // class ._Hi is unique to large classical results
+
+            if ((!$hasgblk || ($hasgblk && $dom->cssQuery('._Hi', $node)->length == 1))
+                && $dom->cssQuery('.rc', $node)->length == 1
+            ) {
                 return self::RULE_MATCH_MATCHED;
             }
         }
         return self::RULE_MATCH_NOMATCH;
+    }
+
+    protected function isLarge(GoogleDom $dom, \DomElement $node)
+    {
+        return $dom->cssQuery('._Hi', $node)->length == 1;
     }
 }

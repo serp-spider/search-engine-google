@@ -5,6 +5,7 @@
 
 namespace Serps\SearchEngine\Google\Parser;
 
+use Serps\Core\Dom\DomNodeList;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 
@@ -21,6 +22,10 @@ abstract class AbstractParser
      */
     abstract protected function generateRules();
 
+    /**
+     * @param GoogleDom $googleDom
+     * @return DomNodeList
+     */
     abstract protected function getParsableItems(GoogleDom $googleDom);
 
 
@@ -59,7 +64,7 @@ abstract class AbstractParser
      * @param $googleDom
      * @return IndexedResultSet
      */
-    protected function parseGroups($elementGroups, IndexedResultSet $resultSet, $googleDom)
+    protected function parseGroups(DomNodeList $elementGroups, IndexedResultSet $resultSet, $googleDom)
     {
         $rules = $this->getRules();
 
@@ -70,7 +75,7 @@ abstract class AbstractParser
             foreach ($rules as $rule) {
                 $match = $rule->match($googleDom, $group);
                 if ($match instanceof \DOMNodeList) {
-                    $this->parseGroups($group->childNodes, $resultSet, $googleDom);
+                    $this->parseGroups(new DomNodeList($group->childNodes, $googleDom), $resultSet, $googleDom);
                     break;
                 } else {
                     switch ($match) {

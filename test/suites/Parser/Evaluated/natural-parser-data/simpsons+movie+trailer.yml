@@ -26,10 +26,12 @@ results:
   - types:
     - CLASSICAL_VIDEO
     - CLASSICAL
+    - CLASSICAL_ILLUSTRATED
 
   - types:
     - CLASSICAL_VIDEO
     - CLASSICAL
+    - CLASSICAL_ILLUSTRATED
 
   - types:
     - CLASSICAL
@@ -40,10 +42,12 @@ results:
   - types:
     - CLASSICAL_VIDEO
     - CLASSICAL
+    - CLASSICAL_ILLUSTRATED
 
   - types:
     - CLASSICAL_VIDEO
     - CLASSICAL
+    - CLASSICAL_ILLUSTRATED
 
   - types:
     - CLASSICAL

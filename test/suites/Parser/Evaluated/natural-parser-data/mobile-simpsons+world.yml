@@ -1,0 +1,34 @@
+# image-group recipes
+url: https://www.google.fr/search?q=simpsons+world
+file: test/resources/pages-mobile/simpsons+world.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: null
+  isMobile: true
+
+results:
+
+  - types:
+      - CLASSICAL
+      - CLASSICAL_LARGE
+    data:
+      title: Everything Simpsons
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL

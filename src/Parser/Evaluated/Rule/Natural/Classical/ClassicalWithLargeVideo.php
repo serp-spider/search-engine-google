@@ -15,7 +15,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class ClassicalWithLargeVideo implements ParsingRuleInterface
 {
 
-    public function match(GoogleDom $dom, \DOMElement $node)
+    public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->getAttribute('class') == 'g mnr-c g-blk'
             && $dom->cssQuery('.knowledge-block__video-nav-block', $node)->length == 1

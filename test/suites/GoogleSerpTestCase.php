@@ -13,11 +13,31 @@ use Serps\Core\Media\MediaInterface;
 class GoogleSerpTestCase extends \PHPUnit_Framework_TestCase
 {
 
-    public function assertResultHasTypes(array $types, ResultDataInterface $result)
+    public function assertResultHasTypes(array $types, ResultDataInterface $result, $file, $index)
     {
+
+        $index = $index + 1;
+
+        $this->assertCount(
+            count($types),
+            $result->getTypes(),
+            'Type count does not match. '
+            . 'Expects that '
+            . 'item[' . implode(', ', $result->getTypes()) . '] '
+            . 'has types:[' . implode(', ', $types) . '] '
+            . 'Using file ' . $file . ' result #' . $index
+        );
+
+
+
         foreach ($types as $type) {
             $typeValue = constant(NaturalResultType::class . '::' . $type);
-            $this->assertTrue($result->is($typeValue), 'Expects that item[' . implode(', ', $result->getTypes()) . '] has the type: ' . $typeValue);
+            $this->assertTrue(
+                $result->is($typeValue),
+                'Expects that '
+                . 'item[' . implode(', ', $result->getTypes()) . '] has the type: ' . $typeValue
+                . '. Using file ' . $file . ' result #' . $index
+            );
         }
     }
 

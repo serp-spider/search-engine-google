@@ -16,7 +16,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class Map implements ParsingRuleInterface
 {
 
-    public function match(GoogleDom $dom, \DOMElement $node)
+    public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($dom->cssQuery('._RBh', $node)->length  > 1) {
             return self::RULE_MATCH_MATCHED;

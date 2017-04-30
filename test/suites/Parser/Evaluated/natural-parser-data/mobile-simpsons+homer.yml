@@ -11,6 +11,7 @@ results:
 
   - types:
     - CLASSICAL
+    - CLASSICAL_ILLUSTRATED
     data:
       title: Homer Simpson — Wikipedia
       url: https://fr.m.wikipedia.org/wiki/Homer_Simpson
@@ -19,6 +20,7 @@ results:
 
   - types:
     - CLASSICAL
+    - CLASSICAL_ILLUSTRATED
     data:
       title: Homer Simpson - Wikipedia, the free encyclopedia
       url: https://en.m.wikipedia.org/wiki/Homer_Simpson
@@ -27,21 +29,26 @@ results:
 
   - types:
     - CLASSICAL
+    - CLASSICAL_ILLUSTRATED
 
   - types:
     - CLASSICAL
+    - CLASSICAL_ILLUSTRATED
 
   - types:
     - VIDEO_GROUP
 
   - types:
     - CLASSICAL
+    - CLASSICAL_ILLUSTRATED
 
   - types:
     - CLASSICAL
+    - CLASSICAL_ILLUSTRATED
 
   - types:
     - CLASSICAL
+    - CLASSICAL_ILLUSTRATED
 
   - types:
     - CLASSICAL
