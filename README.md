@@ -25,3 +25,15 @@ Browse the [documentation](http://serp-spider.github.io/documentation/search-eng
 
 
 
+Disclaimer
+-----------
+
+> Using our Services does not give you ownership of any intellectual property rights in 
+> our Services or the content you access. 
+> You may not use content from our Services unless you obtain permission from its owner or 
+> are otherwise permitted by law
+>
+> Extract from [Google terms of services](https://www.google.com/policies/terms/)
+
+When using this software must respect terms of services of third parties like Google.
+Serps authors and contributors cannot be hold as liable for the use you make of this software. 
