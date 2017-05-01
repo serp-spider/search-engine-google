@@ -31,6 +31,24 @@ results:
   - types:
       - VIDEO_GROUP
 
+    data:
+      videos:
+        - title: Donuts illimités pour Springfield [REDIT Avril 2017]
+          url: https://m.youtube.com/watch?v=e6uSN6bcWtg
+        - title: Les Simpsons Springfield - Avoir des donuts Illimité 2016 Tutoriel FR
+          url: https://m.youtube.com/watch?v=irmOhOGabEM
+
+    data-count:
+      videos: 10
+
+    data-media:
+      videos:
+        # Image is 1px gif
+        # TODO parse it from javacscript source
+        - image: test/resources/pages-mobile/simpsons+donuts/thumb1.png
+
+
+
 
   - types:
       - CLASSICAL

@@ -5,6 +5,7 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
+use Serps\Core\Media\MediaFactory;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\NaturalResultType;
@@ -28,12 +29,28 @@ class VideoGroup implements ParsingRuleInterface
     public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet)
     {
 
-        $xPath = $dom->getXpath();
-
         $item = [
 
-            'items'    => function () use ($node, $dom) {
-                return [];
+            'videos'    => function () use ($node, $dom) {
+                $items = [];
+                $nodes = $dom->cssQuery('._ERj', $node);
+
+                foreach ($nodes as $node) {
+                    $items[] = new BaseResult(NaturalResultType::VIDEO_GROUP_VIDEO, [
+                        'image' => function () use ($node, $dom) {
+                            $data = $dom->cssQuery('g-img img', $node)->getNodeAt(0)->getAttribute('src');
+                            return MediaFactory::createMediaFromSrc($data);
+                        },
+                        'title' => function () use ($node, $dom) {
+                            return $dom->cssQuery('._IRj', $node)->getNodeAt(0)->getNodeValue();
+                        },
+                        'url' => function () use ($node, $dom) {
+                            return $dom->cssQuery('g-inner-card a', $node)->getNodeAt(0)->getAttribute('href');
+                        }
+                    ]);
+                }
+
+                return $items;
             }
 
         ];
