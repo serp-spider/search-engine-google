@@ -4,7 +4,6 @@ namespace Serps\SearchEngine\Google;
 
 use Serps\SearchEngine\Google\GoogleUrlTrait;
 use Serps\Core\Url;
-use Zend\Diactoros\Request;
 
 /**
  * A fluent builder for a google url

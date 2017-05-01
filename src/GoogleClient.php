@@ -17,7 +17,6 @@ use Serps\SearchEngine\Google\Page\GoogleCaptcha;
 use Serps\SearchEngine\Google\Page\GoogleError;
 use Serps\SearchEngine\Google\Page\GoogleSerp;
 use Serps\SearchEngine\Google\GoogleUrl;
-use Zend\Diactoros\Request;
 use Serps\Exception\RequestError\PageNotFoundException;
 use Serps\Exception\RequestError\RequestErrorException;
 use Serps\Exception\RequestError\InvalidResponseException;

@@ -5,10 +5,8 @@
 
 namespace Serps\SearchEngine\Google;
 
-use Psr\Http\Message\RequestInterface;
 use Serps\Core\Url\QueryParam;
 use Serps\SearchEngine\Google\GoogleUrl;
-use Zend\Diactoros\Request;
 
 /**
  * Contains the base methods describing a google url.
