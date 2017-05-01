@@ -55,26 +55,32 @@ class ClassicalResult implements ParsingRuleInterface
         ];
     }
 
+    /**
+     * If isLarge() matched, this will parse the content of site links
+     * @param GoogleDom $dom
+     * @param \DomElement $node
+     * @return \Closure
+     */
     protected function parseSiteLink(GoogleDom $dom, \DomElement $node)
     {
         return function () use ($dom, $node) {
-            $items = $dom->cssQuery('.nrgt tr.mslg>td>.sld', $node);
+            $items = $dom->cssQuery('.mslg .sld', $node);
             $siteLinksData = [];
             foreach ($items as $item) {
                 $siteLinksData[] = new BaseResult(NaturalResultType::CLASSICAL_SITELINK, [
                     'title' => function () use ($dom, $item) {
                         return $dom->cssQuery('h3.r a', $item)
-                            ->item(0)
-                            ->textContent;
+                            ->getNodeAt(0)
+                            ->getNodeValue();
                     },
                     'description' => function () use ($dom, $item) {
                         return $dom->cssQuery('.st', $item)
-                            ->item(0)
-                            ->textContent;
+                            ->getNodeAt(0)
+                            ->getNodeValue();
                     },
                     'url' => function () use ($dom, $item) {
                         return $dom->cssQuery('h3.r a', $item)
-                            ->item(0)
+                            ->getNodeAt(0)
                             ->getAttribute('href');
                     },
                 ]);
@@ -83,10 +89,12 @@ class ClassicalResult implements ParsingRuleInterface
         };
     }
 
-    public function getThumb()
-    {
-    }
-
+    /**
+     * Check if has site links. Might be overriden by subparser like ClassicalCard
+     * @param GoogleDom $dom
+     * @param \DomElement $node
+     * @return bool
+     */
     protected function isLarge(GoogleDom $dom, \DomElement $node)
     {
         return $dom->cssQuery('.nrgt', $node)->length == 1;

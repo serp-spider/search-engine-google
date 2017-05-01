@@ -14,6 +14,20 @@ results:
       - CLASSICAL_LARGE
     data:
       title: Everything Simpsons
+      sitelinks:
+        - title: Episodes
+          description: ""
+          url: http://www.simpsonsworld.com/browse/episodes
+        - title: Simpsons TV
+        - title: Characters
+        - title: Need help?
+        - title: Simpsons World settings
+        - title: Clips
+          description: ""
+          url: http://www.simpsonsworld.com/browse/clips
+
+    data-count:
+      sitelinks: 6
 
   - types:
       - CLASSICAL

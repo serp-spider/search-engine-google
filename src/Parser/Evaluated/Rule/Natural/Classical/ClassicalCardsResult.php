@@ -31,6 +31,13 @@ class ClassicalCardsResult extends ClassicalResult
         return self::RULE_MATCH_NOMATCH;
     }
 
+
+    /**
+     * Is large dectection is not the same for cards and non cards classical results
+     * @param GoogleDom $dom
+     * @param \DomElement $node
+     * @return bool
+     */
     protected function isLarge(GoogleDom $dom, \DomElement $node)
     {
         return $dom->cssQuery('._Hi', $node)->length == 1;
