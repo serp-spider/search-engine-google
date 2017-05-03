@@ -1,8 +1,21 @@
 # CHANGELOG
 
-## 0.2.0 
+## 0.3.0 
 
 *20xx-xx-xx*
+
+
+## 0.2.1
+
+*20xx-xx-xx*
+
+* Features:
+    * Parsing for mobile knowledge results (fd95ffc07c137223e36fade739b4617c17fe6758)
+
+
+## 0.2.0 
+
+*2017-05-01*
 
 * Breaking Changes:
     * Images data are returned MediaInterface [#35](https://github.com/serp-spider/search-engine-google/issues/35)
