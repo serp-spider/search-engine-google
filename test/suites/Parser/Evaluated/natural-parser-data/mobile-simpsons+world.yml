@@ -30,6 +30,12 @@ results:
       sitelinks: 6
 
   - types:
+      - KNOWLEDGE
+    data:
+      title: "Simpsons World The Ultimate Episode Guide: Seasons 1–20"
+      shortDescription: Livre de Matt Groening
+
+  - types:
       - CLASSICAL
 
   - types:

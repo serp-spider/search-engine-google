@@ -10,6 +10,12 @@ test-methods:
 results:
 
   - types:
+      - KNOWLEDGE
+    data:
+      title: Homer Simpson
+      shortDescription: Personnage fictif
+
+  - types:
     - CLASSICAL
     - CLASSICAL_ILLUSTRATED
     data:
