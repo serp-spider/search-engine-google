@@ -1,0 +1,48 @@
+url: https://www.google.co.uk/search?q=narendra+modi&cad=h
+file: test/resources/pages-evaluated/narendra+modi.html
+results:
+
+
+  - types:
+      - TOP_STORIES
+
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - TWEETS_CAROUSEL
+
+    data:
+      title: Narendra Modi (@narendramodi) · Twitter
+      url: https://twitter.com/narendramodi?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor
+      user: "@narendramodi"
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+

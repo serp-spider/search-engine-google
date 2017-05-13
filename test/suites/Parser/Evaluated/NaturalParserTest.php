@@ -91,7 +91,7 @@ class NaturalParserTest extends GoogleSerpTestCase
                 }
 
                 if (isset($expectedResult['data'])) {
-                    $this->assertResultHasData($expectedResult['data'], $item);
+                    $this->assertResultHasData($expectedResult['data'], $item, $file . ' => ' . $k . '/');
                 }
                 if (isset($expectedResult['data-count'])) {
                     $this->assertResultDataCount($expectedResult['data-count'], $item);

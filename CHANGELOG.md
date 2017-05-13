@@ -12,6 +12,9 @@
 * Features:
     * Parsing for mobile knowledge results (fd95ffc07c137223e36fade739b4617c17fe6758)
 
+* Bug fix
+    * Fixing tweet carousel recognition
+
 
 ## 0.2.0 
 

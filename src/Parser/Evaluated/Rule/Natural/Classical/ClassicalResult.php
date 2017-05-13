@@ -29,7 +29,7 @@ class ClassicalResult implements ParsingRuleInterface
     protected function parseNode(GoogleDom $dom, \DomElement $node)
     {
 
-        // find the tilte/url
+        // find the title/url
         /* @var $aTag \DOMElement */
         $aTag=$dom
             ->xpathQuery("descendant::h3[@class='r'][1]/a", $node)

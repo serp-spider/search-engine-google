@@ -16,12 +16,9 @@ class TweetsCarousel implements ParsingRuleInterface
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->getAttribute('class') == 'g') {
-            foreach ($node->childNodes as $node) {
-                if ($node instanceof \DOMElement && $node->getAttribute('class') == '_Zfh') {
-                    return self::RULE_MATCH_MATCHED;
-                }
-            }
+
+        if ($dom->cssQuery('.g ._BOf', $node)->length) {
+            return self::RULE_MATCH_MATCHED;
         }
         return self::RULE_MATCH_NOMATCH;
     }
