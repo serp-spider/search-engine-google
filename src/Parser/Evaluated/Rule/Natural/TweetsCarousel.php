@@ -40,7 +40,7 @@ class TweetsCarousel implements ParsingRuleInterface
             $data = [
                 'title'   => $title,
                 'url'     => $aTag->getAttribute('href'),
-                'user'    => $match[0]
+                'user'    => isset($match[0]) ? $match[0] : null
             ];
 
             $item = new BaseResult(NaturalResultType::TWEETS_CAROUSEL, $data);

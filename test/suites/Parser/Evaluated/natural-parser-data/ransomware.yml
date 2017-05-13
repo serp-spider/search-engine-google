@@ -1,0 +1,48 @@
+# testing null user (see TWEETS_CAROUSEL)
+
+url: https://www.google.co.uk/search?q=ransomware
+file: test/resources/pages-evaluated/ransomware.html
+results:
+
+
+  - types:
+      - TOP_STORIES
+
+  - types:
+      - TWEETS_CAROUSEL
+
+    data:
+      user: null
+      title: ransomware on Twitter
+
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+

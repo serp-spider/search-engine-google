@@ -13,7 +13,8 @@
     * Parsing for mobile knowledge results (fd95ffc07c137223e36fade739b4617c17fe6758)
 
 * Bug fix
-    * Fixing tweet carousel recognition
+    * Fixing tweet carousel recognition (4f681da0435454b5ff592c657789010ccf8361ee)
+    * Fixing tweet carousel non linked to an user
 
 
 ## 0.2.0 
