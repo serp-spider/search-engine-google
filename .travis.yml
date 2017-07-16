@@ -1,5 +1,6 @@
 language: php
 
+dist: trusty
 sudo: false
 
 matrix:
@@ -20,7 +21,6 @@ matrix:
 
 before_script:
   - if [ -z "$IGNORE_XDEBUG" ];then phpenv config-rm xdebug.ini; fi
-  - composer config -g github-oauth.github.com $GITHUB_COMPOSER_AUTH
   - travis_retry composer self-update
   - travis_retry composer update --prefer-dist
   - if [ -n "$PROCESS_CODECLIMATE" ];then echo 'zend_extension=xdebug.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi
