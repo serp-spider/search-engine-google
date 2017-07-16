@@ -4,10 +4,13 @@
 
 *20xx-xx-xx*
 
+## 0.2.2
+
+*20xx-xx-xx*
 
 ## 0.2.1
 
-*20xx-xx-xx*
+*2017-07-16*
 
 * Features:
     * Parsing for mobile knowledge results (fd95ffc07c137223e36fade739b4617c17fe6758)
