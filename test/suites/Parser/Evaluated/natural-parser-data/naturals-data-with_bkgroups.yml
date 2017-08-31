@@ -1,0 +1,39 @@
+url: https://www.google.fr/search?q=titley+großbritannien+hotels&hl=de_DE
+file: test/resources/pages-evaluated/page-with-bkgrouped-results.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: 121
+  isMobile: false
+
+results:
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - IMAGE_GROUP
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL
+
+  - types:
+    - CLASSICAL

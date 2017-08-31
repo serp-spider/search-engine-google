@@ -20,6 +20,8 @@ class SearchResultGroup implements ParsingRuleInterface
 
         if ('srg' == $class || '_NId' == $class) {
             return $node->childNodes;
+        } elseif ('bkWMgd' == $class) {
+            return $node->lastChild->childNodes;
         } else {
             return self::RULE_MATCH_NOMATCH;
         }
