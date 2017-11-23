@@ -88,7 +88,7 @@ class GoogleSerp extends GoogleDom
         // DE:  2.200.000
         // IN:  62,00,000
         // We have to use a global matcher
-        $matched = preg_match('/([0-9]+[ \.,\x{00a0}])+/u', $nodeText->textContent, $countMatch);
+        $matched = preg_match('/([0-9]+[^0-9]?)+/u', $nodeText->textContent, $countMatch);
 
         if (!$matched) {
             return null;

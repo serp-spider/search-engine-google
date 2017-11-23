@@ -3,7 +3,7 @@ file: test/resources/pages-evaluated/page-with-bkgrouped-results.html
 
 test-methods:
   javascriptIsEvaluated: true
-  getNumberOfResults: 121
+  getNumberOfResults: 121000
   isMobile: false
 
 results:
