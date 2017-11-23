@@ -17,7 +17,9 @@ class GoogleSerpTestCase extends \PHPUnit_Framework_TestCase
     public function assertResultHasTypes(array $types, ResultDataInterface $result, $file, $index)
     {
 
-        $index = $index + 1;
+        if (is_int($index)) {
+            $index = $index + 1;
+        }
 
         $this->assertCount(
             count($types),
