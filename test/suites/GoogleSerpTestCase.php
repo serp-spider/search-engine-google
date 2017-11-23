@@ -7,6 +7,7 @@ namespace Serps\Test\SearchEngine\Google;
 
 use Serps\Core\Media\File;
 use Serps\Core\Serp\ResultDataInterface;
+use Serps\Core\Serp\ResultSetInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 use Serps\Core\Media\MediaInterface;
 
@@ -57,19 +58,32 @@ class GoogleSerpTestCase extends \PHPUnit_Framework_TestCase
 
         foreach ($dataArray as $k => $data) {
             $currentPathForItem = $currentPath . $k . '/';
-            if (is_array($data)) {
-                if (is_object($result)) {
-                    $this->assertResultHasData($data, $result->$k, $currentPathForItem);
-                } elseif (is_array($result)) {
-                    $this->assertResultHasData($data, $result[$k], $currentPathForItem);
+
+            if ($k === 'types()') {
+                if (is_object($result) && $result instanceof ResultDataInterface) {
+                    $this->assertResultHasTypes($data, $result, $currentPathForItem, $k);
                 } else {
-                    $this->fail('Asserting that data has key "' . $k . '"". Path: "' . $currentPathForItem . '"');
+                    $this->fail('Asserting that data is instance of ResultDataInterface (evaluating types()). Path: "' . $currentPathForItem . '"');
                 }
             } else {
-                if (!is_object($result)) {
-                    $this->fail('Data is not an object. Evaluating key "' . $k . '"". Path: "' . $currentPathForItem . '"');
+                if (is_array($data)) {
+                    if (is_object($result)) {
+                        if ($result instanceof ResultSetInterface) {
+                            $this->assertResultHasData($data, $result[$k], $currentPathForItem);
+                        } else {
+                            $this->assertResultHasData($data, $result->$k, $currentPathForItem);
+                        }
+                    } elseif (is_array($result)) {
+                        $this->assertResultHasData($data, $result[$k], $currentPathForItem);
+                    } else {
+                        $this->fail('Asserting that data has key "' . $k . '"". Path: "' . $currentPathForItem . '"');
+                    }
+                } else {
+                    if (!is_object($result)) {
+                        $this->fail('Data is not an object. Evaluating key "' . $k . '"". Path: "' . $currentPathForItem . '"');
+                    }
+                    $this->assertEquals($data, $result->$k);
                 }
-                $this->assertEquals($data, $result->$k);
             }
         }
     }

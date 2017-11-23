@@ -24,6 +24,9 @@ abstract class NaturalResultType
 
     const IN_THE_NEWS = 'in_the_news';
     const TOP_STORIES = 'top_stories';
+    const TOP_STORIES_NEWS_VERTICAL = 'top_stories_news_vertical';
+    const TOP_STORIES_NEWS_CAROUSEL = 'top_stories_news_carousel';
+    const TOP_STORIES_COMPOSED = 'top_stories_composed';
     const TWEETS_CAROUSEL= 'tweets_carousel';
 
     const MAP = 'map';

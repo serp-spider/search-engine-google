@@ -9,6 +9,7 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AnswerBox;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResult;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ComposedTopStories;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flight;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup;
@@ -39,6 +40,7 @@ class MobileNaturalParser extends AbstractParser
             new SearchResultGroup(),
             new ClassicalCardsResult(),
             new ImageGroupCarousel(),
+            new ComposedTopStories(),
             new VideoGroup(),
             new ImageGroup(),
             new KnowledgeCard()

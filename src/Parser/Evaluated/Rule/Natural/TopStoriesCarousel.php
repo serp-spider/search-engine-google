@@ -7,6 +7,7 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
+use Serps\Core\Serp\ResultSet;
 use Serps\SearchEngine\Google\NaturalResultType;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
@@ -30,13 +31,14 @@ class TopStoriesCarousel implements ParsingRuleInterface
     {
         return [
             'isCarousel' => true,
+            'isVertical' => false,
             'news' => function () use ($dom, $node) {
 
                 $news = [];
                 $nodes = $dom->cssQuery('._Ocr>._Pcr', $node);
 
                 foreach ($nodes as $newsNode) {
-                    $news[] = new BaseResult('', [
+                    $news[] = new BaseResult(NaturalResultType::TOP_STORIES_NEWS_CAROUSEL, [
                         'title' => function () use ($dom, $newsNode) {
                             $el = $dom->cssQuery('._IRj', $newsNode)->item(0);
                             return $el->nodeValue;
@@ -48,7 +50,10 @@ class TopStoriesCarousel implements ParsingRuleInterface
                     ]);
                 }
 
-                return $news;
+                $resultSet = new ResultSet();
+                $resultSet->addItems($news);
+
+                return $resultSet;
             }
         ];
     }

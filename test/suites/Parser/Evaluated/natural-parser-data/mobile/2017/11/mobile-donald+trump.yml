@@ -1,0 +1,63 @@
+# image-group recipes
+url: https://www.google.fr/search?q=simpsons+world
+file: test/resources/pages-mobile/2017/11/donald+trump.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: null
+  isMobile: true
+
+results:
+
+  - types:
+      - TOP_STORIES
+      - TOP_STORIES_COMPOSED
+
+    data-count:
+      news: 12
+
+    data:
+      isVertical: true
+      isCarousel: true
+      news:
+        - title: Donald Trump’s Twitter account disappeared for five beautiful minutes
+          url: https://www.theverge.com/platform/amp/2017/11/2/16600732/donald-trump-twitter-account-gone-realdonaldtrump
+          types():
+            - TOP_STORIES_NEWS_VERTICAL
+
+        - title: Opinion | What Donald Trump Thinks It Takes to Be a Man
+          url: "#"
+          types():
+            - TOP_STORIES_NEWS_VERTICAL
+
+        - title: Trump's Twitter account briefly 'deactivated'
+          url: https://www.bbc.com/news/amp/world-us-canada-41854482
+          types():
+            - TOP_STORIES_NEWS_CAROUSEL
+        - title: |-
+                 Jared Kushner's team turned over documents to special counsel in Russia
+                     investigation
+          url: https://amp.cnn.com/cnn/2017/11/02/politics/jared-kushner-robert-mueller-documents-russia-investigation/index.html
+          types():
+            - TOP_STORIES_NEWS_CAROUSEL
+
+  - types:
+      - KNOWLEDGE
+
+    data:
+      title: Donald Trump
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - VIDEO_GROUP
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL

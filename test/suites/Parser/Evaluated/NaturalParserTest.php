@@ -41,6 +41,7 @@ use Symfony\Component\Yaml\Yaml;
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesVertical
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesCarousel
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ComposedTopStories
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarousel
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideoGroup
  *
@@ -50,7 +51,9 @@ class NaturalParserTest extends GoogleSerpTestCase
 
     public function serpProvider()
     {
-        $iterator = new \DirectoryIterator(__DIR__ . '/natural-parser-data');
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator(__DIR__ . '/natural-parser-data')
+        );
         $data = [];
         foreach ($iterator as $file) {
             if ($file->getExtension() === 'yml') {
