@@ -25,6 +25,7 @@ use Symfony\Component\Yaml\Yaml;
  * For instance if the previous test included a ``TweetsCarousel`` the new test should do so.
  *
  *
+ * @covers \Serps\SearchEngine\Google\Page\GoogleSerp
  * @covers \Serps\SearchEngine\Google\Parser\AbstractParser
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\MobileNaturalParser
@@ -103,6 +104,21 @@ class NaturalParserTest extends GoogleSerpTestCase
                 }
                 if (isset($expectedResult['data-media'])) {
                     $this->assertResultHasDataMedia($expectedResult['data-media'], $item);
+                }
+            }
+        }
+
+        if (isset($data['related-searches'])) {
+            $relatedSearches = $dom->getRelatedSearches();
+
+            $this->assertCount(count($data['related-searches']), $relatedSearches, 'Failed related search assertion with file ' . $file);
+
+            foreach ($data['related-searches'] as $k => $relSearchItem) {
+                if (isset($relSearchItem['title'])) {
+                    $this->assertEquals($relSearchItem['title'], $relatedSearches[$k]->title, 'Failed related search title assertion with file ' . $file . ' for item #' . $k);
+                }
+                if (isset($relSearchItem['url'])) {
+                    $this->assertEquals($relSearchItem['url'], $relatedSearches[$k]->url, 'Failed related search url assertion with file ' . $file . ' for item #' . $k);
                 }
             }
         }

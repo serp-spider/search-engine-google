@@ -123,16 +123,30 @@ class GoogleSerp extends GoogleDom
     public function getRelatedSearches()
     {
         $relatedSearches = [];
-        $items = $this->cssQuery('#brs ._e4b>a');
-        if ($items->length > 0) {
-            foreach ($items as $item) {
-                /* @var $item \DOMElement */
-                $result = new \stdClass();
-                $result->title = $item->nodeValue;
-                $result->url = $this->getUrl()->resolveAsString($item->getAttribute('href'));
-                $relatedSearches[] = $result;
+        if ($this->isMobile()) {
+            $items = $this->cssQuery('#botstuff div:not(#bres)>._Qot>div>a');
+            if ($items->length > 0) {
+                foreach ($items as $item) {
+                    /* @var $item \DOMElement */
+                    $result = new \stdClass();
+                    $result->title = $item->childNodes->item(0)->nodeValue;
+                    $result->url = $this->getUrl()->resolveAsString($item->getAttribute('href'));
+                    $relatedSearches[] = $result;
+                }
+            }
+        } else {
+            $items = $this->cssQuery('#brs ._e4b>a');
+            if ($items->length > 0) {
+                foreach ($items as $item) {
+                    /* @var $item \DOMElement */
+                    $result = new \stdClass();
+                    $result->title = $item->nodeValue;
+                    $result->url = $this->getUrl()->resolveAsString($item->getAttribute('href'));
+                    $relatedSearches[] = $result;
+                }
             }
         }
+
 
         return $relatedSearches;
     }
