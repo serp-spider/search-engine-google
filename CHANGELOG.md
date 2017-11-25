@@ -8,6 +8,14 @@
 
 *20xx-xx-xx*
 
+* Bug fix:
+    * Parse ``bkWMgd`` groups (thanks to [Shiftas](https://github.com/Shiftas)) [#76](https://github.com/serp-spider/search-engine-google/issues/76)
+    * Fix result count [#76](https://github.com/serp-spider/search-engine-google/issues/76)
+    * Fix some mobile card results not parsing [#79](https://github.com/serp-spider/search-engine-google/issues/79) and [#78](https://github.com/serp-spider/search-engine-google/issues/78)
+
+* Features:
+    * Parsing for "composed top stories" and standardizing old "top stories" [#67](https://github.com/serp-spider/search-engine-google/issues/67)
+
 ## 0.2.1
 
 *2017-07-16*

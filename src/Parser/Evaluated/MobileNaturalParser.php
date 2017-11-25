@@ -8,6 +8,7 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AnswerBox;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultZ1m;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ComposedTopStories;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider;
@@ -38,6 +39,7 @@ class MobileNaturalParser extends AbstractParser
         return [
             new Divider(),
             new SearchResultGroup(),
+            new ClassicalCardsResultZ1m(),
             new ClassicalCardsResult(),
             new ImageGroupCarousel(),
             new ComposedTopStories(),

@@ -84,7 +84,7 @@ class GoogleSerpTestCase extends \PHPUnit_Framework_TestCase
                     if (!is_object($result)) {
                         $this->fail('Data is not an object. Evaluating key "' . $k . '"". Path: "' . $currentPathForItem . '"');
                     }
-                    $this->assertEquals($data, $result->$k);
+                    $this->assertEquals($data, $result->$k, 'Checking key "' . $k . '" for equality. Path: "' . $currentPathForItem . '"');
                 }
             }
         }
