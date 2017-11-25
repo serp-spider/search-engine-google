@@ -23,6 +23,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalC
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarousel;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalWithLargeVideo;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarouselZ1m;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideoGroup;
 
 /**
@@ -41,6 +42,7 @@ class MobileNaturalParser extends AbstractParser
             new SearchResultGroup(),
             new ClassicalCardsResultZ1m(),
             new ClassicalCardsResult(),
+            new TweetsCarouselZ1m(),
             new ImageGroupCarousel(),
             new ComposedTopStories(),
             new VideoGroup(),

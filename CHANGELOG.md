@@ -12,9 +12,13 @@
     * Parse ``bkWMgd`` groups (thanks to [Shiftas](https://github.com/Shiftas)) [#76](https://github.com/serp-spider/search-engine-google/issues/76)
     * Fix result count [#76](https://github.com/serp-spider/search-engine-google/issues/76)
     * Fix some mobile card results not parsing [#79](https://github.com/serp-spider/search-engine-google/issues/79) and [#78](https://github.com/serp-spider/search-engine-google/issues/78)
+    * Fix twitter carousel parser for mobile [#81](https://github.com/serp-spider/search-engine-google/issues/81)
 
 * Features:
     * Parsing for "composed top stories" and standardizing old "top stories" [#67](https://github.com/serp-spider/search-engine-google/issues/67)
+
+* Other:
+    * Dependency to serps/core was updated from ~0.2.0 to ~0.2.4
 
 ## 0.2.1
 

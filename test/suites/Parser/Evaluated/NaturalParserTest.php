@@ -32,6 +32,7 @@ use Symfony\Component\Yaml\Yaml;
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResult
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalWithLargeVideo
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResult
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultZ1m
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flight
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup
@@ -43,6 +44,7 @@ use Symfony\Component\Yaml\Yaml;
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesCarousel
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ComposedTopStories
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarousel
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarouselZ1m
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideoGroup
  *
  */
