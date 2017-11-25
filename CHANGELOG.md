@@ -13,6 +13,7 @@
     * Fix result count [#76](https://github.com/serp-spider/search-engine-google/issues/76)
     * Fix some mobile card results not parsing [#79](https://github.com/serp-spider/search-engine-google/issues/79) and [#78](https://github.com/serp-spider/search-engine-google/issues/78)
     * Fix twitter carousel parser for mobile [#81](https://github.com/serp-spider/search-engine-google/issues/81)
+    * Fix related searches for mobile [#80](https://github.com/serp-spider/search-engine-google/issues/81)
 
 * Features:
     * Parsing for "composed top stories" and standardizing old "top stories" [#67](https://github.com/serp-spider/search-engine-google/issues/67)
