@@ -39,6 +39,7 @@ use Symfony\Component\Yaml\Yaml;
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroupCarousel
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InTheNews
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\KnowledgeCard
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Map
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesVertical
