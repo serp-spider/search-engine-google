@@ -23,19 +23,30 @@ class ClassicalCardsResultZ1m implements ParsingRuleInterface
 
     public function match(GoogleDom $dom, DomElement $node)
     {
-        if ($node->childNodes->length == 1 &&                           // has 1 child
-            $node->childNodes->item(0)->childNodes->length == 1   // and child as also 1 child
-        ) {
+        if ($node->childNodes->length == 1) {
+
             /** @var DomElement $childNode */
             $childNode = $node->childNodes->item(0);
 
-            /** @var DomElement $subChildNode */
-            $subChildNode = $childNode->childNodes->item(0);
+            // check if has class _Z1m
+            if ($childNode->hasClass('_Z1m')) {
+                // check _a5r
+                if ($node->childNodes->item(0)->childNodes->length == 1) {
+                    /** @var DomElement $subChildNode */
+                    $subChildNode = $childNode->childNodes->item(0);
 
-            if ($childNode->hasClass('_Z1m') && $subChildNode->hasClass('_a5r')) {
-                return self::RULE_MATCH_MATCHED;
+                    if ($subChildNode->hasClass('_a5r')) {
+                        return self::RULE_MATCH_MATCHED;
+                    }
+                }
+
+                // check a._Olt._bCp
+                if ($dom->cssQuery('a._Olt._bCp', $node)->length > 0) {
+                    return self::RULE_MATCH_MATCHED;
+                }
             }
         }
+
         return self::RULE_MATCH_NOMATCH;
     }
 
