@@ -83,7 +83,7 @@ class ClassicalCardsResultZ1m implements ParsingRuleInterface
             },
             'description' => function () use ($dom, $node) {
                 $res = $dom
-                    ->cssQuery('._a5r>div:nth-child(2) ._bCp ._H1m', $node);
+                    ->cssQuery('div>div._bCp>div._H1m', $node);
 
                 if ($res->length > 0) {
                     return $res->item(0)->getNodeValue();

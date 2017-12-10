@@ -11,12 +11,18 @@ results:
 
   - types:
       - KNOWLEDGE
-
     data:
       title: Foo Fighters
 
+
   - types:
       - CLASSICAL
+    data:
+      title: foo — Wiktionnaire
+      url: https://fr.m.wiktionary.org/wiki/foo
+      destination: https://fr.m.wiktionary.org › wiki › foo
+      description: foo \fu\ invariable. (Anglicisme informatique) (Programmation informatique) Variable métasyntaxique en programmation informatique.
+
 
   - types:
       - VIDEO_GROUP
@@ -24,6 +30,23 @@ results:
 
   - types:
       - CLASSICAL
+    data:
+      title: Variable métasyntaxique — Wikipédia
+
+
+  - types:
+      - CLASSICAL
+    data:
+      title: Foo Fighters — Wikipédia
+
+
+  - types:
+      - CLASSICAL
+    data:
+      title: "Foo Fighters : écoutez le nouvel album \"Concrete and Gold ..."
+      url: https://m.culturebox.francetvinfo.fr/amp/musique/rock/foo-fighters-ecoutez-le-nouvel-album-concrete-and-gold-mariage-des-extremes-262545
+      destination: https://culturebox.francetvinfo.fr › ...
+      description: 15 sept. 2017 · Le nouvel album des Foo Fighters est selon le leader Dave Grohl leur "plus grand" à ce jour. "Concrete and Gold" célèbre surtout le mariage des extrêmes, celui de la brutalité et de la dentelle, du heavy rock et de la pop.
 
   - types:
       - CLASSICAL
@@ -31,11 +54,9 @@ results:
   - types:
       - CLASSICAL
 
-  - types:
-      - CLASSICAL
-
-  - types:
-      - CLASSICAL
+    data:
+      title: On était au concert ultra-secret des Foo Fighters à Stockholm ! - Le ...
+      description: "14 sept. 2017 · Mais qu'importe ! Nous allons assister ce soir à un show unique : un concert secret des Foo Fighters, venus spécialement en Europe pour fêter avec quelques privilégiés la sortie de leur nouvel album, Concrete and Gold."
 
   - types:
       - CLASSICAL
