@@ -6,12 +6,15 @@
 
 ## 0.2.3
 
-*20xx-xx-xx*
+*2017-12-10*
 
-## 0.2.2
+* Features:
+    * Added parsing for people also ask results
 
 * Bug fix:
     * Fix some mobile card results not parsing [#83](https://github.com/serp-spider/search-engine-google/issues/83)
+
+## 0.2.2
 
 *2017-11-25*
 

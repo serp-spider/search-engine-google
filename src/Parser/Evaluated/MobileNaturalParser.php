@@ -20,6 +20,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\LargeClass
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\KnowledgeCard;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Map;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResult;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\PeopleAlsoAsk;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarousel;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalWithLargeVideo;
@@ -47,6 +48,7 @@ class MobileNaturalParser extends AbstractParser
             new ComposedTopStories(),
             new VideoGroup(),
             new ImageGroup(),
+            new PeopleAlsoAsk(), // people also ask must be placed before knowledge card to stop parsing
             new KnowledgeCard()
         ];
     }

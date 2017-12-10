@@ -16,6 +16,9 @@ abstract class NaturalResultType
 
     const KNOWLEDGE = 'knowledge';
 
+    const PEOPLE_ALSO_ASK = 'people_also_ask';
+    const PAA_QUESTION = 'paa_question';
+
     const IMAGE_GROUP = 'image_group';
     const IMAGE_GROUP_IMAGE = 'image_group_image';
 

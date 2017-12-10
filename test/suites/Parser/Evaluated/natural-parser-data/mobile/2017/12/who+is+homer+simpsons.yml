@@ -1,0 +1,57 @@
+# image-group recipes
+url: https://www.google.fr/search?q=who+is+homer+simpsons
+file: test/resources/pages-mobile/2017/12/who+is+homer+simpsons.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: null
+  isMobile: true
+
+results:
+
+  - types:
+      - KNOWLEDGE
+    data:
+      title: Homer Simpson
+
+  - types:
+      - PEOPLE_ALSO_ASK
+
+    data-count:
+      questions: 4
+
+    data:
+      questions:
+        - question: What jobs has Homer Simpson had?
+          types():
+            - PAA_QUESTION
+        - question: How much weight is Homer Simpson?
+        - question: What football team does Homer Simpson support?
+        - question: How much money does Dan Castellaneta make per episode?
+
+
+  - types:
+      - CLASSICAL
+    data:
+      title: Homer Simpson - Wikipedia
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
