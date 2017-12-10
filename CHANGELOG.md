@@ -4,9 +4,16 @@
 
 *20xx-xx-xx*
 
-## 0.2.2
+## 0.2.3
 
 *20xx-xx-xx*
+
+## 0.2.2
+
+* Bug fix:
+    * Fix some mobile card results not parsing [#83](https://github.com/serp-spider/search-engine-google/issues/83)
+
+*2017-11-25*
 
 * Bug fix:
     * Parse ``bkWMgd`` groups (thanks to [Shiftas](https://github.com/Shiftas)) [#76](https://github.com/serp-spider/search-engine-google/issues/76)
