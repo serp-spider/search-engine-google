@@ -9,7 +9,7 @@
 *2017-12-xx*
 
 * Features:
-    * Added parsing for people also ask results
+    * Added parsing for people also ask results [#70](https://github.com/serp-spider/search-engine-google/issues/70)
 
 * Bug fix:
     * Fix some mobile card results not parsing [#83](https://github.com/serp-spider/search-engine-google/issues/83)

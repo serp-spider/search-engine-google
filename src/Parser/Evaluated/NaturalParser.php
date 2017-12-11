@@ -15,6 +15,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InTheNews;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Map;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResult;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\PeopleAlsoAsk;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesCarousel;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesVertical;
@@ -46,6 +47,7 @@ class NaturalParser extends AbstractParser
             new Map(),
             new AnswerBox(),
             new Flight(),
+            new PeopleAlsoAsk()
         ];
     }
 

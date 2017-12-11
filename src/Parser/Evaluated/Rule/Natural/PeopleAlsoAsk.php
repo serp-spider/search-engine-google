@@ -17,7 +17,7 @@ use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
  * Class PeopleAlsoAsk
  * @package Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural
  *
- * Note: "people also ask" would results would also match against "Knwoledge" parser.
+ * Note: "people also ask" would results would also match against "Knowledge" parser.
  *       For this reason "paa" parser must be processed before knowledge parser.
  *
  */
