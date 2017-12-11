@@ -13,6 +13,7 @@ results:
       - CLASSICAL
       - CLASSICAL_LARGE
     data:
+      isAmp: false
       title: Everything Simpsons
       sitelinks:
         - title: Episodes
@@ -37,15 +38,24 @@ results:
 
   - types:
       - CLASSICAL
+    data:
+      isAmp: false
 
   - types:
       - CLASSICAL
+    data:
+      title: "Simpsons World: Every Simpsons Episode Ever, Online For Free ..."
+      isAmp: true
 
   - types:
       - CLASSICAL
+    data:
+      isAmp: false
 
   - types:
       - CLASSICAL
+    data:
+      isAmp: true
 
   - types:
       - CLASSICAL

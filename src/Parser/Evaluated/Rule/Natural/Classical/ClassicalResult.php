@@ -51,7 +51,12 @@ class ClassicalResult implements ParsingRuleInterface
             'url'     => $dom->getUrl()->resolveAsString($aTag->getAttribute('href')),
             'destination' => $destinationTag ? $destinationTag->nodeValue : null,
             // trim needed for mobile results coming with an initial space
-            'description' => $descriptionTag ? trim($descriptionTag->nodeValue) : null
+            'description' => $descriptionTag ? trim($descriptionTag->nodeValue) : null,
+            'isAmp' => function () use ($dom, $node) {
+                return $dom
+                        ->cssQuery('.amp_r', $node)
+                        ->length > 0;
+            },
         ];
     }
 

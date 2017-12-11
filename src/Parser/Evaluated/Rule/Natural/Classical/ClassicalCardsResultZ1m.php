@@ -69,6 +69,11 @@ class ClassicalCardsResultZ1m implements ParsingRuleInterface
                     ->item(0)
                     ->nodeValue;
             },
+            'isAmp' => function () use ($dom, $node) {
+                return $dom
+                    ->cssQuery('.amp_r', $node)
+                    ->length > 0;
+            },
             'url' => function () use ($dom, $node) {
                 return $dom
                     ->cssQuery('a._Olt', $node)
