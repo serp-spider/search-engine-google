@@ -4,9 +4,19 @@
 
 *20xx-xx-xx*
 
+## 0.2.4
+
+*2018-03-22*
+
+* Bug fix:
+    * Fix google update for map results
+    * Fix google update for "destination" data in classical results
+    * Fix google update for People Also Ask
+    * Fix google update for answer box [#90](https://github.com/serp-spider/search-engine-google/issues/90)
+    
 ## 0.2.3
 
-*2017-12-xx*
+*2017-12-11*
 
 * Features:
     * Added parsing for people also ask results [#70](https://github.com/serp-spider/search-engine-google/issues/70)

@@ -1,0 +1,74 @@
+# image-group recipes
+url: https://www.google.co.uk/search?q=plumber+london
+file: test/resources/pages-evaluated/2018/03/plumber+london.html
+results:
+
+
+  - types:
+    - MAP
+
+    data-count:
+      localPack: 3
+    data:
+      localPack:
+        - title: Pimlico Plumbers
+          url: http://www.pimlicoplumbers.com/
+          street: London, Royaume-Uni
+          stars: 4.4
+          review: 2130
+          phone: +44 20 7928 8888
+        - title: Emergency Plumbers
+          street: Londres, Royaume-Uni
+          stars: 4.8
+          review: 89
+          phone: +44 7796 345453
+        - title: My Plumber
+          street: London, Royaume-Uni
+          stars: 4.3
+          review: 33
+          phone: +44 20 3078 5920
+
+
+  - types:
+    - CLASSICAL
+
+    data:
+      title: Pimlico Plumbers | Plumbers London Emergency Plumbers London ...
+      url: http://www.pimlicoplumbers.com/
+      destination: www.pimlicoplumbers.com/
+      description: Pimlico Plumbers & Emergency Plumbers London; 24 Hours a Day, 365 Days a Year; Providing Plumbers, Heating Engineers, Electricians, Roofers, Carpenters, and Builders all over London.
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
