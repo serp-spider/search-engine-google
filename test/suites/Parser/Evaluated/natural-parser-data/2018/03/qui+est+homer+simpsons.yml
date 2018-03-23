@@ -1,0 +1,58 @@
+# image-group recipes
+url: https://www.google.fr/search?q=qui+est+homer+simpsons
+file: test/resources/pages-evaluated/2018/03/qui+est+homer+simpsons.html
+results:
+
+  - types:
+    - ANSWER_BOX
+
+    data:
+      title: Homer Simpson — Wikipédia
+      url: https://fr.wikipedia.org/wiki/Homer_Simpson
+      destination: https://fr.wikipedia.org/wiki/Homer_Simpson
+      description: Homer est le mari maladroit de Marge et le père de Bart, Lisa et Maggie Simpson. Il a été élevé par ses parents, Mona et Abraham Simpson ; dans l'épisode La Mère d'Homer (saison 7, 1995), il est révélé que Mona est entrée en clandestinité dans les années 1960 après des démêlés avec la justice, étant activiste.
+  - types:
+    - CLASSICAL
+
+    data:
+      title: Homer Simpson — Wikipédia
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+    - CLASSICAL_VIDEO
+
+    data:
+      title: Qu'est ce qui est jaune et qui attend? Homer simpson - YouTube
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
