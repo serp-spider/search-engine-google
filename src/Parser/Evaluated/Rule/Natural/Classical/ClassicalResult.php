@@ -39,7 +39,7 @@ class ClassicalResult implements ParsingRuleInterface
         }
 
         $destinationTag = $dom
-            ->cssQuery('div.f.kv>cite', $node)
+            ->cssQuery('div.f>cite', $node)
             ->item(0);
 
         $descriptionTag = $dom

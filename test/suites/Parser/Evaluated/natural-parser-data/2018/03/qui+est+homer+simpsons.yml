@@ -30,11 +30,9 @@ results:
     - CLASSICAL
 
     data:
+      url: https://fr.wikipedia.org/wiki/Homer_Simpson
       title: Homer Simpson — Wikipédia
-
-
-  - types:
-    - CLASSICAL
+      destination: https://fr.wikipedia.org/wiki/Homer_Simpson
 
 
   - types:
@@ -67,6 +65,17 @@ results:
 
   - types:
     - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+    - CLASSICAL_VIDEO
+
+    data:
+      title: "VIDÉO. Homer Simpson et la nourriture : 25 moments cultes"
+      url: https://www.huffingtonpost.fr/2015/05/30/video-homer-simpson-nourriture-25-moments-cultes_n_7109552.html
+      description: SÉRIES - La bière, la viande et les donuts. Les protéines et le sucre sont de vieux ami de Homer Simpson. Et d ...
+      destination: https://www.huffingtonpost.fr/.../video-homer-simpson-nourriture-25...
 
 
   - types:
