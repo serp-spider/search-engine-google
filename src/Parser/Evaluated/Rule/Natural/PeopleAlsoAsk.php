@@ -29,7 +29,7 @@ class PeopleAlsoAsk implements ParsingRuleInterface
         if ($node->hasClasses(['kno-kp', 'mnr-c'])) {
             $childNodes = new DomNodeList($node->childNodes, $dom);
 
-            if ($childNodes->hasClass('_thf')) {
+            if ($childNodes->hasAnyClass(['cUnQKe', '_thf'])) {  // TODO "_thf" kept for BC, remove in future
                 return self::RULE_MATCH_MATCHED;
             }
         }
@@ -42,13 +42,11 @@ class PeopleAlsoAsk implements ParsingRuleInterface
         $data = [
             'questions' => function () use ($dom, $node) {
                 $items = [];
-                $nodes = $dom->cssQuery('._sgo>._qgo', $node);
+                $nodes = $dom->cssQuery('._sgo>._qgo, .NWt7k', $node);  // TODO "._sgo>._qgo" kept for BC
                 foreach ($nodes as $questionNode) {
                     $items[] = new BaseResult(NaturalResultType::PAA_QUESTION, [
                         'question' => function () use ($questionNode, $dom) {
-                            return $dom->cssQuery('._rhf', $questionNode)
-                                ->getNodeAt(0)
-                                ->getNodeValue();
+                            return $questionNode->getNodeValue();
                         }
                     ]);
                 }

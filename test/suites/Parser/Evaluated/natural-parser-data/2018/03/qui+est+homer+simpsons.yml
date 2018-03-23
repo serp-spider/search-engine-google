@@ -11,6 +11,21 @@ results:
       url: https://fr.wikipedia.org/wiki/Homer_Simpson
       destination: https://fr.wikipedia.org/wiki/Homer_Simpson
       description: Homer est le mari maladroit de Marge et le père de Bart, Lisa et Maggie Simpson. Il a été élevé par ses parents, Mona et Abraham Simpson ; dans l'épisode La Mère d'Homer (saison 7, 1995), il est révélé que Mona est entrée en clandestinité dans les années 1960 après des démêlés avec la justice, étant activiste.
+
+
+  - types:
+    - PEOPLE_ALSO_ASK
+
+    data-count:
+      questions: 4
+    data:
+      questions:
+        - question: Quel est la date de naissance de Homer Simpson ?
+        - question: Quel est le prénom du père de Bart Simpson ?
+        - question: Où habitent les Simpson ?
+        - question: Quel est l' âge de Bart Simpson ?
+
+
   - types:
     - CLASSICAL
 
