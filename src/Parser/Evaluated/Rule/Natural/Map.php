@@ -68,7 +68,6 @@ class Map implements ParsingRuleInterface
                         ->getNodeAt(0)
                         ->getAttribute('href');
                 }
-
             },
             'street' => function () use ($localPack, $dom) {
                 $v = $dom->cssQuery(
@@ -84,7 +83,6 @@ class Map implements ParsingRuleInterface
                         $localPack
                     )->getNodeAt(0)->getNodeValue();
                 }
-
             },
             'stars' => function () use ($localPack, $dom) {
                 $rating = $dom->cssQuery('.BTtC6e', $localPack)->getNodeAt(0)->getNodeValue();
