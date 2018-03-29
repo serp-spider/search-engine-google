@@ -10,6 +10,13 @@
 * Updates
     * (BC Break) google url default domain is now ``"www.google.com`` instead of ``google.com``. This way we avoid extra redirections too ``"www"`` subdomain.
 
+## 0.2.5
+
+*2018-03-29*
+
+* Bug fix:
+    * Fix a bug with map results introduced in version 0.2.4 see [#94](https://github.com/serp-spider/search-engine-google/issues/94)
+
 ## 0.2.4
 
 *2018-03-22*
