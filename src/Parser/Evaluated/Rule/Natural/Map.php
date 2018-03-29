@@ -5,10 +5,9 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
+use Serps\Core\Dom\DomElement;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
-use Serps\Core\UrlArchive;
-use Serps\SearchEngine\Google\GoogleUrlArchive;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
@@ -92,10 +91,16 @@ class Map implements ParsingRuleInterface
             },
 
             'review' => function () use ($localPack, $dom) {
-                $value = $dom->cssQuery(
+                $review = $dom->cssQuery(
                     '.BTtC6e',
                     $localPack
-                )->getNodeAt(0)->parentNode->getNodeValue();
+                )->getNodeAt(0);
+
+                if ($review instanceof DomElement) {
+                    $value = $review->parentNode->getNodeValue();
+                } else {
+                    return null;
+                }
 
                 if ($value && preg_match('/(\([0-9 ,\.]+\))/', $value, $matches)) {
                     // transform '(1 000)' or '(1,000)', etc... to 1000
