@@ -31,7 +31,7 @@
 
   "require": {
     "php": ">=5.5",
-    "serps/core": "~0.2.6"
+    "serps/core": "~0.3.0"
   },
 
   "require-dev":{
@@ -58,7 +58,7 @@
 
   "extra": {
     "branch-alias": {
-      "dev-master": "0.2.1-dev"
+      "dev-master": "0.3.0-dev"
     }
   }
 }

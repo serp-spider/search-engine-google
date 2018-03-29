@@ -22,7 +22,7 @@ class GoogleUrl extends Url implements GoogleUrlInterface
     const RESULT_TYPE_MAP = 'app';
 
     public function __construct(
-        $host = 'google.com',
+        $host = 'www.google.com',
         $path = '/search',
         $scheme = 'https',
         array $query = [],

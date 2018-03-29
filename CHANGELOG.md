@@ -4,6 +4,12 @@
 
 *20xx-xx-xx*
 
+* Dependencies
+    * (BC Break) use version ``0.3.x`` of ``serps/core``
+
+* Updates
+    * (BC Break) google url default domain is now ``"www.google.com`` instead of ``google.com``. This way we avoid extra redirections too ``"www"`` subdomain.
+
 ## 0.2.4
 
 *2018-03-22*
