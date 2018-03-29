@@ -22,14 +22,11 @@ class TweetsCarouselZ1m implements ParsingRuleInterface
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
 
-        if ($node->childNodes->length == 1 &&                           // has 1 child
-            $node->childNodes->item(0)->childNodes->length > 1    // and child has also 1 child
-        ) {
-            /** @var DomElement $childNode */
-            $childNode = $node->childNodes->item(0);
+        if ($node->childNodes->length == 1) {
 
-            /** @var DomElement $subChildNode */
-            $subChildNode = $childNode->childNodes->item(0);
+            $childNode = $node->getChildren()->getNodeAt(0);
+
+            $subChildNode = $childNode->getChildren()->getNodeAt(0);
 
             if ($childNode->hasClass('_Z1m') && $subChildNode->hasClass('_ujp')) {
                 return self::RULE_MATCH_MATCHED;

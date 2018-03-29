@@ -1,0 +1,57 @@
+# image-group recipes
+url: https://www.google.ca/search?q=foo
+file: test/resources/pages-mobile/2018/03/foo.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: null
+  isMobile: true
+
+results:
+
+  - types:
+      - KNOWLEDGE
+    data:
+      title: Foo Fighters
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - VIDEO_GROUP
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+

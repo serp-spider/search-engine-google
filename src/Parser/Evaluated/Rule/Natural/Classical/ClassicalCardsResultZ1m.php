@@ -25,8 +25,7 @@ class ClassicalCardsResultZ1m implements ParsingRuleInterface
     {
         if ($node->childNodes->length == 1) {
 
-            /** @var DomElement $childNode */
-            $childNode = $node->childNodes->item(0);
+            $childNode = $node->getChildren()->getNodeAt(0);
 
             // check if has class _Z1m
             if ($childNode->hasClass('_Z1m')) {
