@@ -75,8 +75,13 @@ abstract class AbstractParser
             foreach ($rules as $rule) {
                 $match = $rule->match($googleDom, $group);
                 if ($match instanceof \DOMNodeList) {
-                    $this->parseGroups(new DomNodeList($group->childNodes, $googleDom), $resultSet, $googleDom);
+                    $this->parseGroups(new DomNodeList($match, $googleDom), $resultSet, $googleDom);
                     break;
+
+                } elseif ($match instanceof DomNodeList) {
+                    $this->parseGroups($match, $resultSet, $googleDom);
+                    break;
+
                 } else {
                     switch ($match) {
                         case ParsingRuleInterface::RULE_MATCH_MATCHED:

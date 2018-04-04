@@ -1,14 +1,20 @@
 # CHANGELOG
 
+
+## 0.3.1
+
+*2018-xx-xx* NOT RELEASED YET
+
 ## 0.3.0 
 
-*20xx-xx-xx*
+*2018-04-04*
 
 * Dependencies
-    * (BC Break) use version ``0.3.x`` of ``serps/core``
-
+    * **bc break** use version ``0.3.x`` of ``serps/core``
 * Updates
-    * (BC Break) google url default domain is now ``"www.google.com`` instead of ``google.com``. This way we avoid extra redirections too ``"www"`` subdomain.
+    * **bc break** google url default domain is now ``"www.google.com`` instead of ``google.com``. This way we avoid extra redirects too the ``"www"`` subdomain.
+    * Fix a bug with search result group parser that was triggering a php error.
+* Dom Updates
     * Fix parsing for classical results on mobiles.
     * Fix parsing for knowledge cards on mobiles.
 
