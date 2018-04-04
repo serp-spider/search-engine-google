@@ -10,6 +10,7 @@
 * Updates
     * (BC Break) google url default domain is now ``"www.google.com`` instead of ``google.com``. This way we avoid extra redirections too ``"www"`` subdomain.
     * Fix parsing for classical results on mobiles.
+    * Fix parsing for knowledge cards on mobiles.
 
 ## 0.2.5
 
