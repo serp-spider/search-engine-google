@@ -24,9 +24,9 @@ class ClassicalCardsResultZ1m implements ParsingRuleInterface
     public function match(GoogleDom $dom, DomElement $node)
     {
         if ($node->childNodes->length == 1) {
-
             $childNode = $node->getChildren()->getNodeAt(0);
 
+            // TODO _Z1m results appear to be outdated
             // check if has class _Z1m
             if ($childNode->hasClass('_Z1m')) {
                 // check _a5r
