@@ -16,7 +16,6 @@ class GoogleError extends WebPage
      */
     public function isCaptcha()
     {
-        $captchaQuery = "//input[@name='captcha']";
-        return $this->getXpath()->query($captchaQuery)->length > 0;
+        return $this->cssQuery('#recaptcha')->count() > 0;
     }
 }

@@ -1,9 +1,14 @@
 # CHANGELOG
 
 
-## 0.3.1
+## 0.4.0
 
 *2018-xx-xx* NOT RELEASED YET
+
+* Bug fix:
+    * fixed the captcha exception. The right exception is now returned when a captcha is found
+* Google updates:
+    * **bc break** removed support for image captcha as google now uses recaptcha
 
 ## 0.3.0 
 
