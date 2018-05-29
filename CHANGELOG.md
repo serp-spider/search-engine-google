@@ -10,6 +10,8 @@
     * fixed invalid type hinting causing errors with hhvm
 * Google updates:
     * **bc break** removed support for image captcha as google now uses recaptcha
+* Other:
+    * When an invalid classical result is found, throw an exception instead of returning invalid results causing fatal errors.
 
 ## 0.3.0 
 

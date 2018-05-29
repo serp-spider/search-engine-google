@@ -7,6 +7,7 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical;
 
 use Serps\Core\Dom\DomElement;
 use Serps\Core\Media\MediaFactory;
+use Serps\SearchEngine\Google\Exception\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
@@ -16,7 +17,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class ClassicalResult implements ParsingRuleInterface
 {
 
-    public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
+    public function match(GoogleDom $dom, DomElement $node)
     {
         if ($node->getAttribute('class') == 'g') {
             if ($dom->cssQuery('.rc', $node)->length == 1) {
@@ -35,7 +36,7 @@ class ClassicalResult implements ParsingRuleInterface
             ->xpathQuery("descendant::h3[@class='r'][1]/a", $node)
             ->item(0);
         if (!$aTag) {
-            return;
+            throw new InvalidDOMException('Cannot parse a classical resulst.');
         }
 
         $destinationTag = $dom
