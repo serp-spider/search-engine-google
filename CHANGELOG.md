@@ -7,6 +7,7 @@
 
 * Bug fix:
     * fixed the captcha exception. The right exception is now returned when a captcha is found
+    * fixed invalid type hinting causing errors with hhvm
 * Google updates:
     * **bc break** removed support for image captcha as google now uses recaptcha
 

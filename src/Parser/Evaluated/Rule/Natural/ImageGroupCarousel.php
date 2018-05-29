@@ -56,7 +56,7 @@ class ImageGroupCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRul
      * @return array
      *
      */
-    private function parseItem(GoogleDOM $googleDOM, \DOMElement $imgNode)
+    private function parseItem(GoogleDom $googleDOM, \DOMElement $imgNode)
     {
         $data =  [
             'sourceUrl' => function () use ($imgNode, $googleDOM) {

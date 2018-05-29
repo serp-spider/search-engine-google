@@ -46,7 +46,7 @@ class InTheNews implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfac
      * @param \DomElement $node
      * @return array
      */
-    protected function parseItem(GoogleDOM $googleDOM, \DomElement $node)
+    protected function parseItem(GoogleDom $googleDOM, \DomElement $node)
     {
         $card = [];
         $xpathTitle = "descendant::a[@class = '_Dk']";
