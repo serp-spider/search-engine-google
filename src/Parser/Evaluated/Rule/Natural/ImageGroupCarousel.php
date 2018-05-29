@@ -77,7 +77,7 @@ class ImageGroupCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRul
                 if (!$img) {
                     return null;
                 }
-                return mediafactory::createmediafromsrc($img->getattribute('src'));
+                return MediaFactory::createMediaFromSrc($img->getattribute('src'));
             },
         ];
 
