@@ -23,7 +23,6 @@ class TweetsCarouselZ1m implements ParsingRuleInterface
     {
 
         if ($node->childNodes->length == 1) {
-
             $childNode = $node->getChildren()->getNodeAt(0);
 
             $subChildNode = $childNode->getChildren()->getNodeAt(0);
