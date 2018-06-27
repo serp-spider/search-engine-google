@@ -80,10 +80,13 @@ class GoogleClient
                 if ($errorDom->isCaptcha()) {
                     throw new GoogleCaptchaException(new GoogleCaptcha($errorDom));
                 } else {
-                    $failedUrl = $response->getInitialUrl();
                     throw new InvalidResponseException(
                         $response,
-                        "The http response from $failedUrl has an invalid status code: '$statusCode'"
+                        sprintf(
+                            "The http response from %s has an invalid status code: '%d'",
+                            $response->getInitialUrl(),
+                            $statusCode
+                        )
                     );
                 }
             }
