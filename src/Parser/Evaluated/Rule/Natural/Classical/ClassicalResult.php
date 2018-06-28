@@ -36,7 +36,7 @@ class ClassicalResult implements ParsingRuleInterface
             ->xpathQuery("descendant::h3[@class='r'][1]/a", $node)
             ->item(0);
         if (!$aTag) {
-            throw new InvalidDOMException('Cannot parse a classical resulst.');
+            throw new InvalidDOMException('Cannot parse a classical result.');
         }
 
         $destinationTag = $dom
