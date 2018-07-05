@@ -76,11 +76,15 @@ class GoogleSerp extends GoogleDom
         if ($item->length != 1) {
             return null;
         }
-        $nodeText = $item->item(0)->childNodes->item(0);
 
-        if (!$nodeText) {
+        // number of results is followed by time, we want to targets the first node (text node) that is the number of
+        // results
+        $nodeValue = $item->getNodeAt(0)->getChildren()->getNodeAt(0)->getNodeValue();
+
+        if (!$nodeValue) {
             return null;
         }
+
 
         // WARNING: The number of result is explained in different format according to the country. Fon instance:
         // UK:  6,200,000
@@ -88,13 +92,17 @@ class GoogleSerp extends GoogleDom
         // DE:  2.200.000
         // IN:  62,00,000
         // We have to use a global matcher
-        $matched = preg_match('/([0-9]+[^0-9]?)+/u', $nodeText->textContent, $countMatch);
+        $matched = preg_match_all('/([0-9]+[^0-9]?)+/u', $nodeValue, $countMatch);
 
         if (!$matched) {
             return null;
         }
 
-        return (int) preg_replace('/[^0-9]/', '', $countMatch[0]);
+        // get the last count, when we use pagination the first count is the page number
+        // see https://github.com/serp-spider/search-engine-google/issues/100
+        $count = $countMatch[0][count($countMatch[0]) - 1];
+
+        return (int) preg_replace('/[^0-9]/', '', $count);
     }
 
     public function javascriptIsEvaluated()

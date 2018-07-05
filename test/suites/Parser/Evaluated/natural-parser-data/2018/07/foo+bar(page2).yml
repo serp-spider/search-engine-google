@@ -1,0 +1,62 @@
+url: https://www.google.com.au/search?q=foo+bar
+file: test/resources/pages-evaluated/2018/07/foo+bar(page2).html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: 27400000
+  isMobile: false
+
+results:
+
+
+
+  - types:
+    - CLASSICAL
+
+    data:
+      title: FOO bar c'est quoi - Developpez.net
+      url: https://www.developpez.net/forums/d506491/systemes/linux/administration-systeme/foo-bar-c-quoi/
+      destination: https://www.developpez.net/forums/d506491/systemes/linux/.../foo-bar-c-quoi/
+      description: 11 mars 2008 - FOO bar c'est quoi. Salut à tous. je ne savais vraiment pas où poster cette question. Mais comme je suis sous linux en ce moment et que j'ai ...
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+    data:
+      title: "Télécharger Foobar2000 pour Windows : téléchargement gratuit !"
+      url: https://www.clubic.com/telecharger-fiche11022-foobar2000.html
+      destination: https://www.clubic.com/telecharger-fiche11022-foobar2000.html
+      description: "15 juin 2018 - Télécharger Foobar2000 : Foobar 2000 : LE lecteur Audio léger par excellence, doté d'innombrables fonctions !"
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
