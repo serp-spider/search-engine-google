@@ -1,9 +1,18 @@
 # CHANGELOG
 
 
-## 0.4.1
+## 0.4.2
 
 *2018-xx-xx* NOT RELEASED YET
+
+## 0.4.1
+
+*2018-07-05* 
+
+* Bug fix:
+    * fixed multiple mobile issues on mobile results
+    * fixed parsing for number of results (#100) - thanks @migliori
+    * fixed related searches on desktop  - thanks @gudix
 
 ## 0.4.0
 
