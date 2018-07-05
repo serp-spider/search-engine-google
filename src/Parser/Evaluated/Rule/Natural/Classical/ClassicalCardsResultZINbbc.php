@@ -64,7 +64,7 @@ class ClassicalCardsResultZINbbc implements ParsingRuleInterface
                 return $dom
                     ->cssQuery('span.QHTnWc', $node)
                     ->getNodeAt(0)
-                    ->nodeValue;
+                    ->getNodeValue();
             },
             'description' => function () use ($dom, $node) {
                 $res = $dom
