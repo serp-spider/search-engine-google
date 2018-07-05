@@ -60,3 +60,15 @@ results:
 
   - types:
     - CLASSICAL
+
+related-searches:
+  - title: foo bar baz
+    url: https://www.google.com.au/search?client=ubuntu&hs=XD6&biw=753&bih=960&q=foo+bar+baz&sa=X&ved=0ahUKEwjNnq_Y-ofcAhXLVRQKHXU8D_o4ChDVAgh4KAA
+  - title: foo bar signification
+  - title: foo bar baz qux
+  - title: foo foo bar
+  - title: foo bar moo
+  - title: perl foo bar
+  - title: foo bar quiz
+  - title: string foo bar
+

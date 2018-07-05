@@ -143,7 +143,7 @@ class GoogleSerp extends GoogleDom
                 }
             }
         } else {
-            $items = $this->cssQuery('#brs ._e4b>a');
+            $items = $this->cssQuery('#brs ._e4b>a, #brs .card-section a'); // TODO ._ed4 is outdated
             if ($items->length > 0) {
                 foreach ($items as $item) {
                     /* @var $item \DOMElement */
