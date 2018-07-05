@@ -37,7 +37,12 @@ class KnowledgeCard implements ParsingRuleInterface
                 return $item->getNodeAt(0)->getNodeValue();
             },
             'shortDescription' => function () use ($googleDOM, $node) {
-                $item = $googleDOM->cssQuery('._OKe ._Q1n ._gdf');
+                $item = $googleDOM->cssQuery('._OKe ._Q1n ._gdf', $node); // appears to be outdated
+
+                if (!$item->length) {
+                    $item = $googleDOM->cssQuery('.sthby', $node);
+                }
+
                 return $item->getNodeAt(0)->getNodeValue();
             }
         ];

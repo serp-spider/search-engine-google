@@ -1,0 +1,79 @@
+# image-group recipes
+url: https://www.google.ca/search?q=simpsons+episode+1
+file: test/resources/pages-mobile/2018/07/simpsons-episode-1.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: null
+  isMobile: true
+
+results:
+
+  - types:
+      - KNOWLEDGE
+    data:
+      title: Noël mortel
+      shortDescription: Épisode de série télévisée
+
+  - types:
+      - CLASSICAL
+      - CLASSICAL_VIDEO
+    data:
+      title: Simpson // saison 1 // episode 1 (ancien)  ...
+      url: https://m.youtube.com/watch?v=cTet1Beli38
+      destination: https://m.youtube.com › watch
+
+
+  - types:
+      - CLASSICAL
+    data:
+      title: "Saison 1 > Episode 1 : Noël mortel - Simpson Streaming"
+      url: http://simpson-en-streaming.com/saison-1/episode-1/noel-mortel
+      destination: simpson-en-streaming.com › noel-mortel
+      description: "Noël mortel (Saison 1, épisode 1) de Les Simpson en streaming illimité et gratuit, résumé de l'épisode : Ce soir , les Simpson assistent à la fête de Noël de l'école dans laquelle Bart et Lisa participent. De retour à la ..."
+
+
+  - types:
+      - CLASSICAL
+    data:
+      title: Saison 1 - Simpson TV
+      url: http://simpson-tv.over-blog.ch/article-episode-1-noel-mortel-105043944.html
+      destination: simpson-tv.over-blog.ch › article-episode...
+
+
+  - types:
+      - CLASSICAL
+      - CLASSICAL_VIDEO
+
+
+  - types:
+      - CLASSICAL
+      - CLASSICAL_VIDEO
+
+
+  - types:
+      - CLASSICAL
+      - CLASSICAL_VIDEO
+
+
+  - types:
+      - CLASSICAL
+      - CLASSICAL_VIDEO
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+    data:
+      title: Saison 1 des Simpson — Wikipédia
+      destination: https://fr.m.wikipedia.org › wiki › Saison...
+      url: https://fr.m.wikipedia.org/wiki/Saison_1_des_Simpson
+      description: Accéder à Épisodes · 1, 1, Noël mortel (Homer au nez rouge) Simpsons Roasting on an ... Simpson à des électrodes. Les Simpson s'électrocutent les uns les autres, causant des baisses de tension dans ...
+
+
+
+  - types:
+      - CLASSICAL

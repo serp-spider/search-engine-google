@@ -22,8 +22,11 @@ class ClassicalCardsResult extends ClassicalResult
             // but not present on base classical results
             // class ._Hi is unique to large classical results
 
-            if ((!$hasgblk || ($hasgblk && $dom->cssQuery('._Hi', $node)->length == 1))
-                && $dom->cssQuery('.rc', $node)->length == 1
+            if ((
+                    !$hasgblk ||
+                    ($hasgblk && $dom->cssQuery('._Hi', $node)->length == 1)
+                ) &&
+                $dom->cssQuery('.rc', $node)->length == 1
             ) {
                 return self::RULE_MATCH_MATCHED;
             }

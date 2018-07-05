@@ -33,6 +33,7 @@ use Symfony\Component\Yaml\Yaml;
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResult
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalWithLargeVideo
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResult
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsVideoResult
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultZ1m
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultZINbbc
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider

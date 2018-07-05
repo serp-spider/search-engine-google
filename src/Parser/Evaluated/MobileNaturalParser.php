@@ -9,6 +9,7 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultZ1m;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultZINbbc;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsVideoResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ComposedTopStories;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup;
@@ -37,6 +38,7 @@ class MobileNaturalParser extends AbstractParser
             new SearchResultGroup(),
             new ClassicalCardsResultZINbbc(),
             new ClassicalCardsResultZ1m(), // TODO remove (outdated)
+            new ClassicalCardsVideoResult(),
             new ClassicalCardsResult(),
             new TweetsCarouselZ1m(), // TODO replace and remove (outdated)
             new ImageGroupCarousel(),
