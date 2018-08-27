@@ -7,6 +7,7 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated;
 
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultO9g5cc;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultZ1m;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultZINbbc;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsVideoResult;
@@ -36,7 +37,8 @@ class MobileNaturalParser extends AbstractParser
         return [
             new Divider(),
             new SearchResultGroup(),
-            new ClassicalCardsResultZINbbc(),
+            new ClassicalCardsResultO9g5cc(),
+            new ClassicalCardsResultZINbbc(), // TODO maybe outdated
             new ClassicalCardsResultZ1m(), // TODO remove (outdated)
             new ClassicalCardsVideoResult(),
             new ClassicalCardsResult(),

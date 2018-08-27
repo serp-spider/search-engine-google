@@ -14,15 +14,15 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 
 /**
- * First seen in 2018 in mobile pages
- * TODO consider removing .ZINbbc (replaced with .O9g5cc in august 2018)
+ * First seen in august 2018 in mobile pages, replacing .ZINbbc
  */
-class ClassicalCardsResultZINbbc implements ParsingRuleInterface
+class ClassicalCardsResultO9g5cc implements ParsingRuleInterface
 {
 
     public function match(GoogleDom $dom, DomElement $node)
     {
-        $res = $dom->cssQuery('.ZINbbc.xpd a.C8nzq', $node);
+        $res = $dom->cssQuery('.O9g5cc.xpd a.C8nzq', $node);
+        // TODO consider removing .ZINbbc (replaced with .O9g5cc in august 2018)
 
         if ($res->length == 1) {
             return self::RULE_MATCH_MATCHED;
@@ -46,7 +46,7 @@ class ClassicalCardsResultZINbbc implements ParsingRuleInterface
         return [
             'title' => function () use ($dom, $node) {
                 return $dom
-                    ->cssQuery('a .pIpgAc', $node)
+                    ->cssQuery('a .MUxGbd', $node)
                     ->getNodeAt(0)
                     ->getNodeValue();
             },
@@ -68,14 +68,10 @@ class ClassicalCardsResultZINbbc implements ParsingRuleInterface
                     ->getNodeValue();
             },
             'description' => function () use ($dom, $node) {
-                $res = $dom
-                    ->cssQuery('.JTuIPc', $node);
-
-                if ($res->length > 1) {
-                    return $dom->cssQuery('.pIpgAc', $res->getNodeAt(1))->getNodeAt(0)->getNodeValue();
-                } else {
-                    return null;
-                }
+                return $dom
+                    ->cssQuery('.JTuIPc:not(a)>.MUxGbd', $node)
+                    ->getNodeAt(0)
+                    ->getNodeValue();
             }
         ];
     }
