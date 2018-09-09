@@ -42,7 +42,7 @@ class PeopleAlsoAsk implements ParsingRuleInterface
         $data = [
             'questions' => function () use ($dom, $node) {
                 $items = [];
-                $nodes = $dom->cssQuery('._sgo>._qgo, .NWt7k', $node);  // TODO "._sgo>._qgo" kept for BC
+                $nodes = $dom->cssQuery('._sgo>._qgo, .NWt7k, .yTrXHe', $node);  // TODO "._sgo>._qgo" kept for BC
                 foreach ($nodes as $questionNode) {
                     $items[] = new BaseResult(NaturalResultType::PAA_QUESTION, [
                         'question' => function () use ($questionNode, $dom) {
