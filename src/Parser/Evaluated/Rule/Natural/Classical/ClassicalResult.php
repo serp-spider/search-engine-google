@@ -48,10 +48,10 @@ class ClassicalResult implements ParsingRuleInterface
         }
 
         $destinationTag = $dom
-            ->xpathQuery("descendant::div[starts-with(@class, 'f ') or @class='TbwUpd']//cite", $node)
+            ->cssQuery('div.f cite, div.TbwUpd cite', $node)
             ->getNodeAt(0);
 
-        if (is_a($destinationTag, 'Serps\Core\Dom\NullDomNode')) {
+        if (is_a($destinationTag, Serps\Core\Dom\NullDomNode::class)) {
             throw new InvalidDOMException('Cannot parse a classical result.');
         }
 
