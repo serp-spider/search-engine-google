@@ -60,7 +60,7 @@ class ClassicalResult implements ParsingRuleInterface
             ->item(0);
 
         return [
-            'title'   => $aTag->nodeValue,
+            'title'   => $h3Tag->nodeValue,
             'url'     => $dom->getUrl()->resolveAsString($aTag->getAttribute('href')),
             'destination' => $destinationTag->getNodeValue(),
             // trim needed for mobile results coming with an initial space
