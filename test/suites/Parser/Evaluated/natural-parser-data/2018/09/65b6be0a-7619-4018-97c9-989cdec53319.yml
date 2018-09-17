@@ -1,0 +1,434 @@
+url: https://www.google.de/search?q=mobile+device+management
+file: test/resources/pages-evaluated/2018/09/65b6be0a-7619-4018-97c9-989cdec53319.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: 521000000
+  isMobile: false
+
+results:
+
+
+
+  - types:
+      - CLASSICAL
+
+    data:
+      title: Mobile-Device-Management – Wikipedia
+      url: https://de.wikipedia.org/wiki/Mobile-Device-Management
+      destination: https://de.wikipedia.org/wiki/Mobile-Device-Management
+      description: "Mobile-Device-Management (MDM; deutsch Mobilgeräteverwaltung) ist ein Begriff aus der Informationstechnik und steht für die zentralisierte Verwaltung von ..."
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+    data:
+      title: "The Best Mobile Device Management (MDM) Solutions of 2018 ..."
+      url: https://www.pcmag.com/article/342695/the-best-mobile-device-management-mdm-software
+      destination: https://www.pcmag.com › ... › Small Business › Cloud Services
+      description: "It's been a while since we dug into the mobile device management (MDM) category, so it's time for an update. However, updating this round of MDM product ..."
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+related-searches:
+  - title: mobile device management vergleich
+    url: https://www.google.de/search?num=100&hl=de&q=mobile+device+management+vergleich&sa=X&ved=0ahUKEwjb_r-Kjb7dAhVSbVAKHU1pDQ4Q1QII6gUoAA
+  - title: mobile device management definition
+  - title: mobile device management apple
+  - title: mobile device management software
+  - title: mobile device management kostenlos
+  - title: mobile device management android
+  - title: mobile device management open source
+  - title: mobile device management iphone
+
