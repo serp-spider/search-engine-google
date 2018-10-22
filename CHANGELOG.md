@@ -1,9 +1,17 @@
 # CHANGELOG
 
 
+## 0.4.3
+
+*2018-xx-xx*
+
 ## 0.4.2
 
-*2018-xx-xx* NOT RELEASED YET
+*2018-10-22*
+
+* Bug fix:
+    * Fixed people also ask update
+
 
 ## 0.4.1
 
