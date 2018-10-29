@@ -12,7 +12,7 @@
 
 * Bug fix:
     * Fixed local pack (#113) Thanks @Human018
-    
+    * Fixed urls for ads results
 
 ## 0.4.2
 
