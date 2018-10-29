@@ -9,7 +9,7 @@ use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\AdwordsResultType;
 use Serps\Core\Dom\Css;
-use Serps\SearchEngine\Google\NaturalResultType;
+use Serps\SearchEngine\Google\Exception\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 
@@ -34,9 +34,12 @@ class AdwordsItem implements ParsingRuleInterface
                 return $aTag->nodeValue;
             },
             'url' => function () use ($node, $googleDOM) {
-                $aTag = $googleDOM->getXpath()->query('descendant::h3/a[2]', $node)->item(0);
+                $aTag = $googleDOM->getXpath()->query('descendant::h3/a[2]', $node)->item(0); // TODO remove
                 if (!$aTag) {
-                    return $googleDOM->getUrl()->resolve('/');
+                    $aTag = $googleDOM->cssQuery('a', $node)->item(0);
+                    if (!$aTag) {
+                        throw new InvalidDOMException('Cannot find ads anchor');
+                    }
                 }
 
                 return $googleDOM->getUrl()->resolveAsString($aTag->getAttribute('href'));

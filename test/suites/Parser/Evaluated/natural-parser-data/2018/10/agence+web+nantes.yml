@@ -1,0 +1,18 @@
+url: https://www.google.co.uk/search?q=agence+web+nantes
+file: test/resources/pages-evaluated/2018/10/agence+web+nantes.html
+
+ads:
+  section:
+    top:
+      results:
+        - types:
+            - AD
+          data:
+            url: https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwj16fSc26zeAhVX-VEKHXfACUYYABAAGgJ3cw&ohost=www.google.fr&cid=CAASEuRoMSMYTKbI4E-RghEWVIVIog&sig=AOD64_2IkY6m4XUTJ9Fr_V49vd1I54aX6Q&q&ved=2ahUKEwjr8e6c26zeAhVNyhoKHZv-AkIQ0Qx6BAgLEAE&adurl
+            visurl: www.motion4ever.com/Agence-Web/Site-Internet
+
+        - types:
+            - AD
+          data:
+            url: https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwj16fSc26zeAhVX-VEKHXfACUYYABAIGgJ3cw&ohost=www.google.fr&cid=CAASEuRoMSMYTKbI4E-RghEWVIVIog&sig=AOD64_2HskaW7LNDJpwoz-cvNrS2SAN3dw&q&ved=2ahUKEwjr8e6c26zeAhVNyhoKHZv-AkIQ0Qx6BAgOEAE&adurl
+            visurl: www.digitalgarden.fr/AgenceConseil/Web

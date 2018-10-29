@@ -5,6 +5,7 @@
 
 namespace Serps\Test\TDD\SearchEngine\Google\Parser\Evaluated;
 
+use Serps\SearchEngine\Google\AdwordsResultType;
 use Serps\SearchEngine\Google\Page\GoogleSerp;
 use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser;
 use Serps\SearchEngine\Google\Page\GoogleDom;
@@ -123,6 +124,42 @@ class NaturalParserTest extends GoogleSerpTestCase
                 }
                 if (isset($relSearchItem['url'])) {
                     $this->assertEquals($relSearchItem['url'], $relatedSearches[$k]->url, 'Failed related search url assertion with file ' . $file . ' for item #' . $k);
+                }
+            }
+        }
+
+        if (isset($data['ads'])) {
+            $allAdsResults = $dom->getAdwordsResults();
+
+            if (isset($data['ads']['section'])) {
+                foreach ($data['ads']['section'] as $section => $sectionData) {
+                    if (isset($sectionData['results'])) {
+                        $sectionConstant = 'SECTION_' . strtoupper($section);
+
+
+                        $adResults = $allAdsResults->getResultsByType('adws_section_' . $section);
+
+                        $this->assertCount(
+                            count($sectionData['results']),
+                            $adResults,
+                            'Failed asserting that number of adwords results matched. Using file ' . $file . ' | ' . $section
+                        );
+
+                        foreach ($sectionData['results'] as $k => $expectedResult) {
+                            $item = $adResults[$k];
+                            $this->assertResultHasTypes(
+                                array_merge($expectedResult['types'], [$sectionConstant]),
+                                $item,
+                                $file,
+                                $k,
+                                AdwordsResultType::class
+                            );
+
+                            if (isset($expectedResult['data'])) {
+                                $this->assertResultHasData($expectedResult['data'], $item, $file . ' => ' . $k . '/');
+                            }
+                        }
+                    }
                 }
             }
         }
