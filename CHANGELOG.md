@@ -1,25 +1,34 @@
 # CHANGELOG
 
 
-## 0.4.4
+## 0.4.5
 
-*2018-xx-xx*
-
-
-## 0.4.3
-
-*2018-xx-xx*
+*2018-30-10*
 
 * Bug fix:
     * Fixed local pack (#113) Thanks @Human018
     * Fixed urls for ads results
 
-## 0.4.2
+## 0.4.4
 
 *2018-10-22*
 
 * Bug fix:
     * Fixed people also ask update
+
+## 0.4.3
+
+*2018-09-17*
+
+* Bug fix:
+    * Fix google dom update on classical results
+
+## 0.4.2
+
+*2018-08-05*
+
+* Bug fix:
+    * fix mobile serps (#106)
 
 
 ## 0.4.1
