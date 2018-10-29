@@ -59,7 +59,7 @@ class Map implements ParsingRuleInterface
 
                 // we search for explicit <a> with href to the website.
                 // if not found the url is sometimes in a <link> tag
-                $nodes = $dom->cssQuery('a.L48Cpd');
+                $nodes = $dom->cssQuery('a.L48Cpd', $localPack);
                 if ($nodes->length > 0) {
                     return $nodes->getNodeAt(0)->getAttribute('href');
                 } else {

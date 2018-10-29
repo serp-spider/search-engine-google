@@ -1,9 +1,18 @@
 # CHANGELOG
 
 
+## 0.4.4
+
+*2018-xx-xx*
+
+
 ## 0.4.3
 
 *2018-xx-xx*
+
+* Bug fix:
+    * Fixed local pack (#113) Thanks @Human018
+    
 
 ## 0.4.2
 
