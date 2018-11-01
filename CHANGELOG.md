@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## 0.4.6
+
+*2018-30-10*
+
+* Bug fix:
+    * Fixed description for mobile classical
+    * Fixed related searches for mobile
+* Feature: 
+    * Added adwords results for mobiles
+* Other:
+    * Added ``ext-dom`` in composer.json
+
+
 ## 0.4.5
 
 *2018-30-10*

@@ -5,6 +5,18 @@ test-methods:
   javascriptIsEvaluated: true
   isMobile: true
 
+ads:
+  section:
+    top:
+      results:
+      - types:
+        - AD
+        data:
+          title: 'Librairie Kobo™ site officiel | Toutes vos lectures'
+          url: https://www.kobo.com/fr/fr
+          visurl: www.kobo.com/
+          description: Plus de 5 millions de titres. Toutes les nouveautés au meilleur prix. Tous les genres de livres. Lecture numérique commode. Appli Kobo™ gratuite. Soldes meilleures ventes.
+
 results:
 
   - types:

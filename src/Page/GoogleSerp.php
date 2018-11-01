@@ -7,10 +7,10 @@ namespace Serps\SearchEngine\Google\Page;
 
 use Serps\Exception;
 use Serps\SearchEngine\Google\Exception\InvalidDOMException;
-use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser as EvaluatedAdwordsParser;
+use Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\MobileNaturalParser;
-use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser as EvaluatedNaturalParser;
+use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser;
+use Serps\SearchEngine\Google\Parser\Evaluated\MobileAdwordsParser;
 use Serps\Stubs\RelatedSearch;
 
 class GoogleSerp extends GoogleDom
@@ -41,7 +41,7 @@ class GoogleSerp extends GoogleDom
             if ($this->isMobile()) {
                 $parser = new MobileNaturalParser();
             } else {
-                $parser = new EvaluatedNaturalParser();
+                $parser = new NaturalParser();
             }
         } else {
             throw new InvalidDOMException('Raw dom is not supported, please provide an evaluated version of the dom');
@@ -58,7 +58,12 @@ class GoogleSerp extends GoogleDom
     public function getAdwordsResults()
     {
         if ($this->javascriptIsEvaluated()) {
-            $parser = new EvaluatedAdwordsParser();
+            if ($this->isMobile()) {
+                $parser = new MobileAdwordsParser();
+            } else {
+                $parser = new AdwordsParser();
+            }
+
             return $parser->parse($this);
         } else {
             throw new InvalidDOMException('Raw dom is not supported, please provide an evaluated version of the dom');

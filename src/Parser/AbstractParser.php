@@ -9,13 +9,13 @@ use Serps\Core\Dom\DomNodeList;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 
-abstract class AbstractParser
+abstract class AbstractParser implements ParserInterface
 {
 
     /**
      * @var ParsingRuleInterface[]
      */
-    protected $rules = null;
+    private $rules = null;
 
     /**
      * @return ParsingRuleInterface[]
@@ -52,6 +52,11 @@ abstract class AbstractParser
         return $this->parseGroups($elementGroups, $resultSet, $googleDom);
     }
 
+    /**
+     * Defines what resultset to use for results
+     * @param GoogleDom $googleDom
+     * @return IndexedResultSet
+     */
     protected function createResultSet(GoogleDom $googleDom)
     {
         $startingAt = (int) $googleDom->getUrl()->getParamValue('start', 0);

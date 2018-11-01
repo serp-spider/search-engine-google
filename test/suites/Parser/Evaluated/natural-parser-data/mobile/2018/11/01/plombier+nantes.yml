@@ -1,0 +1,117 @@
+url: https://www.google.co.uk/search?q=plombier+nantes
+file: test/resources/pages-mobile/2018/11/01/plombier+nantes.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  isMobile: true
+
+ads:
+  section:
+    top:
+      results:
+        - types:
+          - AD
+          data:
+            title: Appelez le 02 99 91 67 43 | 2ADIR / Guede Tony
+            url: https://www.google.fr/aclk?sa=L&ai=DChcSEwimzdCmtLPeAhXNtO0KHeAwB1kYABAAGgJkZw&sig=AOD64_3icl5gYjLzBwtTFMpfFDcr-gjmYA&ved=2ahUKEwji3sumtLPeAhWJJcAKHWojBiYQjhp6BAgNEAE&adurl
+            visurl: www.2adir.com/
+            description: 2ADIR Électricien plombier serrurier
+        - types:
+          - AD
+          data:
+            title: Plombier Boulogne 24/24 7j/7 | Intervention en 30mn chez Vous
+            url: http://plombiersurboulognebillancourt.fr/
+            visurl: www.plombiersurboulognebillancourt.fr/
+            description: Agrées Assurances, Artisan Qualifié, Dépannage d'urgence, tout travaux plomb. Artisan de quartier. Déplacement Rapide. Intervention en 30 mn.
+        - types:
+          - AD
+        - types:
+          - AD
+          data:
+            title: Besoin d'un Devis Travaux | Trouvez un Artisan Qualifié | startdevis.fr
+            url: https://www.google.co.uk/aclk?sa=l&ai=DChcSEwimzdCmtLPeAhXNtO0KHeAwB1kYABAFGgJkZw&ae=1&sig=AOD64_2K7C9U6tiL9okyQh2tttslRCfaPg&adurl=http%3A%2F%2Fwww.startdevis.fr&q
+            visurl: www.startdevis.fr/
+            description: Obtenez Jusqu' à 4 devis Comparatifs en 3 clics et Trouvez le bon Artisan en 48H
+    bottom:
+      results:
+        - types:
+          - AD
+          data:
+            title: Alain Rousseau | Dépannage Plomberie à Nantes.
+            url: http://www.alain-rousseau.fr/plomberie
+            visurl: www.alain-rousseau.fr/Plomberie
+            description: Dépannage, Installation, Détartrage, Réparation, Débouchage, Remplacement. Débouchage. Réparation. Devis gratuit. Détartrage. Remplacement. Installation. Dépannage.
+
+
+results:
+
+#  - types:
+#    - MAP
+#  TODO
+
+  - types:
+    - CLASSICAL
+    data:
+      title: "Ze Plombier Nantes | Dépannage | Réparation | Installation"
+      url: http://www.zeplombier.fr/
+      destination: www.zeplombier.fr
+      description: Ze Plombier intervient à Nantes. Pour vos travaux de plomberie, chauffage, gaz, entretien de chaudière. Devis gratuit.
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+    data:
+      title: "Contactez un plombier à Nantes, demandez un devis pour réaliser vos ..."
+      url: https://www.pagesjaunes.fr/annuaire/nantes-44/plombiers
+      destination: https://www.pagesjaunes.fr › plombiers
+      description: "Plombier à Nantes (44) : Devis et Informations , … Trouvez un artisan ou un expert près de chez vous dans l'annuaire PagesJaunes."
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+    data:
+      title: "Les 10 meilleurs plombiers à Nantes, Loire-Atlantique - StarOfService"
+      url: https://www.starofservice.com/annubis/pays-de-la-loire/loire-atlantique/nantes/plomberie
+      destination: https://www.starofservice.com › plomberie
+      description: Voici la liste complète de nos meilleurs plombiers de Nantes et ses environs évalués par la communauté StarOfService de ...
+
+related-searches:
+  - title: plombier nantes 44300
+    url: https://www.google.co.uk/search?client=ubuntu&hs=ExG&q=plombier+nantes+44300&sa=X&ved=2ahUKEwji3sumtLPeAhWJJcAKHWojBiYQ1QIoAHoECAsQAQ
+  - title: plombier nantes urgence
+  - title: avis plombier nantes
+  - title: ze plombier nantes
+  - title: plombier nantes pas cher
+  - title: plombier nantes pages jaunes
+  - title: plombier nantes 44100
+    url: https://www.google.co.uk/search?client=ubuntu&hs=ExG&q=plombier+nantes+44100&sa=X&ved=2ahUKEwji3sumtLPeAhWJJcAKHWojBiYQ1QIoBnoECAsQBw
+  - title: plombier nantes zola
+    url: https://www.google.co.uk/search?client=ubuntu&hs=ExG&q=plombier+nantes+zola&sa=X&ved=2ahUKEwji3sumtLPeAhWJJcAKHWojBiYQ1QIoB3oECAsQCA
