@@ -132,7 +132,14 @@ class GoogleSerp extends GoogleDom
     {
         $relatedSearches = [];
         if ($this->isMobile()) {
-            $items = $this->cssQuery('#botstuff div:not(#bres)>._Qot>div>a');
+
+            $items = $this->cssQuery('#botstuff div:not(#bres) a.QsZ7bb');
+
+            if ($items->length == 0) {
+                // TODO BC version to remove
+                $items = $this->cssQuery('#botstuff div:not(#bres)>._Qot>div>a');
+            }
+
             if ($items->length > 0) {
                 foreach ($items as $item) {
                     /* @var $item \DOMElement */

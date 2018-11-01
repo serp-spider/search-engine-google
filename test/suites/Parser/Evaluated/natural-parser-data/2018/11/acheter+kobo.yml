@@ -1,0 +1,18 @@
+url: https://www.google.co.uk/search?q=acheter+kobo
+file: test/resources/pages-evaluated/2018/11/acheter+kobo.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  isMobile: true
+
+
+related-searches:
+  - title: kobo liseuse
+    url: https://www.google.co.uk/search?q=kobo+liseuse&sa=X&ved=2ahUKEwj9xtaS7rLeAhVLaBoKHTjEC3MQ1QIoAHoECAoQAQ
+  - title: kobo fnac
+  - title: kobo aura
+  - title: kobo aura one
+  - title: compte kobo
+  - title: acheter kobo aura one
+  - title: kobo application
+  - title: kobo clara hd
