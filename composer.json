@@ -31,7 +31,8 @@
 
   "require": {
     "php": ">=5.5",
-    "serps/core": "~0.3.0"
+    "serps/core": "~0.3.0",
+    "ext-dom": "*"
   },
 
   "require-dev":{
