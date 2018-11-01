@@ -70,7 +70,7 @@ class ClassicalCardsResultO9g5cc implements ParsingRuleInterface
             'description' => function () use ($dom, $node) {
                 // TODO remove BC with ".JTuIPc:not(a)>.MUxGbd"
                 return $dom
-                    ->cssQuery('.JTuIPc:not(a)>.MUxGbd, div.BmP5tf>div.MUxGbd', $node)
+                    ->cssQuery('.JTuIPc:not(a)>.MUxGbd, div.BmP5tf>div.MUxGbd, div.LZ8hH>div.MUxGbd', $node)
                     ->getNodeAt(0)
                     ->getNodeValue();
             }
