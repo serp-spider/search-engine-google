@@ -45,9 +45,24 @@ ads:
 
 results:
 
-#  - types:
-#    - MAP
-#  TODO
+  - types:
+    - MAP
+    data-count:
+      localPack: 3
+    data:
+      localPack:
+        - title: Ze Plombier
+          url: https://www.google.co.uk/search?client=ubuntu&hs=ExG&q=Ze+Plombier+Nantes&ludocid=1512192997907758528&ibp=gwp%3B0%2C7&sa=X&ved=2ahUKEwji3sumtLPeAhWJJcAKHWojBiYQvS4wAHoECAoQQQ
+          stars: 4.4
+          review: 37
+        - title: ARTISAN PLOMBIER CHAUFFAGISTE NANTES YVES HENAFF Dépannage Rénovation Agencement Salle de Bains
+          url: https://www.google.co.uk/search?client=ubuntu&hs=ExG&q=ARTISAN+PLOMBIER+CHAUFFAGISTE+NANTES+YVES+HENAFF+D%C3%A9pannage+R%C3%A9novation+Agencement+Salle+de+Bains+Nantes&ludocid=10943936817373136974&ibp=gwp%3B0%2C7&sa=X&ved=2ahUKEwji3sumtLPeAhWJJcAKHWojBiYQvS4wAXoECAoQWQ
+          stars: 4.2
+          review: 42
+        - title: "Plombier Nantes : MATTOS VINCENT Plombier à Nantes"
+          url: https://www.google.co.uk/search?client=ubuntu&hs=ExG&q=Plombier+Nantes+%3A+MATTOS+VINCENT+Plombier+%C3%A0+Nantes+Nantes&ludocid=15951514921003022363&ibp=gwp%3B0%2C7&sa=X&ved=2ahUKEwji3sumtLPeAhWJJcAKHWojBiYQvS4wAnoECAoQcQ
+          stars: 4.3
+          review: 24
 
   - types:
     - CLASSICAL

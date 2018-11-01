@@ -18,6 +18,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroupCarousel;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\LargeClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\KnowledgeCard;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResult;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MapMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\PeopleAlsoAsk;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarouselZ1m;
@@ -42,6 +43,7 @@ class MobileNaturalParser extends AbstractParser
             new ClassicalCardsResultZ1m(), // TODO remove (outdated)
             new ClassicalCardsVideoResult(),
             new ClassicalCardsResult(),
+            new MapMobile(),
             new TweetsCarouselZ1m(), // TODO replace and remove (outdated)
             new ImageGroupCarousel(),
             new ComposedTopStories(),

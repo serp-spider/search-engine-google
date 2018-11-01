@@ -5,11 +5,12 @@
 
 *2018-30-10*
 
+* Feature: 
+    * Added adwords results for mobiles
+    * Added map results for mobiles
 * Bug fix:
     * Fixed description for mobile classical
     * Fixed related searches for mobile
-* Feature: 
-    * Added adwords results for mobiles
 * Other:
     * Added ``ext-dom`` in composer.json
 
