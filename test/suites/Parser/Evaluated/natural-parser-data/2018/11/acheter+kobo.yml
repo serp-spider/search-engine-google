@@ -5,6 +5,84 @@ test-methods:
   javascriptIsEvaluated: true
   isMobile: true
 
+results:
+
+  - types:
+    - CLASSICAL
+    data:
+      title: "Kobo by fnac : la liseuse numérique | fnac"
+      url: https://www.fnac.com/Kobo-by-Fnac/shi433378/w-4
+      destination: https://www.fnac.com › shi433378
+      description: La lecture à portée de main avec la liseuse numérique Kobo by fnac ! Plus de 3 muillions d'eBooks disponibles à la fnac.
+
+
+  - types:
+    - CLASSICAL
+    data:
+      title: "Tous les Kobo Fnac - Achat Informatique  ..."
+      url: https://www.fnac.com/Tous-les-Kobo-Fnac/Liseuses-Kobo-By-Fnac/nsh440798/w-4
+      destination: https://www.fnac.com › nsh440798
+      description: Plus de 6 références Tous les Kobo Fnac avec la livraison en 1 jour avec Fnac+. Retrouvez aussi tous nos produits de notre univers ...
+
+
+  - types:
+    - CLASSICAL
+    data:
+      title: "Acheter des livres sur kobo.com - kobo ..."
+      url: https://www.kobo.com/help/fr-FR/article/1316/acheter-des-ebooks-et-emagazines-sur-kobo-com
+      destination: https://www.kobo.com › fr-FR › article
+      description: Acheter des eBooks sur kobo.com; Acheter un eBook dans la Librairie Kobo; Ajouter plusieurs articles à votre panier; Utilisation de la ...
+
+
+  - types:
+    - CLASSICAL
+    data:
+      title: "Tous les produits Kobo - Achat / Vente Kobo sur LDLC.com"
+      url: https://www.ldlc.com/kobo/bint000036181/
+      destination: https://www.ldlc.com › bint000036181
+      description: Entreprise canadienne fondée en 2009, Kobo est l'un des services de lecture numérique les plus dynamiques au monde avec plus de 5 ...
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+    data:
+      title: "Liseuse Kobo : quelle est la meilleure en 2018 ? - Liseuses.net"
+      url: http://www.liseuses.net/le-point-sur-les-liseuses-kobo/
+      destination: www.liseuses.net › le-point-sur-les-liseus...
+      description: Accéder à Où acheter une liseuse Kobo ? ·  Vous pouvez donc en acheter une dans ... Kobo Aura 2ème édition, Kobo Clara ...
+
+
+  - types:
+    - PEOPLE_ALSO_ASK
+    data-count:
+      questions: 4
+    data:
+      questions:
+      - question: Comment acheter sur Kobo ?
+      - question: Quelle est la meilleure liseuse ?
+      - question: Comment télécharger des livres gratuits sur Kobo ?
+      - question: Quel format eBook pour Kobo ?
+
 
 related-searches:
   - title: kobo liseuse

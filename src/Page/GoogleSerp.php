@@ -132,7 +132,6 @@ class GoogleSerp extends GoogleDom
     {
         $relatedSearches = [];
         if ($this->isMobile()) {
-
             $items = $this->cssQuery('#botstuff div:not(#bres) a.QsZ7bb');
 
             if ($items->length == 0) {
