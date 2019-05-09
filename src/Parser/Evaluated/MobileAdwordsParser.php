@@ -9,7 +9,7 @@ use Serps\SearchEngine\Google\AdwordsResultType;
 use Serps\Core\Dom\Css;
 use Serps\SearchEngine\Google\Parser\AbstractAdwordsParser;
 
-class AdwordsParser extends AbstractAdwordsParser
+class MobileAdwordsParser extends AbstractAdwordsParser
 {
 
     /**
@@ -19,14 +19,14 @@ class AdwordsParser extends AbstractAdwordsParser
     {
         return [
             // Adwords top
-            new AdwordsSectionParser(
-                Css::toXPath('div#tads li.ads-ad, div#tvcap ._oc'),
+            new MobileAdwordsSectionParser(
+                Css::toXPath('#tads li.ads-fr, #tvcap'),
                 AdwordsResultType::SECTION_TOP
             ),
 
             // Adwords bottom
-            new AdwordsSectionParser(
-                "descendant::div[@id = 'bottomads']//li[@class='ads-ad']",
+            new MobileAdwordsSectionParser(
+                Css::toXPath('#tadsb li.ads-fr'),
                 AdwordsResultType::SECTION_BOTTOM
             )
         ];

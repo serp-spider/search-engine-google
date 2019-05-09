@@ -14,8 +14,14 @@ use Serps\Core\Media\MediaInterface;
 class GoogleSerpTestCase extends \PHPUnit_Framework_TestCase
 {
 
-    public function assertResultHasTypes(array $types, ResultDataInterface $result, $file, $index)
-    {
+    public function assertResultHasTypes(
+        array $types,
+        ResultDataInterface
+        $result,
+        $file,
+        $index,
+        $resultTypesClass = NaturalResultType::class
+    ) {
 
         if (is_int($index)) {
             $index = $index + 1;
@@ -34,7 +40,7 @@ class GoogleSerpTestCase extends \PHPUnit_Framework_TestCase
 
 
         foreach ($types as $type) {
-            $typeValue = constant(NaturalResultType::class . '::' . $type);
+            $typeValue = constant($resultTypesClass . '::' . $type);
             $this->assertTrue(
                 $result->is($typeValue),
                 'Expects that '

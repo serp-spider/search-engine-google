@@ -1,9 +1,58 @@
 # CHANGELOG
 
 
+## 0.4.6
+
+*2018-30-10*
+
+* Feature: 
+    * Added adwords results for mobiles
+    * Added map results for mobiles
+* Bug fix:
+    * Fixed description for mobile classical
+    * Fixed related searches for mobile
+* Other:
+    * Added ``ext-dom`` in composer.json
+
+
+## 0.4.5
+
+*2018-30-10*
+
+* Bug fix:
+    * Fixed local pack (#113) Thanks @Human018
+    * Fixed urls for ads results
+
+## 0.4.4
+
+*2018-10-22*
+
+* Bug fix:
+    * Fixed people also ask update
+
+## 0.4.3
+
+*2018-09-17*
+
+* Bug fix:
+    * Fix google dom update on classical results
+
+## 0.4.2
+
+*2018-08-05*
+
+* Bug fix:
+    * fix mobile serps (#106)
+
+
 ## 0.4.1
 
-*2018-xx-xx* NOT RELEASED YET
+*2018-07-05* 
+
+* Bug fix:
+    * fixed multiple mobile issues on mobile results
+    * fixed parsing for number of results (#100) - thanks @migliori
+    * fixed related searches on desktop  - thanks @gudix
 
 ## 0.4.0
 

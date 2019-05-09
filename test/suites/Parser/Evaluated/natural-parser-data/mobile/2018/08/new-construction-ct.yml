@@ -1,0 +1,62 @@
+# image-group recipes
+url: https://www.google.ca/search?q=new+construction+ct
+file: test/resources/pages-mobile/2018/08/new+construction+ct.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: null
+  isMobile: true
+
+results:
+
+  - types:
+      - CLASSICAL
+
+    data:
+      title: Connecticut New Homes & New Construction For Sale | Zillow
+      destination: Zillow › ct › new-homes
+      url: https://www.zillow.com/ct/new-homes/
+      description: Discover new construction homes or master planned communities in Connecticut . Check out floor plans, pictures and ...
+
+  - types:
+      - CLASSICAL
+    data:
+      url: https://www.realtor.com/newhomesconstruction/Connecticut
+      destination: Realtor.com › newhomesconstruction › C...
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+    data:
+      title: New Home Development and New Home Construction | William ...
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+    data:
+      isAmp: true
+
+  - types:
+      - CLASSICAL
+
+    data:
+      isAmp: true
+      title: Connecticut Homes for Sale - 13 New Home Communities | Toll ...
+      url: https://www.tollbrothers.com/luxury-homes/Connecticut?amp=true
+      destination: Toll Brothers › luxury-homes
+      description: Connecticut homes for sale by Toll Brothers®. 13 new luxury home communities in CT. View photos, floor plans, pricing ...

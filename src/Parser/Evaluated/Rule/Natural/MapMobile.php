@@ -12,12 +12,12 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class Map implements ParsingRuleInterface
+class MapMobile implements ParsingRuleInterface
 {
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($dom->cssQuery('.AEprdc.vk_c', $node)->length == 1) {
+        if ($dom->cssQuery('img.wfAGXd', $node)->length == 1) {
             return self::RULE_MATCH_MATCHED;
         }
         return self::RULE_MATCH_NOMATCH;
@@ -28,7 +28,7 @@ class Map implements ParsingRuleInterface
 
         $item = [
             'localPack' => function () use ($node, $dom) {
-                $localPackNodes = $dom->cssQuery('.ccBEnf>div', $node);
+                $localPackNodes = $dom->cssQuery('.PX16ld', $node);
                 $data = [];
                 foreach ($localPackNodes as $localPack) {
                     $data[] = new BaseResult(NaturalResultType::MAP_PLACE, $this->parseItem($localPack, $dom));
@@ -36,10 +36,6 @@ class Map implements ParsingRuleInterface
                 return $data;
             },
             'mapUrl'    => function () use ($node, $dom) {
-                $mapATag = $dom->cssQuery('#lu_map', $node)->item(0)->parentNode;
-                if ($mapATag) {
-                    return $dom->getUrl()->resolveAsString($mapATag->getAttribute('href'));
-                }
                 return null;
             }
 
@@ -53,39 +49,25 @@ class Map implements ParsingRuleInterface
 
         return [
             'title' => function () use ($localPack, $dom) {
-                return $dom->cssQuery('.dbg0pd', $localPack)->getNodeAt(0)->getNodeValue();
+                return $dom->cssQuery('.kR1eme', $localPack)->getNodeAt(0)->getNodeValue();
             },
             'url' => function () use ($localPack, $dom) {
+                $nodes = $dom->cssQuery('a', $localPack);
 
-                // we search for explicit <a> with href to the website.
-                // if not found the url is sometimes in a <link> tag
-                $nodes = $dom->cssQuery('a.L48Cpd', $localPack);
-                if ($nodes->length > 0) {
-                    return $nodes->getNodeAt(0)->getAttribute('href');
-                } else {
-                    return $dom->cssQuery('link[href]', $localPack)
-                        ->getNodeAt(0)
-                        ->getAttribute('href');
+                $href = $nodes
+                    ->getNodeAt(0)
+                    ->getAttribute('href');
+
+                if ($href) {
+                    return $dom->getUrl()->resolveAsString($href);
                 }
             },
             'street' => function () use ($localPack, $dom) {
-                $v = $dom->cssQuery(
-                    '.rllt__details>div:nth-child(3)>span',
-                    $localPack
-                )->getNodeAt(0)->getNodeValue();
-
-                if ($v) {
-                    return $v;
-                } else {
-                    return $dom->cssQuery(
-                        '.rllt__details>div:nth-child(1)>span',
-                        $localPack
-                    )->getNodeAt(0)->getNodeValue();
-                }
+                // TODO
+                return null;
             },
             'stars' => function () use ($localPack, $dom) {
                 $rating = $dom->cssQuery('.BTtC6e', $localPack)->getNodeAt(0)->getNodeValue();
-
                 // transforms "4,4" to 4.4
                 return $rating ? (float)str_replace(',', '.', $rating) : null;
             },
@@ -111,23 +93,6 @@ class Map implements ParsingRuleInterface
             },
 
             'phone' => function () use ($localPack, $dom) {
-                $item = $dom->cssQuery(
-                    '.rllt__details>div:nth-child(3)',
-                    $localPack
-                )->item(0);
-
-                if (!$item) {
-                    $item = $dom->cssQuery(
-                        '.rllt__details>div:nth-child(1)',
-                        $localPack
-                    )->item(0);
-                }
-
-                if ($item) {
-                    if ($item->childNodes->length > 1 && $item->childNodes->item(1) instanceof \DOMText) {
-                        return trim($item->childNodes->item(1)->nodeValue, ' ·');
-                    }
-                }
                 return null;
             },
         ];

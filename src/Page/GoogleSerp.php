@@ -7,10 +7,10 @@ namespace Serps\SearchEngine\Google\Page;
 
 use Serps\Exception;
 use Serps\SearchEngine\Google\Exception\InvalidDOMException;
-use Serps\SearchEngine\Google\Page\GoogleDom;
-use Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser as EvaluatedAdwordsParser;
+use Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\MobileNaturalParser;
-use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser as EvaluatedNaturalParser;
+use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser;
+use Serps\SearchEngine\Google\Parser\Evaluated\MobileAdwordsParser;
 use Serps\Stubs\RelatedSearch;
 
 class GoogleSerp extends GoogleDom
@@ -41,7 +41,7 @@ class GoogleSerp extends GoogleDom
             if ($this->isMobile()) {
                 $parser = new MobileNaturalParser();
             } else {
-                $parser = new EvaluatedNaturalParser();
+                $parser = new NaturalParser();
             }
         } else {
             throw new InvalidDOMException('Raw dom is not supported, please provide an evaluated version of the dom');
@@ -58,7 +58,12 @@ class GoogleSerp extends GoogleDom
     public function getAdwordsResults()
     {
         if ($this->javascriptIsEvaluated()) {
-            $parser = new EvaluatedAdwordsParser();
+            if ($this->isMobile()) {
+                $parser = new MobileAdwordsParser();
+            } else {
+                $parser = new AdwordsParser();
+            }
+
             return $parser->parse($this);
         } else {
             throw new InvalidDOMException('Raw dom is not supported, please provide an evaluated version of the dom');
@@ -76,11 +81,15 @@ class GoogleSerp extends GoogleDom
         if ($item->length != 1) {
             return null;
         }
-        $nodeText = $item->item(0)->childNodes->item(0);
 
-        if (!$nodeText) {
+        // number of results is followed by time, we want to targets the first node (text node) that is the number of
+        // results
+        $nodeValue = $item->getNodeAt(0)->getChildren()->getNodeAt(0)->getNodeValue();
+
+        if (!$nodeValue) {
             return null;
         }
+
 
         // WARNING: The number of result is explained in different format according to the country. Fon instance:
         // UK:  6,200,000
@@ -88,13 +97,17 @@ class GoogleSerp extends GoogleDom
         // DE:  2.200.000
         // IN:  62,00,000
         // We have to use a global matcher
-        $matched = preg_match('/([0-9]+[^0-9]?)+/u', $nodeText->textContent, $countMatch);
+        $matched = preg_match_all('/([0-9]+[^0-9]?)+/u', $nodeValue, $countMatch);
 
         if (!$matched) {
             return null;
         }
 
-        return (int) preg_replace('/[^0-9]/', '', $countMatch[0]);
+        // get the last count, when we use pagination the first count is the page number
+        // see https://github.com/serp-spider/search-engine-google/issues/100
+        $count = $countMatch[0][count($countMatch[0]) - 1];
+
+        return (int) preg_replace('/[^0-9]/', '', $count);
     }
 
     public function javascriptIsEvaluated()
@@ -124,7 +137,13 @@ class GoogleSerp extends GoogleDom
     {
         $relatedSearches = [];
         if ($this->isMobile()) {
-            $items = $this->cssQuery('#botstuff div:not(#bres)>._Qot>div>a');
+            $items = $this->cssQuery('#botstuff div:not(#bres) a.QsZ7bb');
+
+            if ($items->length == 0) {
+                // TODO BC version to remove
+                $items = $this->cssQuery('#botstuff div:not(#bres)>._Qot>div>a');
+            }
+
             if ($items->length > 0) {
                 foreach ($items as $item) {
                     /* @var $item \DOMElement */
@@ -135,7 +154,7 @@ class GoogleSerp extends GoogleDom
                 }
             }
         } else {
-            $items = $this->cssQuery('#brs ._e4b>a');
+            $items = $this->cssQuery('#brs ._e4b>a, #brs .card-section a'); // TODO ._ed4 is outdated
             if ($items->length > 0) {
                 foreach ($items as $item) {
                     /* @var $item \DOMElement */

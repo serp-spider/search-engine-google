@@ -20,14 +20,14 @@
     <rule ref="PEAR.Functions.ValidDefaultValue.NotAtEnd">
         <exclude-pattern>./test/*</exclude-pattern>
     </rule>
-    
+
     <!-- By default we use single quote only. Double quotes come when a variable is inside -->
     <rule ref="Squiz.Strings.DoubleQuoteUsage">
         <exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
     </rule>
 
     <!-- Disallow some function like var_dump -->
-    <rule ref="Squiz.PHP.ForbiddenFunctions">
+    <rule ref="Generic.PHP.ForbiddenFunctions">
         <properties>
             <property name="forbiddenFunctions" type="array" value="var_dump=>null,sizeof=>count,delete=>unset,echo=>null"/>
         </properties>
