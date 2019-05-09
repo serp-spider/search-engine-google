@@ -68,6 +68,15 @@ class GoogleClient
         $statusCode = $response->getHttpResponseStatus();
 
         $effectiveUrl = GoogleUrlArchive::fromString($response->getEffectiveUrl()->__toString());
+        
+        //check if the response is encoded
+        switch ($response->getHeader('Content-Encoding')[0]) {
+            case 'gzip':
+                $pageContent = gzinflate(substr($response->getPageContent(), 10, -8));
+                break;
+            default :
+                $pageContent = $response->getPageContent();
+        }
 
         if (200 == $statusCode) {
             return new GoogleSerp($response->getPageContent(), $effectiveUrl);
