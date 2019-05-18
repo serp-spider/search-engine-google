@@ -29,7 +29,10 @@ class AdwordsItem implements ParsingRuleInterface
             'title' => function () use ($googleDOM, $node) {
                 $aTag = $googleDOM->getXpath()->query('descendant::h3/a[2]', $node)->item(0);
                 if (!$aTag) {
-                    return null;
+                    $aTag = $googleDOM->getXpath()->query('descendant::h3', $node)->item(0);
+                    if (!$aTag) {
+                        return null;
+                    }
                 }
                 return $aTag->nodeValue;
             },

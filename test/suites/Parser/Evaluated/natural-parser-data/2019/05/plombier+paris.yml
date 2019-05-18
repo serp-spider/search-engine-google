@@ -1,0 +1,27 @@
+# image-group recipes
+url: https://www.google.com/search?q=plombier+paris
+file: test/resources/pages-evaluated/2019/05/plombier+paris.html
+
+ads:
+  section:
+    top:
+      results:
+      - types:
+        - AD
+        data:
+          title: 'Votre Plombier 24H/7J à Paris | Partenaire de la MAIF‎'
+          url: https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwih-Zm7w6TiAhVmu-0KHZMLCyQYABAAGgJkZw&ohost=www.google.com&cid=CAASEuRo6HTIPJoDJ-nujvNR8ARXrA&sig=AOD64_3_Vxn-U9ONRlRa5qtg1QvtFDKs_w&q&ved=2ahUKEwig0ZS7w6TiAhWISBUIHZAtBjUQ0Qx6BAgOEAE&adurl
+          visurl: www.mesdepanneurs.fr/Plomberie/Paris
+          description: En Urgence ou sur Rendez-Vous. Commandez votre intervention rapidement en ligne ! Les prix...
+      - types:
+        - AD
+        data:
+          title: Plombier Paris | Intervention En Moins de 30min‎
+      - types:
+        - AD
+        data:
+          title: Trouvez votre Plombier | 5000€ de Travaux à Gagner‎
+      - types:
+        - AD
+        data:
+          title: "Plombier Paris | Tarif: A partir de 90 € | Dépannage en 45 minutes‎"
