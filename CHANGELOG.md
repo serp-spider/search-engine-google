@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.4.7
+
+*2018-18-05*
+
+* Bug fix: 
+    * Fixed title for adwords results
 
 ## 0.4.6
 
