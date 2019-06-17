@@ -36,11 +36,13 @@ class Map implements ParsingRuleInterface
                 return $data;
             },
             'mapUrl'    => function () use ($node, $dom) {
-                $mapATag = $dom->cssQuery('#lu_map', $node)->item(0)->parentNode;
-                if ($mapATag) {
-                    return $dom->getUrl()->resolveAsString($mapATag->getAttribute('href'));
+                $luMap = $dom->cssQuery('#lu_map', $node)->item(0);
+                if ($luMap) {
+                    $mapATag = $luMap->parentNode;
+                    if ($mapATag) {
+                        return $dom->getUrl()->resolveAsString($mapATag->getAttribute('href'));
+                    }
                 }
-                return null;
             }
 
         ];
