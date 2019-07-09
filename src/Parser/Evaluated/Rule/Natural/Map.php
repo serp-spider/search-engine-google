@@ -43,6 +43,7 @@ class Map implements ParsingRuleInterface
                         return $dom->getUrl()->resolveAsString($mapATag->getAttribute('href'));
                     }
                 }
+                return null;
             }
 
         ];
