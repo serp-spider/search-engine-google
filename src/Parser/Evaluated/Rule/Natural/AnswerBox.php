@@ -37,6 +37,11 @@ class AnswerBox implements ParsingRuleInterface
                     // TODO ERROR
                     return;
                 }
+
+                if ($h3Tag = $dom->cssQuery('h3', $aTag)->item(0)) {
+                    return $h3Tag->getNodeValue();
+                }
+
                 return $aTag->nodeValue;
             },
             'url'     => function () use ($dom, $node) {
