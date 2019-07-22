@@ -1,0 +1,64 @@
+# image-group recipes
+url: https://www.google.fr/search?q=buy+pen
+file: test/resources/pages-mobile/2017/11/buy+pen.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: null
+  isMobile: true
+
+results:
+
+
+  - types:
+      - CLASSICAL
+
+    data:
+      url: https://penclassics.nz/
+      destination: https://penclassics.nz
+      title: Pen Classics
+      description: New Zealand's premiere retailer of fountain pens, inks and papers! With over 200 inks in stock and the worlds top ...
+
+  - types:
+      - CLASSICAL
+
+    data:
+      url: https://www.penshop.co.uk/pens
+      destination: https://www.penshop.co.uk › pens
+      title: Buy Luxury Pens Online | Free UK Delivery | The Pen Shop
+      description: Browse our full range of luxury pens, including fountain & ball pens from brands like Mont Blanc, Cross & Parker. Buy ...
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+    data:
+      url: https://www.amazon.in/Pens-Writing-Supplies/b?ie=UTF8&node=3591021031
+      destination: https://www.amazon.in › Pens-Writing-S...
+      title: "Pens, Pencils & Writing Supplies: Buy Pens, Pencils ... - Amazon.in"
+      description: Results 1 - 24 of 18193 · Amazon.in - Buy Pens, Pencils & Writing Supplies Online at Low Prices in India at Amazon.in.
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+
+  - types:
+      - CLASSICAL
+    data:
+      url: https://www.priceme.co.nz/Pen-Refills-Ink/c-1577.aspx
+      destination: https://www.priceme.co.nz › Pen-Refills-I...
+      title: "Pen Refills & Ink NZ - Compare & Buy Pen Refills & Ink ... - PriceMe"
+      description: Products 1 - 48 of 207 - Compare Pen Refills & Ink prices and read reviews on PriceMe. Buy online from the best shops in ...
+
+  - types:
+      - CLASSICAL

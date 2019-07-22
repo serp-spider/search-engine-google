@@ -50,7 +50,7 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
      * @param \DOMElement $imgNode
      * @return array
      */
-    private function parseItem(GoogleDOM $googleDOM, \DOMElement $imgNode)
+    private function parseItem(GoogleDom $googleDOM, \DOMElement $imgNode)
     {
         $data =  [
             'sourceUrl' => function () use ($imgNode, $googleDOM) {

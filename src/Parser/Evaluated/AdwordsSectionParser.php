@@ -5,7 +5,6 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated;
 
-use Serps\SearchEngine\Google\AdwordsResultType;
 use Serps\SearchEngine\Google\AdwordsSectionResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
@@ -30,11 +29,13 @@ class AdwordsSectionParser extends AbstractParser
         $this->location = $location;
     }
 
+    /**
+     * @inheritdoc
+     */
     protected function createResultSet(GoogleDom $googleDom)
     {
         return new AdwordsSectionResultSet($this->location);
     }
-
 
     /**
      * @inheritdoc
@@ -52,8 +53,6 @@ class AdwordsSectionParser extends AbstractParser
      */
     protected function getParsableItems(GoogleDom $googleDom)
     {
-        $xpathObject = $googleDom->getXpath();
-        $xpathElementGroups = $this->pathToItems;
-        return $xpathObject->query($xpathElementGroups);
+        return $googleDom->xpathQuery($this->pathToItems);
     }
 }

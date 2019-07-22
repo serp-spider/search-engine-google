@@ -35,6 +35,17 @@ results:
       - CLASSICAL
 
   - types:
+      - PEOPLE_ALSO_ASK
+    data-count:
+      questions: 4
+    data:
+      questions:
+        - question: What is a ransomware attack?
+        - question: How do I get rid of ransomware?
+        - question: How do I protect myself from ransomware?
+        - question: What is locky ransomware?
+
+  - types:
       - CLASSICAL
 
   - types:

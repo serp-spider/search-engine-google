@@ -15,8 +15,9 @@ Install
 Install it through [composer](https://getcomposer.org/) with the package 
 [serps/search-engine-google](https://packagist.org/packages/serps/search-engine-google) : 
 
-``composer require 'serps/search-engine-google'``
+``composer require  --prefer-dist 'serps/search-engine-google'``
 
+Note: it is recommended to use ``--prefer-dist`` to avoid downloading html test files.
 
 Documentation
 -------------

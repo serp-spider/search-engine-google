@@ -1,0 +1,75 @@
+url: https://www.google.co.uk/search?q=who+is+homer+simpson
+file: test/resources/pages-evaluated/2018/10/who+is+homer+simpson.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: 25500000
+  isMobile: false
+
+results:
+
+
+  - types:
+      - ANSWER_BOX
+
+  - types:
+      - PEOPLE_ALSO_ASK
+    data-count:
+      questions: 4
+
+    data:
+      questions:
+        - question: Quel est l'âge de Homer Simpson ?
+        - question: Quel est le métier de Homer Simpson ?
+        - question: Quel âge a la série Les Simpson ?
+        - question: Quel est l'âge de Marge Simpson ?
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+  - types:
+      - CLASSICAL
+
+
+related-searches:
+  - title: homer simpson age
+    url: https://www.google.co.uk/search?q=homer+simpson+age&sa=X&ved=0ahUKEwi9p_OS4JreAhUNyoUKHdpUCD0Q1QIIhAIoAA
+  - title: homer simpson voix
+  - title: homer simpson dessin
+  - title: homer simpson en vrai
+  - title: homer simpson cerveau
+  - title: homer simpson profil
+  - title: homer simpson biere
+  - title: marge simpson

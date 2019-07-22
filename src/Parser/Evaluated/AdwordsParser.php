@@ -5,22 +5,19 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated;
 
-use Serps\Core\Serp\CompositeResultSet;
 use Serps\SearchEngine\Google\AdwordsResultType;
 use Serps\Core\Dom\Css;
-use Serps\SearchEngine\Google\Page\GoogleDom;
-use \Serps\SearchEngine\Google\Parser\Evaluated\AdwordsSectionParser;
+use Serps\SearchEngine\Google\Parser\AbstractAdwordsParser;
 
-class AdwordsParser
+class AdwordsParser extends AbstractAdwordsParser
 {
 
     /**
-     * @param GoogleDom $googleDom
-     * @return CompositeResultSet
+     * @inheritdoc
      */
-    public function parse(GoogleDom $googleDom)
+    public function generateParsers()
     {
-        $parsers = [
+        return [
             // Adwords top
             new AdwordsSectionParser(
                 Css::toXPath('div#tads li.ads-ad, div#tvcap ._oc'),
@@ -33,17 +30,5 @@ class AdwordsParser
                 AdwordsResultType::SECTION_BOTTOM
             )
         ];
-
-
-        $resultsSets = new CompositeResultSet();
-
-        foreach ($parsers as $parser) {
-            /* @var $parser \Serps\SearchEngine\Google\Parser\Evaluated\AdwordsSectionParser */
-            $resultsSets->addResultSet(
-                $parser->parse($googleDom)
-            );
-        }
-
-        return $resultsSets;
     }
 }

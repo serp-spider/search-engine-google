@@ -7,6 +7,7 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical;
 
 use Serps\Core\Dom\DomElement;
 use Serps\Core\Media\MediaFactory;
+use Serps\SearchEngine\Google\Exception\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
@@ -16,7 +17,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class ClassicalResult implements ParsingRuleInterface
 {
 
-    public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
+    public function match(GoogleDom $dom, DomElement $node)
     {
         if ($node->getAttribute('class') == 'g') {
             if ($dom->cssQuery('.rc', $node)->length == 1) {
@@ -31,27 +32,44 @@ class ClassicalResult implements ParsingRuleInterface
 
         // find the title/url
         /* @var $aTag \DOMElement */
-        $aTag=$dom
-            ->xpathQuery("descendant::h3[@class='r'][1]/a", $node)
+        $aTag = $dom
+            ->xpathQuery("descendant::*[(self::div or self::h3) and @class='r'][1]/a", $node)
             ->item(0);
         if (!$aTag) {
-            return;
+            throw new InvalidDOMException('Cannot parse a classical result.');
+        }
+
+        /* @var $h3Tag \DOMElement */
+        $h3Tag = $dom
+            ->xpathQuery('descendant::h3', $node)
+            ->item(0);
+        if (!$h3Tag) {
+            throw new InvalidDOMException('Cannot parse a classical result.');
         }
 
         $destinationTag = $dom
-            ->cssQuery('div.f.kv>cite', $node)
-            ->item(0);
+            ->cssQuery('div.f cite, div.TbwUpd cite', $node)
+            ->getNodeAt(0);
+
+        if (is_a($destinationTag, Serps\Core\Dom\NullDomNode::class)) {
+            throw new InvalidDOMException('Cannot parse a classical result.');
+        }
 
         $descriptionTag = $dom
             ->xpathQuery("descendant::span[@class='st']", $node)
             ->item(0);
 
         return [
-            'title'   => $aTag->nodeValue,
+            'title'   => $h3Tag->nodeValue,
             'url'     => $dom->getUrl()->resolveAsString($aTag->getAttribute('href')),
-            'destination' => $destinationTag ? $destinationTag->nodeValue : null,
+            'destination' => $destinationTag->getNodeValue(),
             // trim needed for mobile results coming with an initial space
-            'description' => $descriptionTag ? trim($descriptionTag->nodeValue) : null
+            'description' => $descriptionTag ? trim($descriptionTag->nodeValue) : null,
+            'isAmp' => function () use ($dom, $node) {
+                return $dom
+                        ->cssQuery('.amp_r', $node)
+                        ->length > 0;
+            },
         ];
     }
 

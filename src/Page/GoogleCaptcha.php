@@ -13,7 +13,6 @@ use Serps\SearchEngine\Google\Page\GoogleError;
 class GoogleCaptcha implements CaptchaResponse
 {
 
-
     /**
      * @var GoogleError
      */
@@ -36,29 +35,10 @@ class GoogleCaptcha implements CaptchaResponse
         return $this->googleError;
     }
 
-    /**
-     * Gets the url of the image. Be aware that each call to this method will regenerate the captcha image
-     * and the previous generated image will be invalided
-     *
-     * @return mixed
-     * @throws Exception
-     */
-    public function getImageUrl()
-    {
-        $imageTag = $this->googleError->cssQuery('img');
-
-        if ($imageTag->length !== 1) {
-            throw new InvalidDOMException('Unable to find the captcha image.');
-        }
-
-        $src =  $imageTag->item(0)->getAttribute('src');
-        $d = $this->googleError->getUrl()->resolve($src);
-        return $d->buildUrl();
-    }
 
     public function getCaptchaType()
     {
-        return self::CAPTCHA_TYPE_IMAGE;
+        return self::CAPTCHA_TYPE_RECAPTCHAV2;
     }
 
     /**
@@ -69,23 +49,7 @@ class GoogleCaptcha implements CaptchaResponse
      */
     public function getData()
     {
-        $imageUrl = $this->getImageUrl();
-        return file_get_contents($imageUrl);
-    }
-
-    /**
-     * The captcha resolution id to send with the form to solve the captcha
-     * @return mixed
-     * @throws Exception
-     */
-    public function getId()
-    {
-        $inputTag = $this->googleError->cssQuery('input[name="q"]');
-        if ($inputTag->length == 0) {
-            throw new InvalidDOMException('Unable to find the captcha id.');
-        }
-        $id = $inputTag->item(0)->getAttribute('value');
-        return $id;
+        return null;
     }
 
     public function getDetectedIp()

@@ -1,0 +1,58 @@
+# image-group recipes
+url: https://www.google.fr/search?q=super+u+paris
+file: test/resources/pages-evaluated/2018/03/super+u+paris.html
+results:
+
+  - types:
+    - MAP
+
+    data-count:
+      localPack: 3
+    data:
+      localPack:
+        - title: Super U et drive
+          url: https://www.magasins-u.com/superu-parisavenuedeclichy
+          street: 103 Avenue de Clichy
+          phone: 01 42 28 61 22
+        - title: Super U et drive
+          street: 14 Rue Paul Bert
+          phone: 01 43 79 43 43
+        - title: U Express et drive
+          street: 15 Rue des Petits Carreaux
+          phone: 01 42 36 51 00
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL

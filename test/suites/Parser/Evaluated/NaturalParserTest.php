@@ -5,6 +5,7 @@
 
 namespace Serps\Test\TDD\SearchEngine\Google\Parser\Evaluated;
 
+use Serps\SearchEngine\Google\AdwordsResultType;
 use Serps\SearchEngine\Google\Page\GoogleSerp;
 use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser;
 use Serps\SearchEngine\Google\Page\GoogleDom;
@@ -25,6 +26,7 @@ use Symfony\Component\Yaml\Yaml;
  * For instance if the previous test included a ``TweetsCarousel`` the new test should do so.
  *
  *
+ * @covers \Serps\SearchEngine\Google\Page\GoogleSerp
  * @covers \Serps\SearchEngine\Google\Parser\AbstractParser
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\MobileNaturalParser
@@ -32,16 +34,23 @@ use Symfony\Component\Yaml\Yaml;
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResult
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalWithLargeVideo
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResult
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsVideoResult
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultZ1m
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultZINbbc
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flight
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroupCarousel
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InTheNews
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\KnowledgeCard
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Map
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\PeopleAlsoAsk
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesVertical
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesCarousel
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ComposedTopStories
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarousel
+ * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarouselZ1m
  * @covers \Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideoGroup
  *
  */
@@ -50,7 +59,9 @@ class NaturalParserTest extends GoogleSerpTestCase
 
     public function serpProvider()
     {
-        $iterator = new \DirectoryIterator(__DIR__ . '/natural-parser-data');
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator(__DIR__ . '/natural-parser-data')
+        );
         $data = [];
         foreach ($iterator as $file) {
             if ($file->getExtension() === 'yml') {
@@ -98,6 +109,57 @@ class NaturalParserTest extends GoogleSerpTestCase
                 }
                 if (isset($expectedResult['data-media'])) {
                     $this->assertResultHasDataMedia($expectedResult['data-media'], $item);
+                }
+            }
+        }
+
+        if (isset($data['related-searches'])) {
+            $relatedSearches = $dom->getRelatedSearches();
+
+            $this->assertCount(count($data['related-searches']), $relatedSearches, 'Failed related search assertion with file ' . $file);
+
+            foreach ($data['related-searches'] as $k => $relSearchItem) {
+                if (isset($relSearchItem['title'])) {
+                    $this->assertEquals($relSearchItem['title'], $relatedSearches[$k]->title, 'Failed related search title assertion with file ' . $file . ' for item #' . $k);
+                }
+                if (isset($relSearchItem['url'])) {
+                    $this->assertEquals($relSearchItem['url'], $relatedSearches[$k]->url, 'Failed related search url assertion with file ' . $file . ' for item #' . $k);
+                }
+            }
+        }
+
+        if (isset($data['ads'])) {
+            $allAdsResults = $dom->getAdwordsResults();
+
+            if (isset($data['ads']['section'])) {
+                foreach ($data['ads']['section'] as $section => $sectionData) {
+                    if (isset($sectionData['results'])) {
+                        $sectionConstant = 'SECTION_' . strtoupper($section);
+
+
+                        $adResults = $allAdsResults->getResultsByType('adws_section_' . $section);
+
+                        $this->assertCount(
+                            count($sectionData['results']),
+                            $adResults,
+                            'Failed asserting that number of adwords results matched. Using file ' . $file . ' | ' . $section
+                        );
+
+                        foreach ($sectionData['results'] as $k => $expectedResult) {
+                            $item = $adResults[$k];
+                            $this->assertResultHasTypes(
+                                array_merge($expectedResult['types'], [$sectionConstant]),
+                                $item,
+                                $file,
+                                $k,
+                                AdwordsResultType::class
+                            );
+
+                            if (isset($expectedResult['data'])) {
+                                $this->assertResultHasData($expectedResult['data'], $item, $file . ' => ' . $k . '/');
+                            }
+                        }
+                    }
                 }
             }
         }

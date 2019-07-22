@@ -27,13 +27,7 @@ class GoogleCaptchaTest extends \PHPUnit_Framework_TestCase
 
         $captchaDom = new GoogleCaptcha($errorDom);
 
-        $this->assertEquals('88.164.16.115', $captchaDom->getDetectedIp());
-
-        $expected = 'https://ipv4.google.com/sorry/image?id=2807240840246447177&q=CGMSBFikEHMYmPy9vwUiGQDxp4NLbaoWhAiT1YLcRhBcqrVhooLaAM4&hl=en&continue=https%3A%2F%2Fwww.google.fr%2Fsearch%3Fsourceid%3Dchrome-psyapi2%26ion%3D1%26espv%3D2%26ie%3DUTF-8%26client%3Dubuntu%26q%3Dsimpsons%26oq%3Dsimpsons%26aqs%3Dchrome..69i57j0l5.1511j0j7';
-        $this->assertEquals($expected, $captchaDom->getImageUrl());
-
-
-        $this->assertEquals('CGMSBFikEHMYmPy9vwUiGQDxp4NLbaoWhAiT1YLcRhBcqrVhooLaAM4', $captchaDom->getId());
+        $this->assertEquals('188.94.206.49', $captchaDom->getDetectedIp());
 
         $this->assertInstanceOf(GoogleError::class, $captchaDom->getErrorPage());
     }

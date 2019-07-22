@@ -1,0 +1,65 @@
+# image-group recipes
+url: https://www.google.fr/search?q=asian+massage
+file: test/resources/pages-evaluated/2018/03/asian+massage.html
+results:
+
+  - types:
+    - MAP
+
+    data-count:
+      localPack: 3
+    data:
+      localPack:
+        - title: Oasis massage centre
+          street: Newcastle upon Tyne
+          review: 3
+          phone: 0191 222 0691
+        - title: Dundalk Asian Massage Centre
+          street: dundalk, County Louth, Ireland
+          review: 0
+          phone: +353 87 709 1703
+        - title: Fern Thai Massage
+          street: Leigh
+          review: 0
+          phone: 07837 980433
+
+
+  - types:
+    - CLASSICAL
+    - CLASSICAL_VIDEO
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL
+
+
+  - types:
+    - CLASSICAL

@@ -56,7 +56,7 @@ class ImageGroupCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRul
      * @return array
      *
      */
-    private function parseItem(GoogleDOM $googleDOM, \DOMElement $imgNode)
+    private function parseItem(GoogleDom $googleDOM, \DOMElement $imgNode)
     {
         $data =  [
             'sourceUrl' => function () use ($imgNode, $googleDOM) {
@@ -77,7 +77,7 @@ class ImageGroupCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRul
                 if (!$img) {
                     return null;
                 }
-                return mediafactory::createmediafromsrc($img->getattribute('src'));
+                return MediaFactory::createMediaFromSrc($img->getattribute('src'));
             },
         ];
 

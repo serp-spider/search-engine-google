@@ -1,0 +1,93 @@
+# image-group recipes
+url: https://www.google.ca/search?q=foo
+file: test/resources/pages-mobile/2018/03/foo.html
+
+test-methods:
+  javascriptIsEvaluated: true
+  getNumberOfResults: null
+  isMobile: true
+
+results:
+
+  - types:
+      - KNOWLEDGE
+    data:
+      title: Foo Fighters
+
+
+
+  - types:
+      - CLASSICAL
+
+    data:
+      title: Variable métasyntaxique — Wikipédia
+      isAmp: false
+      url: https://fr.m.wikipedia.org/wiki/Variable_m%C3%A9tasyntaxique
+      destination: https://fr.m.wikipedia.org › wiki › Variab...
+      description: "foo : historiquement fu, pour fucked up, ou peut-être forward observation officer, connus pendant la Seconde Guerre mondiale notamment pour les inscriptions laissées derrière les lignes ennemies foo was here ; selon une autre interprétation, ..."
+
+  - types:
+      - CLASSICAL
+
+    data:
+      title: Foo Fighters — Wikipédia
+
+
+  - types:
+      - CLASSICAL
+
+    data:
+      title: foo — Wiktionnaire
+
+
+  - types:
+      - CLASSICAL
+
+    data:
+      title: Foo Fighters - YouTube
+
+
+  - types:
+      - CLASSICAL
+
+    data:
+      title: Foo Fighters - Accueil | Facebook
+
+
+  - types:
+      - CLASSICAL
+
+    data:
+      title: '"Concrete and Gold" : Dave Grohl et ses Foo Fighters tiennent ... - LCI'
+
+
+  - types:
+      - CLASSICAL
+
+    data:
+      title: "Dave Grohl, de Nirvana aux Foo Fighters : une vie en rock"
+      isAmp: true
+
+
+  - types:
+      - CLASSICAL
+
+    data:
+      title: 'Foo Fighters : écoutez le nouvel album "Concrete and ...'
+      isAmp: true
+      url: https://m.culturebox.francetvinfo.fr/amp/musique/rock/foo-fighters-ecoutez-le-nouvel-album-concrete-and-gold-mariage-des-extremes-262545
+      destination: https://culturebox.francetvinfo.fr › ...
+      description: '15 sept. 2017 · Le nouvel album des Foo Fighters est selon le leader Dave Grohl leur "plus grand" à ce jour. "Concrete and Gold" célèbre surtout le mariage des extrêmes, celui de la brutalité et de la dentelle, du heavy rock et de la pop.'
+
+
+  - types:
+      - CLASSICAL
+
+    data:
+      title: 'Foo Production | Event, équipement, shop'
+      isAmp: false
+      url: http://foo-production.com/
+      destination: foo-production.com
+      description: "Foo Production c'est aussi un large réseau de professionnel dans multiples secteurs. Foo Production a vu le jour en 2007 à Thionville (57), à ce moment-là c' était une salle de remise en forme de 800m². Depuis, le gérant Younesse El Hariri, ..."
+
+
