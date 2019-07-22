@@ -16,14 +16,14 @@ use Serps\SearchEngine\Google\GoogleUrl;
 trait GoogleUrlTrait
 {
 
-    public abstract function getParamValue($param, $defaultValue = null);
-    public abstract function buildUrl();
-    public abstract function getParamRawValue($param, $defaultValue = null);
-    public abstract function getHost();
-    public abstract function getPath();
-    public abstract function getScheme();
-    public abstract function getParams();
-    public abstract function getHash();
+    abstract public function getParamValue($param, $defaultValue = null);
+    abstract public function buildUrl();
+    abstract public function getParamRawValue($param, $defaultValue = null);
+    abstract public function getHost();
+    abstract public function getPath();
+    abstract public function getScheme();
+    abstract public function getParams();
+    abstract public function getHash();
 
     /**
      * Get the number of the page, the pages are 1 indexed
