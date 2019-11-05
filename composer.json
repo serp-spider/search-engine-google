@@ -19,7 +19,8 @@
 
   "autoload":{
     "psr-4" : {
-      "Serps\\SearchEngine\\Google\\": "src/"
+      "Serps\\SearchEngine\\Google\\": "src/",
+      "Serps\\Stubs\\": "stubs/"
     }
   },
 
