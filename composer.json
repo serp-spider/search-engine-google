@@ -36,7 +36,7 @@
 
   "require": {
     "php": ">=5.5",
-    "repat/serps-core": "~0.4.0",
+    "repat/serps-core": "^0.4.1",
     "ext-dom": "*"
   },
 
