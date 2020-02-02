@@ -1,6 +1,6 @@
 {
 
-  "name": "serps/search-engine-google",
+  "name": "repat/serps-search-engine-google",
   "description": "Google Rules and client for SERPS",
   "type": "library",
   "keywords": ["SERPS", "Google"],
@@ -14,12 +14,17 @@
     {
       "name": "Soufiane GHZAL",
       "homepage": "https://github.com/gsouf"
+    },
+    {
+      "name": "repat",
+      "homepage": "https://repat.de"
     }
   ],
 
   "autoload":{
     "psr-4" : {
-      "Serps\\SearchEngine\\Google\\": "src/"
+      "Serps\\SearchEngine\\Google\\": "src/",
+      "Serps\\Stubs\\": "stubs/"
     }
   },
 
@@ -31,7 +36,7 @@
 
   "require": {
     "php": ">=5.5",
-    "serps/core": "~0.3.0",
+    "repat/serps-core": "^0.4.1",
     "ext-dom": "*"
   },
 
