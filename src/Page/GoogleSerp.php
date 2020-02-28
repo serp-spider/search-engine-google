@@ -77,7 +77,7 @@ class GoogleSerp extends GoogleDom
      */
     public function getNumberOfResults()
     {
-        $item = $this->cssQuery('#resultStats');
+        $item = $this->cssQuery('#result-stats');
         if ($item->length != 1) {
             return null;
         }
