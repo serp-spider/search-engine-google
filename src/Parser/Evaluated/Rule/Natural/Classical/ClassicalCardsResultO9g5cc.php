@@ -46,7 +46,7 @@ class ClassicalCardsResultO9g5cc implements ParsingRuleInterface
         return [
             'title' => function () use ($dom, $node) {
                 return $dom
-                    ->cssQuery('a .MUxGbd', $node)
+                    ->cssQuery('a .MUxGbd.v0nnCb', $node)
                     ->getNodeAt(0)
                     ->getNodeValue();
             },

@@ -77,7 +77,7 @@ class GoogleSerp extends GoogleDom
      */
     public function getNumberOfResults()
     {
-        $item = $this->cssQuery('#resultStats');
+        $item = $this->cssQuery('#result-stats');
         if ($item->length != 1) {
             return null;
         }
@@ -137,7 +137,7 @@ class GoogleSerp extends GoogleDom
     {
         $relatedSearches = [];
         if ($this->isMobile()) {
-            $items = $this->cssQuery('#botstuff div:not(#bres) a.QsZ7bb');
+            $items = $this->cssQuery('#botstuff #bres .s75CSd');
 
             if ($items->length == 0) {
                 // TODO BC version to remove
