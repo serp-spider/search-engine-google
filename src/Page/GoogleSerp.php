@@ -78,8 +78,14 @@ class GoogleSerp extends GoogleDom
     public function getNumberOfResults()
     {
         $item = $this->cssQuery('#resultStats');
+
         if ($item->length != 1) {
-            return null;
+
+            $item = $this->cssQuery('#result-stats');
+
+            if ($item->length != 1) {
+                return null;
+            }
         }
 
         // number of results is followed by time, we want to targets the first node (text node) that is the number of
