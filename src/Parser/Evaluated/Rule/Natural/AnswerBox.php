@@ -54,7 +54,8 @@ class AnswerBox implements ParsingRuleInterface
                 return $dom->getUrl()->resolveAsString($aTag->getAttribute('href'));
             },
             'destination' => function () use ($dom, $node) {
-                $citeTag = $dom->cssQuery('.rc .s cite', $node)
+                //$citeTag = $dom->cssQuery('.rc .s cite', $node)
+                $citeTag = $dom->cssQuery('.iUh30', $node)
                     ->item(0);
                 if (!$citeTag) {
                     // TODO ERROR
@@ -64,11 +65,15 @@ class AnswerBox implements ParsingRuleInterface
             },
             'description' => function () use ($dom, $node) {
                 // TODO "mod ._Tgc" kept for BC, remove in the future
-                $citeTag = $dom->cssQuery('.mod ._Tgc, .mod .Y0NH2b', $node)
+               
+			   //$citeTag = $dom->cssQuery('.mod ._Tgc, .mod .Y0NH2b .hgKElc', $node)
+                $citeTag = $dom->cssQuery('.hgKElc', $node)
                     ->item(0);
                 if (!$citeTag) {
                     // TODO ERROR
-                    return;
+                    //return;
+					$citeTag = $dom->cssQuery('.DI6Ufb', $node)
+                    ->item(0);
                 }
                 return $citeTag->nodeValue;
             },
