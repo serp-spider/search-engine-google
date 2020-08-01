@@ -11,6 +11,7 @@ use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 
+
 class AnswerBox implements ParsingRuleInterface
 {
 
@@ -55,26 +56,38 @@ class AnswerBox implements ParsingRuleInterface
             },
             'destination' => function () use ($dom, $node) {
                 //$citeTag = $dom->cssQuery('.rc .s cite', $node)
-                $citeTag = $dom->cssQuery('.iUh30', $node)
-                    ->item(0);
-                if (!$citeTag) {
-                    // TODO ERROR
-                    return;
-                }
+				
+				//AnswerBox Description can be different classes
+				$destination_classes = array(
+					'.iUh30'
+				);
+				
+				foreach($destination_classes as $class){
+					$citeTag = $dom->cssQuery($class, $node)->item(0);
+					if ($citeTag) {
+						break;
+					}
+				}
+				
                 return $citeTag->nodeValue;
             },
             'description' => function () use ($dom, $node) {
                 // TODO "mod ._Tgc" kept for BC, remove in the future
+				
+				//AnswerBox Description can be different classes
+				$description_classes = array(
+					'.hgKElc',  
+					'.DI6Ufb', 
+					'.iKJnec'
+				);
+				
+				foreach($description_classes as $class){
+					$citeTag = $dom->cssQuery($class, $node)->item(0);
+					if ($citeTag) {
+						break;
+					}
+				}
                
-			   //$citeTag = $dom->cssQuery('.mod ._Tgc, .mod .Y0NH2b .hgKElc', $node)
-                $citeTag = $dom->cssQuery('.hgKElc', $node)
-                    ->item(0);
-                if (!$citeTag) {
-                    // TODO ERROR
-                    //return;
-					$citeTag = $dom->cssQuery('.DI6Ufb', $node)
-                    ->item(0);
-                }
                 return $citeTag->nodeValue;
             },
         ];
