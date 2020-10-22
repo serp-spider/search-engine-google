@@ -7,9 +7,27 @@ SERPS - Search Engine: Google
 [![License](https://poser.pugx.org/serps/search-engine-google/license)](https://packagist.org/packages/serps/search-engine-google)
 
 
-This is the Google implementation for [SERPS](https://github.com/serp-spider/serps)
+This is a fork of the Google implementation for [SERPS](https://github.com/serp-spider/serps)
 
 Install
+-------
+
+Add this repo to your composer.json as type vcs, and require serps/search-engine-google dev-master.
+```json
+{
+	"repositories": [
+		{
+			"type" : "vcs",
+			"url": "https://github.com/alexgarciab/search-engine-google.git"
+		}
+	],
+	"require": {
+		"serps/search-engine-google" : "dev-master"
+	}
+}
+```
+
+Original install
 -------
 
 Install it through [composer](https://getcomposer.org/) with the package 
