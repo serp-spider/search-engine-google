@@ -11,7 +11,7 @@ If you encounter an issue with the library you are encouraged to report it and w
 
 Before submitting the issue please make sure you are using the latest version of serps/search-engine-google. 
 If you are and if you still have the issue you can report it 
-on the [issue tracker](https://github.com/serp-spider/search-engine-google/issues/new).
+on the [issue tracker](https://github.com/alexgarciab/search-engine-google/issues/new).
 
 When reporting an issue try to provide as much details as possible. If the issue is related to a page that cannont
 parse correctly, the following details will be very helpful to fix the issue:
