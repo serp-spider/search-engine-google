@@ -33,7 +33,7 @@ class ClassicalResult implements ParsingRuleInterface
         // find the title/url
         /* @var $aTag \DOMElement */
         $aTag = $dom
-            ->xpathQuery("descendant::*[(self::div or self::h3) and @class='r'][1]/a", $node)
+            ->xpathQuery("descendant::*[(self::div or self::h3) and @class='yuRUbf'][1]/a", $node)
             ->item(0);
         if (!$aTag) {
             throw new InvalidDOMException('Cannot parse a classical result.');
@@ -56,7 +56,7 @@ class ClassicalResult implements ParsingRuleInterface
         }
 
         $descriptionTag = $dom
-            ->xpathQuery("descendant::span[@class='st']", $node)
+            ->xpathQuery("descendant::span[@class='aCOpRe']", $node)
             ->item(0);
 
         return [
