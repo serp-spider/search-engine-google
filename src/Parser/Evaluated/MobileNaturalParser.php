@@ -8,6 +8,7 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultO9g5cc;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardResultsATSHe;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultZ1m;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultZINbbc;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsVideoResult;
@@ -39,6 +40,7 @@ class MobileNaturalParser extends AbstractParser
             new Divider(),
             new SearchResultGroup(),
             new ClassicalCardsResultO9g5cc(),
+            new ClassicalCardResultsATSHe(),
             new ClassicalCardsResultZINbbc(), // TODO maybe outdated
             new ClassicalCardsResultZ1m(), // TODO remove (outdated)
             new ClassicalCardsVideoResult(),
@@ -60,7 +62,7 @@ class MobileNaturalParser extends AbstractParser
     protected function getParsableItems(GoogleDom $googleDom)
     {
         $xpathObject = $googleDom->getXpath();
-        $xpathElementGroups = "//div[@id = 'ires']/*[@id = 'rso']/*";
+        $xpathElementGroups = "//div[@id = 'rso']/*";
         return $xpathObject->query($xpathElementGroups);
     }
 }

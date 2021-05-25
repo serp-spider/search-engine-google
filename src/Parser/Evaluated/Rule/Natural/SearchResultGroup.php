@@ -16,7 +16,7 @@ class SearchResultGroup implements ParsingRuleInterface
 {
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->hasAnyClass(['srg', '_NId', 'bkWMgd'])) {
+        if ($node->hasAnyClass(['srg', '_NId', 'bkWMgd', 'hlcw0c'])) {
             return $node->childNodes;
         } else {
             return self::RULE_MATCH_NOMATCH;

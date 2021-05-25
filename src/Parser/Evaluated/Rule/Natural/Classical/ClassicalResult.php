@@ -20,7 +20,7 @@ class ClassicalResult implements ParsingRuleInterface
     public function match(GoogleDom $dom, DomElement $node)
     {
         if ($node->getAttribute('class') == 'g') {
-            if ($dom->cssQuery('.rc', $node)->length == 1) {
+            if ($dom->cssQuery('.r', $node)->length == 1) {
                 return self::RULE_MATCH_MATCHED;
             }
         }
@@ -56,8 +56,7 @@ class ClassicalResult implements ParsingRuleInterface
         }
 
         $descriptionTag = $dom
-            ->xpathQuery("descendant::span[@class='st']", $node)
-            ->item(0);
+            ->cssQuery('div.IsZvec span.aCOpRe, span.st', $node)->item(0);
 
         return [
             'title'   => $h3Tag->nodeValue,

@@ -42,7 +42,7 @@ class GoogleDom extends WebPage
             $currentEncoding = 'UTF-8';
         }
 
-        parent::__construct($domString, $url, $currentEncoding);
+        parent::__construct($this->cleanDomString($domString), $url, $currentEncoding);
     }
 
 
@@ -72,5 +72,29 @@ class GoogleDom extends WebPage
         } else {
             return null;
         }
+    }
+
+    /**
+     * Cleans up the dom string , the head contains <div> tags,
+     * we need the <meta> tags to identify if it is mobile or not
+     * @param strind $domString the html string
+     * @return  string
+    */
+    public function cleanDomString($domString)
+    {
+        preg_match_all('/(?:<meta(.*)>)/Uis',$domString, $metaMatches);
+        $metaString = '';
+        if(!empty($metaMatches[0])) {
+            foreach($metaMatches[0] as $match) {
+                $metaString .=  $match;
+            }
+        }
+        preg_match_all('/(?:<head(.*)<\/head>)/Uis',$domString, $matches);
+        if(!empty($matches[0])) {
+            foreach($matches[0] as $match) {
+                $domString =  str_replace($match, '<head>'.$metaString.'</head>', $domString);
+            }
+        }
+        return $domString;
     }
 }

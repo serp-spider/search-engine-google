@@ -1,7 +1,5 @@
 <?php
-/**
- * @license see LICENSE
- */
+
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical;
 
@@ -13,15 +11,12 @@ use Serps\SearchEngine\Google\NaturalResultType;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 
-/**
- * First seen in august 2018 in mobile pages, replacing .ZINbbc
- */
-class ClassicalCardsResultO9g5cc implements ParsingRuleInterface
-{
 
+class ClassicalCardResultsATSHe  implements ParsingRuleInterface
+{
     public function match(GoogleDom $dom, DomElement $node)
     {
-        $res = $dom->cssQuery('.O9g5cc.xpd a.C8nzq', $node);
+        $res = $dom->cssQuery('.TzHB6b .sATSHe .qDOt0b', $node);
         // TODO consider removing .ZINbbc (replaced with .O9g5cc in august 2018)
 
         if ($res->length == 1) {
@@ -46,18 +41,18 @@ class ClassicalCardsResultO9g5cc implements ParsingRuleInterface
         return [
             'title' => function () use ($dom, $node) {
                 return $dom
-                    ->cssQuery('a .V7Sr0', $node)
+                    ->cssQuery('a.sXtWJb', $node)
                     ->getNodeAt(0)
                     ->getNodeValue();
             },
             'isAmp' => function () use ($dom, $node) {
                 return $dom
-                    ->cssQuery('.ZseVEf', $node)
-                    ->length > 0;
+                        ->cssQuery('.ZseVEf', $node)
+                        ->length > 0;
             },
             'url' => function () use ($dom, $node) {
                 return $dom
-                    ->cssQuery('a.C8nzq', $node)
+                    ->cssQuery('a.sXtWJb', $node)
                     ->getNodeAt(0)
                     ->getAttribute('href');
             },
@@ -70,7 +65,7 @@ class ClassicalCardsResultO9g5cc implements ParsingRuleInterface
             'description' => function () use ($dom, $node) {
                 // TODO remove BC with ".JTuIPc:not(a)>.MUxGbd"
                 return $dom
-                    ->cssQuery('.JTuIPc:not(a)>.MUxGbd, div.BmP5tf>div.MUxGbd, div.LZ8hH>div.MUxGbd', $node)
+                    ->cssQuery('.JTuIPc:not(a)>.MUxGbd, div.BmP5tf>div.MUxGbd, div.LZ8hH>div.MUxGbd, span.hgKElc', $node)
                     ->getNodeAt(0)
                     ->getNodeValue();
             }
