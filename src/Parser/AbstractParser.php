@@ -48,6 +48,7 @@ abstract class AbstractParser implements ParserInterface
     public function parse(GoogleDom $googleDom)
     {
         $elementGroups = $this->getParsableItems($googleDom);
+
         $resultSet = $this->createResultSet($googleDom);
         return $this->parseGroups($elementGroups, $resultSet, $googleDom);
     }

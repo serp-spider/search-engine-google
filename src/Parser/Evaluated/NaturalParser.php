@@ -13,6 +13,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flight;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InTheNews;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\KnowledgeGraph;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Map;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MapLegacy;
@@ -37,19 +38,19 @@ class NaturalParser extends AbstractParser
         return [
             new Divider(),
             new SearchResultGroup(),
-            new ClassicalResult(),
-            new ClassicalCardsResult(),
+            //new ClassicalResult(),
+            //new ClassicalCardsResult(),
             new ImageGroup(),
             new TopStoriesCarousel(),
             new TopStoriesVertical(),
             new TweetsCarousel(),
-            new ClassicalWithLargeVideo(),
+            //new ClassicalWithLargeVideo(),
             new InTheNews(),
             new Map(),
-            new MapLegacy(),
             new AnswerBox(),
             new Flight(),
-            new PeopleAlsoAsk()
+            new PeopleAlsoAsk(),
+            new KnowledgeGraph()
         ];
     }
 
@@ -58,6 +59,8 @@ class NaturalParser extends AbstractParser
      */
     protected function getParsableItems(GoogleDom $googleDom)
     {
-        return $googleDom->xpathQuery("//*[@id = 'rso']/*");
+        // rso = results in position
+        // rhs = knowledge graph
+        return $googleDom->xpathQuery("//*[@id = 'rso' or @id='rhs' or @id='taw']/*[not(self::script) and not(self::style)]/*");
     }
 }

@@ -36,6 +36,7 @@ abstract class NaturalResultType
     const MAP_PLACE = 'map_place';
 
     const FLIGHTS = 'flights';
+    const KNOWLEDGE_GRAPH = 'knowledge_graph';
 
     const ANSWER_BOX = 'answer_box';
 }
