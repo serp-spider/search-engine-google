@@ -7,6 +7,7 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated;
 
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AdsTop;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AnswerBox;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider;
@@ -18,6 +19,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Map;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MapLegacy;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\PeopleAlsoAsk;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Recipes;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesCarousel;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesVertical;
@@ -50,7 +52,9 @@ class NaturalParser extends AbstractParser
             new AnswerBox(),
             new Flight(),
             new PeopleAlsoAsk(),
-            new KnowledgeGraph()
+            new KnowledgeGraph(),
+            new AdsTop(),
+            new Recipes(),
         ];
     }
 
@@ -61,6 +65,11 @@ class NaturalParser extends AbstractParser
     {
         // rso = results in position
         // rhs = knowledge graph
-        return $googleDom->xpathQuery("//*[@id = 'rso' or @id='rhs' or @id='taw']/*[not(self::script) and not(self::style)]/*");
+        // iur = images
+        // tvcap = ads top
+        // tvcap = ads top
+        // @jsname='gI9xcc' = recipes
+       // return $googleDom->xpathQuery("//*[@id = 'rso' or @id='rhs' or @id='taw']/*[not(self::script) and not(self::style)]/*");
+        return $googleDom->xpathQuery("//*[@jsname='gI9xcc']/*[not(self::script) and not(self::style)]/*");
     }
 }

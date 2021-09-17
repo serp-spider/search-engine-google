@@ -20,6 +20,13 @@ class KnowledgeGraph implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
 
     public function parse(GoogleDom $googleDOM, \DomElement $group, IndexedResultSet $resultSet)
     {
-        $resultSet->addItem(new BaseResult(NaturalResultType::KNOWLEDGE_GRAPH, []));
+        /** @var \DomElement $titleNode */
+        $titleNode = $googleDOM->cssQuery("div[data-attrid='subtitle']", $group)->item(0);
+
+        if ($titleNode instanceof \DomElement) {
+            $data['title'] = $titleNode->textContent;
+        }
+
+        $resultSet->addItem(new BaseResult(NaturalResultType::KNOWLEDGE_GRAPH, $data));
     }
 }

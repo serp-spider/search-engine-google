@@ -13,13 +13,12 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
+class Recipes implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->parentNode->parentNode->getAttribute('id') == 'iur' &&
-            $node->hasAttribute('jsmodel')
+        if ($node->parentNode->parentNode->getAttribute('jsname') == 'gI9xcc'
         ) {
             return self::RULE_MATCH_MATCHED;
         }
@@ -30,26 +29,15 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
     {
-        $images = $googleDOM->getXpath()->query('descendant::div[@data-lpage]', $node->lastChild);
+        $urls = $googleDOM->getXpath()->query('descendant::g-link', $node->childNodes->item(1));
         $item = [];
 
-        if($images->length> 0) {
-            foreach ($images as $imageNode) {
-                $item['images'][] = $this->parseItem($googleDOM, $imageNode);
+        if($urls->length> 0) {
+            foreach ($urls as $urlNode) {
+                $item['recipes_links'][] = ['link' => $urlNode->firstChild->getAttribute('href')];
             }
         }
 
         $resultSet->addItem(new BaseResult(NaturalResultType::IMAGE_GROUP, $item));
-    }
-    /**
-     * @param GoogleDOM $googleDOM
-     * @param \DOMElement $imgNode
-     * @return array
-     */
-    private function parseItem(GoogleDom $googleDOM, \DOMElement $imgNode)
-    {
-        $data =  $imgNode->getAttribute('data-lpage');
-
-        return new BaseResult(NaturalResultType::IMAGE_GROUP_IMAGE, [$data]);
     }
 }
