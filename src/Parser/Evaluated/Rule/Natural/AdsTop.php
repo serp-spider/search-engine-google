@@ -15,41 +15,51 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class AdsTop implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
+    const ADS_TOP_CLASS  = 'tads';
+    const ADS_DOWN_CLASS = 'tadsb';
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if($node->getTagName() !='div') {
+        if ($node->getTagName() != 'div') {
             return self::RULE_MATCH_NOMATCH;
         }
 
-        if ($node->parentNode->getAttribute('id') == 'tads') {
+        if ($node->getAttribute('id') == self::ADS_TOP_CLASS || // Ads top
+            $node->getAttribute('id') == self::ADS_DOWN_CLASS // Ads bottom
+        ) {
             return self::RULE_MATCH_MATCHED;
         }
 
         return self::RULE_MATCH_NOMATCH;
     }
 
-
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
     {
-        $link = $googleDOM->getXpath()->query('descendant::a', $node)->item(0)->getAttribute('href');
+        $adsNodes = $googleDOM->getXpath()->query('descendant::a', $node);
+        $links    = [];
 
-        if($resultSet->hasType('image_group')) {
-
-        } else {
-            $resultSet->addItem(new BaseResult(NaturalResultType::IMAGE_GROUP, [$link]));
+        if ($adsNodes->length == 0) {
+            return;
         }
-    }
-    /**
-     * @param GoogleDOM $googleDOM
-     * @param \DOMElement $imgNode
-     * @return array
-     */
-    private function parseItem(GoogleDom $googleDOM, \DOMElement $imgNode)
-    {
-        $data =  $imgNode->getAttribute('data-lpage');
 
+        foreach ($adsNodes as $adsNode) {
 
-        return new BaseResult(NaturalResultType::IMAGE_GROUP_IMAGE, [$data]);
+            if (!$adsNode->hasClass('Krnil')) {
+                continue;
+            }
+
+            $links[] = ['url' => $adsNode->getAttribute('href')];
+        }
+
+        if (!empty($links)) {
+
+            if ($node->getAttribute('id') == self::ADS_TOP_CLASS) {
+                $resultSet->addItem(new BaseResult(NaturalResultType::AdsTop, $links));
+            }
+
+            if ($node->getAttribute('id') == self::ADS_DOWN_CLASS) {
+                $resultSet->addItem(new BaseResult(NaturalResultType::AdsDOWN, $links));
+            }
+        }
     }
 }

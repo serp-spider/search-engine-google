@@ -78,6 +78,11 @@ abstract class AbstractParser implements ParserInterface
             if (!($group instanceof \DOMElement)) {
                 continue;
             }
+
+            if(in_array($group->tagName, ['hr', 'g-more-link'])) {
+                continue;
+            }
+
             foreach ($rules as $rule) {
                 $match = $rule->match($googleDom, $group);
                 if ($match instanceof \DOMNodeList) {

@@ -15,11 +15,15 @@ abstract class NaturalResultType
     const CLASSICAL_ILLUSTRATED = 'classical_illustrated';
 
     const KNOWLEDGE = 'knowledge';
+    const AdsTop = 'ads_top';
+    const AdsDOWN = 'ads_down';
 
     const PEOPLE_ALSO_ASK = 'people_also_ask';
     const PAA_QUESTION = 'paa_question';
 
     const IMAGE_GROUP = 'image_group';
+    const RECIPES_GROUP = 'recipes';
+    const TOP_STORIES_GROUP = 'top_stories';
     const IMAGE_GROUP_IMAGE = 'image_group_image';
 
     const VIDEO_GROUP = 'video_group';
@@ -32,7 +36,7 @@ abstract class NaturalResultType
     const TOP_STORIES_COMPOSED = 'top_stories_composed';
     const TWEETS_CAROUSEL= 'tweets_carousel';
 
-    const MAP = 'map';
+    const MAP = 'maps';
     const MAP_PLACE = 'map_place';
 
     const FLIGHTS = 'flights';
