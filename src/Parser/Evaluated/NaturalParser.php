@@ -11,14 +11,18 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AdsTop;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AnswerBox;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\FeaturedSnipped;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flight;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\InTheNews;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Jobs;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\KnowledgeGraph;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Maps;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MapLegacy;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\PeopleAlsoAsk;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ProductListing;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Questions;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Recipes;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStories;
@@ -56,7 +60,11 @@ class NaturalParser extends AbstractParser
             new KnowledgeGraph(),
             new AdsTop(),
             new Recipes(),
-            new TopStories()
+            new TopStories(),
+            new FeaturedSnipped(),
+            new ProductListing(),
+            new Questions(),
+            new Jobs()
         ];
     }
 
@@ -72,12 +80,16 @@ class NaturalParser extends AbstractParser
         // [@id='tadsb']  = ads bottom
         // [@id='tvcap']  = ads top carousel
         // [@class='C7r6Ue']  = maps
+        // [@class='xpdopen']  = features snipped/position zero
+        // [contains(@class, 'commercial-unit-desktop-top')]  = product listing
+        // [contains(@class, 'related-question-pair')]  = questions
+        // [contains(@class, 'gws-plugins-horizon-jobs__li-ed')][1]  = jobs
 
         //  [@id='isl_13']  = recipes
         // //*[g-section-with-header[@class='yG4QQe TBC9ub']]]/child::* = top stories
 
        // return $googleDom->xpathQuery("//*[@id = 'rso' or @id='rhs' or @id='taw']/*[not(self::script) and not(self::style)]/*");
-        return $googleDom->xpathQuery("//*[@class='C7r6Ue'][not(self::script) and not(self::style)]");
+        return $googleDom->xpathQuery("//*[contains(@class, 'gws-plugins-horizon-jobs__li-ed')][1][not(self::script) and not(self::style)]");
     }
 }
 

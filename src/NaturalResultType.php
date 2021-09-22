@@ -22,6 +22,10 @@ abstract class NaturalResultType
     const PAA_QUESTION = 'paa_question';
 
     const IMAGE_GROUP = 'image_group';
+    const FEATURED_SNIPPED = 'pos_zero';
+    const QUESTIONS = 'questions';
+    const JOBS = 'jobs';
+    const PRODUCT_LISTING = 'pla';
     const RECIPES_GROUP = 'recipes';
     const TOP_STORIES_GROUP = 'top_stories';
     const IMAGE_GROUP_IMAGE = 'image_group_image';
