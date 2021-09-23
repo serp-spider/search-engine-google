@@ -18,8 +18,12 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->parentNode->parentNode->getAttribute('id') == 'iur' &&
-            $node->hasAttribute('jsmodel')
+        if ($node->getAttribute('id') == 'iur' &&
+            (   // Mobile
+                $node->parentNode->hasAttribute('jsmodel') ||
+                // Desktop
+                $node->parentNode->parentNode->hasAttribute('jsmodel')
+            )
         ) {
             return self::RULE_MATCH_MATCHED;
         }

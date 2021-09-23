@@ -20,8 +20,12 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\LargeClass
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\KnowledgeCard;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MapMobile;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Maps;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MapsMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\PeopleAlsoAsk;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Questions;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStories;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarouselZ1m;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideoGroup;
 
@@ -31,6 +35,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideoGroup;
 class MobileNaturalParser extends AbstractParser
 {
 
+    protected $isMobile = true;
     /**
      * @inheritdoc
      */
@@ -38,21 +43,10 @@ class MobileNaturalParser extends AbstractParser
     {
         return [
             new Divider(),
-            new SearchResultGroup(),
-            new ClassicalCardsResultO9g5cc(),
-            new ClassicalCardResultsATSHe(),
-            new ClassicalCardsResultZINbbc(), // TODO maybe outdated
-            new ClassicalCardsResultZ1m(), // TODO remove (outdated)
-            new ClassicalCardsVideoResult(),
-            new ClassicalCardsResult(),
-            new MapMobile(),
-            new TweetsCarouselZ1m(), // TODO replace and remove (outdated)
-            new ImageGroupCarousel(),
-            new ComposedTopStories(),
-            new VideoGroup(),
             new ImageGroup(),
-            new PeopleAlsoAsk(), // people also ask must be placed before knowledge card to stop parsing
-            new KnowledgeCard()
+            new MapsMobile(),
+            new Questions(),
+            new TopStories()
         ];
     }
 
@@ -61,8 +55,11 @@ class MobileNaturalParser extends AbstractParser
      */
     protected function getParsableItems(GoogleDom $googleDom)
     {
-        $xpathObject = $googleDom->getXpath();
-        $xpathElementGroups = "//div[@id = 'rso']/*";
-        return $xpathObject->query($xpathElementGroups);
+        // [@id='iur'] = images
+        // [contains(@class, 'scm-c')]  = maps
+        // [contains(@class, 'related-question-pair')] = questions
+        // [@class='C7r6Ue']  = maps
+
+        return $googleDom->xpathQuery("//*[@class='xSoq1'][not(self::script) and not(self::style)]");
     }
 }

@@ -24,7 +24,9 @@ abstract class NaturalResultType
     const IMAGE_GROUP = 'image_group';
     const FEATURED_SNIPPED = 'pos_zero';
     const QUESTIONS = 'questions';
+    const QUESTIONS_MOBILE = 'questions_mobile';
     const JOBS = 'jobs';
+    const APP_PACK = 'app_pack';
     const PRODUCT_LISTING = 'pla';
     const RECIPES_GROUP = 'recipes';
     const TOP_STORIES_GROUP = 'top_stories';

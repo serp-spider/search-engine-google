@@ -5,13 +5,15 @@ namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
+use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class Jobs implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
+class MapsMobile implements ParsingRuleInterface
 {
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->hasClass('gws-plugins-horizon-jobs__li-ed')) {
+        if ($node->hasClass('scm-c')) {
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -20,12 +22,20 @@ class Jobs implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
     {
-        if (!empty($resultSet->getResultsByType(NaturalResultType::JOBS)->getItems())) {
+        $ratingStars = $googleDOM->getXpath()->query('descendant::g-review-stars', $node);
+
+        if ($ratingStars->length == 0) {
             return;
         }
 
-        $resultSet->addItem(
-            new BaseResult(NaturalResultType::JOBS, [])
-        );
+        $spanElements = [];
+
+        foreach ($ratingStars as $ratingStarNode) {
+            $spanElements['title'][] = $ratingStarNode->parentNode->parentNode->childNodes[0]->childNodes[0]->textContent;
+        }
+
+        if($this->isMobile) {
+
+        }
     }
 }

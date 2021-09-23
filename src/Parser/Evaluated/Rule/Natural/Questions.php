@@ -2,7 +2,6 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
-use Serps\Core\Dom\DomElement;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
@@ -19,14 +18,14 @@ class Questions implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfac
         return self::RULE_MATCH_NOMATCH;
     }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
+    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        if (!empty($resultSet->getResultsByType(NaturalResultType::QUESTIONS)->getItems())) {
+        if (!empty($resultSet->getResultsByType($isMobile ? NaturalResultType::QUESTIONS_MOBILE : NaturalResultType::QUESTIONS)->getItems())) {
             return;
         }
 
         $resultSet->addItem(
-            new BaseResult(NaturalResultType::QUESTIONS, [])
+            new BaseResult($isMobile ? NaturalResultType::QUESTIONS_MOBILE : NaturalResultType::QUESTIONS, [])
         );
     }
 }

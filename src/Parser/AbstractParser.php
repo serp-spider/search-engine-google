@@ -85,6 +85,7 @@ abstract class AbstractParser implements ParserInterface
 
             foreach ($rules as $rule) {
                 $match = $rule->match($googleDom, $group);
+
                 if ($match instanceof \DOMNodeList) {
                     $this->parseGroups(new DomNodeList($match, $googleDom), $resultSet, $googleDom);
                     break;
@@ -92,9 +93,10 @@ abstract class AbstractParser implements ParserInterface
                     $this->parseGroups($match, $resultSet, $googleDom);
                     break;
                 } else {
+
                     switch ($match) {
                         case ParsingRuleInterface::RULE_MATCH_MATCHED:
-                            $rule->parse($googleDom, $group, $resultSet);
+                            $rule->parse($googleDom, $group, $resultSet, $this->isMobile);
                             break 2;
                         case ParsingRuleInterface::RULE_MATCH_STOP:
                             break 2;
@@ -102,6 +104,7 @@ abstract class AbstractParser implements ParserInterface
                 }
             }
         }
+
         return $resultSet;
     }
 }

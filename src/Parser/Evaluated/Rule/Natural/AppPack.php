@@ -7,11 +7,11 @@ use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class Jobs implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
+class AppPack implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->hasClass('gws-plugins-horizon-jobs__li-ed')) {
+        if ($node->getAttribute('id') == 'extabar') {
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -20,12 +20,8 @@ class Jobs implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
     {
-        if (!empty($resultSet->getResultsByType(NaturalResultType::JOBS)->getItems())) {
-            return;
-        }
-
         $resultSet->addItem(
-            new BaseResult(NaturalResultType::JOBS, [])
+            new BaseResult(NaturalResultType::APP_PACK, [])
         );
     }
 }
