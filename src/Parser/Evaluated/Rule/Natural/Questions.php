@@ -18,14 +18,20 @@ class Questions implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfac
         return self::RULE_MATCH_NOMATCH;
     }
 
+
+    protected function getType($isMobile)
+    {
+        return $isMobile ? NaturalResultType::QUESTIONS_MOBILE : NaturalResultType::QUESTIONS;
+    }
+
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        if (!empty($resultSet->getResultsByType($isMobile ? NaturalResultType::QUESTIONS_MOBILE : NaturalResultType::QUESTIONS)->getItems())) {
+        if (!empty($resultSet->getResultsByType($this->getType($isMobile))->getItems())) {
             return;
         }
 
         $resultSet->addItem(
-            new BaseResult($isMobile ? NaturalResultType::QUESTIONS_MOBILE : NaturalResultType::QUESTIONS, [])
+            new BaseResult($this->getType($isMobile), [])
         );
     }
 }

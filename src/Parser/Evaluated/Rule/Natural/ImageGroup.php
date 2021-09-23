@@ -32,30 +32,34 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
     }
 
 
-    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
+    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
         $images = $googleDOM->getXpath()->query('descendant::div[@data-lpage]', $node->lastChild);
-        $item = [];
+        $item   = [];
 
-        if($images->length> 0) {
+        if ($images->length > 0) {
             foreach ($images as $imageNode) {
-                $item['images'][] = $this->parseItem($googleDOM, $imageNode);
+                $item['images'][] = $this->parseItem( $imageNode);
             }
         }
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::IMAGE_GROUP, $item));
+        $resultSet->addItem(
+            new BaseResult($this->getType($isMobile), $item)
+        );
+    }
+
+    protected function getType($isMobile)
+    {
+        return $isMobile ? NaturalResultType::IMAGE_GROUP_MOBILE : NaturalResultType::IMAGE_GROUP;
     }
 
     /**
-     * @param GoogleDom $googleDOM
      * @param \DOMElement $imgNode
      *
-     * @return BaseResult
+     * @return string
      */
-    private function parseItem(GoogleDom $googleDOM, \DOMElement $imgNode)
+    private function parseItem( \DOMElement $imgNode)
     {
-        $data =  $imgNode->getAttribute('data-lpage');
-
-        return new BaseResult(NaturalResultType::IMAGE_GROUP_IMAGE, [$data]);
+        return $imgNode->getAttribute('data-lpage');
     }
 }

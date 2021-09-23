@@ -20,7 +20,7 @@ class Maps implements ParsingRuleInterface
         return self::RULE_MATCH_NOMATCH;
     }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
+    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
     {
         $ratingStars = $googleDOM->getXpath()->query('descendant::g-review-stars', $node);
 

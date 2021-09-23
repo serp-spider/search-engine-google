@@ -33,7 +33,7 @@ class AdsTop implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
         return self::RULE_MATCH_NOMATCH;
     }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
+    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
     {
         $adsNodes = $googleDOM->getXpath()->query('descendant::a', $node);
         $links    = [];

@@ -29,14 +29,14 @@ class TopStories implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
         return self::RULE_MATCH_NOMATCH;
     }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
+    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
         foreach ($this->steps as $functionName) {
-            call_user_func_array([$this, $functionName], [$googleDOM, $node, $resultSet]);
+            call_user_func_array([$this, $functionName], [$googleDOM, $node, $resultSet, $isMobile]);
         }
     }
 
-    protected function version1(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
+    protected function version1(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile)
     {
         $stories = $googleDOM->getXpath()->query('descendant::g-inner-card', $node);
         $items   = [];
@@ -55,11 +55,18 @@ class TopStories implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
         }
 
         if (!empty($items)) {
-            $resultSet->addItem(new BaseResult(NaturalResultType::TOP_STORIES_GROUP, $items));
+            $resultSet->addItem(
+                new BaseResult($this->getType($isMobile), $items)
+            );
         }
     }
 
-    protected function version2(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
+    protected function getType($isMobile)
+    {
+        return $isMobile ? NaturalResultType::TOP_STORIES_MOBILE : NaturalResultType::TOP_STORIES;
+    }
+
+    protected function version2(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile)
     {
         $hrefsNodes = $googleDOM->getXpath()->query("descendant::a[@class='WlydOe']", $node);
 
@@ -79,7 +86,7 @@ class TopStories implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
         }
 
         if (!empty($items)) {
-            $resultSet->addItem(new BaseResult(NaturalResultType::TOP_STORIES_GROUP, $items));
+            $resultSet->addItem(new BaseResult($this->getType($isMobile), $items));
         }
     }
 }

@@ -22,7 +22,7 @@ class Divider implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
         }
     }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $group, IndexedResultSet $resultSet)
+    public function parse(GoogleDom $googleDOM, \DomElement $group, IndexedResultSet $resultSet, $isMobile=false)
     {
     }
 }

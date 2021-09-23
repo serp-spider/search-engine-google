@@ -2,26 +2,23 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
+use Serps\Core\Dom\DomElement;
+use Serps\Core\Dom\DomNodeList;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class AppPack implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
+class TopStoriesMobile extends TopStories
 {
+    protected $steps = ['version1', 'version2'];
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->getAttribute('id') == 'extabar') {
+        if ($node->hasClass('xSoq1')) {
             return self::RULE_MATCH_MATCHED;
         }
 
         return self::RULE_MATCH_NOMATCH;
-    }
-
-    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
-    {
-        $resultSet->addItem(
-            new BaseResult(NaturalResultType::APP_PACK, [])
-        );
     }
 }

@@ -26,6 +26,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\PeopleAlsoAsk;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Questions;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStories;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TweetsCarouselZ1m;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideoGroup;
 
@@ -46,7 +47,7 @@ class MobileNaturalParser extends AbstractParser
             new ImageGroup(),
             new MapsMobile(),
             new Questions(),
-            new TopStories()
+            new TopStoriesMobile()
         ];
     }
 
@@ -59,6 +60,7 @@ class MobileNaturalParser extends AbstractParser
         // [contains(@class, 'scm-c')]  = maps
         // [contains(@class, 'related-question-pair')] = questions
         // [@class='C7r6Ue']  = maps
+        // [@class='xSoq1']  = top stories
 
         return $googleDom->xpathQuery("//*[@class='xSoq1'][not(self::script) and not(self::style)]");
     }

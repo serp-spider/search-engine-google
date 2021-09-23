@@ -22,7 +22,7 @@ class Flight implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
         return self::RULE_MATCH_NOMATCH;
     }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $group, IndexedResultSet $resultSet)
+    public function parse(GoogleDom $googleDOM, \DomElement $group, IndexedResultSet $resultSet, $isMobile=false)
     {
         $resultSet->addItem(new BaseResult(NaturalResultType::FLIGHTS, []));
     }

@@ -20,7 +20,7 @@ class MapsMobile implements ParsingRuleInterface
         return self::RULE_MATCH_NOMATCH;
     }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet)
+    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
     {
         $ratingStars = $googleDOM->getXpath()->query('descendant::g-review-stars', $node);
 
@@ -34,8 +34,6 @@ class MapsMobile implements ParsingRuleInterface
             $spanElements['title'][] = $ratingStarNode->parentNode->parentNode->childNodes[0]->childNodes[0]->textContent;
         }
 
-        if($this->isMobile) {
-
-        }
+        $resultSet->addItem(new BaseResult(NaturalResultType::MAP_MOBILE, $spanElements));
     }
 }
