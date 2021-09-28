@@ -13,7 +13,12 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalC
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResultZINbbc;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsVideoResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ComposedTopStories;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Definitions;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\DefinitionsMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flights;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Hotels;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\HotelsMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroupCarousel;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\LargeClassicalResult;
@@ -24,6 +29,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Maps;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MapsMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\PeopleAlsoAsk;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Questions;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Recipes;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStories;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesMobile;
@@ -47,7 +53,11 @@ class MobileNaturalParser extends AbstractParser
             new ImageGroup(),
             new MapsMobile(),
             new Questions(),
-            new TopStoriesMobile()
+            new TopStoriesMobile(),
+            new Recipes(),
+            new Flights(),
+            new HotelsMobile(),
+            new DefinitionsMobile()
         ];
     }
 
@@ -61,7 +71,10 @@ class MobileNaturalParser extends AbstractParser
         // [contains(@class, 'related-question-pair')] = questions
         // [@class='C7r6Ue']  = maps
         // [@class='xSoq1']  = top stories
+        //@class='LQQ1Bd' - flights
+        //div[@class='hNKF2b m9orme'] = hotels
+        //div[@class='lr_container wDYxhc yc7KLc'] = definitions
 
-        return $googleDom->xpathQuery("//*[@class='xSoq1'][not(self::script) and not(self::style)]");
+        return $googleDom->xpathQuery("//*[@class='lr_container wDYxhc yc7KLc'][not(self::script) and not(self::style)]");
     }
 }

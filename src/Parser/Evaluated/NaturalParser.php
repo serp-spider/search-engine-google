@@ -25,6 +25,9 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\PeopleAlsoAsk;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ProductListing;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Questions;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Recipes;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Hotels;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Definitions;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flights;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStories;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesCarousel;
@@ -50,8 +53,15 @@ class NaturalParser extends AbstractParser
             //new ClassicalResult(),
             //new ClassicalCardsResult(),
             new ImageGroup(),
+            new TopStoriesCarousel(),
+            new TopStoriesVertical(),
+            new TweetsCarousel(),
+            //new ClassicalWithLargeVideo(),
+            new InTheNews(),
             new Maps(),
+            new AnswerBox(),
             new Flight(),
+            new PeopleAlsoAsk(),
             new KnowledgeGraph(),
             new AdsTop(),
             new Recipes(),
@@ -59,6 +69,9 @@ class NaturalParser extends AbstractParser
             new FeaturedSnipped(),
             new ProductListing(),
             new Questions(),
+            new Hotels(),
+            new Definitions(),
+            new Flights(),
             new Jobs(),
             new AppPack(),
 
@@ -83,11 +96,13 @@ class NaturalParser extends AbstractParser
         // [contains(@class, 'related-question-pair')]  = questions
         // [contains(@class, 'gws-plugins-horizon-jobs__li-ed')]  = jobs
 
-        //  [@id='isl_13']  = recipes
+        //  div[contains(@id, 'isl')]  = recipes
         // //*[g-section-with-header[@class='yG4QQe TBC9ub']]]/child::* = top stories
-
+        //div[@class='CH6Bmd']/div[@class='ntKMYc P2hV9e'] = hotels
+        //@class='lr_container yc7KLc mBNN3d' - definitions
+        //@class='LQQ1Bd' - flights
        // return $googleDom->xpathQuery("//*[@id = 'rso' or @id='rhs' or @id='taw']/*[not(self::script) and not(self::style)]/*");
-        return $googleDom->xpathQuery("//*[@class='C7r6Ue'][not(self::script) and not(self::style)]");
+        return $googleDom->xpathQuery("//div[@class='lr_container yc7KLc mBNN3d'][not(self::script) and not(self::style)]");
     }
 }
 

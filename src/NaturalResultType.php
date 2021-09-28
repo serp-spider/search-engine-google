@@ -51,4 +51,11 @@ abstract class NaturalResultType
     const KNOWLEDGE_GRAPH = 'knowledge_graph';
 
     const ANSWER_BOX = 'answer_box';
+
+    const HOTELS = 'hotels';
+    const HOTELS_MOBILE = 'hotels_mobile';
+
+    const DEFINITIONS = 'definitions';
+    const DEFINITIONS_MOBILE = 'definitions_mobile';
+
 }
