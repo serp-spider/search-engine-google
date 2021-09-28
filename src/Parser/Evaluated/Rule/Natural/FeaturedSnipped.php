@@ -18,9 +18,14 @@ class FeaturedSnipped implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
         return self::RULE_MATCH_NOMATCH;
     }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
+    protected function getType($isMobile)
     {
-        $naturalResultNode = $googleDOM->getXpath()->query("descendant::div[@class='g']", $node);
+        return $isMobile ? NaturalResultType::FEATURED_SNIPPED_MOBILE : NaturalResultType::FEATURED_SNIPPED;
+    }
+
+    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
+    {
+        $naturalResultNode = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' g ')]", $node);
 
         if ($naturalResultNode->length == 0) {
             return;
@@ -35,8 +40,7 @@ class FeaturedSnipped implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
         }
 
         $resultSet->addItem(
-            new BaseResult(NaturalResultType::FEATURED_SNIPPED,
-                [$aTag->item(0)->getAttribute('href')])
+            new BaseResult($this->getType($isMobile), [$aTag->item(0)->getAttribute('href')])
         );
     }
 }

@@ -18,7 +18,12 @@ class KnowledgeGraph implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
         return self::RULE_MATCH_NOMATCH;
     }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $group, IndexedResultSet $resultSet, $isMobile=false)
+    protected function getType($isMobile)
+    {
+        return $isMobile ? NaturalResultType::KNOWLEDGE_GRAPH_MOBILE : NaturalResultType::KNOWLEDGE_GRAPH;
+    }
+
+    public function parse(GoogleDom $googleDOM, \DomElement $group, IndexedResultSet $resultSet, $isMobile = false)
     {
         $data = [];
 
@@ -29,6 +34,6 @@ class KnowledgeGraph implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
             $data['title'] = $titleNode->textContent;
         }
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::KNOWLEDGE_GRAPH, $data));
+        $resultSet->addItem(new BaseResult($this->getType($isMobile), $data));
     }
 }

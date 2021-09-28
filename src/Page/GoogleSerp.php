@@ -175,4 +175,5 @@ class GoogleSerp extends GoogleDom
         $item = $this->cssQuery('head meta[name="viewport"]');
         return $item->length == 1;
     }
+
 }

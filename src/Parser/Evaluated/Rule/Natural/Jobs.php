@@ -18,14 +18,19 @@ class Jobs implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
         return self::RULE_MATCH_NOMATCH;
     }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
+    protected function getType($isMobile)
     {
-        if (!empty($resultSet->getResultsByType(NaturalResultType::JOBS)->getItems())) {
+        return $isMobile ? NaturalResultType::JOBS_MOBILE : NaturalResultType::JOBS;
+    }
+
+    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
+    {
+        if (!empty($resultSet->getResultsByType($this->getType($isMobile))->getItems())) {
             return;
         }
 
         $resultSet->addItem(
-            new BaseResult(NaturalResultType::JOBS, [])
+            new BaseResult($this->getType($isMobile), [])
         );
     }
 }
