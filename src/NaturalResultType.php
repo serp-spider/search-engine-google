@@ -39,8 +39,7 @@ abstract class NaturalResultType
 
     const IMAGE_GROUP_IMAGE = 'image_group_image';
 
-    const VIDEO_GROUP       = 'video_group';
-    const VIDEO_GROUP_VIDEO = 'video_group_video';
+    const VIDEOS       = 'videos';
 
     const IN_THE_NEWS        = 'in_the_news';
     const TOP_STORIES        = 'top_stories';
@@ -55,4 +54,11 @@ abstract class NaturalResultType
     const KNOWLEDGE_GRAPH_MOBILE = 'knowledge_graph_mobile';
 
     const ANSWER_BOX = 'answer_box';
+
+    const HOTELS = 'hotels';
+    const HOTELS_MOBILE = 'hotels_mobile';
+
+    const DEFINITIONS = 'definitions';
+    const DEFINITIONS_MOBILE = 'definitions_mobile';
+
 }

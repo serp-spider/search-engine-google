@@ -54,7 +54,7 @@ class AdsTop implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
         if (!empty($links)) {
 
             if ($node->getAttribute('id') == self::ADS_TOP_CLASS) {
-                $resultSet->addItem(new BaseResult(NaturalResultType::AdsTop, $links));
+                $resultSet->addItem(new BaseResult(NaturalResultType::AdsTOP, $links));
             }
 
             if ($node->getAttribute('id') == self::ADS_DOWN_CLASS) {

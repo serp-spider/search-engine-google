@@ -11,14 +11,14 @@ class Recipes implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->getAttribute('id') == 'isl_13') {
+        if (strpos($node->getAttribute('id'), 'isl_') !== false) {
             return self::RULE_MATCH_MATCHED;
         }
 
         return self::RULE_MATCH_NOMATCH;
     }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
+    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
         $urls = $googleDOM->getXpath()->query('descendant::g-link', $node->childNodes->item(1));
         $item = [];
@@ -28,7 +28,7 @@ class Recipes implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
                 $item['recipes_links'][] = ['link' => $urlNode->firstChild->getAttribute('href')];
             }
 
-            $resultSet->addItem(new BaseResult(NaturalResultType::RECIPES_GROUP, $item));
+            $resultSet->addItem(new BaseResult($isMobile ? NaturalResultType::RECIPES_GROUP_MOBILE : NaturalResultType::RECIPES_GROUP, $item));
         }
     }
 }

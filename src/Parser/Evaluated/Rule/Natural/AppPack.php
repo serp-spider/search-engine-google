@@ -20,6 +20,9 @@ class AppPack implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
     {
+        if($node->childNodes <=1) {
+            return;
+        }
         $resultSet->addItem(
             new BaseResult(NaturalResultType::APP_PACK, [])
         );
