@@ -40,6 +40,7 @@ abstract class NaturalResultType
     const IMAGE_GROUP_IMAGE = 'image_group_image';
 
     const VIDEOS       = 'videos';
+    const VIDEOS_MOBILE       = 'videos_mobile';
 
     const IN_THE_NEWS        = 'in_the_news';
     const TOP_STORIES        = 'top_stories';
