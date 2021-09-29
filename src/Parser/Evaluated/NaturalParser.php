@@ -66,7 +66,7 @@ class NaturalParser extends AbstractParser
             new Definitions(),
             new Flights(),
             new Jobs(),
-            new AppPack(),
+            //new AppPack(),
 
         ];
     }
