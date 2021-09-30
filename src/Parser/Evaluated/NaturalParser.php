@@ -21,6 +21,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\KnowledgeGraph;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Maps;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalCardsResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MapLegacy;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Misspelling;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\PeopleAlsoAsk;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ProductListing;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Questions;
@@ -41,7 +42,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Videos;
  */
 class NaturalParser extends AbstractParser
 {
-    protected $isMobile = true;
+    protected $isMobile = false;
 
     /**
      * @inheritdoc
@@ -49,7 +50,7 @@ class NaturalParser extends AbstractParser
     protected function generateRules()
     {
         return [
-            new ClassicalResult(),
+//            new ClassicalResult(),
             //new ClassicalCardsResult(),
             new ImageGroup(),
             new Videos(),
@@ -66,7 +67,8 @@ class NaturalParser extends AbstractParser
             new Definitions(),
             new Flights(),
             new Jobs(),
-            //new AppPack(),
+            new AppPack(),
+            new Misspelling()
 
         ];
     }
@@ -95,7 +97,8 @@ class NaturalParser extends AbstractParser
         //div[@class='CH6Bmd']/div[@class='ntKMYc P2hV9e'] = hotels
         //@class='lr_container yc7KLc mBNN3d' - definitions
         //@class='LQQ1Bd' - flights
-       // return $googleDom->xpathQuery("//*[@id = 'rso' or @id='rhs' or @id='taw']/*[not(self::script) and not(self::style)]/*");
+        //@class = 'p64x9c card-section KDCVqf' - misspelings
+//        return $googleDom->xpathQuery("//div[contains(@id, 'isl')]/*[not(self::script) and not(self::style)]/*");
         return $googleDom->xpathQuery("//*[
             @id='rso' or
             @id='rhs' or
@@ -104,7 +107,7 @@ class NaturalParser extends AbstractParser
             @id='tadsb' or
             @id='tvcap' or
             @id='extabar' or
-            div[contains(@id, 'isl')] or
+            contains(@id, 'isl') or
             @class='C7r6Ue' or
             @class='e4xoPb' or
             @class='xpdopen' or
@@ -114,8 +117,8 @@ class NaturalParser extends AbstractParser
             contains(@class, 'commercial-unit-desktop-top') or
             contains(@class, 'related-question-pair') or
             contains(@class, 'gws-plugins-horizon-jobs__li-ed') or
-
-            g-section-with-header[@class='yG4QQe TBC9ub']
+            g-section-with-header[@class='yG4QQe TBC9ub'] or
+            @class = 'p64x9c card-section KDCVqf'
 
         ][not(self::script) and not(self::style)]");
     }
