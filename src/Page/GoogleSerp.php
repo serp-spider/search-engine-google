@@ -178,7 +178,6 @@ class GoogleSerp extends GoogleDom
 
     public function translate($results)
     {
-        $test = 1;
         $template = [
             'site_links' => '',
             'spell' => '',
