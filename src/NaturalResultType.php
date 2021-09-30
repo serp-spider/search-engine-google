@@ -23,24 +23,27 @@ abstract class NaturalResultType
     const PEOPLE_ALSO_ASK = 'people_also_ask';
     const PAA_QUESTION    = 'paa_question';
 
-    const IMAGE_GROUP            = 'image_group';
-    const IMAGE_GROUP_MOBILE     = 'image_group_mobile';
-    const FEATURED_SNIPPED       = 'pos_zero';
-    const FEATURED_SNIPPED_MOBILE       = 'pos_zero_mobile';
-    const QUESTIONS              = 'questions';
-    const QUESTIONS_MOBILE       = 'questions_mobile';
-    const JOBS                   = 'jobs';
-    const JOBS_MOBILE                   = 'jobs_mobile';
-    const APP_PACK               = 'app_pack';
-    const APP_PACK_MOBILE        = 'app_pack_mobile';
-    const PRODUCT_LISTING        = 'pla';
-    const PRODUCT_LISTING_MOBILE = 'pla_mobile';
-    const RECIPES_GROUP          = 'recipes';
+    const IMAGE_GROUP             = 'image_group';
+    const IMAGE_GROUP_MOBILE      = 'image_group_mobile';
+    const FEATURED_SNIPPED        = 'pos_zero';
+    const FEATURED_SNIPPED_MOBILE = 'pos_zero_mobile';
+    const QUESTIONS               = 'questions';
+    const QUESTIONS_MOBILE        = 'questions_mobile';
+    const JOBS                    = 'jobs';
+    const JOBS_MOBILE             = 'jobs_mobile';
+    const APP_PACK                = 'app_pack';
+    const SITE_LINKS_BIG          = 'site_links_big';
+    const SITE_LINKS_BIG_MOBILE   = 'site_links_big_mobile';
+    const SITE_LINKS_SMALL        = 'site_links_small';
+    const APP_PACK_MOBILE         = 'app_pack_mobile';
+    const PRODUCT_LISTING         = 'pla';
+    const PRODUCT_LISTING_MOBILE  = 'pla_mobile';
+    const RECIPES_GROUP           = 'recipes';
 
     const IMAGE_GROUP_IMAGE = 'image_group_image';
 
-    const VIDEOS       = 'videos';
-    const VIDEOS_MOBILE       = 'videos_mobile';
+    const VIDEOS        = 'videos';
+    const VIDEOS_MOBILE = 'videos_mobile';
 
     const IN_THE_NEWS        = 'in_the_news';
     const TOP_STORIES        = 'top_stories';
@@ -56,10 +59,10 @@ abstract class NaturalResultType
 
     const ANSWER_BOX = 'answer_box';
 
-    const HOTELS = 'hotels';
+    const HOTELS        = 'hotels';
     const HOTELS_MOBILE = 'hotels_mobile';
 
-    const DEFINITIONS = 'definitions';
+    const DEFINITIONS        = 'definitions';
     const DEFINITIONS_MOBILE = 'definitions_mobile';
 
 }
