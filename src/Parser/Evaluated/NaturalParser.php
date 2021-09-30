@@ -114,9 +114,7 @@ class NaturalParser extends AbstractParser
             contains(@class, 'commercial-unit-desktop-top') or
             contains(@class, 'related-question-pair') or
             contains(@class, 'gws-plugins-horizon-jobs__li-ed') or
-
             g-section-with-header[@class='yG4QQe TBC9ub']
-
         ][not(self::script) and not(self::style)]");
     }
 }
