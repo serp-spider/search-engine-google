@@ -7,6 +7,7 @@ use Serps\SearchEngine\Google\Exception\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SiteLinksBigMobile;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 
@@ -55,6 +56,10 @@ class ClassicalResultMobile implements ParsingRuleInterface
             $resultTypes = [NaturalResultType::CLASSICAL];
 
             $resultSet->addItem(new BaseResult($resultTypes, $result));
+
+            if( $dom->xpathQuery("descendant::div[@class='MUxGbd v0nnCb lyLwlc']", $organicResult->parentNode->parentNode)->length >0) {
+                (new SiteLinksBigMobile())->parse($dom,$organicResult->parentNode->parentNode, $resultSet, false);
+            }
         }
     }
 
