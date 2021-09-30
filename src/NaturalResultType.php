@@ -64,5 +64,8 @@ abstract class NaturalResultType
 
     const DEFINITIONS        = 'definitions';
     const DEFINITIONS_MOBILE = 'definitions_mobile';
+    
+    const MISSPELLING = 'misspelling';
+    const MISSPELING_MOBILE = 'misspelling_mobile';
 
 }

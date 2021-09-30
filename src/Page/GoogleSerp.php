@@ -176,4 +176,67 @@ class GoogleSerp extends GoogleDom
         return $item->length == 1;
     }
 
+    public function translate($results)
+    {
+        $template = [
+            'site_links' => '',
+            'spell' => '',
+            'ads' => [],
+            'ads_up' => [],
+            'ads_down' => [],
+            'images' => [],
+            'news' => [],
+            'videos' => [],
+            'knowledge_graph' => '',
+            'maps_links' => false,
+            'has_maps' => false,
+            'lat' => false,
+            'long' => false,
+            'pos_zero' => false,
+            'pla' => [],
+            'questions' => [],
+            'flights' => [],
+            'directions' => [],
+            'definition' => [],
+            'jobs' => [],
+            'app_pack' => false,
+            'hotels_names' => false,
+            'hotels' => false,
+            'recipes_links' => false,
+            'recipes' => false,
+            'no_results' => 0,
+            'xpath' => 0,
+        ];
+
+        if (empty($results->getItems())) {
+            return json_encode($template);
+        }
+
+        foreach ($results->getItems() as $item) {
+            switch ($item->getTypes()[0]) {
+                case 'app_pack':
+                    $template['app_pack'] = true;
+                    break;
+                case 'misspelling':
+                    $template['spell'] = 1;
+                    break;
+                case 'maps':
+                    $template['has_maps'] = true;
+                    foreach ($item->getData()['title'] as $title) {
+                        $template['maps_links'][] = ['title' => $title];
+                    }
+                    break;
+                case 'videos':
+                    $template['video'] = $item->getData();
+                    break;
+                case 'knowledge_graph':
+                    $template['knowledge_graph'] = $item->getData();
+                    break;
+                case 'recipes':
+                    $template['recipes_links'] = $item->getData()['recipes_links'];
+                    $template['recipes'] = true;
+                    break;
+            }
+        }
+    }
 }
