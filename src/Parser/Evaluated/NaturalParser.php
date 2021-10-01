@@ -50,8 +50,7 @@ class NaturalParser extends AbstractParser
     protected function generateRules()
     {
         return [
-//            new ClassicalResult(),
-            //new ClassicalCardsResult(),
+           new ClassicalResult(),
             new ImageGroup(),
             new Videos(),
             new Maps(),
