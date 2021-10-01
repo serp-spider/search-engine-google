@@ -45,12 +45,18 @@ class ClassicalResultMobile implements ParsingRuleInterface
                 throw new InvalidDOMException('Cannot parse a classical result.');
             }
 
-            $descriptionTag = $organicResult->childNodes[0]->childNodes[1]->childNodes[0]->childNodes[0];
+            $descriptionNodes = $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' MUxGbd yDYNvb ')]", $organicResult);
+
+            $descriptionTag = null;
+
+            if($descriptionNodes->length >0) {
+                $descriptionTag = $descriptionNodes->item(0)->textContent;
+            }
 
             $result = [
                 'title'       => $titleTag->textContent,
                 'url'         => $dom->getUrl()->resolveAsString($aTag->getAttribute('href')),
-                'description' => $descriptionTag ? $descriptionTag->textContent : null,
+                'description' => $descriptionTag,
             ];
 
             $resultTypes = [NaturalResultType::CLASSICAL];
