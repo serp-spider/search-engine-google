@@ -8,6 +8,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AppPackMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResultMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\LargeClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\DefinitionsMobile;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\DirectionsMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\FeaturedSnipped;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flights;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\HotelsMobile;
@@ -52,7 +53,8 @@ class MobileNaturalParser extends AbstractParser
             new HotelsMobile(),
             new DefinitionsMobile(),
             new VideosMobile(),
-            new MisspellingMobile()
+            new MisspellingMobile(),
+            new DirectionsMobile()
         ];
     }
 
@@ -79,6 +81,7 @@ class MobileNaturalParser extends AbstractParser
         //div[@class='lr_container wDYxhc yc7KLc'] = definitions
         //div[contains(@id, 'isl')]  = recipes
         //@class='p64x9c card-section KDCVqf mnr-c' - misspelings
+        //@class='ULktNd rQUFld mnr-c rrecc' - directions
 
         return $googleDom->xpathQuery("//*[@id='iur' or @id='rso' or
             @id='tads' or
@@ -96,7 +99,8 @@ class MobileNaturalParser extends AbstractParser
             @class='hNKF2b m9orme' or
             div[@class='lr_container wDYxhc yc7KLc'] or
             div[contains(@id, 'isl')] or
-             @class = 'p64x9c card-section KDCVqf mnr-c'
+            @class = 'p64x9c card-section KDCVqf mnr-c' or
+            @class='ULktNd rQUFld mnr-c rrecc'
         ][not(self::script) and not(self::style)]");
     }
 }

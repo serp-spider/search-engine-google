@@ -67,5 +67,8 @@ abstract class NaturalResultType
     
     const MISSPELLING = 'misspelling';
     const MISSPELING_MOBILE = 'misspelling_mobile';
-
+    
+    const RESULTS_NO = 'results_no';
+    const DIRECTIONS = 'directions';
+    const DIRECTIONS_MOBILE = 'directions_mobile';
 }
