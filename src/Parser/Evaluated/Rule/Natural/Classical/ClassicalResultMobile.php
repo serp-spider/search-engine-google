@@ -3,6 +3,7 @@
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical;
 
 use Serps\Core\Dom\DomElement;
+use Serps\Core\Dom\DomNodeList;
 use Serps\SearchEngine\Google\Exception\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
@@ -33,23 +34,41 @@ class ClassicalResultMobile implements ParsingRuleInterface
         foreach ($naturalResults as $organicResult) {
 
             /* @var $aTag \DOMElement */
-            $aTag = $dom->xpathQuery("descendant::*[(self::div)]/a", $organicResult)->item(0);
+            $aTag = $dom->xpathQuery("descendant::*[@class='tKdlvb d5oMvf KJDcUb']/a", $organicResult);
 
-            if (!$aTag) {
+            if ($aTag->length == 0) {
+
+                $elemNode = $dom->xpathQuery("descendant::*[@class='pXvdUe']", $organicResult);
+
+                if ($elemNode->length > 0) {
+                    $aTag = $dom->xpathQuery("descendant::a", $elemNode->item(0));
+
+                    if ($aTag->length > 0) {
+                        $aTag = $aTag->item(0);
+                    }
+                }
+            }
+
+            if (empty($aTag)) {
                 throw new InvalidDOMException('Cannot parse a classical result.');
             }
 
-            $titleTag = $aTag->lastChild;
+            if ($aTag instanceof DomNodeList) {
+                $aTag = $aTag->item(0);
+            }
 
-            if (!$titleTag instanceof  DomElement) {
+            $titleTag = $aTag->lastChild ;
+
+            if (!$titleTag instanceof DomElement) {
                 throw new InvalidDOMException('Cannot parse a classical result.');
             }
 
-            $descriptionNodes = $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' MUxGbd yDYNvb ')]", $organicResult);
+            $descriptionNodes = $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' MUxGbd yDYNvb ')]",
+                $organicResult);
 
             $descriptionTag = null;
 
-            if($descriptionNodes->length >0) {
+            if ($descriptionNodes->length > 0) {
                 $descriptionTag = $descriptionNodes->item(0)->textContent;
             }
 
@@ -63,8 +82,9 @@ class ClassicalResultMobile implements ParsingRuleInterface
 
             $resultSet->addItem(new BaseResult($resultTypes, $result));
 
-            if( $dom->xpathQuery("descendant::div[@class='MUxGbd v0nnCb lyLwlc']", $organicResult->parentNode->parentNode)->length >0) {
-                (new SiteLinksBigMobile())->parse($dom,$organicResult->parentNode->parentNode, $resultSet, false);
+            if ($dom->xpathQuery("descendant::div[@class='MUxGbd v0nnCb lyLwlc']",
+                    $organicResult->parentNode->parentNode)->length > 0) {
+                (new SiteLinksBigMobile())->parse($dom, $organicResult->parentNode->parentNode, $resultSet, false);
             }
         }
     }
