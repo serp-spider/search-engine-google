@@ -28,7 +28,7 @@ class Recipes implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
                 $item['recipes_links'][] = ['link' => $urlNode->firstChild->getAttribute('href')];
             }
 
-            $resultSet->addItem(new BaseResult($isMobile ? NaturalResultType::RECIPES_GROUP_MOBILE : NaturalResultType::RECIPES_GROUP, $item));
+            $resultSet->addItem(new BaseResult(NaturalResultType::RECIPES_GROUP , $item));
         }
     }
 }
