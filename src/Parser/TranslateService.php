@@ -4,6 +4,11 @@ namespace Serps\SearchEngine\Google\Parser;
 
 use Serps\SearchEngine\Google\NaturalResultType;
 
+/**
+ * Class TranslateService
+ *
+ * @package Serps\SearchEngine\Google\Parser
+ */
 class TranslateService
 {
     protected $siteHost = null,
@@ -12,6 +17,13 @@ class TranslateService
         $urlAlias = null,
         $response = [];
 
+    /**
+     * TranslateService constructor.
+     *
+     * @param $siteHost
+     * @param bool $crawlSubdomains
+     * @param null $urlAlias
+     */
     public function __construct($siteHost, $crawlSubdomains = false, $urlAlias = null)
     {
         $this->siteHost        = $siteHost;
@@ -19,6 +31,11 @@ class TranslateService
         $this->urlAlias        = $urlAlias;
     }
 
+    /**
+     * @param $url
+     *
+     * @return string
+     */
     protected function extractDomain($url)
     {
         $url = strtolower(trim($url));
@@ -36,27 +53,45 @@ class TranslateService
         return $url;
     }
 
-    protected function processClassicalResult($item, &$rank)
+    /**
+     * @param $item
+     *
+     * @return array
+     */
+    protected function matchSubdomainsOrUrlAlias($item)
     {
-        $rank++;
+        $matchedSubdomains = [];
 
         if ($this->crawlSubdomains || $this->mobile || $this->urlAlias) {
             if ($this->crawlSubdomains === false) {
-                preg_match('/m\.' . str_replace('.', '\.', $this->siteHost) . '$/', $item->url, $matchedSubdomains);
+                preg_match('/m\.' . str_replace('.', '\.', $this->siteHost) . '/', $item->url, $matchedSubdomains);
 
                 if (empty($matchedSubdomains[0]) && $this->urlAlias) {
-                    preg_match('/m\.' . str_replace('.', '\.', $this->urlAlias) . '$/', $item->url, $matchedSubdomains);
+                    preg_match('/m\.' . str_replace('.', '\.', $this->urlAlias) . '/', $item->url, $matchedSubdomains);
                 }
 
             } else {
-                preg_match('/.*\.' . str_replace('.', '\.', $this->siteHost) . '$/', $item->url, $matchedSubdomains);
+                preg_match('/.*\.' . str_replace('.', '\.', $this->siteHost) . '/', $item->url, $matchedSubdomains);
 
                 if (empty($matchedSubdomains[0]) && $this->urlAlias) {
-                    preg_match('/.*\.' . str_replace('.', '\.', $this->urlAlias) . '$/', $item->url,
+                    preg_match('/.*\.' . str_replace('.', '\.', $this->urlAlias) . '/', $item->url,
                         $matchedSubdomains);
                 }
             }
         }
+
+        return $matchedSubdomains;
+    }
+
+    /**
+     * @param $item
+     * @param $rank
+     */
+    protected function processClassicalResult($item, &$rank)
+    {
+        $rank++;
+
+        $matchedSubdomains = $this->matchSubdomainsOrUrlAlias($item);
 
         $title       = $item->title;
         $description = $item->description;
@@ -68,7 +103,7 @@ class TranslateService
         }
 
         if (empty($this->response[0][$domainName])) {
-            $this->response[0][$domainName] = $rank;
+            $this->response['list_of_urls'][0][$domainName] = $rank;
         }
 
         $this->response['competition'][$rank] = [
@@ -82,10 +117,21 @@ class TranslateService
         ];
     }
 
+    /**
+     * @param $item
+     */
     protected function processSerpFeatures($item)
     {
         if ($item->is(NaturalResultType::APP_PACK)) {
             $this->response[NaturalResultType::APP_PACK] = true;
+        }
+
+        if ($item->is(NaturalResultType::AdsTOP) || $item->is(NaturalResultType::AdsTOP_MOBILE)) {
+            $this->response[NaturalResultType::AdsTOP] = $item->getData();
+        }
+
+        if ($item->is(NaturalResultType::AdsDOWN) || $item->is(NaturalResultType::AdsDOWN_MOBILE)) {
+            $this->response[NaturalResultType::AdsDOWN] = $item->getData();
         }
 
         if ($item->is(NaturalResultType::APP_PACK_MOBILE)) {
@@ -106,9 +152,7 @@ class TranslateService
         }
 
         if ($item->is(NaturalResultType::VIDEOS) || $item->is(NaturalResultType::VIDEOS_MOBILE)) {
-            foreach ($item->getData() as $video) {
-                $this->response[NaturalResultType::VIDEOS][] = $video;
-            }
+            $this->response[NaturalResultType::VIDEOS] = $item->getData();
         }
 
         if ($item->is(NaturalResultType::KNOWLEDGE_GRAPH) || $item->is(NaturalResultType::KNOWLEDGE_GRAPH_MOBILE)) {
@@ -153,13 +197,27 @@ class TranslateService
         if ($item->is(NaturalResultType::SITE_LINKS_SMALL) || $item->is(NaturalResultType::SITE_LINKS)) {
             $this->response[NaturalResultType::SITE_LINKS] = 1;
         }
+
+        if ($item->is(NaturalResultType::DIRECTIONS) || $item->is(NaturalResultType::DIRECTIONS_MOBILE)) {
+            $this->response[NaturalResultType::DIRECTIONS] = true;
+        }
+
+        if ($item->is(NaturalResultType::RESULTS_NO)) {
+            $this->response[NaturalResultType::RESULTS_NO] = $item->getData()[0];
+        }
     }
 
-
+    /**
+     * @param \Serps\Core\Serp\IndexedResultSet $results
+     *
+     * @return $this
+     */
     public function intoOldResponse(\Serps\Core\Serp\IndexedResultSet $results)
     {
         if (empty($results->getItems())) {
-            return json_encode(NaturalResultType::SERP_FEATURES_OLD_RESPONSE_TEMPLATE);
+            $this->response = NaturalResultType::SERP_FEATURES_OLD_RESPONSE_TEMPLATE;
+
+            return $this;
         }
 
         if ($results->hasType([NaturalResultType::CLASSICAL_MOBILE])) {
@@ -167,6 +225,7 @@ class TranslateService
         }
 
         $rank = 0;
+        $this->initSerpFeaturesDefaultResponse();
 
         foreach ($results->getItems() as $item) {
             if ($item->is(NaturalResultType::CLASSICAL) || $item->is(NaturalResultType::CLASSICAL_MOBILE)) {
@@ -178,9 +237,24 @@ class TranslateService
             $this->processSerpFeatures($item);
         }
 
+        $this->response['list_of_urls'][0] = array_reverse($this->response['list_of_urls'][0]);
+
         return $this;
     }
 
+    /**
+     *
+     */
+    protected function initSerpFeaturesDefaultResponse()
+    {
+        foreach (NaturalResultType::SERP_FEATURES_OLD_RESPONSE_TEMPLATE as $typeSerp => $value) {
+            $this->response[$typeSerp] = $value;
+        }
+    }
+
+    /**
+     * @return array|bool|null
+     */
     public function getResponse()
     {
         return $this->response;

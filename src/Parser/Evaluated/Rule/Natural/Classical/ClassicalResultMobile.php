@@ -8,11 +8,13 @@ use Serps\SearchEngine\Google\Exception\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\AbstractRuleMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SiteLinksBigMobile;
+use Serps\SearchEngine\Google\Parser\ParsingRuleByVersionInterface;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class ClassicalResultMobile implements ParsingRuleInterface
+class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInterface
 {
     public function match(GoogleDom $dom, DomElement $node)
     {
@@ -31,59 +33,39 @@ class ClassicalResultMobile implements ParsingRuleInterface
             throw new InvalidDOMException('Cannot parse a classical result.');
         }
 
+        $k = 0;
         foreach ($naturalResults as $organicResult) {
+            $k++;
+            $result = null;
 
-            /* @var $aTag \DOMElement */
-            $aTag = $dom->xpathQuery("descendant::*[@class='tKdlvb d5oMvf KJDcUb']/a", $organicResult);
+            /** @var ParsingRuleByVersionInterface $rule */
+            foreach ($this->getRules() as $versionRule) {
+                $organicResultObject = new OrganicResultObject();
 
-            if ($aTag->length == 0) {
+                try {
+                    $versionRule->parseNode($dom, $organicResult, $organicResultObject);
 
-                $elemNode = $dom->xpathQuery("descendant::*[@class='pXvdUe']", $organicResult);
-
-                if ($elemNode->length > 0) {
-                    $aTag = $dom->xpathQuery("descendant::a", $elemNode->item(0));
-
-                    if ($aTag->length > 0) {
-                        $aTag = $aTag->item(0);
-                    }
+                    break 1;
+                } catch (\Exception $exception) {
+                    continue;
+                } catch (\Error $exception) {
+                    continue;
                 }
             }
 
-            if (empty($aTag)) {
-                throw new InvalidDOMException('Cannot parse a classical result.');
+            if ($organicResultObject->getLink() === null) {
+                throw new \Exception('bla bla');
             }
 
-            if ($aTag instanceof DomNodeList) {
-                $aTag = $aTag->item(0);
-            }
+            $resultSet->addItem(new BaseResult([NaturalResultType::CLASSICAL_MOBILE],
+                [
+                    'title'       => $organicResultObject->getTitle(),
+                    'url'         => $organicResultObject->getLink(),
+                    'description' => $organicResultObject->getDescription(),
+                ]
+            ));
 
-            $titleTag = $aTag->lastChild ;
-
-            if (!$titleTag instanceof DomElement) {
-                throw new InvalidDOMException('Cannot parse a classical result.');
-            }
-
-            $descriptionNodes = $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' MUxGbd yDYNvb ')]",
-                $organicResult);
-
-            $descriptionTag = null;
-
-            if ($descriptionNodes->length > 0) {
-                $descriptionTag = $descriptionNodes->item(0)->textContent;
-            }
-
-            $result = [
-                'title'       => $titleTag->textContent,
-                'url'         => $dom->getUrl()->resolveAsString($aTag->getAttribute('href')),
-                'description' => $descriptionTag,
-            ];
-
-            $resultTypes = [NaturalResultType::CLASSICAL];
-
-            $resultSet->addItem(new BaseResult($resultTypes, $result));
-
-            if ($dom->xpathQuery("descendant::div[@class='MUxGbd v0nnCb lyLwlc']",
-                    $organicResult->parentNode->parentNode)->length > 0) {
+            if ($dom->xpathQuery("descendant::div[@class='MUxGbd v0nnCb lyLwlc']", $organicResult->parentNode->parentNode)->length > 0) {
                 (new SiteLinksBigMobile())->parse($dom, $organicResult->parentNode->parentNode, $resultSet, false);
             }
         }

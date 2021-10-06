@@ -11,6 +11,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AdsTop;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AnswerBox;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AppPack;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResult;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Directions;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Divider;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\FeaturedSnipped;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flight;
@@ -29,6 +30,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Recipes;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Hotels;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Definitions;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flights;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ResultsNo;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SearchResultGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStories;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesCarousel;
@@ -66,8 +68,8 @@ class NaturalParser extends AbstractParser
             new Definitions(),
             new Flights(),
             new Jobs(),
-            new Misspelling()
-
+            new ResultsNo(),
+            new Directions()
         ];
     }
 
@@ -96,7 +98,9 @@ class NaturalParser extends AbstractParser
         //@class='lr_container yc7KLc mBNN3d' - definitions
         //@class='LQQ1Bd' - flights
         //@class = 'p64x9c card-section KDCVqf' - misspelings
-//        return $googleDom->xpathQuery("//div[contains(@id, 'isl')]/*[not(self::script) and not(self::style)]/*");
+        //@id = 'result-stats' - no of results
+        //@class = 'ULktNd rQUFld rrecc' - directions
+//        return $googleDom->xpathQuery("//*[@id='result-stats']/*[not(self::script) and not(self::style)]/*");
         return $googleDom->xpathQuery("//*[
             @id='rso' or
             @id='rhs' or
@@ -116,7 +120,9 @@ class NaturalParser extends AbstractParser
             contains(@class, 'related-question-pair') or
             contains(@class, 'gws-plugins-horizon-jobs__li-ed') or
             g-section-with-header[@class='yG4QQe TBC9ub'] or
-            @class = 'p64x9c card-section KDCVqf'
+            @class = 'p64x9c card-section KDCVqf' or
+            @id='result-stats' or
+            @class = 'ULktNd rQUFld rrecc'
         ][not(self::script) and not(self::style)]");
     }
 }

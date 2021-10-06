@@ -91,4 +91,8 @@ abstract class NaturalResultType
         self::RECIPES_GROUP           => null,
         self::RECIPES_LINKS           => null,
     ];
+
+    const RESULTS_NO = 'results_no';
+    const DIRECTIONS = 'directions';
+    const DIRECTIONS_MOBILE = 'directions_mobile';
 }
