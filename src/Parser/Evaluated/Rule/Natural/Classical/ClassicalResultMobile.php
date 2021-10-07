@@ -25,7 +25,43 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
         return self::RULE_MATCH_NOMATCH;
     }
 
-    protected function parseNode(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet)
+    protected function parseNode(GoogleDom $dom, \DomElement $organicResult, IndexedResultSet $resultSet, $k)
+    {
+        $organicResultObject = new OrganicResultObject();
+
+        /** @var ParsingRuleByVersionInterface $versionRule */
+        foreach ($this->getRules() as $versionRule) {
+
+            try {
+                $versionRule->parseNode($dom, $organicResult, $organicResultObject);
+
+                break 1;
+            } catch (\Exception $exception) {
+                continue;
+            } catch (\Error $exception) {
+                continue;
+            }
+        }
+
+        if ($organicResultObject->getLink() === null) {
+            throw new \Exception('bla bla');
+        }
+
+        $resultSet->addItem(new BaseResult([NaturalResultType::CLASSICAL_MOBILE],
+            [
+                'title'       => $organicResultObject->getTitle(),
+                'url'         => $organicResultObject->getLink(),
+                'description' => $organicResultObject->getDescription(),
+            ]
+        ));
+
+        if ($dom->xpathQuery("descendant::div[@class='MUxGbd v0nnCb lyLwlc']",
+                $organicResult->parentNode->parentNode)->length > 0) {
+            (new SiteLinksBigMobile())->parse($dom, $organicResult->parentNode->parentNode, $resultSet, false);
+        }
+    }
+
+    public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
         $naturalResults = $dom->xpathQuery("descendant::div[@class='mnr-c xpd O9g5cc uUPGi']", $node);
 
@@ -34,45 +70,27 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
         }
 
         $k = 0;
+
         foreach ($naturalResults as $organicResult) {
+
+            if ($this->skiResult($organicResult)) {
+                continue;
+            }
+
             $k++;
-            $result = null;
 
-            /** @var ParsingRuleByVersionInterface $rule */
-            foreach ($this->getRules() as $versionRule) {
-                $organicResultObject = new OrganicResultObject();
-
-                try {
-                    $versionRule->parseNode($dom, $organicResult, $organicResultObject);
-
-                    break 1;
-                } catch (\Exception $exception) {
-                    continue;
-                } catch (\Error $exception) {
-                    continue;
-                }
-            }
-
-            if ($organicResultObject->getLink() === null) {
-                throw new \Exception('bla bla');
-            }
-
-            $resultSet->addItem(new BaseResult([NaturalResultType::CLASSICAL_MOBILE],
-                [
-                    'title'       => $organicResultObject->getTitle(),
-                    'url'         => $organicResultObject->getLink(),
-                    'description' => $organicResultObject->getDescription(),
-                ]
-            ));
-
-            if ($dom->xpathQuery("descendant::div[@class='MUxGbd v0nnCb lyLwlc']", $organicResult->parentNode->parentNode)->length > 0) {
-                (new SiteLinksBigMobile())->parse($dom, $organicResult->parentNode->parentNode, $resultSet, false);
-            }
+            $this->parseNode($dom, $organicResult, $resultSet, $k);
         }
+
     }
 
-    public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
+    protected function skiResult(DomElement $organicResult)
     {
-        $this->parseNode($dom, $node, $resultSet);
+        // Recipes are identified as organic result
+        if ($organicResult->getChildren()->hasClasses(['Q9mvUc'])) {
+           return true;
+        }
+
+        return false;
     }
 }
