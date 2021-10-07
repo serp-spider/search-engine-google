@@ -7,13 +7,16 @@ use Serps\SearchEngine\Google\Exception\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\AbstractRuleDesktop;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SiteLinks;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SiteLinksBig;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SiteLinksBigMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SiteLinksSmall;
+use Serps\SearchEngine\Google\Parser\ParsingRuleByVersionInterface;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 
-class ClassicalResult implements ParsingRuleInterface
+class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterface
 {
     public function match(GoogleDom $dom, DomElement $node)
     {
@@ -24,7 +27,46 @@ class ClassicalResult implements ParsingRuleInterface
         return self::RULE_MATCH_NOMATCH;
     }
 
-    protected function parseNode(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet)
+    protected function parseNode(GoogleDom $dom, \DomElement $organicResult, IndexedResultSet $resultSet, $k)
+    {
+        $organicResultObject = new OrganicResultObject();
+
+        /** @var ParsingRuleByVersionInterface $versionRule */
+        foreach ($this->getRules() as $versionRule) {
+
+            try {
+                $versionRule->parseNode($dom, $organicResult, $organicResultObject);
+
+                break 1;
+            } catch (\Exception $exception) {
+                continue;
+            } catch (\Error $exception) {
+                continue;
+            }
+        }
+
+        if ($organicResultObject->getLink() === null) {
+            throw new \Exception('bla bla');
+        }
+
+        $resultSet->addItem(new BaseResult([NaturalResultType::CLASSICAL],
+            [
+                'title'       => $organicResultObject->getTitle(),
+                'url'         => $organicResultObject->getLink(),
+                'description' => $organicResultObject->getDescription(),
+            ]
+        ));
+
+        if( $dom->xpathQuery("descendant::table[@class='jmjoTe']", $organicResult)->length >0) {
+            (new SiteLinksBig())->parse($dom,$organicResult, $resultSet, false);
+        }
+
+        if( $dom->xpathQuery("descendant::div[@class='HiHjCd']", $organicResult)->length >0) {
+            (new SiteLinksSmall())->parse($dom,$organicResult, $resultSet, false);
+        }
+    }
+
+    public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
         $naturalResults = $dom->xpathQuery("descendant::div[@class='g']", $node);
 
@@ -32,45 +74,27 @@ class ClassicalResult implements ParsingRuleInterface
             throw new InvalidDOMException('Cannot parse a classical result.');
         }
 
+        $k=0;
         foreach ($naturalResults as $organicResult) {
 
-            /* @var $aTag \DOMElement */
-            $aTag = $dom->xpathQuery("descendant::*[(self::div)]/a", $organicResult)->item(0);
-
-            if (!$aTag) {
-                throw new InvalidDOMException('Cannot parse a classical result.');
+            if($this->skiResult($organicResult)) {
+                continue;
             }
 
-            $h3Tag = $dom->xpathQuery('descendant::h3', $organicResult)->item(0);
-
-            if (!$h3Tag) {
-                throw new InvalidDOMException('Cannot parse a classical result.');
-            }
-
-            $descriptionTag = $dom->xpathQuery("descendant::div[@class='IsZvec']", $organicResult)->item(0);
-
-            $result = [
-                'title'       => $h3Tag->textContent,
-                'url'         => $dom->getUrl()->resolveAsString($aTag->getAttribute('href')),
-                'description' => $descriptionTag ? $descriptionTag->textContent : null,
-            ];
-
-            $resultTypes = [NaturalResultType::CLASSICAL];
-
-            $resultSet->addItem(new BaseResult($resultTypes, $result));
-
-            if( $dom->xpathQuery("descendant::table[@class='jmjoTe']", $organicResult)->length >0) {
-                (new SiteLinksBig())->parse($dom,$organicResult, $resultSet, false);
-            }
-
-            if( $dom->xpathQuery("descendant::div[@class='HiHjCd']", $organicResult)->length >0) {
-                (new SiteLinksSmall())->parse($dom,$organicResult, $resultSet, false);
-            }
+            $k++;
+            $this->parseNode($dom, $organicResult, $resultSet, $k);
         }
+
     }
 
-    public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
+    protected function skiResult(DomElement $organicResult)
     {
-        $this->parseNode($dom, $node, $resultSet);
+        // Recipes are identified as organic result
+        if ($organicResult->getChildren()->hasClasses(['rrecc'])) {
+            return true;
+        }
+
+        return false;
     }
 }
+//
