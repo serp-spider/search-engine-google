@@ -12,6 +12,11 @@ class ClassicalResultEngine
 {
     protected $resultType = NaturalResultType::CLASSICAL;
 
+    protected function parseNode(GoogleDom $dom, \DomElement $organicResult, IndexedResultSet $resultSet, $k)
+    {
+
+    }
+
     protected function parseNodeWithRules(GoogleDom $dom, \DomElement $organicResult, IndexedResultSet $resultSet, $k)
     {
         $organicResultObject = new OrganicResultObject();

@@ -11,8 +11,12 @@ class AppPackMobile implements \Serps\SearchEngine\Google\Parser\ParsingRuleInte
 {
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->hasClass('qs-io')  && $node->childNodes[0]->hasClass('qs-ii')) {
-            return self::RULE_MATCH_MATCHED;
+        if ($node->hasClass('qs-io')) {
+            // Reason of "instanceof": Avoid parsing "Something went wrong." results
+            if(!$node->childNodes[0] instanceof \DOMText && $node->childNodes[0]->hasClass('qs-ii')) {
+                return self::RULE_MATCH_MATCHED;
+            }
+
         }
 
         return self::RULE_MATCH_NOMATCH;
