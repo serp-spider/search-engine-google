@@ -16,6 +16,8 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInterface
 {
+    protected $resultType = NaturalResultType::CLASSICAL_MOBILE;
+
     public function match(GoogleDom $dom, DomElement $node)
     {
         if ($node->getAttribute('id') == 'rso') {
@@ -27,33 +29,7 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
     protected function parseNode(GoogleDom $dom, \DomElement $organicResult, IndexedResultSet $resultSet, $k)
     {
-        $organicResultObject = new OrganicResultObject();
-
-        /** @var ParsingRuleByVersionInterface $versionRule */
-        foreach ($this->getRules() as $versionRule) {
-
-            try {
-                $versionRule->parseNode($dom, $organicResult, $organicResultObject);
-
-                break 1;
-            } catch (\Exception $exception) {
-                continue;
-            } catch (\Error $exception) {
-                continue;
-            }
-        }
-
-        if ($organicResultObject->getLink() === null) {
-            throw new \Exception('bla bla');
-        }
-
-        $resultSet->addItem(new BaseResult([NaturalResultType::CLASSICAL_MOBILE],
-            [
-                'title'       => $organicResultObject->getTitle(),
-                'url'         => $organicResultObject->getLink(),
-                'description' => $organicResultObject->getDescription(),
-            ]
-        ));
+        $this->parseNodeWithRules($dom, $organicResult, $resultSet, $k);
 
         if ($dom->xpathQuery("descendant::div[@class='MUxGbd v0nnCb lyLwlc']",
                 $organicResult->parentNode->parentNode)->length > 0) {
@@ -73,7 +49,7 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
         foreach ($naturalResults as $organicResult) {
 
-            if ($this->skiResult($organicResult)) {
+            if ($this->skiResult($dom, $organicResult)) {
                 continue;
             }
 
@@ -84,11 +60,15 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
     }
 
-    protected function skiResult(DomElement $organicResult)
+    protected function skiResult(GoogleDom $dom, DomElement $organicResult)
     {
         // Recipes are identified as organic result
         if ($organicResult->getChildren()->hasClasses(['Q9mvUc'])) {
-           return true;
+            return true;
+        }
+
+        if ($dom->xpathQuery("descendant::g-scrolling-carousel", $organicResult)->length > 0) {
+            return true;
         }
 
         return false;

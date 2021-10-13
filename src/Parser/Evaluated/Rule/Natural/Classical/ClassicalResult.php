@@ -29,33 +29,7 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
 
     protected function parseNode(GoogleDom $dom, \DomElement $organicResult, IndexedResultSet $resultSet, $k)
     {
-        $organicResultObject = new OrganicResultObject();
-
-        /** @var ParsingRuleByVersionInterface $versionRule */
-        foreach ($this->getRules() as $versionRule) {
-
-            try {
-                $versionRule->parseNode($dom, $organicResult, $organicResultObject);
-
-                break 1;
-            } catch (\Exception $exception) {
-                continue;
-            } catch (\Error $exception) {
-                continue;
-            }
-        }
-
-        if ($organicResultObject->getLink() === null) {
-            throw new \Exception('bla bla');
-        }
-
-        $resultSet->addItem(new BaseResult([NaturalResultType::CLASSICAL],
-            [
-                'title'       => $organicResultObject->getTitle(),
-                'url'         => $organicResultObject->getLink(),
-                'description' => $organicResultObject->getDescription(),
-            ]
-        ));
+        $this->parseNodeWithRules($dom, $organicResult, $resultSet, $k);
 
         if( $dom->xpathQuery("descendant::table[@class='jmjoTe']", $organicResult)->length >0) {
             (new SiteLinksBig())->parse($dom,$organicResult, $resultSet, false);

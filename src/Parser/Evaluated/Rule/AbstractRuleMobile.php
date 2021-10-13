@@ -1,12 +1,13 @@
 <?php
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule;
 
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResultEngine;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\Versions\Mobile\MobileV1;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\Versions\Mobile\MobileV2;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\Versions\Mobile\MobileV3;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\Versions\Mobile\MobileV4;
 
-class AbstractRuleMobile
+class AbstractRuleMobile extends ClassicalResultEngine
 {
     protected $rulesForParsing;
 

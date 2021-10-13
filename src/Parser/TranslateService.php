@@ -173,7 +173,7 @@ class TranslateService
         }
 
         if ($item->is(NaturalResultType::QUESTIONS) || $item->is(NaturalResultType::QUESTIONS_MOBILE)) {
-            $this->response[NaturalResultType::QUESTIONS] = $item->getData();
+            $this->response[NaturalResultType::QUESTIONS][] = $item->getData();
         }
 
         if ($item->is(NaturalResultType::FLIGHTS)) {
