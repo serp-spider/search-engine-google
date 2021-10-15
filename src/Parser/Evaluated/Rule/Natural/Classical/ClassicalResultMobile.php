@@ -69,10 +69,12 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
         // Result has carousel in it
         if ($dom->xpathQuery("descendant::g-scrolling-carousel", $organicResult)->length > 0 &&
-            $dom->xpathQuery("descendant::svg", $organicResult)->length > 0 &&
-            // And carousel have title like "Results in "
-            $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' pxp6I MUxGbd ')]", $organicResult)->length >0
-    ) {
+            ($dom->xpathQuery("descendant::svg", $organicResult)->length > 0 ||
+                // And carousel have title like "Results in "
+                $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' pxp6I MUxGbd ')]", $organicResult)->length > 0 ||
+                // Temporary keep this
+                $dom->getXpath()->query("descendant::table", $organicResult)->length > 0
+            )) {
             return true;
         }
 
