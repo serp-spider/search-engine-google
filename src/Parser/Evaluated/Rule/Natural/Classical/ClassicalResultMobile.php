@@ -67,16 +67,24 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
             return true;
         }
 
+        // Inside div with class= 'mnr-c xpd O9g5cc uUPGi' are more divs with 'mnr-c xpd O9g5cc uUPGi'
+        // Should ignore from processing parent result and process only children and avoid duplicate results
+        if($dom->xpathQuery("descendant::div[@class='mnr-c xpd O9g5cc uUPGi']", $organicResult)->length >0) {
+            return true;
+        }
+
         // Result has carousel in it
         if ($dom->xpathQuery("descendant::g-scrolling-carousel", $organicResult)->length > 0 &&
-            ($dom->xpathQuery("descendant::svg", $organicResult)->length > 0 ||
-                // And carousel have title like "Results in "
+            $dom->xpathQuery("descendant::svg", $organicResult)->length > 0 &&
+            (  // And carousel have title like "Results in "
                 $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' pxp6I MUxGbd ')]", $organicResult)->length > 0 ||
                 // Temporary keep this
                 $dom->getXpath()->query("descendant::table", $organicResult)->length > 0
             )) {
             return true;
         }
+
+
 
         return false;
     }
