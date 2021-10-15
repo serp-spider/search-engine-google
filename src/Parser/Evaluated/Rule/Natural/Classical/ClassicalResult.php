@@ -42,7 +42,7 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
 
     public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $naturalResults = $dom->xpathQuery("descendant::div[@class='g']", $node);
+        $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' g ')]", $node);
 
         if ($naturalResults->length == 0) {
             throw new InvalidDOMException('Cannot parse a classical result.');
@@ -65,6 +65,15 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
     {
         // Recipes are identified as organic result
         if ($organicResult->getChildren()->hasClasses(['rrecc'])) {
+            return true;
+        }
+
+        // Avoid getting  results from questions (when clicking "Show more". When clicking "Show more" on questions)
+        // The result under it looks exactly like a natural results
+        if ($organicResult->parentNode->parentNode->parentNode->getAttribute('class') =='ymu2Hb' ||
+            $organicResult->parentNode->parentNode->getAttribute('class') =='g') {
+
+
             return true;
         }
 
