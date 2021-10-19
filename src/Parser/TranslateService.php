@@ -17,6 +17,8 @@ class TranslateService
         $urlAlias = null,
         $response = [];
 
+    const DEFAULT_POSITION = 666;
+
     /**
      * TranslateService constructor.
      *
@@ -98,7 +100,10 @@ class TranslateService
         $domainName  = $this->extractDomain($item->url);
 
 
-        if ($domainName === $this->siteHost || $domainName === $this->urlAlias || !empty($matchedSubdomains[0])) {
+        if (
+            $this->response['position'] == self::DEFAULT_POSITION &&
+            ( $domainName === $this->siteHost || $domainName === $this->urlAlias || !empty($matchedSubdomains[0]))
+        ) {
             $this->response['position']     = $rank;
             $this->response['landing_page'] = $item->url;
         }
@@ -227,7 +232,7 @@ class TranslateService
 
         $rank = 0;
         $this->initSerpFeaturesDefaultResponse();
-        $this->response['position'] = 666;
+        $this->response['position'] = self::DEFAULT_POSITION;
 
         foreach ($results->getItems() as $item) {
             if ($item->is(NaturalResultType::CLASSICAL) || $item->is(NaturalResultType::CLASSICAL_MOBILE)) {

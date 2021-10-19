@@ -59,7 +59,12 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
                 $k++;
                 $this->parseNode($dom, $organicResult, $resultSet, $k);
             } catch (\Exception $exception) {
-                $k--;
+
+                // If first position detected with classical class it's not a results, do not decrement position
+                if ($k > 1) {
+                    $k--;
+                }
+
                 continue;
             }
 
@@ -89,7 +94,9 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
         // Avoid getting  results from questions (when clicking "Show more". When clicking "Show more" on questions)
         // The result under it looks exactly like a natural results
-        if($organicResult->parentNode->parentNode->parentNode->getAttribute('class') =='ymu2Hb' ||
+        if(
+            $organicResult->parentNode->parentNode->parentNode->getAttribute('class') =='ymu2Hb' ||
+            $organicResult->parentNode->parentNode->parentNode->getAttribute('class') =='dfiEbb' ||
             $organicResult->parentNode->parentNode->parentNode->parentNode->getAttribute('class') =='ymu2Hb') {
             return true;
         }
