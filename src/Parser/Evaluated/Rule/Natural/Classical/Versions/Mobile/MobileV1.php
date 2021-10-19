@@ -20,6 +20,7 @@ class MobileV1 implements ParsingRuleByVersionInterface
              @class='KJDcUb'
          ]/a", $organicResult);
 
+
         $elemNode = $dom->xpathQuery("descendant::*[@class='pXvdUe']", $organicResult);
 
         if ($elemNode->length > 0) {

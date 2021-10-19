@@ -39,7 +39,7 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
     public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $naturalResults = $dom->xpathQuery("descendant::div[@class='mnr-c xpd O9g5cc uUPGi']", $node);
+        $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ')]", $node);
 
         if ($naturalResults->length == 0) {
             throw new InvalidDOMException('Cannot parse a classical result.');
@@ -53,9 +53,16 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
                 continue;
             }
 
-            $k++;
 
-            $this->parseNode($dom, $organicResult, $resultSet, $k);
+
+            try {
+                $k++;
+                $this->parseNode($dom, $organicResult, $resultSet, $k);
+            } catch (\Exception $exception) {
+                $k--;
+                continue;
+            }
+
         }
 
     }
@@ -69,7 +76,21 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
         // Inside div with class= 'mnr-c xpd O9g5cc uUPGi' are more divs with 'mnr-c xpd O9g5cc uUPGi'
         // Should ignore from processing parent result and process only children and avoid duplicate results
-        if($dom->xpathQuery("descendant::div[@class='mnr-c xpd O9g5cc uUPGi']", $organicResult)->length >0) {
+        if($dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ')]", $organicResult)->length >0) {
+            return true;
+        }
+
+        // Ignore maps from results
+        if($dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' z3HNkc ')]", $organicResult)->length >0) {
+            return true;
+        }
+
+
+
+        // Avoid getting  results from questions (when clicking "Show more". When clicking "Show more" on questions)
+        // The result under it looks exactly like a natural results
+        if($organicResult->parentNode->parentNode->parentNode->getAttribute('class') =='ymu2Hb' ||
+            $organicResult->parentNode->parentNode->parentNode->parentNode->getAttribute('class') =='ymu2Hb') {
             return true;
         }
 
