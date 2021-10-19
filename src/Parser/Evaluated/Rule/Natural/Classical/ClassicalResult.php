@@ -51,7 +51,7 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
         $k=0;
         foreach ($naturalResults as $organicResult) {
 
-            if($this->skiResult($organicResult)) {
+            if($this->skiResult($dom,$organicResult)) {
                 continue;
             }
 
@@ -61,10 +61,15 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
 
     }
 
-    protected function skiResult(DomElement $organicResult)
+    protected function skiResult(GoogleDom $googleDOM, DomElement $organicResult)
     {
         // Recipes are identified as organic result
         if ($organicResult->getChildren()->hasClasses(['rrecc'])) {
+            return true;
+        }
+
+        // This result is a featured snipped. It it has another div with class g that contains organic results -> avoid duplicates
+        if( $organicResult->hasClasses(['mnr-c'])) {
             return true;
         }
 
@@ -76,6 +81,8 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
 
             return true;
         }
+
+
 
         return false;
     }
