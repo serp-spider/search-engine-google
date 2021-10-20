@@ -16,10 +16,10 @@ class AbstractRuleMobile extends ClassicalResultEngine
     {
         return [
             new MobileV1(),
-//            new MobileV2(),
-//            new MobileV3(),
-//            new MobileV4(),
-//            new MobileV5(),
+            new MobileV2(),
+            new MobileV3(),
+            new MobileV4(),
+            new MobileV5(),
         ];
     }
 
