@@ -244,7 +244,7 @@ class TranslateService
             $this->processSerpFeatures($item);
         }
 
-        $this->response['list_of_urls'][0] = array_reverse($this->response['list_of_urls'][0]);
+        $this->response['list_of_urls'][0] = !empty($this->response['list_of_urls'][0]) ? array_reverse($this->response['list_of_urls'][0]):[];
 
         return $this;
     }
