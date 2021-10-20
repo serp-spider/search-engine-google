@@ -64,23 +64,23 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
     protected function skiResult(GoogleDom $googleDOM, DomElement $organicResult)
     {
         // Recipes are identified as organic result
-//        if ($organicResult->getChildren()->hasClasses(['rrecc'])) {
-//            return true;
-//        }
-//
-//        // This result is a featured snipped. It it has another div with class g that contains organic results -> avoid duplicates
-//        if( $organicResult->hasClasses(['mnr-c'])) {
-//            return true;
-//        }
-//
-//        // Avoid getting  results from questions (when clicking "Show more". When clicking "Show more" on questions)
-//        // The result under it looks exactly like a natural results
-//        $node = $organicResult->parentNode->parentNode;
-//        if ($node->parentNode->getAttribute('class') =='ymu2Hb' ||
-//            $node->getAttribute('class') =='g') {
-//
-//            return true;
-//        }
+        if ($organicResult->getChildren()->hasClasses(['rrecc'])) {
+            return true;
+        }
+
+        // This result is a featured snipped. It it has another div with class g that contains organic results -> avoid duplicates
+        if( $organicResult->hasClasses(['mnr-c'])) {
+            return true;
+        }
+
+        // Avoid getting  results from questions (when clicking "Show more". When clicking "Show more" on questions)
+        // The result under it looks exactly like a natural results
+        $node = $organicResult->parentNode->parentNode;
+        if ($node->parentNode->getAttribute('class') =='ymu2Hb' ||
+            $node->getAttribute('class') =='g') {
+
+            return true;
+        }
 
 
 
