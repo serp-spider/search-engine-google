@@ -28,7 +28,7 @@ class TranslateService
      */
     public function __construct($siteHost, $crawlSubdomains = false, $urlAlias = null)
     {
-        $this->siteHost        = $siteHost;
+        $this->siteHost        = $this->extractDomain($siteHost);
         $this->crawlSubdomains = $crawlSubdomains;
         $this->urlAlias        = $urlAlias;
     }
@@ -162,7 +162,7 @@ class TranslateService
         }
 
         if ($item->is(NaturalResultType::KNOWLEDGE_GRAPH) || $item->is(NaturalResultType::KNOWLEDGE_GRAPH_MOBILE)) {
-            $this->response[NaturalResultType::KNOWLEDGE_GRAPH] = $item->getData();
+            $this->response[NaturalResultType::KNOWLEDGE_GRAPH] = $item->getData()['title'];
         }
 
         if ($item->is(NaturalResultType::RECIPES_GROUP)) {
