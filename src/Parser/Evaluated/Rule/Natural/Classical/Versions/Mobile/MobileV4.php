@@ -15,11 +15,11 @@ class MobileV4 implements ParsingRuleByVersionInterface
         /* @var $aTag \DOMElement */
         $aTag = $dom->xpathQuery("descendant::*[contains(concat(' ', normalize-space(@class), ' '), ' C8nzq BmP5tf ') or     @class='sXtWJb']", $organicResult);
 
-        if (empty($aTag)) {
+        if (empty($aTag) && $organicResultObject->getLink() === null) {
             throw new InvalidDOMException('Cannot parse a classical result.');
         }
 
-        if(empty($aTag->item(0))) {
+        if(empty($aTag->item(0)) && $organicResultObject->getLink() === null) {
             throw new InvalidDOMException('Cannot parse a classical result.');
         }
 

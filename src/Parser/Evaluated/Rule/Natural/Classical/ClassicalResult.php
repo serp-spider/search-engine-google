@@ -76,13 +76,12 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
         // Avoid getting  results from questions (when clicking "Show more". When clicking "Show more" on questions)
         // The result under it looks exactly like a natural results
         $node = $organicResult->parentNode->parentNode;
+
         if ($node->parentNode->getAttribute('class') =='ymu2Hb' ||
             $node->getAttribute('class') =='g') {
 
             return true;
         }
-
-
 
         return false;
     }
