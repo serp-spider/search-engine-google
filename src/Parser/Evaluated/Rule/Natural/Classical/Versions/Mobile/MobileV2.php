@@ -19,7 +19,7 @@ class MobileV2 implements ParsingRuleByVersionInterface
              @class='KJDcUb'
          ]/a", $organicResult);
 
-        if (empty($aTag)) {
+        if (empty($aTag) && $organicResultObject->getLink() === null) {
             throw new InvalidDOMException('Cannot parse a classical result.');
         }
 
