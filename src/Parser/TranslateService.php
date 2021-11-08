@@ -221,6 +221,10 @@ class TranslateService
     public function intoOldResponse(\Serps\Core\Serp\IndexedResultSet $results)
     {
         if (empty($results->getItems())) {
+            $this->response['position']     = self::DEFAULT_POSITION;
+            $this->response['list_of_urls'] = [];
+            $this->response['competition']  = [];
+
             $this->response = NaturalResultType::SERP_FEATURES_OLD_RESPONSE_TEMPLATE;
 
             return $this;
