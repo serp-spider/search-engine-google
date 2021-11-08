@@ -112,7 +112,7 @@ class TranslateService
             $this->response['list_of_urls'][0][$domainName] = $rank;
         }
 
-        $this->response['competition'][$rank] = [
+        $this->response['competition'][(string)$rank] = [
             "url"               => $domainName,
             "full_landing_page" => $item->url,
             "height"            => "0",
@@ -245,6 +245,7 @@ class TranslateService
         }
 
         $this->response['list_of_urls'][0] = !empty($this->response['list_of_urls'][0]) ? array_reverse($this->response['list_of_urls'][0]):[];
+        $this->response['competition'] = array_reverse($this->response['competition'], true);
 
         return $this;
     }
