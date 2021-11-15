@@ -13,7 +13,11 @@ class MobileV4 implements ParsingRuleByVersionInterface
     public function parseNode(GoogleDom $dom, \DomElement $organicResult, OrganicResultObject $organicResultObject)
     {
         /* @var $aTag \DOMElement */
-        $aTag = $dom->xpathQuery("descendant::*[contains(concat(' ', normalize-space(@class), ' '), ' C8nzq BmP5tf ') or     @class='sXtWJb']", $organicResult);
+        $aTag = $dom->xpathQuery("descendant::*[
+        contains(concat(' ', normalize-space(@class), ' '), ' C8nzq BmP5tf ') or
+        @class='sXtWJb' or
+        contains(concat(' ', normalize-space(@class), ' '), ' cz3goc BmP5tf ')
+        ]", $organicResult);
 
         if (empty($aTag) && $organicResultObject->getLink() === null) {
             throw new InvalidDOMException('Cannot parse a classical result.');
