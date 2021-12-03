@@ -75,6 +75,7 @@ class MobileNaturalParser extends AbstractParser
         // [contains(@class, 'osrp-blk')]  =  knowledge graph
         // [@id='tads']  = ads top
         // [@id='tadsb']  = ads bottom
+        // [@id='bottomads']  = ads bottom
         // [[contains(@class, 'qs-io')]]  =app pack
         // [[contains(@class, 'ki5rnd')]]  =app pack
         // [@class='xpdopen']  = features snipped/position zero
@@ -89,6 +90,7 @@ class MobileNaturalParser extends AbstractParser
         return $googleDom->xpathQuery("//*[@id='iur' or @id='rso' or
             @id='tads' or
             @id='tadsb' or
+            @id='bottomads' or
             contains(@class, 'scm-c') or
             contains(@class, 'related-question-pair') or
             @class='C7r6Ue' or

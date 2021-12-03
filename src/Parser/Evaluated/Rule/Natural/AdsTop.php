@@ -25,7 +25,8 @@ class AdsTop implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
         }
 
         if ($node->getAttribute('id') == self::ADS_TOP_CLASS || // Ads top
-            $node->getAttribute('id') == self::ADS_DOWN_CLASS // Ads bottom
+            $node->getAttribute('id') == self::ADS_DOWN_CLASS  || // Ads bottom
+            $node->getAttribute('id') == 'bottomads' // Ads bottom
         ) {
             return self::RULE_MATCH_MATCHED;
         }
