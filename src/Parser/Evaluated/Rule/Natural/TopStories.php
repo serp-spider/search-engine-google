@@ -19,10 +19,13 @@ class TopStories implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
         if (($node->parentNode->hasAttribute('jscontroller') &&
                 $node->parentNode->getAttribute('jscontroller') == 'QE1bwd' &&
                 $node->parentNode->tagName == 'g-expandable-container') ||
-            (
-                $node->tagName == 'g-section-with-header' && $node->hasClass('yG4QQe')
-            )
+            ($node->tagName == 'g-section-with-header' && $node->hasClass('yG4QQe'))
+
         ) {
+            return self::RULE_MATCH_MATCHED;
+        }
+
+        if(!empty($node->firstChild) &&  !empty($node->firstChild->tagName) && $node->firstChild->tagName == 'g-section-with-header' && $node->firstChild->hasClass('yG4QQe')) {
             return self::RULE_MATCH_MATCHED;
         }
 

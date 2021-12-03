@@ -10,6 +10,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class Maps implements ParsingRuleInterface
 {
+    protected $steps = ['version1', 'version2'];
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
@@ -20,7 +21,30 @@ class Maps implements ParsingRuleInterface
         return self::RULE_MATCH_NOMATCH;
     }
 
+
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
+    {
+        foreach ($this->steps as $functionName) {
+            call_user_func_array([$this, $functionName], [$googleDOM, $node, $resultSet, $isMobile]);
+        }
+    }
+
+    protected function version2(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile)
+    {
+        $ratingStars = $googleDOM->getXpath()->query("descendant::div[@class='rllt__details']", $node);
+
+        if ($ratingStars->length == 0) {
+            return;
+        }
+
+        foreach ($ratingStars as $ratingStarNode) {
+            $spanElements['title'][] = $ratingStarNode->parentNode->childNodes[1]->textContent;
+        }
+
+        $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
+    }
+
+    protected function version1(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile)
     {
         $ratingStars = $googleDOM->getXpath()->query('descendant::g-review-stars', $node);
 
