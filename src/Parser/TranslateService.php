@@ -162,7 +162,7 @@ class TranslateService
         }
 
         if ($item->is(NaturalResultType::KNOWLEDGE_GRAPH) || $item->is(NaturalResultType::KNOWLEDGE_GRAPH_MOBILE)) {
-            $this->response[NaturalResultType::KNOWLEDGE_GRAPH] = $item->getData()['title'];
+            $this->response[NaturalResultType::KNOWLEDGE_GRAPH] = $item->getData()['title']??[];
         }
 
         if ($item->is(NaturalResultType::RECIPES_GROUP)) {

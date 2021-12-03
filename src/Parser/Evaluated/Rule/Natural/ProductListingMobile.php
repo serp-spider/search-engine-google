@@ -2,6 +2,7 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
+use Serps\Core\Dom\DomElement;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\NaturalResultType;
@@ -11,7 +12,9 @@ class ProductListingMobile implements \Serps\SearchEngine\Google\Parser\ParsingR
 {
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->hasClass('commercial-unit-mobile-top')) {
+        if ($node->hasClass('commercial-unit-mobile-top') ||
+            $node->hasClass('commercial-unit-mobile-bottom')
+        ) {
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -24,6 +27,11 @@ class ProductListingMobile implements \Serps\SearchEngine\Google\Parser\ParsingR
 
         if ($productsNodes->length == 0) {
             return;
+        }
+
+        foreach ($productsNodes as $productNode) {
+            $productUrl = $productNode->getAttribute('href');
+            $items[]    = ['url' => $productUrl];
         }
 
         $resultSet->addItem(

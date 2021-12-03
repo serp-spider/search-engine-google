@@ -9,20 +9,57 @@ use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 
 class VideosMobile implements ParsingRuleInterface
 {
+    protected $steps = ['version1', 'version2'];
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->hasClass('cawG4b') && $node->hasClass('OvQkSb')) {
             return self::RULE_MATCH_MATCHED;
         }
 
+        if ($node->hasClass('uVMCKf') && $node->hasClass('mnr-c')) {
+            return self::RULE_MATCH_MATCHED;
+        }
+
         return self::RULE_MATCH_NOMATCH;
     }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
+    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
     {
-        $resultSet->addItem(new BaseResult(
-            [NaturalResultType::VIDEOS_MOBILE],
-            ['url' => $node->parentNode->getAttribute('href')]
-        ));
+        foreach ($this->steps as $functionName) {
+            call_user_func_array([$this, $functionName], [$googleDOM, $node, $resultSet, $isMobile]);
+        }
+    }
+
+    protected function version1(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
+    {
+        $data = [];
+
+        if($node->parentNode->tagName !='a') {
+            return;
+        }
+
+        $data[] = ['url' => $node->parentNode->getAttribute('href')];
+
+        $resultSet->addItem(new BaseResult([NaturalResultType::VIDEOS_MOBILE], $data));
+    }
+
+    protected function version2(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
+    {
+        $videosContainer = $googleDOM->getXpath()->query("descendant::video-voyager", $node);
+
+        if ($videosContainer->length ==0) {
+            return;
+        }
+
+        $data = [];
+
+        foreach ($videosContainer as $videoNode) {
+            $url = $googleDOM->getXpath()->query("descendant::a", $videoNode)->item(0);
+
+            $data[] = ['url'=>$url->getAttribute('href')];
+        }
+
+        $resultSet->addItem(new BaseResult([NaturalResultType::VIDEOS_MOBILE], $data));
     }
 }

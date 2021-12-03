@@ -16,7 +16,10 @@ class AppPackMobile implements \Serps\SearchEngine\Google\Parser\ParsingRuleInte
             if(!$node->childNodes[0] instanceof \DOMText && $node->childNodes[0]->hasClass('qs-ii')) {
                 return self::RULE_MATCH_MATCHED;
             }
+        }
 
+        if ($node->hasClass('ki5rnd') && $node->parentNode->hasAttribute('data-app')) {
+            return self::RULE_MATCH_MATCHED;
         }
 
         return self::RULE_MATCH_NOMATCH;

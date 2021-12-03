@@ -69,11 +69,14 @@ class MobileNaturalParser extends AbstractParser
         // [@class='C7r6Ue']  = maps
         // [@class='xSoq1']  = top stories
         //  @class='cawG4b OvQkSb' = videos
+        //  @class='uVMCKf mnr-c' = videos
         // [contains(@class, 'commercial-unit-mobile-top')]  = product listing
+        // [contains(@class, 'commercial-unit-mobile-bottom')]  = product listing
         // [contains(@class, 'osrp-blk')]  =  knowledge graph
         // [@id='tads']  = ads top
         // [@id='tadsb']  = ads bottom
         // [[contains(@class, 'qs-io')]]  =app pack
+        // [[contains(@class, 'ki5rnd')]]  =app pack
         // [@class='xpdopen']  = features snipped/position zero
         //[contains(@class, 'gws-plugins-horizon-jobs__li-ed')]  = jobs
         //@class='LQQ1Bd' - flights
@@ -90,15 +93,20 @@ class MobileNaturalParser extends AbstractParser
             contains(@class, 'related-question-pair') or
             @class='C7r6Ue' or
             contains(@class, 'commercial-unit-mobile-top') or
+            contains(@class, 'commercial-unit-mobile-bottom') or
             contains(@class, 'osrp-blk') or
             contains(@class, 'qs-io') or
+            contains(@class, 'ki5rnd') or
             @class='xpdopen' or
             contains(@class, 'gws-plugins-horizon-jobs__li-ed') or
             @class='LQQ1Bd' or
+            @class='xSoq1' or
             @class='cawG4b OvQkSb' or
+            @class='uVMCKf mnr-c' or
             @class='hNKF2b m9orme' or
             div[@class='lr_container wDYxhc yc7KLc'] or
             div[contains(@id, 'isl')] or
+            contains(@class, 'kp-wholepage') or
             @class = 'p64x9c card-section KDCVqf mnr-c' or
             @class='ULktNd rQUFld mnr-c rrecc'
         ][not(self::script) and not(self::style)]");

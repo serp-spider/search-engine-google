@@ -107,6 +107,7 @@ class NaturalParser extends AbstractParser
             contains(@class, 'related-question-pair') or
             contains(@class, 'gws-plugins-horizon-jobs__li-ed') or
             g-section-with-header[@class='yG4QQe TBC9ub'] or
+            contains(@class, 'kp-wholepage') or
             @class = 'p64x9c card-section KDCVqf' or
             @id='result-stats' or
             @class = 'ULktNd rQUFld rrecc'
