@@ -47,9 +47,12 @@ abstract class NaturalResultType
     const TWEETS_CAROUSEL         = 'tweets_carousel';
 
     const MAP              = 'maps';
-    const MAPS_OLD_VERSION = 'has_maps';
-    const MAPS_LINKS       = 'maps_links';
+    const MAPS_OLD_VERSION = 'has_map';
+    const MAPS_LINKS            = 'maps_links';
+    const MAPS_COORDONATES      = 'maps_coords';
     const MAP_MOBILE       = 'maps_mobile';
+    const MAPS_LATITUDE       = 'lat';
+    const MAPS_LONGITUTDE       = 'long';
 
     const FLIGHTS                = 'flights';
     const KNOWLEDGE_GRAPH        = 'knowledge_graph';
@@ -58,15 +61,20 @@ abstract class NaturalResultType
     const ANSWER_BOX = 'answer_box';
 
     const HOTELS        = 'hotels';
+    const HOTELS_NAMES  = 'hotels_names';
     const HOTELS_MOBILE = 'hotels_mobile';
 
-    const DEFINITIONS        = 'definitions';
-    const DEFINITIONS_MOBILE = 'definitions_mobile';
+    const DEFINITIONS        = 'definition';
+    const DEFINITIONS_MOBILE = 'definition_mobile';
 
     const MISSPELLING             = 'misspelling';
     const MISSPELLING_OLD_VERSION = 'spell';
     const MISSPELLING_OLD_VERSION_MOBILE = 'spell_mobile';
     const MISSPELING_MOBILE       = 'misspelling_mobile';
+
+    const RESULTS_NO = 'no_results';
+    const DIRECTIONS = 'directions';
+    const DIRECTIONS_MOBILE = 'directions_mobile';
 
     const SERP_FEATURES_OLD_RESPONSE_TEMPLATE = [
         self::SITE_LINKS              => '',
@@ -80,6 +88,9 @@ abstract class NaturalResultType
         self::KNOWLEDGE_GRAPH         => '',
         self::MAPS_OLD_VERSION        => null,
         self::MAPS_LINKS              => null,
+        self::MAPS_COORDONATES        => [],
+        self::MAPS_LATITUDE           => false,
+        self::MAPS_LONGITUTDE         => false,
         self::FEATURED_SNIPPED        => null,
         self::PRODUCT_LISTING         => [],
         self::QUESTIONS               => [],
@@ -88,11 +99,12 @@ abstract class NaturalResultType
         self::JOBS                    => [],
         self::APP_PACK                => null,
         self::HOTELS                  => null,
+        self::HOTELS_NAMES            => [],
         self::RECIPES_GROUP           => null,
         self::RECIPES_LINKS           => null,
+        self::DIRECTIONS              =>  [],
+        self::RESULTS_NO              => null
     ];
 
-    const RESULTS_NO = 'results_no';
-    const DIRECTIONS = 'directions';
-    const DIRECTIONS_MOBILE = 'directions_mobile';
+
 }
