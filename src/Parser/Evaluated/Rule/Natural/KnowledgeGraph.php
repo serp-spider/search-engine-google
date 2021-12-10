@@ -32,6 +32,12 @@ class KnowledgeGraph implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
 
         if ($titleNode instanceof \DomElement) {
             $data['title'] = $titleNode->textContent;
+        } else {
+            $titleNode = $googleDOM->getXpath()->query("descendant::h2[contains(concat(' ', normalize-space(@class), ' '), ' kno-ecr-pt ')]", $group);
+
+            if($titleNode->length >0) {
+                $data['title'] = $titleNode->item(0)->firstChild->textContent;
+            }
         }
 
         $resultSet->addItem(new BaseResult($this->getType($isMobile), $data));
