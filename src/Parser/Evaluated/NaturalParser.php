@@ -78,6 +78,7 @@ class NaturalParser extends AbstractParser
         // [@class='xpdopen']  = features snipped/position zero
         // [@class='e4xoPb']  = videos
         // [contains(@class, 'commercial-unit-desktop-top')]  = product listing
+        // [contains(@class, 'cu-container')]  = product listing on right, like ads
         // [contains(@class, 'related-question-pair')]  = questions
         // [contains(@class, 'gws-plugins-horizon-jobs__li-ed')]  = jobs
         // [@class='xpdopen']  = features snipped/position zero
@@ -107,6 +108,7 @@ class NaturalParser extends AbstractParser
             @class='LQQ1Bd' or
             div[@class='CH6Bmd'] or
             contains(@class, 'commercial-unit-desktop-top') or
+            contains(@class, 'cu-container') or
             contains(@class, 'related-question-pair') or
             contains(@class, 'gws-plugins-horizon-jobs__li-ed') or
             g-section-with-header[@class='yG4QQe TBC9ub'] or
