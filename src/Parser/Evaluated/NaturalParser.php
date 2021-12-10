@@ -19,6 +19,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Jobs;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\KnowledgeGraph;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Maps;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MapsCoords;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ProductListing;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Questions;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Recipes;
@@ -56,7 +57,8 @@ class NaturalParser extends AbstractParser
             new Flights(),
             new Jobs(),
             new ResultsNo(),
-            new Directions()
+            new Directions(),
+            new MapsCoords()
         ];
     }
 
@@ -88,6 +90,7 @@ class NaturalParser extends AbstractParser
         //@id = 'result-stats' - no of results
         //@class = 'ULktNd rQUFld rrecc' - directions
 //        return $googleDom->xpathQuery("//*[@id='result-stats']/*[not(self::script) and not(self::style)]/*");
+//        @class = 'H93uF' - coords
         return $googleDom->xpathQuery("//*[
             @id='rso' or
             @id='rhs' or
@@ -110,7 +113,8 @@ class NaturalParser extends AbstractParser
             contains(@class, 'kp-wholepage') or
             @class = 'p64x9c card-section KDCVqf' or
             @id='result-stats' or
-            @class = 'ULktNd rQUFld rrecc'
+            @class = 'ULktNd rQUFld rrecc' or
+            @class = 'H93uF'
         ][not(self::script) and not(self::style)]");
     }
 }
