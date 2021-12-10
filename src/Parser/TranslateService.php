@@ -219,6 +219,12 @@ class TranslateService
         if ($item->is(NaturalResultType::TOP_STORIES) || $item->is(NaturalResultType::TOP_STORIES_MOBILE) ) {
             $this->response[NaturalResultType::TOP_STORIES_OLD_VERSION] = $item->getData()['news'];
         }
+
+        if ($item->is(NaturalResultType::MAPS_COORDONATES)) {
+            $this->response[NaturalResultType::MAPS_LATITUDE] = $item->getData()['lat'];
+            $this->response[NaturalResultType::MAPS_LONGITUTDE] = $item->getData()['long'];
+        }
+
     }
 
     /**
