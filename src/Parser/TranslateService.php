@@ -194,8 +194,6 @@ class TranslateService
             $this->response[NaturalResultType::JOBS] = true;
         }
 
-        $this->response[NaturalResultType::SITE_LINKS] = 0;
-
         if ($item->is(NaturalResultType::SITE_LINKS_BIG) || $item->is(NaturalResultType::SITE_LINKS_BIG_MOBILE)) {
             $this->response[NaturalResultType::SITE_LINKS] = 2;
         }
@@ -257,7 +255,7 @@ class TranslateService
         }
 
         $this->response['list_of_urls'][0] = !empty($this->response['list_of_urls'][0]) ? array_reverse($this->response['list_of_urls'][0]):[];
-        $this->response['competition'] = array_reverse($this->response['competition'], true);
+        $this->response['competition'] = !empty($this->response['competition'])?array_reverse($this->response['competition'], true):[];
 
         return $this;
     }

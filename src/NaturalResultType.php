@@ -27,8 +27,9 @@ abstract class NaturalResultType
     const JOBS                    = 'jobs';
     const JOBS_MOBILE             = 'jobs_mobile';
     const APP_PACK                = 'app_pack';
-    const SITE_LINKS_BIG          = 'site_links_big';
+        const SITE_LINKS_BIG          = 'site_links_big';
     const SITE_LINKS              = 'site_links';
+    const AMP                     = 'amp';
     const SITE_LINKS_BIG_MOBILE   = 'site_links_big_mobile';
     const SITE_LINKS_SMALL        = 'site_links_small';
     const APP_PACK_MOBILE         = 'app_pack_mobile';
@@ -77,7 +78,7 @@ abstract class NaturalResultType
     const DIRECTIONS_MOBILE = 'directions_mobile';
 
     const SERP_FEATURES_OLD_RESPONSE_TEMPLATE = [
-        self::SITE_LINKS              => '',
+        self::SITE_LINKS              => 0,
         self::MISSPELLING_OLD_VERSION => '',
         self::ADS_OLD_VERSION         => [],
         self::AdsDOWN                 => [],
@@ -103,7 +104,7 @@ abstract class NaturalResultType
         self::RECIPES_GROUP           => null,
         self::RECIPES_LINKS           => null,
         self::DIRECTIONS              =>  [],
-        self::RESULTS_NO              => null
+        self::RESULTS_NO              => null,
     ];
 
 
