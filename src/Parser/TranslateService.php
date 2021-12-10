@@ -141,7 +141,7 @@ class TranslateService
         }
 
         if ($item->is(NaturalResultType::APP_PACK_MOBILE)) {
-            $this->response[NaturalResultType::APP_PACK_MOBILE] = true;
+            $this->response[NaturalResultType::APP_PACK] = true;
         }
 
         if ($item->is(NaturalResultType::MISSPELLING) || $item->is(NaturalResultType::MISSPELING_MOBILE)) {

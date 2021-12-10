@@ -33,6 +33,7 @@ abstract class NaturalResultType
     const SITE_LINKS_BIG_MOBILE   = 'site_links_big_mobile';
     const SITE_LINKS_SMALL        = 'site_links_small';
     const APP_PACK_MOBILE         = 'app_pack_mobile';
+
     const PRODUCT_LISTING         = 'pla';
     const PRODUCT_LISTING_MOBILE  = 'pla_mobile';
     const RECIPES_GROUP           = 'recipes';
