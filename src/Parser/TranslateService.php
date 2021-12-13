@@ -223,6 +223,7 @@ class TranslateService
         if ($item->is(NaturalResultType::MAPS_COORDONATES)) {
             $this->response[NaturalResultType::MAPS_LATITUDE] = $item->getData()['lat'];
             $this->response[NaturalResultType::MAPS_LONGITUTDE] = $item->getData()['long'];
+            $this->response[NaturalResultType::MAPS_COORDONATES] = $item->getData();
         }
 
     }
