@@ -12,7 +12,7 @@ class ProductListing implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
 {
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->hasClass('commercial-unit-desktop-top')) {
+        if ($node->hasClass('commercial-unit-desktop-top') || $node->hasClass('cu-container')) {
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -21,8 +21,8 @@ class ProductListing implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
     {
-        $productsNodes = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' pla-unit ')]",
-            $node);
+        $productsNodes = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' pla-unit ') or
+        contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ') ]", $node);
         $items         = [];
 
         if ($productsNodes->length == 0) {

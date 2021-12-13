@@ -67,6 +67,7 @@ class MobileNaturalParser extends AbstractParser
         // [contains(@class, 'scm-c')]  = maps
         // [contains(@class, 'related-question-pair')] = questions
         // [@class='C7r6Ue']  = maps
+        // [@class='qixVud']  = maps
         // [@class='xSoq1']  = top stories
         //  @class='cawG4b OvQkSb' = videos
         //  @class='uVMCKf mnr-c' = videos
@@ -94,6 +95,7 @@ class MobileNaturalParser extends AbstractParser
             contains(@class, 'scm-c') or
             contains(@class, 'related-question-pair') or
             @class='C7r6Ue' or
+            contains(@class, 'qixVud') or
             contains(@class, 'commercial-unit-mobile-top') or
             contains(@class, 'commercial-unit-mobile-bottom') or
             contains(@class, 'osrp-blk') or

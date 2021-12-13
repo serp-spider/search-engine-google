@@ -14,7 +14,7 @@ class MapsMobile implements ParsingRuleInterface
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->hasClass('scm-c')) {
+        if ($node->hasClass('scm-c') || $node->hasClass('qixVud')) {
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -30,7 +30,7 @@ class MapsMobile implements ParsingRuleInterface
 
     protected function version2(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile)
     {
-        $ratingStars = $googleDOM->getXpath()->query("descendant::div[@class='rllt__details']", $node);
+        $ratingStars = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' rllt__details')]", $node);
 
         if ($ratingStars->length == 0) {
             return;

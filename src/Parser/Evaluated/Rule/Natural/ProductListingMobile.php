@@ -35,7 +35,7 @@ class ProductListingMobile implements \Serps\SearchEngine\Google\Parser\ParsingR
         }
 
         $resultSet->addItem(
-            new BaseResult(NaturalResultType::PRODUCT_LISTING_MOBILE, [])
+            new BaseResult(NaturalResultType::PRODUCT_LISTING_MOBILE, $items)
         );
     }
 }

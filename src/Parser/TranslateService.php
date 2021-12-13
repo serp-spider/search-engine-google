@@ -141,7 +141,7 @@ class TranslateService
         }
 
         if ($item->is(NaturalResultType::APP_PACK_MOBILE)) {
-            $this->response[NaturalResultType::APP_PACK_MOBILE] = true;
+            $this->response[NaturalResultType::APP_PACK] = true;
         }
 
         if ($item->is(NaturalResultType::MISSPELLING) || $item->is(NaturalResultType::MISSPELING_MOBILE)) {
@@ -193,8 +193,6 @@ class TranslateService
         if ($item->is(NaturalResultType::JOBS) || $item->is(NaturalResultType::JOBS_MOBILE)) {
             $this->response[NaturalResultType::JOBS] = true;
         }
-
-        $this->response[NaturalResultType::SITE_LINKS] = 0;
 
         if ($item->is(NaturalResultType::SITE_LINKS_BIG) || $item->is(NaturalResultType::SITE_LINKS_BIG_MOBILE)) {
             $this->response[NaturalResultType::SITE_LINKS] = 2;
@@ -264,7 +262,7 @@ class TranslateService
         }
 
         $this->response['list_of_urls'][0] = !empty($this->response['list_of_urls'][0]) ? array_reverse($this->response['list_of_urls'][0]):[];
-        $this->response['competition'] = array_reverse($this->response['competition'], true);
+        $this->response['competition'] = !empty($this->response['competition'])?array_reverse($this->response['competition'], true):[];
 
         return $this;
     }
