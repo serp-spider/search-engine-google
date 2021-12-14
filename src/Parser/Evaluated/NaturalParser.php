@@ -20,6 +20,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Jobs;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\KnowledgeGraph;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Maps;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MapsCoords;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Misspelling;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ProductListing;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Questions;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Recipes;
@@ -58,7 +59,8 @@ class NaturalParser extends AbstractParser
             new Jobs(),
             new ResultsNo(),
             new Directions(),
-            new MapsCoords()
+            new MapsCoords(),
+            new Misspelling()
         ];
     }
 

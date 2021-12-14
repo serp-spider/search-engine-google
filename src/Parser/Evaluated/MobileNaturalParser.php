@@ -6,6 +6,7 @@ use Serps\SearchEngine\Google\Parser\AbstractParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AdsTopMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AppPackMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResultMobile;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResultMobileV2;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\LargeClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\DefinitionsMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\DirectionsMobile;
@@ -39,6 +40,7 @@ class MobileNaturalParser extends AbstractParser
     {
         return [
             new ClassicalResultMobile(),
+            new ClassicalResultMobileV2(),
             new ImageGroup(),
             new MapsMobile(),
             new Questions(),
@@ -88,7 +90,9 @@ class MobileNaturalParser extends AbstractParser
         //@class='p64x9c card-section KDCVqf mnr-c' - misspelings
         //@class='ULktNd rQUFld mnr-c rrecc' - directions
 
-        return $googleDom->xpathQuery("//*[@id='iur' or @id='rso' or
+        return $googleDom->xpathQuery("//*[@id='iur' or
+            @id='rso' or
+            @id='center_col' or
             @id='tads' or
             @id='tadsb' or
             @id='bottomads' or

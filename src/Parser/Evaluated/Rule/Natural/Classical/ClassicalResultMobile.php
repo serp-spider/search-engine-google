@@ -53,8 +53,6 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
                 continue;
             }
 
-
-
             try {
                 $k++;
                 $this->parseNode($dom, $organicResult, $resultSet, $k);
@@ -67,7 +65,6 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
                 continue;
             }
-
         }
 
     }
@@ -114,7 +111,7 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
         // Avoid getting results  such as "people also ask" near a regular result; (it's not a "people also ask" but the functionality is exactly like "people also ask")
         // It's like an expander with click on a main text. The results under it looks like a regular classical result
-        if( $organicResult->firstChild->getAttribute('class') =='g card-section') {
+        if( !empty($organicResult->firstChild) && $organicResult->firstChild->getAttribute('class') =='g card-section') {
             return true;
         }
 

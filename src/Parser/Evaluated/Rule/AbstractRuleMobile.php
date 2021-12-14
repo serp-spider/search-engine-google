@@ -1,6 +1,8 @@
 <?php
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule;
 
+use Serps\Core\Serp\IndexedResultSet;
+use Serps\SearchEngine\Google\NaturalResultType;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResultEngine;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\Versions\Mobile\MobileV1;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\Versions\Mobile\MobileV2;
@@ -30,5 +32,10 @@ class AbstractRuleMobile extends ClassicalResultEngine
         }
 
         return $this->rulesForParsing;
+    }
+
+    public function alreadyCheckedRule(IndexedResultSet $resultSet)
+    {
+        return $resultSet->hasType(NaturalResultType::CLASSICAL_MOBILE);
     }
 }

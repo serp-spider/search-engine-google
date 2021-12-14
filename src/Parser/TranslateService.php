@@ -99,6 +99,9 @@ class TranslateService
         $description = $item->description;
         $domainName  = $this->extractDomain($item->url);
 
+        if ($rank == 1 && strpos($item->url, 'wikipedia.org') !== false) {
+            $this->response[NaturalResultType::WIKI] = 1;
+        }
 
         if (
             $this->response['position'] == self::DEFAULT_POSITION &&
@@ -145,7 +148,7 @@ class TranslateService
         }
 
         if ($item->is(NaturalResultType::MISSPELLING) || $item->is(NaturalResultType::MISSPELING_MOBILE)) {
-            $this->response[NaturalResultType::MISSPELLING_OLD_VERSION] = true;
+            $this->response[NaturalResultType::MISSPELLING_OLD_VERSION] = $item->getData()[0];
         }
 
         if ($item->is(NaturalResultType::MAP) || $item->is(NaturalResultType::MAP_MOBILE)) {

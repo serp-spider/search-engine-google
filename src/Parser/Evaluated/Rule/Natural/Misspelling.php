@@ -29,6 +29,9 @@ class Misspelling implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterf
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $resultSet->addItem(new BaseResult(NaturalResultType::MISSPELLING, []));
+
+        $resultSet->addItem(new BaseResult(NaturalResultType::MISSPELLING, [
+            $googleDOM->getXpath()->query("descendant::a", $node)->item(0)->textContent
+        ]));
     }
 }
