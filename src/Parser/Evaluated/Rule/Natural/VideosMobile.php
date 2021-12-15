@@ -9,7 +9,7 @@ use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 
 class VideosMobile implements ParsingRuleInterface
 {
-    protected $steps = ['version1', 'version2'];
+    protected $steps = ['version1', 'version2', 'version3'];
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
@@ -18,6 +18,10 @@ class VideosMobile implements ParsingRuleInterface
         }
 
         if ($node->hasClass('uVMCKf') && $node->hasClass('mnr-c')) {
+            return self::RULE_MATCH_MATCHED;
+        }
+
+        if ($node->hasClass('HD8Pae') && $node->hasClass('mnr-c')) {
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -56,6 +60,25 @@ class VideosMobile implements ParsingRuleInterface
 
         foreach ($videosContainer as $videoNode) {
             $url = $googleDOM->getXpath()->query("descendant::a", $videoNode)->item(0);
+
+            $data[] = ['url'=>$url->getAttribute('href')];
+        }
+
+        $resultSet->addItem(new BaseResult([NaturalResultType::VIDEOS_MOBILE], $data));
+    }
+
+    protected function version3(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
+    {
+        $videosPlayerBtns = $googleDOM->getXpath()->query('descendant::span[@class="OPkOif"]', $node);
+
+        if ($videosPlayerBtns->length ==0) {
+            return;
+        }
+
+        $data = [];
+
+        foreach ($videosPlayerBtns as $videoBtn) {
+            $url = $videoBtn->parentNode->parentNode->parentNode->parentNode->parentNode;
 
             $data[] = ['url'=>$url->getAttribute('href')];
         }

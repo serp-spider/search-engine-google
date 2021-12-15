@@ -42,6 +42,7 @@ abstract class NaturalResultType
 
 
     const VIDEOS        = 'videos';
+    const VIDEOS_LIST        = 'videos_list';
     const VIDEOS_MOBILE = 'videos_mobile';
 
     const TOP_STORIES             = 'top_stories';

@@ -73,6 +73,7 @@ class MobileNaturalParser extends AbstractParser
         // [@class='xSoq1']  = top stories
         //  @class='cawG4b OvQkSb' = videos
         //  @class='uVMCKf mnr-c' = videos
+        //  @class='HD8Pae mnr-c' = videos
         // [contains(@class, 'commercial-unit-mobile-top')]  = product listing
         // [contains(@class, 'commercial-unit-mobile-bottom')]  = product listing
         // [contains(@class, 'osrp-blk')]  =  knowledge graph
@@ -84,7 +85,7 @@ class MobileNaturalParser extends AbstractParser
         // [@class='xpdopen']  = features snipped/position zero
         //[contains(@class, 'gws-plugins-horizon-jobs__li-ed')]  = jobs
         //@class='LQQ1Bd' - flights
-        //div[@class='hNKF2b m9orme'] = hotels
+        //div[@class='hNKF2b'] = hotels
         //div[@class='lr_container wDYxhc yc7KLc'] = definitions
         //div[contains(@id, 'isl')]  = recipes
         //@class='p64x9c card-section KDCVqf mnr-c' - misspelings
@@ -111,7 +112,8 @@ class MobileNaturalParser extends AbstractParser
             @class='xSoq1' or
             @class='cawG4b OvQkSb' or
             @class='uVMCKf mnr-c' or
-            @class='hNKF2b m9orme' or
+            contains(@class, 'HD8Pae mnr-c') or
+            @class='hNKF2b' or
             div[@class='lr_container wDYxhc yc7KLc'] or
             div[contains(@id, 'isl')] or
             contains(@class, 'kp-wholepage') or
