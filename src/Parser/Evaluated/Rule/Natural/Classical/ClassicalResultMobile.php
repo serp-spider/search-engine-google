@@ -20,7 +20,7 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
     public function match(GoogleDom $dom, DomElement $node)
     {
-        if ($node->getAttribute('id') == 'rso') {
+        if ($node->getAttribute('id') == 'center_col') {
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -114,10 +114,9 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
         if( !empty($organicResult->firstChild) &&
             !$organicResult->firstChild instanceof \DOMText &&
             $organicResult->firstChild->getAttribute('class') =='g card-section') {
+
             return true;
         }
-
-
 
         return false;
     }

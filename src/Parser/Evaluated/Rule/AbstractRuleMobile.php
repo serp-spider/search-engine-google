@@ -34,8 +34,4 @@ class AbstractRuleMobile extends ClassicalResultEngine
         return $this->rulesForParsing;
     }
 
-    public function alreadyCheckedRule(IndexedResultSet $resultSet)
-    {
-        return $resultSet->hasType(NaturalResultType::CLASSICAL_MOBILE);
-    }
 }

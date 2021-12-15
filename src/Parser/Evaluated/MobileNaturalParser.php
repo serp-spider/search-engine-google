@@ -92,7 +92,7 @@ class MobileNaturalParser extends AbstractParser
         //@class='ULktNd rQUFld mnr-c rrecc' - directions
 
         return $googleDom->xpathQuery("//*[@id='iur' or
-            @id='rso' or
+
             @id='center_col' or
             @id='tads' or
             @id='tadsb' or

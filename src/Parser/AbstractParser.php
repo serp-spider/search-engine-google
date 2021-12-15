@@ -85,12 +85,6 @@ abstract class AbstractParser implements ParserInterface
 
             foreach ($rules as $rule) {
 
-                if(method_exists($rule, 'alreadyCheckedRule')) {
-                    if($rule->alreadyCheckedRule($resultSet)) {
-                      continue;
-                    }
-                }
-
                 $match = $rule->match($googleDom, $group);
 
                 if ($match instanceof \DOMNodeList) {

@@ -208,9 +208,9 @@ class TranslateService
             $this->response[NaturalResultType::SITE_LINKS] = 2;
         }
 
-        if ($item->is(NaturalResultType::SITE_LINKS_SMALL) || $item->is(NaturalResultType::SITE_LINKS)) {
-            $this->response[NaturalResultType::SITE_LINKS] = 1;
-        }
+//        if ($item->is(NaturalResultType::SITE_LINKS_SMALL) || $item->is(NaturalResultType::SITE_LINKS)) {
+//            $this->response[NaturalResultType::SITE_LINKS] = 1;
+//        }
 
         if ($item->is(NaturalResultType::DIRECTIONS) || $item->is(NaturalResultType::DIRECTIONS_MOBILE)) {
             $this->response[NaturalResultType::DIRECTIONS] = true;
