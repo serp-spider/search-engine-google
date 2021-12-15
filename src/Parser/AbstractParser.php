@@ -84,6 +84,7 @@ abstract class AbstractParser implements ParserInterface
             }
 
             foreach ($rules as $rule) {
+
                 $match = $rule->match($googleDom, $group);
 
                 if ($match instanceof \DOMNodeList) {

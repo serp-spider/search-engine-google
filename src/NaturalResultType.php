@@ -27,6 +27,7 @@ abstract class NaturalResultType
     const JOBS                    = 'jobs';
     const JOBS_MOBILE             = 'jobs_mobile';
     const APP_PACK                = 'app_pack';
+    const WIKI                = 'has_wiki';
         const SITE_LINKS_BIG          = 'site_links_big';
     const SITE_LINKS              = 'site_links';
     const AMP                     = 'amp';
@@ -41,6 +42,7 @@ abstract class NaturalResultType
 
 
     const VIDEOS        = 'videos';
+    const VIDEOS_LIST        = 'videos_list';
     const VIDEOS_MOBILE = 'videos_mobile';
 
     const TOP_STORIES             = 'top_stories';
@@ -106,6 +108,7 @@ abstract class NaturalResultType
         self::RECIPES_LINKS           => null,
         self::DIRECTIONS              =>  [],
         self::RESULTS_NO              => null,
+        self::WIKI              => 0,
     ];
 
 

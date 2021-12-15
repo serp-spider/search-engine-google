@@ -40,6 +40,15 @@ class KnowledgeGraph implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
             }
         }
 
+        // Has no definition -> take "general presentation" text
+        if(empty($data)) {
+            $aHrefs = $googleDOM->getXpath()->query("descendant::a[contains(concat(' ', normalize-space(@class), ' '), ' KYeOtb ')]", $group);
+
+            if($aHrefs->length >0) {
+                $data['title'] = $aHrefs->item(0)->textContent;
+            }
+        }
+
         $resultSet->addItem(new BaseResult($this->getType($isMobile), $data));
     }
 }

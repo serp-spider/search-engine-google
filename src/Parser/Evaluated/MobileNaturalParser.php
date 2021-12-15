@@ -6,6 +6,7 @@ use Serps\SearchEngine\Google\Parser\AbstractParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AdsTopMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AppPackMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResultMobile;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResultMobileV2;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\LargeClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\DefinitionsMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\DirectionsMobile;
@@ -39,6 +40,7 @@ class MobileNaturalParser extends AbstractParser
     {
         return [
             new ClassicalResultMobile(),
+            new ClassicalResultMobileV2(),
             new ImageGroup(),
             new MapsMobile(),
             new Questions(),
@@ -71,6 +73,7 @@ class MobileNaturalParser extends AbstractParser
         // [@class='xSoq1']  = top stories
         //  @class='cawG4b OvQkSb' = videos
         //  @class='uVMCKf mnr-c' = videos
+        //  @class='HD8Pae mnr-c' = videos
         // [contains(@class, 'commercial-unit-mobile-top')]  = product listing
         // [contains(@class, 'commercial-unit-mobile-bottom')]  = product listing
         // [contains(@class, 'osrp-blk')]  =  knowledge graph
@@ -82,13 +85,15 @@ class MobileNaturalParser extends AbstractParser
         // [@class='xpdopen']  = features snipped/position zero
         //[contains(@class, 'gws-plugins-horizon-jobs__li-ed')]  = jobs
         //@class='LQQ1Bd' - flights
-        //div[@class='hNKF2b m9orme'] = hotels
+        //div[@class='hNKF2b'] = hotels
         //div[@class='lr_container wDYxhc yc7KLc'] = definitions
         //div[contains(@id, 'isl')]  = recipes
         //@class='p64x9c card-section KDCVqf mnr-c' - misspelings
         //@class='ULktNd rQUFld mnr-c rrecc' - directions
 
-        return $googleDom->xpathQuery("//*[@id='iur' or @id='rso' or
+        return $googleDom->xpathQuery("//*[@id='iur' or
+
+            @id='center_col' or
             @id='tads' or
             @id='tadsb' or
             @id='bottomads' or
@@ -107,7 +112,8 @@ class MobileNaturalParser extends AbstractParser
             @class='xSoq1' or
             @class='cawG4b OvQkSb' or
             @class='uVMCKf mnr-c' or
-            @class='hNKF2b m9orme' or
+            contains(@class, 'HD8Pae mnr-c') or
+            @class='hNKF2b' or
             div[@class='lr_container wDYxhc yc7KLc'] or
             div[contains(@id, 'isl')] or
             contains(@class, 'kp-wholepage') or

@@ -1,6 +1,8 @@
 <?php
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule;
 
+use Serps\Core\Serp\IndexedResultSet;
+use Serps\SearchEngine\Google\NaturalResultType;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResultEngine;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\Versions\Desktop\DesktopV1;
 
@@ -23,4 +25,5 @@ class AbstractRuleDesktop extends ClassicalResultEngine
 
         return $this->rulesForParsing;
     }
+
 }

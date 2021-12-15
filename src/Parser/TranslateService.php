@@ -99,6 +99,9 @@ class TranslateService
         $description = $item->description;
         $domainName  = $this->extractDomain($item->url);
 
+        if ($rank == 1 && strpos($item->url, 'wikipedia.org') !== false) {
+            $this->response[NaturalResultType::WIKI] = 1;
+        }
 
         if (
             $this->response['position'] == self::DEFAULT_POSITION &&
@@ -145,8 +148,14 @@ class TranslateService
         }
 
         if ($item->is(NaturalResultType::MISSPELLING) || $item->is(NaturalResultType::MISSPELING_MOBILE)) {
-            $this->response[NaturalResultType::MISSPELLING_OLD_VERSION] = true;
+            $this->response[NaturalResultType::MISSPELLING_OLD_VERSION] = $item->getData()[0];
         }
+
+        if ($item->is(NaturalResultType::HOTELS) || $item->is(NaturalResultType::HOTELS_MOBILE)) {
+            $this->response[NaturalResultType::HOTELS_NAMES] = $item->getData()['hotels_names'];
+            $this->response[NaturalResultType::HOTELS]       = $item->getData()['hotels_names'];
+        }
+
 
         if ($item->is(NaturalResultType::MAP) || $item->is(NaturalResultType::MAP_MOBILE)) {
             $this->response[NaturalResultType::MAP]              = true;
@@ -158,7 +167,8 @@ class TranslateService
         }
 
         if ($item->is(NaturalResultType::VIDEOS) || $item->is(NaturalResultType::VIDEOS_MOBILE)) {
-            $this->response[NaturalResultType::VIDEOS] = $item->getData();
+            $this->response[NaturalResultType::VIDEOS]      = $item->getData();
+            $this->response[NaturalResultType::VIDEOS_LIST] = $item->getData();
         }
 
         if ($item->is(NaturalResultType::KNOWLEDGE_GRAPH) || $item->is(NaturalResultType::KNOWLEDGE_GRAPH_MOBILE)) {
@@ -198,9 +208,9 @@ class TranslateService
             $this->response[NaturalResultType::SITE_LINKS] = 2;
         }
 
-        if ($item->is(NaturalResultType::SITE_LINKS_SMALL) || $item->is(NaturalResultType::SITE_LINKS)) {
-            $this->response[NaturalResultType::SITE_LINKS] = 1;
-        }
+//        if ($item->is(NaturalResultType::SITE_LINKS_SMALL) || $item->is(NaturalResultType::SITE_LINKS)) {
+//            $this->response[NaturalResultType::SITE_LINKS] = 1;
+//        }
 
         if ($item->is(NaturalResultType::DIRECTIONS) || $item->is(NaturalResultType::DIRECTIONS_MOBILE)) {
             $this->response[NaturalResultType::DIRECTIONS] = true;

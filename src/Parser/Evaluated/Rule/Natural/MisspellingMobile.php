@@ -29,6 +29,8 @@ class MisspellingMobile implements \Serps\SearchEngine\Google\Parser\ParsingRule
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $resultSet->addItem(new BaseResult(NaturalResultType::MISSPELING_MOBILE, []));
+        $resultSet->addItem(new BaseResult(NaturalResultType::MISSPELING_MOBILE, [
+            $googleDOM->getXpath()->query("descendant::a", $node)->item(0)->textContent
+        ]));
     }
 }
