@@ -111,7 +111,7 @@ class TranslateService
             $this->response['landing_page'] = $item->url;
         }
 
-        if (empty($this->response[0][$domainName])) {
+        if (empty($this->response['list_of_urls'][0][$domainName])) {
             $this->response['list_of_urls'][0][$domainName] = $rank;
         }
 
