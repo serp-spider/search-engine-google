@@ -83,6 +83,13 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
             return true;
         }
 
+        //
+        $currencyPlayer = $googleDOM->getXpath()->query('descendant::div[@id="knowledge-currency__updatable-data-column"]', $organicResult);
+
+        if($currencyPlayer->length>0) {
+            return true;
+        }
+
         return false;
     }
 }
