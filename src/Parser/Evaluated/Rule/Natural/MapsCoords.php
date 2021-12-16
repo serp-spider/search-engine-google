@@ -24,8 +24,11 @@ class MapsCoords implements ParsingRuleInterface
         $aNode = $node->getChildren()->item(0);
         $href = $aNode->getAttribute('href');
         preg_match('/rllag=([^,]*),([^,]*)/', $href, $coords);
-        $item['lat'] = $coords['1']/pow(10, strlen($coords['1'])-2);
-        $item['long'] = $coords['2']/pow(10, strlen($coords['2'])-2);;
-        $resultSet->addItem(new BaseResult(NaturalResultType::MAPS_COORDONATES , $item));
+
+        if(!empty($coords['1']) && !empty($coords['2'])) {
+            $item['lat'] = $coords['1']/pow(10, strlen($coords['1'])-2);
+            $item['long'] = $coords['2']/pow(10, strlen($coords['2'])-2);;
+            $resultSet->addItem(new BaseResult(NaturalResultType::MAPS_COORDONATES , $item));
+        }
     }
 }
