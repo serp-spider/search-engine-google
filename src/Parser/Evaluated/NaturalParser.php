@@ -86,6 +86,7 @@ class NaturalParser extends AbstractParser
         // [@class='xpdopen']  = features snipped/position zero
         //  div[contains(@id, 'isl')]  = recipes
         // //*[g-section-with-header[@class='yG4QQe TBC9ub']]]/child::* = top stories
+        // [@id='kp-wp-tab-cont-Latest'] = top stories
         //div[@class='CH6Bmd']/div[@class='ntKMYc P2hV9e'] = hotels
         //@class='lr_container yc7KLc mBNN3d' - definitions
         //@class='LQQ1Bd' - flights
@@ -114,9 +115,10 @@ class NaturalParser extends AbstractParser
             contains(@class, 'related-question-pair') or
             contains(@class, 'gws-plugins-horizon-jobs__li-ed') or
             g-section-with-header[@class='yG4QQe TBC9ub'] or
-            contains(@class, 'kp-wholepage') or
+            @id='kp-wp-tab-cont-Latest' or
             @class = 'p64x9c card-section KDCVqf' or
             @id='result-stats' or
+            @id='kp-wp-tab-Latest' or
             @class = 'ULktNd rQUFld rrecc' or
             @class = 'H93uF'
         ][not(self::script) and not(self::style)]");

@@ -11,7 +11,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class TopStories implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
-    protected $steps = ['version1', 'version2'];
+    protected $steps = ['version1', 'version2', 'version3'];
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
@@ -26,6 +26,10 @@ class TopStories implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
         }
 
         if(!empty($node->firstChild) &&  !empty($node->firstChild->tagName) && $node->firstChild->tagName == 'g-section-with-header' && $node->firstChild->hasClass('yG4QQe')) {
+            return self::RULE_MATCH_MATCHED;
+        }
+
+        if ($node->hasAttribute('id') && $node->getAttribute('id') == 'kp-wp-tab-cont-Latest') {
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -86,6 +90,47 @@ class TopStories implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
         foreach ($hrefsNodes as $hrefNode) {
             /** @var $hrefNode DomElement */
             $items['news'][] = ['url' => $hrefNode->getAttribute('href')];
+        }
+
+        if (!empty($items)) {
+            $resultSet->addItem(new BaseResult($this->getType($isMobile), $items));
+        }
+    }
+
+    protected function version3(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile)
+    {
+        // Leave this "if" here
+        // It is possible to find results based on third condition by id "kp-wp-tab-cont-Latest" and identify urls with "version2" method
+        // And it's not necessarily to add twice this type of results.
+        if($resultSet->hasType($this->getType($isMobile))) {
+            return;
+        }
+
+        $cards = $googleDOM->getXpath()->query("descendant::g-card", $node);
+
+        if (!$cards instanceof DomNodeList) {
+            return;
+        }
+
+        if ($cards->length == 0) {
+            return;
+        }
+
+        $items = [];
+
+        foreach ($cards as $story) {
+            $imgNode = $googleDOM->getXpath()->query("descendant::g-img", $story);
+
+            if($imgNode->length ==0) {
+                continue;
+            }
+            $hrefNodes = $googleDOM->getXpath()->query("descendant::a", $story);
+
+            if($hrefNodes->length == 0) {
+                continue;
+            }
+            /** @var $hrefNode DomElement */
+            $items['news'][] = ['url' => $hrefNodes->item(0)->getAttribute('href')];
         }
 
         if (!empty($items)) {
