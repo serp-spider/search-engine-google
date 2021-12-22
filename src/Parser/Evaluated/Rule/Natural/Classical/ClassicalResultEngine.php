@@ -7,16 +7,13 @@ use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\NaturalResultType;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleByVersionInterface;
-use Monolog\Logger;
-use Monolog\Formatter\LineFormatter;
-use Monolog\Handler\SyslogUdpHandler;
 
 class ClassicalResultEngine
 {
+    use \Serps\SearchEngine\Google\Parser\Helper\Log;
+
     protected $resultType = NaturalResultType::CLASSICAL;
 
-    /** @var Logger | null */
-    protected $monolog = null;
 
     public function __construct()
     {
@@ -45,6 +42,7 @@ class ClassicalResultEngine
 
         if ($organicResultObject->getLink() === null) {
 
+            $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, []));
             $this->monolog->error('Cannot identify natural result ', ['html'=>$organicResult->ownerDocument->saveHTML($organicResult), ]);
 
             return;
@@ -57,17 +55,5 @@ class ClassicalResultEngine
                 'description' => $organicResultObject->getDescription(),
             ]
         ));
-    }
-
-    protected function initLogger()
-    {
-        if($this->monolog !== null) {
-           return;
-        }
-
-        $this->monolog  = new Logger('data-integrity');
-        $syslog_handler = new SyslogUdpHandler("logs.papertrailapp.com", 35320, LOG_USER, Logger::WARNING);
-        $syslog_handler->setFormatter(new LineFormatter("%channel%.%level_name%: %message%"));
-        $this->monolog->pushHandler($syslog_handler);
     }
 }

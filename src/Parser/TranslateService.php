@@ -11,6 +11,8 @@ use Serps\SearchEngine\Google\NaturalResultType;
  */
 class TranslateService
 {
+    use \Serps\SearchEngine\Google\Parser\Helper\Log;
+
     protected $siteHost = null,
         $mobile = false,
         $crawlSubdomains = false,
@@ -238,10 +240,11 @@ class TranslateService
 
     /**
      * @param \Serps\Core\Serp\IndexedResultSet $results
+     * @param array $options -> only for debug purpose
      *
      * @return $this
      */
-    public function intoOldResponse(\Serps\Core\Serp\IndexedResultSet $results)
+    public function intoOldResponse(\Serps\Core\Serp\IndexedResultSet $results, $options=[])
     {
         if (empty($results->getItems())) {
             $this->response['position']     = self::DEFAULT_POSITION;
@@ -264,6 +267,21 @@ class TranslateService
         foreach ($results->getItems() as $item) {
             if ($item->is(NaturalResultType::CLASSICAL) || $item->is(NaturalResultType::CLASSICAL_MOBILE)) {
                 $this->processClassicalResult($item, $rank);
+
+                continue;
+            }
+
+            // Log parameters for debug if the parser has exceptions as result
+            if ($item->is(NaturalResultType::EXCEPTIONS) || $item->is(NaturalResultType::EXCEPTIONS)) {
+
+                $this->initLogger();
+                $this->monolog->error('Exception on Serp parser ',
+                    [
+                        'context' => array_merge(['site_host'        => $this->siteHost,
+                                                  'mobile'           => $this->mobile,
+                                                  'crawl_subdomains' => $this->crawlSubdomains,
+                        ], $options),
+                    ]);
 
                 continue;
             }

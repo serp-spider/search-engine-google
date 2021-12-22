@@ -42,7 +42,10 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
         $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ')]", $node);
 
         if ($naturalResults->length == 0) {
-            throw new InvalidDOMException('Cannot parse a classical result.');
+            $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, []));
+            $this->monolog->error('Cannot identify results in html page ', ['html'=>$node->ownerDocument->saveHTML($node), ]);
+
+           return;
         }
 
         $k = 0;

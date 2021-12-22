@@ -45,10 +45,15 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
         $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' g ')]", $node);
 
         if ($naturalResults->length == 0) {
-            throw new InvalidDOMException('Cannot parse a classical result.');
+
+            $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, []));
+            $this->monolog->error('Cannot identify results in html page ', ['html'=>$node->ownerDocument->saveHTML($node), ]);
+
+            return;
         }
 
         $k=0;
+
         foreach ($naturalResults as $organicResult) {
 
             if($this->skiResult($dom,$organicResult)) {

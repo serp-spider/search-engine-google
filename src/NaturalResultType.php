@@ -65,6 +65,7 @@ abstract class NaturalResultType
     const ANSWER_BOX = 'answer_box';
 
     const HOTELS        = 'hotels';
+    const EXCEPTIONS        = 'exceptions';
     const HOTELS_NAMES  = 'hotels_names';
     const HOTELS_MOBILE = 'hotels_mobile';
 
