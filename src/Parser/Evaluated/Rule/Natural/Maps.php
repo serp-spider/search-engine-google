@@ -10,7 +10,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class Maps implements ParsingRuleInterface
 {
-    protected $steps = ['version1', 'version2'];
+    protected $steps = ['version1', 'version2', 'version3'];
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
@@ -22,10 +22,16 @@ class Maps implements ParsingRuleInterface
     }
 
 
-    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
+    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
         foreach ($this->steps as $functionName) {
-            call_user_func_array([$this, $functionName], [$googleDOM, $node, $resultSet, $isMobile]);
+
+            try {
+                call_user_func_array([$this, $functionName], [$googleDOM, $node, $resultSet, $isMobile]);
+            } catch (\Exception $exception) {
+                continue;
+            }
+
         }
     }
 
@@ -43,6 +49,22 @@ class Maps implements ParsingRuleInterface
 
         $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
     }
+
+    protected function version3(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile)
+    {
+        $ratingStars = $googleDOM->getXpath()->query("descendant::div[@class='rllt__details']", $node);
+
+        if ($ratingStars->length == 0) {
+            return;
+        }
+
+        foreach ($ratingStars as $ratingStarNode) {
+            $spanElements['title'][] =  $ratingStarNode->childNodes->item(0)->textContent;
+        }
+
+        $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
+    }
+
 
     protected function version1(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile)
     {
