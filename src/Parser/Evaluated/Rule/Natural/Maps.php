@@ -44,10 +44,16 @@ class Maps implements ParsingRuleInterface
         }
 
         foreach ($ratingStars as $ratingStarNode) {
+            if (empty($ratingStarNode->parentNode->childNodes[1])) {
+                continue;
+            }
+
             $spanElements['title'][] = $ratingStarNode->parentNode->childNodes[1]->textContent;
         }
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
+        if(!empty($spanElements)) {
+            $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
+        }
     }
 
     protected function version3(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile)
