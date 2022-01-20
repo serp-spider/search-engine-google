@@ -26,6 +26,10 @@ class Maps implements ParsingRuleInterface
     {
         foreach ($this->steps as $functionName) {
 
+            if ($resultSet->hasType(NaturalResultType::MAP)) {
+                break 1;
+            }
+
             try {
                 call_user_func_array([$this, $functionName], [$googleDOM, $node, $resultSet, $isMobile]);
             } catch (\Exception $exception) {
@@ -65,10 +69,16 @@ class Maps implements ParsingRuleInterface
         }
 
         foreach ($ratingStars as $ratingStarNode) {
+            if($ratingStarNode->childNodes->length ==0) {
+                continue;
+            }
+
             $spanElements['title'][] =  $ratingStarNode->childNodes->item(0)->textContent;
         }
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
+        if(!empty($spanElements)) {
+            $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
+        }
     }
 
 
