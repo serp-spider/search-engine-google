@@ -5,8 +5,11 @@
 
 namespace Serps\SearchEngine\Google\Page;
 
+use Serps\Core\Serp\BaseResult;
+use Serps\Core\Serp\IndexedResultSet;
 use Serps\Exception;
 use Serps\SearchEngine\Google\Exception\InvalidDOMException;
+use Serps\SearchEngine\Google\NaturalResultType;
 use Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\MobileNaturalParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\NaturalParser;
@@ -33,7 +36,8 @@ class GoogleSerp extends GoogleDom
     }
 
     /**
-     * @return \Serps\Core\Serp\IndexedResultSet
+     * @return IndexedResultSet|void
+     * @throws InvalidDOMException
      */
     public function getNaturalResults()
     {
@@ -44,8 +48,10 @@ class GoogleSerp extends GoogleDom
                 $parser = new NaturalParser();
             }
         } else {
-            throw new InvalidDOMException('Raw dom is not supported, please provide an evaluated version of the dom');
+            $parser = new NaturalParser();
+            (new IndexedResultSet())->addItem(new BaseResult(NaturalResultType::CLASSICAL, []));
         }
+
         return $parser->parse($this);
     }
 
@@ -115,7 +121,7 @@ class GoogleSerp extends GoogleDom
         $body = $this->getXpath()->query('//body');
 
         if ($body->length != 1) {
-            throw new Exception('No body found');
+            return false;
         }
 
         $body = $body->item(0);
