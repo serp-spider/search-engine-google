@@ -27,7 +27,9 @@ class MobileV4 implements ParsingRuleByVersionInterface
             throw new InvalidDOMException('Cannot parse a classical result.');
         }
 
-        $titleTag = $aTag->item(0)->lastChild;
+        if(!empty($aTag->item(0))) {
+            $titleTag = $aTag->item(0)->lastChild;
+        }
 
         if($organicResultObject->getLink() === null) {
             $organicResultObject->setLink($dom->getUrl()->resolveAsString($aTag->item(0)->getAttribute('href')));
