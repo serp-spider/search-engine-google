@@ -31,9 +31,7 @@ class ClassicalResultEngine
 
             try {
                 $versionRule->parseNode($dom, $organicResult, $organicResultObject);
-            } catch (\Exception $exception) {
-                continue;
-            } catch (\Error $exception) {
+            } catch (\Throwable $exception) {
                 continue;
             }
         }
