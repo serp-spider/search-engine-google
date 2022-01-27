@@ -27,6 +27,8 @@ class MobileV4 implements ParsingRuleByVersionInterface
             throw new InvalidDOMException('Cannot parse a classical result.');
         }
 
+        $titleTag = '';
+
         if(!empty($aTag->item(0))) {
             $titleTag = $aTag->item(0)->lastChild;
         }
