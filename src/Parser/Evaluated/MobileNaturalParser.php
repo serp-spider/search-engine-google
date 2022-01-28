@@ -66,6 +66,7 @@ class MobileNaturalParser extends AbstractParser
     protected function getParsableItems(GoogleDom $googleDom)
     {
         // [@id='iur'] = images
+        // [@id='sports-app'] = classical results
         // [contains(@class, 'scm-c')]  = maps
         // [contains(@class, 'related-question-pair')] = questions
         // [@class='C7r6Ue']  = maps
@@ -92,7 +93,7 @@ class MobileNaturalParser extends AbstractParser
         //@class='ULktNd rQUFld mnr-c rrecc' - directions
 
         return $googleDom->xpathQuery("//*[@id='iur' or
-
+            @id='sports-app' or
             @id='center_col' or
             @id='tads' or
             @id='tadsb' or

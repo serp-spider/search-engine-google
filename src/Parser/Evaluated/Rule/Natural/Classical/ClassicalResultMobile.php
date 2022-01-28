@@ -20,7 +20,7 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
     public function match(GoogleDom $dom, DomElement $node)
     {
-        if ($node->getAttribute('id') == 'center_col') {
+        if ($node->getAttribute('id') == 'center_col' || $node->getAttribute('id') =='sports-app') {
             return self::RULE_MATCH_MATCHED;
         }
 

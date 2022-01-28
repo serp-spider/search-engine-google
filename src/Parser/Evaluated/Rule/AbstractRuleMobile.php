@@ -1,14 +1,13 @@
 <?php
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule;
 
-use Serps\Core\Serp\IndexedResultSet;
-use Serps\SearchEngine\Google\NaturalResultType;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResultEngine;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\Versions\Mobile\MobileV1;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\Versions\Mobile\MobileV2;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\Versions\Mobile\MobileV3;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\Versions\Mobile\MobileV4;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\Versions\Mobile\MobileV5;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\Versions\Mobile\MobileV6;
 
 class AbstractRuleMobile extends ClassicalResultEngine
 {
@@ -22,6 +21,7 @@ class AbstractRuleMobile extends ClassicalResultEngine
             new MobileV3(),
             new MobileV4(),
             new MobileV5(),
+            new MobileV6(),
         ];
     }
 

@@ -127,13 +127,17 @@ class GoogleSerp extends GoogleDom
         $body = $body->item(0);
         /** @var $body \DOMElement */
         $class = $body->getAttribute('class');
+
         if ($class=='hsrp') {
             return false;
-        } elseif (strstr($class, 'srp')) {
-            return true;
-        } else {
-            throw new InvalidDOMException('Unable to check javascript status.');
         }
+
+        if (strstr($class, 'srp') || strstr($class, 'qs-i')) {
+            return true;
+        }
+
+        throw new InvalidDOMException('Unable to check javascript status.');
+
     }
 
     /**
