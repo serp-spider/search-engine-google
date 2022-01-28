@@ -74,6 +74,11 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
     protected function skiResult(GoogleDom $dom, DomElement $organicResult)
     {
+        // Knowledge graph, sometimes, is identified as an organic result
+        if ($organicResult->hasClasses(['kp-wholepage'])) {
+            return true;
+        }
+
         // Recipes are identified as organic result
         if ($organicResult->getChildren()->hasClasses(['Q9mvUc'])) {
             return true;
