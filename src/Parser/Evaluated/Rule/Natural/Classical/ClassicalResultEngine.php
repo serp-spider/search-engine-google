@@ -36,7 +36,7 @@ class ClassicalResultEngine
             }
         }
 
-        if ($organicResultObject->getLink() === null || $organicResultObject->getTitle() === null) {
+        if ($organicResultObject->getLink() === null) {
 
             $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, []));
             $this->monolog->error('Cannot identify natural result ', ['html'=>$organicResult->ownerDocument->saveHTML($organicResult), ]);
