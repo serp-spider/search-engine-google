@@ -265,7 +265,14 @@ class TranslateService
         $this->response['position'] = self::DEFAULT_POSITION;
 
         foreach ($results->getItems() as $item) {
+
             if ($item->is(NaturalResultType::CLASSICAL) || $item->is(NaturalResultType::CLASSICAL_MOBILE)) {
+
+                // Double check
+                if($item->title === null || $item->url === null) {
+                    continue;
+                }
+
                 $this->processClassicalResult($item, $rank);
 
                 continue;
