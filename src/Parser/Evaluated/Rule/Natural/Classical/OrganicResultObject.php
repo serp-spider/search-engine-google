@@ -19,7 +19,7 @@ class OrganicResultObject
     /**
      * @param null $title
      */
-    public function setTitle($title): void
+    public function setTitle($title)
     {
         $this->title = $title;
     }
@@ -35,7 +35,7 @@ class OrganicResultObject
     /**
      * @param null $description
      */
-    public function setDescription($description): void
+    public function setDescription($description)
     {
         $this->description = $description;
     }
@@ -51,7 +51,7 @@ class OrganicResultObject
     /**
      * @param null $link
      */
-    public function setLink($link): void
+    public function setLink($link)
     {
         $this->link = $link;
     }
