@@ -268,11 +268,6 @@ class TranslateService
 
             if ($item->is(NaturalResultType::CLASSICAL) || $item->is(NaturalResultType::CLASSICAL_MOBILE)) {
 
-                // Double check
-                if($item->title === null || $item->url === null) {
-                    continue;
-                }
-
                 $this->processClassicalResult($item, $rank);
 
                 continue;
