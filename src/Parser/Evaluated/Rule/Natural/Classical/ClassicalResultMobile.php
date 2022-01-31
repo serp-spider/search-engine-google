@@ -74,6 +74,11 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
     protected function skiResult(GoogleDom $dom, DomElement $organicResult)
     {
+        // Organic result is identified as top ads
+        if($organicResult->parentNode->parentNode->parentNode->getAttribute('id') =='tads') {
+            return true;
+        }
+
         // Knowledge graph, sometimes, is identified as an organic result
         if ($organicResult->hasClasses(['kp-wholepage'])) {
             return true;
@@ -95,14 +100,18 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
             return true;
         }
 
-
-
         // Avoid getting  results from questions (when clicking "Show more". When clicking "Show more" on questions)
         // The result under it looks exactly like a natural results
         if(
             $organicResult->parentNode->parentNode->parentNode->getAttribute('class') =='ymu2Hb' ||
             $organicResult->parentNode->parentNode->parentNode->getAttribute('class') =='dfiEbb' ||
             $organicResult->parentNode->parentNode->parentNode->parentNode->getAttribute('class') =='ymu2Hb') {
+            return true;
+        }
+
+        // The organic result identified as "Find results on"
+        if ($dom->xpathQuery("descendant::g-scrolling-carousel", $organicResult)->length > 0 &&
+            $dom->xpathQuery("descendant::g-inner-card", $organicResult)->length > 0) {
             return true;
         }
 
