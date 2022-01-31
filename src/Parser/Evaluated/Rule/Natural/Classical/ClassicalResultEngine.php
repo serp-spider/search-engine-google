@@ -44,6 +44,10 @@ class ClassicalResultEngine
             return;
         }
 
+        if (strpos($organicResultObject->getLink(), 'google.com') !== false) {
+            return;
+        }
+
         $resultSet->addItem(new BaseResult([$this->resultType],
             [
                 'title'       => $organicResultObject->getTitle(),
