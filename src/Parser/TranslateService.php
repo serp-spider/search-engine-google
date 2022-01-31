@@ -267,12 +267,6 @@ class TranslateService
         foreach ($results->getItems() as $item) {
 
             if ($item->is(NaturalResultType::CLASSICAL) || $item->is(NaturalResultType::CLASSICAL_MOBILE)) {
-
-                // Double check
-                if($item->title === null || $item->url === null) {
-                    continue;
-                }
-
                 $this->processClassicalResult($item, $rank);
 
                 continue;
@@ -281,6 +275,7 @@ class TranslateService
             // Log parameters for debug if the parser has exceptions as result
             if ($item->is(NaturalResultType::EXCEPTIONS) || $item->is(NaturalResultType::EXCEPTIONS)) {
 
+                /*TODO: Use local logger
                 $this->initLogger();
                 $this->monolog->error('Exception on Serp parser ',
                     [
@@ -288,7 +283,7 @@ class TranslateService
                                                   'mobile'           => $this->mobile,
                                                   'crawl_subdomains' => $this->crawlSubdomains,
                         ], $options),
-                    ]);
+                    ]);*/
 
                 continue;
             }
