@@ -44,7 +44,7 @@ class ClassicalResultEngine
             return;
         }
 
-        if (strpos($organicResultObject->getLink(), 'google.com') !== false) {
+        if (strpos($organicResultObject->getLink(), 'google.') !== false) {
             return;
         }
 
