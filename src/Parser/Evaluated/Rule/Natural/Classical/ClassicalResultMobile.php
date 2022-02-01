@@ -100,6 +100,13 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
             return true;
         }
 
+        $questionParent =   $dom->getXpath()->query("ancestor::div[contains(concat(' ', normalize-space(@class), ' '), ' related-question-pair ')]", $organicResult);
+
+        if ($questionParent->length > 0) {
+
+            return true;
+        }
+
         // Avoid getting  results from questions (when clicking "Show more". When clicking "Show more" on questions)
         // The result under it looks exactly like a natural results
         if(

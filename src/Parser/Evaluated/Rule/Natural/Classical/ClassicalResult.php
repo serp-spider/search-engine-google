@@ -42,7 +42,7 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
 
     public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' g ')]", $node);
+        $naturalResults = $dom->xpathQuery("descendant::*[contains(concat(' ', normalize-space(@class), ' '), ' g ') or contains(concat(' ', normalize-space(@class), ' '), ' FxLDp ')]", $node);
 
         if ($naturalResults->length == 0) {
 
@@ -80,10 +80,9 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
 
         // Avoid getting  results from questions (when clicking "Show more". When clicking "Show more" on questions)
         // The result under it looks exactly like a natural results
-        $node = $organicResult->parentNode->parentNode;
+        $questionParent =   $googleDOM->getXpath()->query("ancestor::div[contains(concat(' ', normalize-space(@class), ' '), ' related-question-pair ')]", $organicResult);
 
-        if ($node->parentNode->getAttribute('class') =='ymu2Hb' ||
-            $node->getAttribute('class') =='g') {
+        if ($questionParent->length > 0) {
 
             return true;
         }
