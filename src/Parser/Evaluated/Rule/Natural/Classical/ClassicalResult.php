@@ -88,6 +88,7 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
         }
 
         $hasSameChild = $googleDOM->getXpath()->query('descendant::div[@class="g"]', $organicResult);
+
         if ($hasSameChild->length > 0) {
             return true;
         }
