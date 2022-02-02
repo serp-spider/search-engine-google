@@ -87,9 +87,13 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
             return true;
         }
 
-        $hasSameChild = $googleDOM->getXpath()->query('descendant::div[@class="g"]', $organicResult);
+        $hasSameChild = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' g ')]", $organicResult);
         if ($hasSameChild->length > 0) {
-            return true;
+            $hasSameChildIndent = $googleDOM->getXpath()->query("ancestor::ul[contains(concat(' ', normalize-space(@class), ' '), ' FxLDp ')]", $hasSameChild->item(0));
+            if ($hasSameChildIndent->length == 0) {
+                return true;
+            }
+
         }
 
         //
