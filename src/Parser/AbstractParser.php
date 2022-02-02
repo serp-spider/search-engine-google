@@ -5,6 +5,7 @@
 
 namespace Serps\SearchEngine\Google\Parser;
 
+use Monolog\Logger;
 use Serps\Core\Dom\DomNodeList;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
@@ -16,6 +17,16 @@ abstract class AbstractParser implements ParserInterface
      * @var ParsingRuleInterface[]
      */
     private $rules = null;
+
+    /**
+     * @var Logger|null
+     */
+    protected $logger = null;
+
+    public function __construct(Logger $logger = null)
+    {
+        $this->logger = $logger;
+    }
 
     /**
      * @return ParsingRuleInterface[]

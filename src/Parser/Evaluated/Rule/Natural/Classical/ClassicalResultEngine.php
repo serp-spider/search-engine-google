@@ -2,6 +2,7 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical;
 
+use Monolog\Logger;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\NaturalResultType;
@@ -14,10 +15,12 @@ class ClassicalResultEngine
 
     protected $resultType = NaturalResultType::CLASSICAL;
 
-
-    public function __construct()
+    /**
+     * @param Logger|null $logger Monolog log channel dependency
+     */
+    public function __construct(Logger $logger = null)
     {
-        $this->initLogger();
+        $this->initLogger($logger);
     }
 
     protected function parseNode(GoogleDom $dom, \DomElement $organicResult, IndexedResultSet $resultSet, $k) {}

@@ -5,6 +5,7 @@
 
 namespace Serps\SearchEngine\Google\Parser;
 
+use Monolog\Logger;
 use Serps\Core\Serp\CompositeResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 
@@ -15,6 +16,16 @@ abstract class AbstractAdwordsParser implements ParserInterface
      * @var ParserInterface[]
      */
     private $parsers = null;
+
+    /**
+     * @var Logger|null
+     */
+    protected $logger;
+
+    public function __construct(Logger $logger = null)
+    {
+        $this->logger = $logger;
+    }
 
     /**
      * Generate a list of parsers to be used when parsing dom

@@ -1,13 +1,13 @@
 <?php
 namespace Serps\SearchEngine\Google\Parser\Evaluated;
 
+use Monolog\Logger;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AdsTopMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\AppPackMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResultMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\ClassicalResultMobileV2;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\LargeClassicalResult;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\DefinitionsMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\DirectionsMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\FeaturedSnipped;
@@ -23,7 +23,6 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ProductListingMobile
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Questions;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Recipes;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesMobile;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideoGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideosMobile;
 
 /**
@@ -33,14 +32,15 @@ class MobileNaturalParser extends AbstractParser
 {
 
     protected $isMobile = true;
+
     /**
      * @inheritdoc
      */
     protected function generateRules()
     {
         return [
-            new ClassicalResultMobile(),
-            new ClassicalResultMobileV2(),
+            new ClassicalResultMobile($this->logger),
+            new ClassicalResultMobileV2($this->logger),
             new ImageGroup(),
             new MapsMobile(),
             new Questions(),

@@ -21,13 +21,15 @@ class AdwordsParser extends AbstractAdwordsParser
             // Adwords top
             new AdwordsSectionParser(
                 Css::toXPath('div#tads li.ads-ad, div#tvcap ._oc'),
-                AdwordsResultType::SECTION_TOP
+                AdwordsResultType::SECTION_TOP,
+                $this->logger
             ),
 
             // Adwords bottom
             new AdwordsSectionParser(
                 "descendant::div[@id = 'bottomads']//li[@class='ads-ad']",
-                AdwordsResultType::SECTION_BOTTOM
+                AdwordsResultType::SECTION_BOTTOM,
+                $this->logger
             )
         ];
     }
