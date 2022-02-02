@@ -33,7 +33,7 @@
     "php": ">=5.5",
     "serps/core": "~0.3.0",
     "ext-dom": "*",
-    "monolog/monolog": "^1.26"
+    "monolog/monolog": "^1.23||^2.0"
   },
 
   "require-dev":{
