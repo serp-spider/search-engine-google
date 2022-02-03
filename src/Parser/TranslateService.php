@@ -2,6 +2,7 @@
 
 namespace Serps\SearchEngine\Google\Parser;
 
+use Monolog\Logger;
 use Serps\SearchEngine\Google\NaturalResultType;
 
 /**
@@ -19,20 +20,27 @@ class TranslateService
         $urlAlias = null,
         $response = [];
 
+    /**
+     * @var Logger|null
+     */
+    protected $logger = null;
+
     const DEFAULT_POSITION = 666;
 
     /**
      * TranslateService constructor.
      *
-     * @param $siteHost
+     * @param string $siteHost
      * @param bool $crawlSubdomains
-     * @param null $urlAlias
+     * @param string|null $urlAlias
+     * @param Logger|null $logger
      */
-    public function __construct($siteHost, $crawlSubdomains = false, $urlAlias = null)
+    public function __construct(string $siteHost, bool $crawlSubdomains = false, $urlAlias = null, Logger $logger = null)
     {
         $this->siteHost        = $this->extractDomain($siteHost);
         $this->crawlSubdomains = $crawlSubdomains;
         $this->urlAlias        = $urlAlias;
+        $this->logger          = $logger;
     }
 
     /**
@@ -262,18 +270,17 @@ class TranslateService
 
     /**
      * @param \Serps\Core\Serp\IndexedResultSet $results
-     * @param array $options -> only for debug purpose
-     *
+     * @param array $options -> only for debug purposes
      * @return $this
      */
     public function intoOldResponse(\Serps\Core\Serp\IndexedResultSet $results, $options=[])
     {
         if (empty($results->getItems())) {
+            $this->response = NaturalResultType::SERP_FEATURES_OLD_RESPONSE_TEMPLATE;
+
             $this->response['position']     = self::DEFAULT_POSITION;
             $this->response['list_of_urls'] = [];
             $this->response['competition']  = [];
-
-            $this->response = NaturalResultType::SERP_FEATURES_OLD_RESPONSE_TEMPLATE;
 
             return $this;
         }
@@ -298,7 +305,7 @@ class TranslateService
             if ($item->is(NaturalResultType::EXCEPTIONS) || $item->is(NaturalResultType::EXCEPTIONS)) {
 
                 /*TODO: Use local logger
-                $this->initLogger();
+                $this->initLogger($this->logger);
                 $this->monolog->error('Exception on Serp parser ',
                     [
                         'context' => array_merge(['site_host'        => $this->siteHost,

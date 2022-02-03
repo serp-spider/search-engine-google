@@ -5,10 +5,12 @@
 
 namespace Serps\SearchEngine\Google\Page;
 
+use Monolog\Logger;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\Exception;
 use Serps\SearchEngine\Google\Exception\InvalidDOMException;
+use Serps\SearchEngine\Google\GoogleUrlInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 use Serps\SearchEngine\Google\Parser\Evaluated\AdwordsParser;
 use Serps\SearchEngine\Google\Parser\Evaluated\MobileNaturalParser;
@@ -18,6 +20,17 @@ use Serps\Stubs\RelatedSearch;
 
 class GoogleSerp extends GoogleDom
 {
+    /**
+     * @var Logger|null
+     */
+    protected $logger;
+
+    public function __construct($domString, GoogleUrlInterface $url, Logger $logger = null)
+    {
+        parent::__construct($domString, $url);
+
+        $this->logger = $logger;
+    }
 
     /**
      * Get the location detected by google
@@ -43,12 +56,12 @@ class GoogleSerp extends GoogleDom
     {
         if ($this->javascriptIsEvaluated()) {
             if ($this->isMobile()) {
-                $parser = new MobileNaturalParser();
+                $parser = new MobileNaturalParser($this->logger);
             } else {
-                $parser = new NaturalParser();
+                $parser = new NaturalParser($this->logger);
             }
         } else {
-            $parser = new NaturalParser();
+            $parser = new NaturalParser($this->logger);
             (new IndexedResultSet())->addItem(new BaseResult(NaturalResultType::CLASSICAL, []));
         }
 
@@ -65,9 +78,9 @@ class GoogleSerp extends GoogleDom
     {
         if ($this->javascriptIsEvaluated()) {
             if ($this->isMobile()) {
-                $parser = new MobileAdwordsParser();
+                $parser = new MobileAdwordsParser($this->logger);
             } else {
-                $parser = new AdwordsParser();
+                $parser = new AdwordsParser($this->logger);
             }
 
             return $parser->parse($this);

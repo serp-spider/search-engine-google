@@ -41,7 +41,7 @@ class NaturalParser extends AbstractParser
     protected function generateRules()
     {
         return [
-            new ClassicalResult(),
+            new ClassicalResult($this->logger),
             new ImageGroup(),
             new Videos(),
             new Maps(),

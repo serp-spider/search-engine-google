@@ -5,6 +5,7 @@
 
 namespace Serps\SearchEngine\Google;
 
+use Monolog\Logger;
 use Serps\Core\Browser\BrowserInterface;
 use Serps\Core\Cookie\ArrayCookieJar;
 use Serps\Core\Cookie\CookieJarInterface;
@@ -30,9 +31,15 @@ class GoogleClient
 
     protected $defaultBrowser;
 
-    public function __construct(BrowserInterface $browser = null)
+    /**
+     * @var Logger
+     */
+    protected $logger;
+
+    public function __construct(BrowserInterface $browser = null, Logger $logger)
     {
         $this->defaultBrowser = $browser;
+        $this->logger = $logger;
     }
 
     /**
@@ -70,7 +77,7 @@ class GoogleClient
         $effectiveUrl = GoogleUrlArchive::fromString($response->getEffectiveUrl()->__toString());
 
         if (200 == $statusCode) {
-            return new GoogleSerp($response->getPageContent(), $effectiveUrl);
+            return new GoogleSerp($response->getPageContent(), $effectiveUrl, $this->logger);
         } else {
             if (404 == $statusCode) {
                 throw new PageNotFoundException($response);

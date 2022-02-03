@@ -21,13 +21,15 @@ class MobileAdwordsParser extends AbstractAdwordsParser
             // Adwords top
             new MobileAdwordsSectionParser(
                 Css::toXPath('#tads li.ads-fr, #tvcap'),
-                AdwordsResultType::SECTION_TOP
+                AdwordsResultType::SECTION_TOP,
+                $this->logger
             ),
 
             // Adwords bottom
             new MobileAdwordsSectionParser(
                 Css::toXPath('#tadsb li.ads-fr'),
-                AdwordsResultType::SECTION_BOTTOM
+                AdwordsResultType::SECTION_BOTTOM,
+                $this->logger
             )
         ];
     }

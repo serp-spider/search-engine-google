@@ -5,6 +5,7 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated;
 
+use Monolog\Logger;
 use Serps\SearchEngine\Google\AdwordsSectionResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\AbstractParser;
@@ -23,10 +24,12 @@ class AdwordsSectionParser extends AbstractParser
     /**
      * @param $pathToItems
      */
-    public function __construct($pathToItems, $location)
+    public function __construct($pathToItems, $location, Logger $logger = null)
     {
         $this->pathToItems = $pathToItems;
         $this->location = $location;
+
+        parent::__construct($logger);
     }
 
     /**
