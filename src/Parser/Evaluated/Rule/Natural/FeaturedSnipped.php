@@ -25,22 +25,33 @@ class FeaturedSnipped implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $naturalResultNode = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' g ')]", $node);
+        $naturalResultNodes = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' g ')]", $node);
 
-        if ($naturalResultNode->length == 0) {
+        if ($naturalResultNodes->length == 0) {
             return;
         }
 
-        $googleDOM->getXpath()->query("descendant::a", $naturalResultNode->item(0));
+        $results = [];
 
-        $aTag = $googleDOM->getXpath()->query("descendant::a", $naturalResultNode->item(0));
+        foreach ($naturalResultNodes  as $featureSnippetNode) {
+            $aTag = $googleDOM->getXpath()->query("descendant::a", $featureSnippetNode);
 
-        if ($aTag->length == 0) {
-            return;
+            if ($aTag->length == 0) {
+                continue;
+            }
+
+            $object              = new \StdClass();
+            $object->url         = $aTag->item(0)->getAttribute('href');
+            $object->description = '';
+            $object->title       = '';
+
+            $results[] = $object;
         }
 
-        $resultSet->addItem(
-            new BaseResult($this->getType($isMobile), [$aTag->item(0)->getAttribute('href')])
-        );
+        if(!empty($results)) {
+            $resultSet->addItem(
+                new BaseResult($this->getType($isMobile), $results)
+            );
+        }
     }
 }
