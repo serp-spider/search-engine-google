@@ -48,8 +48,10 @@ class FeaturedSnipped implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
             $results[] = $object;
         }
 
-        $resultSet->addItem(
-            new BaseResult($this->getType($isMobile), $results)
-        );
+        if(!empty($results)) {
+            $resultSet->addItem(
+                new BaseResult($this->getType($isMobile), $results)
+            );
+        }
     }
 }
