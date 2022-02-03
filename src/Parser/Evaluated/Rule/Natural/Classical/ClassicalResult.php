@@ -3,16 +3,12 @@
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical;
 
 use Serps\Core\Dom\DomElement;
-use Serps\SearchEngine\Google\Exception\InvalidDOMException;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\AbstractRuleDesktop;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SiteLinks;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SiteLinksBig;
-use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SiteLinksBigMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\SiteLinksSmall;
-use Serps\SearchEngine\Google\Parser\ParsingRuleByVersionInterface;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
 
@@ -88,15 +84,16 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
         }
 
         $hasSameChild = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' g ')]", $organicResult);
+
         if ($hasSameChild->length > 0) {
             $hasSameChildIndent = $googleDOM->getXpath()->query("ancestor::ul[contains(concat(' ', normalize-space(@class), ' '), ' FxLDp ')]", $hasSameChild->item(0));
+
             if ($hasSameChildIndent->length == 0) {
                 return true;
             }
 
         }
 
-        //
         $currencyPlayer = $googleDOM->getXpath()->query('descendant::div[@id="knowledge-currency__updatable-data-column"]', $organicResult);
 
         if($currencyPlayer->length>0) {

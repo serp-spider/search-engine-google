@@ -91,7 +91,7 @@ class TranslateService
      * @param $item
      * @param $rank
      */
-    protected function processClassicalResult($item, &$rank)
+    protected function processClassicalResult($item, &$rank, $rewritePositionFromPosZero = false)
     {
         $rank++;
 
@@ -106,7 +106,7 @@ class TranslateService
         }
 
         if (
-            $this->response['position'] == self::DEFAULT_POSITION &&
+            ($this->response['position'] == self::DEFAULT_POSITION || $rewritePositionFromPosZero) &&
             ( $domainName === $this->siteHost || $domainName === $this->urlAlias || !empty($matchedSubdomains[0]))
         ) {
             $this->response['position']     = $rank;
@@ -114,10 +114,15 @@ class TranslateService
         }
 
         if (empty($this->response['list_of_urls'][0][$domainName])) {
-            $this->response['list_of_urls'][0][$domainName] = $rank;
+
+            if($rewritePositionFromPosZero) {
+                $this->response['list_of_urls'][0] = [$domainName=>$rank] + $this->response['list_of_urls'][0];
+            } else {
+                $this->response['list_of_urls'][0][$domainName] = $rank;
+            }
         }
 
-        $this->response['competition'][(string)$rank] = [
+        $competitionData = [
             "url"               => $domainName,
             "full_landing_page" => $item->url,
             "height"            => "0",
@@ -125,7 +130,14 @@ class TranslateService
             "description"       => $description,
             "video"             => "",
             "amp"               => "",
+
         ];
+
+        $this->response['competition'][(string)$rank] = $competitionData;
+
+        if($rewritePositionFromPosZero) {
+            ksort($this->response['competition']);
+        }
     }
 
     /**
@@ -183,7 +195,17 @@ class TranslateService
         }
 
         if ($item->is(NaturalResultType::FEATURED_SNIPPED) || $item->is(NaturalResultType::FEATURED_SNIPPED_MOBILE)) {
-            $this->response[NaturalResultType::FEATURED_SNIPPED] = $item->getData();
+            if (count($item->getData()) > 1) {
+                $snippets    = $item->getData();
+                $firstResult = array_shift($snippets);
+
+                $this->incrementCompetitionRanksAndDomainRanks($snippets);
+
+            } else {
+                $firstResult = $item->getData()[0];
+            }
+
+            $this->response[NaturalResultType::FEATURED_SNIPPED] = $firstResult->url;
         }
 
         if ($item->is(NaturalResultType::PRODUCT_LISTING) || $item->is(NaturalResultType::PRODUCT_LISTING_MOBILE)) {
@@ -313,5 +335,26 @@ class TranslateService
     public function getResponse()
     {
         return $this->response;
+    }
+
+    protected function incrementCompetitionRanksAndDomainRanks($snippets)
+    {
+        $rank        = 0;
+
+        foreach (array_reverse($snippets) as $featureSnippet) {
+
+            foreach ($this->response['list_of_urls'][0] as $domainName => $domainPosition) {
+                $this->response['list_of_urls'][0][$domainName] = $domainPosition + 1;
+            }
+
+            $naturalResults                = $this->response['competition'];
+            $this->response['competition'] = [];
+
+            foreach ($naturalResults as $currentRank => $data) {
+                $this->response['competition'][$currentRank + 1] = $data;
+            }
+
+            $this->processClassicalResult($featureSnippet, $rank, true);
+        }
     }
 }
