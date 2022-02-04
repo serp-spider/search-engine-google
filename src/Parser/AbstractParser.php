@@ -116,7 +116,8 @@ abstract class AbstractParser implements ParserInterface
                 }
             }
         }
-
+        libxml_clear_errors();
+        libxml_use_internal_errors(false);
         return $resultSet;
     }
 }
