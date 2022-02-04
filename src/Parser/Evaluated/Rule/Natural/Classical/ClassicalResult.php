@@ -30,19 +30,22 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
         if( $dom->xpathQuery("descendant::table[@class='jmjoTe']", $organicResult)->length >0) {
             (new SiteLinksBig())->parse($dom,$organicResult, $resultSet, false);
         }
+
         $parentWithSameClass = $dom->xpathQuery("ancestor::div[@class='g']", $organicResult);
+
         if($parentWithSameClass->length > 0) {
             if( $dom->xpathQuery("descendant::table[@class='jmjoTe']", $parentWithSameClass->item(0))->length >0) {
-                (new SiteLinksBig())->parse($dom,$organicResult, $resultSet, false);
+                (new SiteLinksBig())->parse($dom,$parentWithSameClass->item(0), $resultSet, false);
             }
         }
 
         if( $dom->xpathQuery("descendant::div[@class='HiHjCd']", $organicResult)->length >0) {
             (new SiteLinksSmall())->parse($dom,$organicResult, $resultSet, false);
         }
+
         if($parentWithSameClass->length > 0) {
             if( $dom->xpathQuery("descendant::div[@class='HiHjCd']", $parentWithSameClass->item(0))->length >0) {
-                (new SiteLinksBig())->parse($dom,$organicResult, $resultSet, false);
+                (new SiteLinksBig())->parse($dom,$parentWithSameClass->item(0), $resultSet, false);
             }
         }
     }
