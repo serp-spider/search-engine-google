@@ -113,13 +113,21 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
             $organicResult->parentNode->parentNode->parentNode->getAttribute('class') =='ymu2Hb' ||
             $organicResult->parentNode->parentNode->parentNode->getAttribute('class') =='dfiEbb' ||
             $organicResult->parentNode->parentNode->parentNode->parentNode->getAttribute('class') =='ymu2Hb') {
+
             return true;
         }
 
         // The organic result identified as "Find results on"
-        if ($dom->xpathQuery("descendant::g-scrolling-carousel", $organicResult)->length > 0 &&
+
+        $carouselNode = $dom->xpathQuery("descendant::g-scrolling-carousel", $organicResult);
+        if ($carouselNode->length > 0 &&
             $dom->xpathQuery("descendant::g-inner-card", $organicResult)->length > 0) {
-            return true;
+
+            // If the  direct parent of the carousel is the class from classical results -> meaning that there is no classical result here to be parsed.
+            // If the  direct parent of the carousel is NOT the class from classical results -> this is a classical result and under it is a carousel. need to parse the node and identify title/url/description
+            if(preg_match('/mnr\-c/', $carouselNode->item(0)->parentNode->getAttribute('class'))) {
+                return true;
+            }
         }
 
         // Result has carousel in it
