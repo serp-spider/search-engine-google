@@ -89,7 +89,7 @@ class GoogleDom extends WebPage
                 $metaString .=  $match;
             }
         }
-        preg_match_all('/(?:<head(.*)<\/head>)/Uis',$domString, $matches);
+        preg_match_all('/(?:<head>(?:.*))(<div(.*)<\/div>)(?:(?:.*)<\/head>)/Uis',$domString, $matches);
         if(!empty($matches[0])) {
             foreach($matches[0] as $match) {
                 $domString =  str_replace($match, '<head>'.$metaString.'</head>', $domString);
