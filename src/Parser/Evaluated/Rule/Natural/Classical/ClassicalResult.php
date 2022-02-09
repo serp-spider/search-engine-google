@@ -104,11 +104,15 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
             $hasSameChildIndent = $googleDOM->getXpath()->query("ancestor::ul[contains(concat(' ', normalize-space(@class), ' '), ' FxLDp ')]", $hasSameChild->item(0));
 
             // This is for this situation:
-            //
+            //  DO NOT SKIP THIS
             //    -> div[class='g']
             //          --> (natural result) (1)
             //    ---------> ul[class='FxLDp']
-            //              ----> (natural result) (2)
+            //              ----> div[class='g'] (natural result) (2)
+            // SKIP ONLY IF
+            //      -> div[class='g']
+            //            //          --> (natural result) (1)
+            //            //              ----> div[class='g'] (natural result) (2)
             //
             // Need to identify (natural result) (1) and (natural result) (2)
             //
