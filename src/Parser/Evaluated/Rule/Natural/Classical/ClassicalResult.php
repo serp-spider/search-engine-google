@@ -52,6 +52,8 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
 
     public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
+
+
         $naturalResults = $dom->xpathQuery("descendant::*[contains(concat(' ', normalize-space(@class), ' '), ' g ') or contains(concat(' ', normalize-space(@class), ' '), ' MYVUIe ')]", $node);
 
         if ($naturalResults->length == 0) {
@@ -97,44 +99,20 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
             return true;
         }
 
-        $hasSameChild = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' g ')]", $organicResult);
+        $hasParentG     = $googleDOM->getXpath()->query("ancestor::div[contains(concat(' ', normalize-space(@class), ' '), ' g ')]", $organicResult);
+        $hasParentFxLDp = $googleDOM->getXpath()->query("ancestor::ul[contains(concat(' ', normalize-space(@class), ' '), ' FxLDp ')]", $organicResult);
+        $hasSameChild  = false;
 
-        if ($hasSameChild->length > 0) {
+        if ($organicResult->hasClasses(['MYVUIe'])) {
+            $hasChildG = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' g ')]", $organicResult);
 
-            $hasSameChildIndent = $googleDOM->getXpath()->query("ancestor::ul[contains(concat(' ', normalize-space(@class), ' '), ' FxLDp ')]", $hasSameChild->item(0));
-
-            // This is for this situation:
-            //
-            //    -> div[class='g']
-            //          --> (natural result) (1)
-            //    ---------> ul[class='FxLDp']
-            //              ----> (natural result) (2)
-            //
-            // Need to identify (natural result) (1) and (natural result) (2)
-            //
-            if ($hasSameChildIndent->length == 0) {
-                return true;
+            if ($hasChildG->length > 0) {
+                $hasSameChild = true;
             }
+        }
 
-            // This is for this situation:
-            //
-            //    -> div[class='g']
-            //    ----> div[class='g']
-            //          --> (natural result) (1)
-            //    ----> ul[class='FxLDp']
-            //        ----> div[class='g'] [B]
-            //          ----> (natural result) (2)
-            //
-            // Need to identify (natural result) (1) and (natural result) (2)
-            // Need to ignore [B] because it is identified with rule ul[class='FxLDp'] and avoid duplicate natural result (2)
-            if ($hasSameChildIndent->length > 0) {
-                $parent = $googleDOM->getXpath()->query("ancestor::div[contains(concat(' ', normalize-space(@class), ' '), ' g ')]", $hasSameChildIndent->item(0));
-
-                if ($parent->length > 0) {
-                    return true;
-                }
-            }
-
+        if ( ($hasParentG->length > 0 && $hasParentFxLDp->length ==0)  || $hasSameChild) {
+            return true;
         }
 
         //
