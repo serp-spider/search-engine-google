@@ -52,8 +52,6 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
 
     public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-
-
         $naturalResults = $dom->xpathQuery("descendant::*[contains(concat(' ', normalize-space(@class), ' '), ' g ') or contains(concat(' ', normalize-space(@class), ' '), ' MYVUIe ')]", $node);
 
         if ($naturalResults->length == 0) {

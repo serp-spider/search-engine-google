@@ -103,6 +103,14 @@ class TranslateService
     {
         $rank++;
 
+        // Double check: ignore results when have duplicates. Do not put in competition the same result as previous result
+        if (!empty($this->response['competition'][(int)$rank - 1]['url']) &&
+            $this->response['competition'][(int)$rank - 1]['full_landing_page'] == $item->url) {
+            $rank--;
+
+            return;
+        }
+
         $matchedSubdomains = $this->matchSubdomainsOrUrlAlias($item);
 
         $title       = $item->title;
@@ -293,7 +301,7 @@ class TranslateService
         $this->initSerpFeaturesDefaultResponse();
         $this->response['position'] = self::DEFAULT_POSITION;
 
-        foreach ($results->getItems() as $item) {
+        foreach ($results->getItems() as $itemPosition => $item) {
 
             if ($item->is(NaturalResultType::CLASSICAL) || $item->is(NaturalResultType::CLASSICAL_MOBILE)) {
                 $this->processClassicalResult($item, $rank);
@@ -303,17 +311,6 @@ class TranslateService
 
             // Log parameters for debug if the parser has exceptions as result
             if ($item->is(NaturalResultType::EXCEPTIONS) || $item->is(NaturalResultType::EXCEPTIONS)) {
-
-                /*TODO: Use local logger
-                $this->initLogger($this->logger);
-                $this->monolog->error('Exception on Serp parser ',
-                    [
-                        'context' => array_merge(['site_host'        => $this->siteHost,
-                                                  'mobile'           => $this->mobile,
-                                                  'crawl_subdomains' => $this->crawlSubdomains,
-                        ], $options),
-                    ]);*/
-
                 continue;
             }
 
