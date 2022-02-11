@@ -105,10 +105,10 @@ class TranslateService
 
         // Double check: ignore results when have duplicates. Do not put in competition the same result as previous result
         if (!empty($this->response['competition'][(int)$rank - 1]['url']) &&
-            $this->response['competition'][(int)$rank - 1]['full_landing_page'] == $item->url) {
-            $rank--;
+           $this->response['competition'][(int)$rank - 1]['full_landing_page'] == $item->url) {
+          //  $rank--;
 
-            return;
+            //return;
         }
 
         $matchedSubdomains = $this->matchSubdomainsOrUrlAlias($item);
