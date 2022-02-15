@@ -105,7 +105,7 @@ class TranslateService
 
         // Double check: ignore results when have duplicates. Do not put in competition the same result as previous result
         if (!empty($this->response['competition'][(int)$rank - 1]['url']) &&
-           $this->response['competition'][(int)$rank - 1]['full_landing_page'] == $item->url) {
+            $this->response['competition'][(int)$rank - 1]['full_landing_page'] == $item->url) {
             $rank--;
 
             return;
@@ -136,6 +136,9 @@ class TranslateService
             } else {
                 $this->response['list_of_urls'][0][$domainName] = $rank;
             }
+        } else if ($rewritePositionFromPosZero) {
+            unset($this->response['list_of_urls'][0][$domainName]);
+            $this->response['list_of_urls'][0] = [$domainName=>$rank] + $this->response['list_of_urls'][0];
         }
 
         $competitionData = [
@@ -300,7 +303,7 @@ class TranslateService
         $rank = 0;
         $this->initSerpFeaturesDefaultResponse();
         $this->response['position'] = self::DEFAULT_POSITION;
-
+        $processLast = [];
         foreach ($results->getItems() as $itemPosition => $item) {
 
             if ($item->is(NaturalResultType::CLASSICAL) || $item->is(NaturalResultType::CLASSICAL_MOBILE)) {
@@ -314,7 +317,18 @@ class TranslateService
                 continue;
             }
 
+            if ($item->is(NaturalResultType::FEATURED_SNIPPED) || $item->is(NaturalResultType::FEATURED_SNIPPED_MOBILE)) {
+                $processLast[] = $item;
+                continue;
+            }
+
             $this->processSerpFeatures($item);
+        }
+
+        if (!empty($processLast)) {
+            foreach ($processLast as $item) {
+                $this->processSerpFeatures($item);
+            }
         }
 
         $this->response['list_of_urls'][0] = !empty($this->response['list_of_urls'][0]) ? array_reverse($this->response['list_of_urls'][0]):[];
@@ -343,12 +357,14 @@ class TranslateService
 
     protected function incrementCompetitionRanksAndDomainRanks($snippets)
     {
-        $rank        = 0;
+
 
         foreach (array_reverse($snippets) as $featureSnippet) {
-
-            foreach ($this->response['list_of_urls'][0] as $domainName => $domainPosition) {
-                $this->response['list_of_urls'][0][$domainName] = $domainPosition + 1;
+            $rank        = 0;
+            if (!empty($this->response['list_of_urls'][0])){
+                foreach ($this->response['list_of_urls'][0] as $domainName => $domainPosition) {
+                    $this->response['list_of_urls'][0][$domainName] = $domainPosition + 1;
+                }
             }
 
             $naturalResults                = $this->response['competition'];
