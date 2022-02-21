@@ -18,7 +18,9 @@ class Misspelling implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterf
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->getAttribute('class') == 'p64x9c card-section KDCVqf'
+        if (
+            $node->getAttribute('class') == 'p64x9c card-section KDCVqf' ||
+            $node->getAttribute('class') == 'gqLncc card-section KDCVqf'
         ) {
             return self::RULE_MATCH_MATCHED;
         }

@@ -18,7 +18,9 @@ class MisspellingMobile implements \Serps\SearchEngine\Google\Parser\ParsingRule
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->getAttribute('class') == 'p64x9c card-section KDCVqf mnr-c'
+        if (
+            $node->getAttribute('class') == 'p64x9c card-section KDCVqf mnr-c' ||
+            $node->getAttribute('class') == 'gqLncc card-section KDCVqf mnr-c'
         ) {
             return self::RULE_MATCH_MATCHED;
         }
