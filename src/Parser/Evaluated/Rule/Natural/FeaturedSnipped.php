@@ -34,6 +34,11 @@ class FeaturedSnipped implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
         $results = [];
 
         foreach ($naturalResultNodes  as $featureSnippetNode) {
+            $isHidden = $googleDOM->getXpath()->query("ancestor::g-accordion-expander", $featureSnippetNode);
+            if ($isHidden->length >  0) {
+                continue;
+            }
+
             $aTag = $googleDOM->getXpath()->query("descendant::a", $featureSnippetNode);
 
             if ($aTag->length == 0) {
