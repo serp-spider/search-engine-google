@@ -19,8 +19,7 @@ class MisspellingMobile implements \Serps\SearchEngine\Google\Parser\ParsingRule
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if (
-            $node->getAttribute('class') == 'p64x9c card-section KDCVqf mnr-c' ||
-            $node->getAttribute('class') == 'gqLncc card-section KDCVqf mnr-c'
+            $node->getAttribute('id') =='oFNiHe'
         ) {
             return self::RULE_MATCH_MATCHED;
         }
@@ -31,8 +30,14 @@ class MisspellingMobile implements \Serps\SearchEngine\Google\Parser\ParsingRule
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $resultSet->addItem(new BaseResult(NaturalResultType::MISSPELING_MOBILE, [
-            $googleDOM->getXpath()->query("descendant::a", $node)->item(0)->textContent
-        ]));
+
+        $mispellingNode = $googleDOM->getXpath()->query("descendant::*[contains(concat(' ', normalize-space(@class), ' '), ' card-section KDCVqf ')]", $node);
+
+        if ($mispellingNode->length > 0) {
+            $resultSet->addItem(new BaseResult(NaturalResultType::MISSPELLING, [
+                $googleDOM->getXpath()->query("descendant::a", $mispellingNode->item(0))->item(0)->textContent
+            ]));
+        }
+
     }
 }
