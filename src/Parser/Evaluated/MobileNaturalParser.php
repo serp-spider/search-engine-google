@@ -89,7 +89,7 @@ class MobileNaturalParser extends AbstractParser
         //div[@class='hNKF2b'] = hotels
         //div[@class='lr_container wDYxhc yc7KLc'] = definitions
         //div[contains(@id, 'isl')]  = recipes
-        //@class='p64x9c card-section KDCVqf mnr-c' - misspelings
+        //@id='oFNiHe' - misspelings
         //@class='ULktNd rQUFld mnr-c rrecc' - directions
 
         return $googleDom->xpathQuery("//*[@id='iur' or
@@ -118,7 +118,7 @@ class MobileNaturalParser extends AbstractParser
             div[@class='lr_container wDYxhc yc7KLc'] or
             div[contains(@id, 'isl')] or
             contains(@class, 'kp-wholepage') or
-            @class = 'p64x9c card-section KDCVqf mnr-c' or
+            @id = 'oFNiHe' or
             @class='ULktNd rQUFld mnr-c rrecc'
         ][not(self::script) and not(self::style)]");
     }

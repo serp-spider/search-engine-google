@@ -90,7 +90,7 @@ class NaturalParser extends AbstractParser
         //div[@class='CH6Bmd']/div[@class='ntKMYc P2hV9e'] = hotels
         //@class='lr_container yc7KLc mBNN3d' - definitions
         //@class='LQQ1Bd' - flights
-        //@class = 'p64x9c card-section KDCVqf' - misspelings
+        //@id = 'oFNiHe' - misspelings
         //@id = 'result-stats' - no of results
         //@class = 'ULktNd rQUFld rrecc' - directions
 //        return $googleDom->xpathQuery("//*[@id='result-stats']/*[not(self::script) and not(self::style)]/*");
@@ -116,7 +116,7 @@ class NaturalParser extends AbstractParser
             contains(@class, 'gws-plugins-horizon-jobs__li-ed') or
             g-section-with-header[@class='yG4QQe TBC9ub'] or
             @id='kp-wp-tab-cont-Latest' or
-            @class = 'p64x9c card-section KDCVqf' or
+            @id = 'oFNiHe' or
             @id='result-stats' or
             @id='kp-wp-tab-Latest' or
             @class = 'ULktNd rQUFld rrecc' or
