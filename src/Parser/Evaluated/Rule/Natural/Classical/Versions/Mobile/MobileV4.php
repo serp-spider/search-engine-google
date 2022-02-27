@@ -16,7 +16,8 @@ class MobileV4 implements ParsingRuleByVersionInterface
         $aTag = $dom->xpathQuery("descendant::*[
         contains(concat(' ', normalize-space(@class), ' '), ' C8nzq BmP5tf ') or
         @class='sXtWJb' or
-        contains(concat(' ', normalize-space(@class), ' '), ' cz3goc BmP5tf ')
+        (contains(concat(' ', normalize-space(@class), ' '), ' BmP5tf ') and
+         contains(concat(' ', normalize-space(@class), ' '), ' cz3goc '))
         ]", $organicResult);
 
         if (empty($aTag) && $organicResultObject->getLink() === null) {
