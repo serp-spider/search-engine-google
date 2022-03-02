@@ -110,6 +110,21 @@ class TranslateService
 
             return;
         }
+        if (empty(json_encode($item->url))) {
+            $item->url = utf8_encode($item->url);
+        }
+        if (empty(json_encode($item->description))) {
+            $item->description = utf8_encode($item->description);
+        }
+
+        if (empty(json_encode($item->title))) {
+            $item->title = utf8_encode($item->title);
+        }
+
+        if (empty($item->url)) {
+            $rank--;
+            return;
+        }
 
         $matchedSubdomains = $this->matchSubdomainsOrUrlAlias($item);
 
