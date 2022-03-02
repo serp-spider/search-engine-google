@@ -110,29 +110,29 @@ class TranslateService
 
             return;
         }
+        $url = $item->url;
         if (empty(json_encode($item->url))) {
-            $item->url = utf8_encode($item->url);
+            $url = utf8_encode($item->url);
         }
+        $description =$item->description;
         if (empty(json_encode($item->description))) {
-            $item->description = utf8_encode($item->description);
+            $description = utf8_encode($item->description);
         }
 
+        $title = $item->title;
         if (empty(json_encode($item->title))) {
-            $item->title = utf8_encode($item->title);
+            $title = utf8_encode($item->title);
         }
 
-        if (empty($item->url)) {
+        if (empty($url)) {
             $rank--;
             return;
         }
 
         $matchedSubdomains = $this->matchSubdomainsOrUrlAlias($item);
+        $domainName  = $this->extractDomain($url);
 
-        $title       = $item->title;
-        $description = $item->description;
-        $domainName  = $this->extractDomain($item->url);
-
-        if ($rank == 1 && strpos($item->url, 'wikipedia.org') !== false) {
+        if ($rank == 1 && strpos($url, 'wikipedia.org') !== false) {
             $this->response[NaturalResultType::WIKI] = 1;
         }
 
@@ -141,7 +141,7 @@ class TranslateService
             ( $domainName === $this->siteHost || $domainName === $this->urlAlias || !empty($matchedSubdomains[0]))
         ) {
             $this->response['position']     = $rank;
-            $this->response['landing_page'] = $item->url;
+            $this->response['landing_page'] = $url;
         }
 
         if (empty($this->response['list_of_urls'][0][$domainName])) {
@@ -158,7 +158,7 @@ class TranslateService
 
         $competitionData = [
             "url"               => $domainName,
-            "full_landing_page" => $item->url,
+            "full_landing_page" => $url,
             "height"            => "0",
             "title"             => $title,
             "description"       => $description,
