@@ -45,7 +45,7 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
             $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, []));
             $this->monolog->error('Cannot identify results in html page ', ['html'=>$node->ownerDocument->saveHTML($node), ]);
 
-           return;
+            return;
         }
 
         $k = 0;
@@ -75,10 +75,13 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
     protected function skiResult(GoogleDom $dom, DomElement $organicResult)
     {
         // Organic result is identified as top ads
-        if($organicResult->parentNode->parentNode->parentNode->getAttribute('id') =='tads') {
+        if($dom->xpathQuery("ancestor::*[contains(concat(' ', normalize-space(@id), ' '), ' tads')]", $organicResult)->length > 0) {
             return true;
         }
 
+        if($dom->xpathQuery("ancestor::*[contains(concat(' ', normalize-space(@id), ' '), ' tvcap ')]", $organicResult)->length > 0) {
+            return true;
+        }
         // Knowledge graph, sometimes, is identified as an organic result
         if ($organicResult->hasClasses(['kp-wholepage'])) {
             return true;

@@ -78,6 +78,16 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
 
     protected function skiResult(GoogleDom $googleDOM, DomElement $organicResult)
     {
+
+        // Organic result is identified as top ads
+        if($googleDOM->xpathQuery("ancestor::*[contains(concat(' ', normalize-space(@id), ' '), ' tads')]", $organicResult)->length > 0) {
+            return true;
+        }
+
+        if($googleDOM->xpathQuery("ancestor::*[contains(concat(' ', normalize-space(@id), ' '), ' tvcap ')]", $organicResult)->length > 0) {
+            return true;
+        }
+
         // Recipes are identified as organic result
         if ($organicResult->getChildren()->hasClasses(['rrecc'])) {
             return true;
