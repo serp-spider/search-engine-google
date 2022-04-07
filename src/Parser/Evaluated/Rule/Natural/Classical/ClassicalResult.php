@@ -84,6 +84,10 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
             return true;
         }
 
+        if ($googleDOM->xpathQuery("ancestor::g-accordion-expander ", $organicResult)->length >0) {
+            return true;
+        }
+
         if($googleDOM->xpathQuery("ancestor::*[contains(concat(' ', normalize-space(@id), ' '), ' tvcap ')]", $organicResult)->length > 0) {
             return true;
         }
