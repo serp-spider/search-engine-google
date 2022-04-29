@@ -43,7 +43,7 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
         if ($naturalResults->length == 0) {
             $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, []));
-            $this->monolog->error('Cannot identify results in html page ', ['html'=>$node->ownerDocument->saveHTML($node), ]);
+            $this->monolog->error('Cannot identify results in html page', ['class' => self::class]);
 
             return;
         }
