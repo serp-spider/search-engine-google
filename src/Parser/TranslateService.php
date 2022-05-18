@@ -292,6 +292,9 @@ class TranslateService
             $this->response[NaturalResultType::MAPS_COORDONATES] = $item->getData();
         }
 
+        if ($item->is(NaturalResultType::VIDEO_CAROUSEL) || $item->is(NaturalResultType::VIDEO_CAROUSEL_MOBILE)) {
+            $this->response[NaturalResultType::VIDEO_CAROUSEL] = $item->getData();
+        }
     }
 
     /**

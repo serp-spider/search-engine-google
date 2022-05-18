@@ -27,6 +27,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Recipes;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ResultsNo;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStories;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Videos;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideoCarousel;
 
 /**
  * Parses natural results from a google SERP
@@ -60,7 +61,8 @@ class NaturalParser extends AbstractParser
             new ResultsNo(),
             new Directions(),
             new MapsCoords(),
-            new Misspelling()
+            new Misspelling(),
+            new VideoCarousel()
         ];
     }
 
@@ -120,7 +122,8 @@ class NaturalParser extends AbstractParser
             @id='result-stats' or
             @id='kp-wp-tab-Latest' or
             @class = 'ULktNd rQUFld rrecc' or
-            @class = 'H93uF'
+            @class = 'H93uF' or
+            video-voyager 
         ][not(self::script) and not(self::style)]");
     }
 }

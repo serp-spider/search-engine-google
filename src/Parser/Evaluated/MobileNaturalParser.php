@@ -23,6 +23,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ProductListingMobile
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Questions;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Recipes;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesMobile;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideoCarouselMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideosMobile;
 
 /**
@@ -39,24 +40,25 @@ class MobileNaturalParser extends AbstractParser
     protected function generateRules()
     {
         return [
-            new ClassicalResultMobile($this->logger),
-            new ClassicalResultMobileV2($this->logger),
-            new ImageGroup(),
-            new MapsMobile(),
-            new Questions(),
-            new TopStoriesMobile(),
-            new ProductListingMobile(),
-            new KnowledgeGraphMobile(),
-            new AdsTopMobile(),
-            new AppPackMobile(),
-            new FeaturedSnipped(),
-            new Recipes(),
-            new Flights(),
-            new HotelsMobile(),
-            new DefinitionsMobile(),
-            new VideosMobile(),
-            new MisspellingMobile(),
-            new DirectionsMobile()
+//            new ClassicalResultMobile($this->logger),
+//            new ClassicalResultMobileV2($this->logger),
+//            new ImageGroup(),
+//            new MapsMobile(),
+//            new Questions(),
+//            new TopStoriesMobile(),
+//            new ProductListingMobile(),
+//            new KnowledgeGraphMobile(),
+//            new AdsTopMobile(),
+//            new AppPackMobile(),
+//            new FeaturedSnipped(),
+//            new Recipes(),
+//            new Flights(),
+//            new HotelsMobile(),
+//            new DefinitionsMobile(),
+//            new VideosMobile(),
+//            new MisspellingMobile(),
+//            new DirectionsMobile(),
+            new VideoCarouselMobile()
         ];
     }
 
@@ -119,7 +121,9 @@ class MobileNaturalParser extends AbstractParser
             div[contains(@id, 'isl')] or
             contains(@class, 'kp-wholepage') or
             @id = 'oFNiHe' or
-            @class='ULktNd rQUFld mnr-c rrecc'
+            @class='ULktNd rQUFld mnr-c rrecc' or
+            video-voyager or
+            inline-video
         ][not(self::script) and not(self::style)]");
     }
 }
