@@ -23,7 +23,7 @@ class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRu
             return self::RULE_MATCH_MATCHED;
         }
 
-        if ($node->getChildren()->item(1) == 'inline-video') {
+        if ($node->getChildren()->item(1)->getTagName()  == 'inline-video') {
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -33,6 +33,18 @@ class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRu
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL_MOBILE, []));
-    }
+        $aHrefs = $googleDOM->getXpath()->query('descendant::a[@class="ygih0"]', $node);
+        if ($aHrefs->length == 0) {
+            return;
+        }
+
+        $items = [];
+
+        foreach ($aHrefs as $url) {
+            $items[] = [
+                'url'    => $url->getAttribute('href'),
+                'height' => '',
+            ];
+        }
+        $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL_MOBILE, $items));    }
 }

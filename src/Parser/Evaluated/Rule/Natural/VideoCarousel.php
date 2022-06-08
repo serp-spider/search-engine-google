@@ -30,6 +30,20 @@ class VideoCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRuleInte
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL, []));
+        $aHrefs = $googleDOM->getXpath()->query('descendant::a[@class="X5OiLe"]', $node);
+
+        if ($aHrefs->length == 0) {
+            return;
+        }
+
+        $items = [];
+
+        foreach ($aHrefs as $url) {
+            $items[] = [
+                'url'    => $url->getAttribute('href'),
+                'height' => '',
+            ];
+        }
+        $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL, $items));
     }
 }
