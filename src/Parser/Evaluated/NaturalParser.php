@@ -62,7 +62,7 @@ class NaturalParser extends AbstractParser
             new Directions(),
             new MapsCoords(),
             new Misspelling(),
-//            new VideoCarousel()
+            new VideoCarousel()
         ];
     }
 
@@ -123,7 +123,7 @@ class NaturalParser extends AbstractParser
             @id='kp-wp-tab-Latest' or
             @class = 'ULktNd rQUFld rrecc' or
             @class = 'H93uF' or
-            video-voyager 
+            video-voyager
         ][not(self::script) and not(self::style)]");
     }
 }

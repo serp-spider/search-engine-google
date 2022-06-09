@@ -27,7 +27,8 @@ class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRu
             return self::RULE_MATCH_NOMATCH;
         }
 
-        if ($node->getChildren()->item(1)->getTagName()  == 'inline-video' || $node->getChildren()->item(0)->getTagName() == 'video-voyager') {
+        if (($node->getChildren()->item(1) && $node->getChildren()->item(1)->getTagName()  == 'inline-video')
+            || ($node->getChildren()->item(0) && $node->getChildren()->item(0)->getTagName() == 'video-voyager')) {
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -56,7 +57,7 @@ class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRu
                 continue;
             }
             $items[] = [
-                'url'    => $url->getAttribute('href'),
+                'url'    => $theUrl,
                 'height' => '',
             ];
         }
@@ -70,7 +71,7 @@ class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRu
     {
         $child = $googleDOM->getXpath()->query('descendant::div[@class="O6s9Nd"]', $node);
 
-        if (empty($child) || empty($child->length)) {
+        if (empty($child) || empty($child->item(1))) {
             return;
         }
 
