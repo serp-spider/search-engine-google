@@ -62,7 +62,7 @@ class NaturalParser extends AbstractParser
             new Directions(),
             new MapsCoords(),
             new Misspelling(),
-            new VideoCarousel()
+//            new VideoCarousel()
         ];
     }
 

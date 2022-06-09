@@ -58,7 +58,7 @@ class MobileNaturalParser extends AbstractParser
             new VideosMobile(),
             new MisspellingMobile(),
             new DirectionsMobile(),
-            new VideoCarouselMobile()
+//            new VideoCarouselMobile()
         ];
     }
 
