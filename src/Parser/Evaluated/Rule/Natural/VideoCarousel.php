@@ -9,6 +9,7 @@ use Serps\Core\Media\MediaFactory;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\Core\UrlArchive;
+use Serps\Exception;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
@@ -18,8 +19,16 @@ class VideoCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRuleInte
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
+        $tagName = '';
+        
+        try {
+            $tagName = $node->firstChild->tagName;
+        } catch (Exception $e) {
+            return self::RULE_MATCH_NOMATCH;
+        }
+        
         if (
-            $node->firstChild->tagName == 'video-voyager'
+            $tagName == 'video-voyager'
         ) {
             return self::RULE_MATCH_MATCHED;
         }

@@ -9,6 +9,7 @@ use Serps\Core\Media\MediaFactory;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\Core\UrlArchive;
+use Serps\Exception;
 use Serps\SearchEngine\Google\Page\GoogleDom;
 use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 use Serps\SearchEngine\Google\NaturalResultType;
@@ -20,14 +21,22 @@ class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRu
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
 
-        if (isset($node->firstChild->tagName) && $node->firstChild->tagName == 'video-voyager') {
-            return self::RULE_MATCH_MATCHED;
-        }
-
         if ($node->getChildren()->item(1)->getTagName()  == 'inline-video') {
             return self::RULE_MATCH_MATCHED;
         }
 
+        $tagName = '';
+
+        try {
+            $tagName = $node->firstChild->tagName;
+        } catch (Exception $e) {
+            return self::RULE_MATCH_NOMATCH;
+        }
+        
+        if ($tagName == 'video-voyager') {
+            return self::RULE_MATCH_MATCHED;
+        }
+        
         return self::RULE_MATCH_NOMATCH;
     }
 
