@@ -20,16 +20,15 @@ class VideoCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRuleInte
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         $tagName = '';
-        
-        try {
-            $tagName = $node->firstChild->tagName;
-        } catch (Exception $e) {
+        $firstChild = $node->firstChild;
+
+        if (empty($firstChild)) {
             return self::RULE_MATCH_NOMATCH;
         }
         
-        if (
-            $tagName == 'video-voyager'
-        ) {
+        $tagName = $firstChild->tagName;
+        
+        if ($tagName == 'video-voyager') {
             return self::RULE_MATCH_MATCHED;
         }
 

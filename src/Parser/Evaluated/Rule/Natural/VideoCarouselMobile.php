@@ -21,22 +21,16 @@ class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRu
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
 
-        if ($node->getChildren()->item(1)->getTagName()  == 'inline-video') {
-            return self::RULE_MATCH_MATCHED;
-        }
+        $children = $node->getChildren();
 
-        $tagName = '';
-
-        try {
-            $tagName = $node->firstChild->tagName;
-        } catch (Exception $e) {
+        if (empty($children)) {
             return self::RULE_MATCH_NOMATCH;
         }
-        
-        if ($tagName == 'video-voyager') {
+
+        if ($node->getChildren()->item(1)->getTagName()  == 'inline-video' || $node->getChildren()->item(0)->getTagName() == 'video-voyager') {
             return self::RULE_MATCH_MATCHED;
         }
-        
+
         return self::RULE_MATCH_NOMATCH;
     }
 
@@ -68,7 +62,13 @@ class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRu
 
     public function version2(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $url = ((($node->getChildren()->item(1))->getChildren()->item(0))->getChildren()->item(0))->getChildren()->item(0)->getAttribute('data-id');
+        $child = $googleDOM->getXpath()->query('descendant::div[@class="O6s9Nd"]', $node);
+
+        if (empty($child)) {
+            return;
+        }
+
+        $url = $child->item(1)->getAttribute('data-id');
 
         if (empty($url)) {
             return;
