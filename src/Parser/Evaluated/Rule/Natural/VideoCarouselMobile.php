@@ -15,6 +15,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
+    protected $steps = ['version1', 'version2'];
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
@@ -30,12 +31,18 @@ class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRu
         return self::RULE_MATCH_NOMATCH;
     }
 
+    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
+    {
+        foreach ($this->steps as $functionName) {
+            call_user_func_array([$this, $functionName], [$googleDOM, $node, $resultSet, $isMobile]);
+        }
+    }
 
-    public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
+    public function version1(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
         $aHrefs = $googleDOM->getXpath()->query('descendant::a[@class="ygih0"]', $node);
         if ($aHrefs->length == 0) {
-            return;
+           return;
         }
 
         $items = [];
@@ -46,5 +53,24 @@ class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRu
                 'height' => '',
             ];
         }
-        $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL_MOBILE, $items));    }
+
+        $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL_MOBILE, $items));
+    }
+
+    public function version2(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
+    {
+        $url = ((($node->getChildren()->item(1))->getChildren()->item(0))->getChildren()->item(0))->getChildren()->item(0)->getAttribute('data-id');
+
+        if (empty($url)) {
+            return;
+        }
+
+        $items[] = [
+            'url' => $url,
+            'height' => '',
+        ];
+
+        $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL_MOBILE, $items));
+    }
+
 }
