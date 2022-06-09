@@ -51,20 +51,26 @@ class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRu
         $items = [];
 
         foreach ($aHrefs as $url) {
+            $theUrl = $url->getAttribute('href');
+            if (empty($theUrl)) {
+                continue;
+            }
             $items[] = [
                 'url'    => $url->getAttribute('href'),
                 'height' => '',
             ];
         }
+        if (!empty($items)) {
+            $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL_MOBILE, $items));
+        }
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL_MOBILE, $items));
     }
 
     public function version2(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
         $child = $googleDOM->getXpath()->query('descendant::div[@class="O6s9Nd"]', $node);
 
-        if (empty($child)) {
+        if (empty($child) || empty($child->length)) {
             return;
         }
 

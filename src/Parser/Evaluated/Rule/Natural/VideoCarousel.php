@@ -47,11 +47,17 @@ class VideoCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRuleInte
         $items = [];
 
         foreach ($aHrefs as $url) {
+            $theUrl = $url->getAttribute('href');
+            if (empty($theUrl)) {
+                continue;
+            }
             $items[] = [
-                'url'    => $url->getAttribute('href'),
+                'url'    => $theUrl,
                 'height' => '',
             ];
         }
-        $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL, $items));
+        if (!empty($items)) {
+            $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL, $items));
+        }
     }
 }
