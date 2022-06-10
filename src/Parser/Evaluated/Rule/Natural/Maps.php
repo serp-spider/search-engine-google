@@ -11,7 +11,7 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class Maps implements ParsingRuleInterface
 {
-    protected $steps = ['version1', 'version2', 'version3', 'version4'];
+    protected $steps = ['version1', 'version2', 'version3'];
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
@@ -99,25 +99,5 @@ class Maps implements ParsingRuleInterface
         }
 
         $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
-    }
-
-    protected function version4(GoogleDom  $googleDom, \DomElement $node, IndexedResultSet $resultSet, $isMobile) {
-        $ratingStars = $googleDOM->getXpath()->query("descendant::div[@class='rllt__details']", $node);
-
-        if ($ratingStars->length == 0) {
-            return;
-        }
-
-        foreach ($ratingStars as $ratingStarNode) {
-            if (empty($ratingStarNode->parentNode->childNodes[1])) {
-                continue;
-            }
-
-            $spanElements['title'][] = $ratingStarNode->parentNode->childNodes[1]->textContent;
-        }
-
-        if(!empty($spanElements)) {
-            $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
-        }
     }
 }
