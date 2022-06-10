@@ -121,7 +121,8 @@ class NaturalParser extends AbstractParser
             @id='result-stats' or
             @id='kp-wp-tab-Latest' or
             @class = 'ULktNd rQUFld rrecc' or
-            @class = 'H93uF'
+            @class = 'H93uF' or
+            @class = 'o8ebK'
         ][not(self::script) and not(self::style)]");
     }
 }

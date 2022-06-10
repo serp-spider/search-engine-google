@@ -2,6 +2,7 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
+use Serps\Core\Dom\DomXpath;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
@@ -12,7 +13,7 @@ class MapsCoords implements ParsingRuleInterface
 {
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->getAttribute('class') == 'H93uF') {
+        if ($node->getAttribute('class') == 'H93uF' || $node->getAttribute('class') == 'o8ebK') {
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -21,7 +22,8 @@ class MapsCoords implements ParsingRuleInterface
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
     {
-        $aNode = $node->getChildren()->item(0);
+
+        $aNode = $node->getElementsByTagName('a')->item(0);
         $href = $aNode->getAttribute('href');
         preg_match('/rllag=([^,]*),([^,]*)/', $href, $coords);
 
@@ -31,4 +33,5 @@ class MapsCoords implements ParsingRuleInterface
             $resultSet->addItem(new BaseResult(NaturalResultType::MAPS_COORDONATES , $item));
         }
     }
+
 }
