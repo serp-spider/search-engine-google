@@ -2,6 +2,7 @@
 
 namespace Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural;
 
+use Serps\Core\Dom\DomElement;
 use Serps\Core\Serp\BaseResult;
 use Serps\Core\Serp\IndexedResultSet;
 use Serps\SearchEngine\Google\Page\GoogleDom;
@@ -10,11 +11,11 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class Maps implements ParsingRuleInterface
 {
-    protected $steps = ['version1', 'version2', 'version3'];
+    protected $steps = ['version1', 'version2', 'version3', 'version4'];
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->getAttribute('class') == 'C7r6Ue') {
+        if ($node->getAttribute('class') == 'C7r6Ue' || str_contains($node->getAttribute('class'),  'WVGKWb')) {
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -98,5 +99,25 @@ class Maps implements ParsingRuleInterface
         }
 
         $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
+    }
+
+    protected function version4(GoogleDom  $googleDom, \DomElement $node, IndexedResultSet $resultSet, $isMobile) {
+        $ratingStars = $googleDOM->getXpath()->query("descendant::div[@class='rllt__details']", $node);
+
+        if ($ratingStars->length == 0) {
+            return;
+        }
+
+        foreach ($ratingStars as $ratingStarNode) {
+            if (empty($ratingStarNode->parentNode->childNodes[1])) {
+                continue;
+            }
+
+            $spanElements['title'][] = $ratingStarNode->parentNode->childNodes[1]->textContent;
+        }
+
+        if(!empty($spanElements)) {
+            $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
+        }
     }
 }
