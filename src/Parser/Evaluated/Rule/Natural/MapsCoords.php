@@ -24,6 +24,9 @@ class MapsCoords implements ParsingRuleInterface
     {
 
         $aNode = $node->getElementsByTagName('a')->item(0);
+        if (empty($aNode)) {
+            return;
+        }
         $href = $aNode->getAttribute('href');
         preg_match('/rllag=([^,]*),([^,]*)/', $href, $coords);
 
