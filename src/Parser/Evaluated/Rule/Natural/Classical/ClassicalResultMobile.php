@@ -39,7 +39,7 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
     public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ')]", $node);
+        $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ') or contains(concat(' ', normalize-space(@class), ' '), ' Ww4FFb ')]", $node);
 
         if ($naturalResults->length == 0) {
             $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, []));
@@ -92,6 +92,9 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
             return true;
         }
 
+        if($dom->xpathQuery("ancestor::*[contains(concat(' ', normalize-space(@id), ' '), '  mnr-c ')]", $organicResult)->length > 0) {
+            return true;
+        }
         // Inside div with class= 'mnr-c xpd O9g5cc uUPGi' are more divs with 'mnr-c xpd O9g5cc uUPGi'
         // Should ignore from processing parent result and process only children and avoid duplicate results
         if($dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ')]", $organicResult)->length >0) {
