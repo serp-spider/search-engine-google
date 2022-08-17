@@ -17,6 +17,8 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
     protected $steps = ['version1', 'version2'];
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
@@ -62,7 +64,7 @@ class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRu
             ];
         }
         if (!empty($items)) {
-            $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL_MOBILE, $items));
+            $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL_MOBILE, $items, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
         }
 
     }
@@ -86,7 +88,7 @@ class VideoCarouselMobile implements \Serps\SearchEngine\Google\Parser\ParsingRu
             'height' => '',
         ];
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL_MOBILE, $items));
+        $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL_MOBILE, $items, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 
 }

@@ -9,6 +9,10 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class SiteLinksSmall implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
+
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         return self::RULE_MATCH_MATCHED;
@@ -29,7 +33,7 @@ class SiteLinksSmall implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
         }
 
         $resultSet->addItem(
-            new BaseResult(NaturalResultType::SITE_LINKS_SMALL, $items)
+            new BaseResult(NaturalResultType::SITE_LINKS_SMALL, $items, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
         );
     }
 }

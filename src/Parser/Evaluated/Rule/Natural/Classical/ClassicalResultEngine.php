@@ -41,7 +41,7 @@ class ClassicalResultEngine
 
         if ($organicResultObject->getLink() === null || $organicResultObject->getTitle() === null) {
 
-            $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, []));
+            $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, [], $organicResult));
             //$this->monolog->error('Cannot identify natural result', ['class' => self::class]);
 
             return;
@@ -51,12 +51,14 @@ class ClassicalResultEngine
             return;
         }
 
-        $resultSet->addItem(new BaseResult([$this->resultType],
+        $resultSet->addItem(new BaseResult(
+            [$this->resultType],
             [
                 'title'       => $organicResultObject->getTitle(),
                 'url'         => $organicResultObject->getLink(),
                 'description' => $organicResultObject->getDescription(),
-            ]
+            ],
+            $organicResult
         ));
     }
 }

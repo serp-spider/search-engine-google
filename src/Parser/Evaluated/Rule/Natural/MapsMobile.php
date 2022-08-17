@@ -11,6 +11,8 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class MapsMobile implements ParsingRuleInterface
 {
     protected $steps = ['version1', 'version2'];
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
@@ -42,7 +44,7 @@ class MapsMobile implements ParsingRuleInterface
 
         $spanElements['title'] = array_unique($spanElements['title']);
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
+        $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 
     protected function version1(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile)
@@ -59,6 +61,6 @@ class MapsMobile implements ParsingRuleInterface
             $spanElements['title'][] = $ratingStarNode->parentNode->parentNode->childNodes[0]->childNodes[0]->textContent;
         }
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::MAP_MOBILE, $spanElements));
+        $resultSet->addItem(new BaseResult(NaturalResultType::MAP_MOBILE, $spanElements, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 }

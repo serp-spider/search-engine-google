@@ -9,6 +9,9 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class FeaturedSnipped implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->getAttribute('class') == 'xpdopen') {
@@ -55,7 +58,7 @@ class FeaturedSnipped implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
 
         if(!empty($results)) {
             $resultSet->addItem(
-                new BaseResult($this->getType($isMobile), $results)
+                new BaseResult($this->getType($isMobile), $results, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
             );
         }
     }

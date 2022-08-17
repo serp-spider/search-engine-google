@@ -15,6 +15,9 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class MapMobile implements ParsingRuleInterface
 {
 
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+    
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($dom->cssQuery('img.wfAGXd', $node)->length == 1) {
@@ -41,7 +44,7 @@ class MapMobile implements ParsingRuleInterface
 
         ];
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $item));
+        $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $item, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 
     private function parseItem($localPack, GoogleDom $dom)

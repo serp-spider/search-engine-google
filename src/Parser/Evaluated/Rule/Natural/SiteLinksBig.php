@@ -9,6 +9,10 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class SiteLinksBig implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
+
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         return self::RULE_MATCH_MATCHED;
@@ -30,7 +34,7 @@ class SiteLinksBig implements \Serps\SearchEngine\Google\Parser\ParsingRuleInter
         }
 
         $resultSet->addItem(
-            new BaseResult(NaturalResultType::SITE_LINKS_BIG, $items)
+            new BaseResult(NaturalResultType::SITE_LINKS_BIG, $items, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
         );
     }
 }

@@ -9,6 +9,9 @@ use Serps\SearchEngine\Google\Page\GoogleDom;
 
 class KnowledgeGraph implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = true;
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($dom->cssQuery('.kp-wholepage.kp-wholepage-osrp', $node)->length == 1) {
@@ -45,7 +48,11 @@ class KnowledgeGraph implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
             $data['title']= $this->detectGeneralPresentationText($googleDOM, $group);
         }
 
-        $resultSet->addItem(new BaseResult($this->getType($isMobile), $data));
+        if ($isMobile) {
+            $this->hasSideSerpFeaturePosition = false;
+        }
+
+        $resultSet->addItem(new BaseResult($this->getType($isMobile), $data, $group, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 
     protected function detectGeneralPresentationText(GoogleDom $googleDOM, \DomElement $group)

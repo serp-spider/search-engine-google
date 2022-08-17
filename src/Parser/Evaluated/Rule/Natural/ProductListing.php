@@ -10,6 +10,10 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class ProductListing implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
+
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+    
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->hasClass('commercial-unit-desktop-top') || $node->hasClass('cu-container')) {
@@ -46,7 +50,7 @@ class ProductListing implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
 
         if (!empty($items)) {
             $resultSet->addItem(
-                new BaseResult(NaturalResultType::PRODUCT_LISTING, $items)
+                new BaseResult(NaturalResultType::PRODUCT_LISTING, $items, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
             );
         }
     }

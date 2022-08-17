@@ -14,6 +14,10 @@ use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 
 class TopStoriesVertical implements ParsingRuleInterface
 {
+
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($dom->cssQuery('h3._MRj', $node)->length == 1
@@ -61,7 +65,10 @@ class TopStoriesVertical implements ParsingRuleInterface
     {
         $item = new BaseResult(
             [NaturalResultType::TOP_STORIES],
-            $this->parseNode($dom, $node)
+            $this->parseNode($dom, $node),
+            $node,
+            $this->hasSerpFeaturePosition,
+            $this->hasSideSerpFeaturePosition
         );
         $resultSet->addItem($item);
     }

@@ -12,6 +12,8 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class Maps implements ParsingRuleInterface
 {
     protected $steps = ['version1', 'version2', 'version3'];
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
@@ -57,7 +59,7 @@ class Maps implements ParsingRuleInterface
         }
 
         if(!empty($spanElements)) {
-            $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
+            $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
         }
     }
 
@@ -78,7 +80,7 @@ class Maps implements ParsingRuleInterface
         }
 
         if(!empty($spanElements)) {
-            $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
+            $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
         }
     }
 
@@ -98,6 +100,6 @@ class Maps implements ParsingRuleInterface
                 ->childNodes[0]->textContent;
         }
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements));
+        $resultSet->addItem(new BaseResult(NaturalResultType::MAP, $spanElements, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 }

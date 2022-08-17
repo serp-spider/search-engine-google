@@ -10,6 +10,8 @@ use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 class VideosMobile implements ParsingRuleInterface
 {
     protected $steps = ['version1', 'version2', 'version3'];
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
@@ -45,7 +47,7 @@ class VideosMobile implements ParsingRuleInterface
 
         $data[] = ['url' => $node->parentNode->getAttribute('href')];
 
-        $resultSet->addItem(new BaseResult([NaturalResultType::VIDEOS_MOBILE], $data));
+        $resultSet->addItem(new BaseResult([NaturalResultType::VIDEOS_MOBILE], $data, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 
     protected function version2(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
@@ -64,7 +66,7 @@ class VideosMobile implements ParsingRuleInterface
             $data[] = ['url'=>$url->getAttribute('href')];
         }
 
-        $resultSet->addItem(new BaseResult([NaturalResultType::VIDEOS_MOBILE], $data));
+        $resultSet->addItem(new BaseResult([NaturalResultType::VIDEOS_MOBILE], $data, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 
     protected function version3(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
@@ -83,6 +85,6 @@ class VideosMobile implements ParsingRuleInterface
             $data[] = ['url'=>$url->getAttribute('href')];
         }
 
-        $resultSet->addItem(new BaseResult([NaturalResultType::VIDEOS_MOBILE], $data));
+        $resultSet->addItem(new BaseResult([NaturalResultType::VIDEOS_MOBILE], $data, $nod, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 }

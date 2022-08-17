@@ -14,6 +14,9 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class TweetsCarousel implements ParsingRuleInterface
 {
 
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
 
@@ -43,7 +46,7 @@ class TweetsCarousel implements ParsingRuleInterface
                 'user'    => isset($match[0]) ? $match[0] : null
             ];
 
-            $item = new BaseResult(NaturalResultType::TWEETS_CAROUSEL, $data);
+            $item = new BaseResult(NaturalResultType::TWEETS_CAROUSEL, $data, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition);
             $resultSet->addItem($item);
         }
     }

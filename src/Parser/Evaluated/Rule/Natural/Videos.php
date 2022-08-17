@@ -18,6 +18,9 @@ use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 class Videos implements ParsingRuleInterface
 {
 
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->hasClass('e4xoPb')) {
@@ -45,6 +48,6 @@ class Videos implements ParsingRuleInterface
             ];
         }
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::VIDEOS, $items));
+        $resultSet->addItem(new BaseResult(NaturalResultType::VIDEOS, $items, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 }

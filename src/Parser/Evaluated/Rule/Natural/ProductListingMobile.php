@@ -10,6 +10,8 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Classical\Versions\S
 
 class ProductListingMobile extends SerpFeaturesVersions
 {
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
     protected $steps = ['version1', 'version2'];
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
@@ -37,7 +39,7 @@ class ProductListingMobile extends SerpFeaturesVersions
         }
 
         $resultSet->addItem(
-            new BaseResult(NaturalResultType::PRODUCT_LISTING_MOBILE, $items)
+            new BaseResult(NaturalResultType::PRODUCT_LISTING_MOBILE, $items, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
         );
     }
 
@@ -53,7 +55,7 @@ class ProductListingMobile extends SerpFeaturesVersions
         $items[] = ['url' => $productsNodes->item(0)->getAttribute('href')];
 
         $resultSet->addItem(
-            new BaseResult(NaturalResultType::PRODUCT_LISTING_MOBILE, $items)
+            new BaseResult(NaturalResultType::PRODUCT_LISTING_MOBILE, $items, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
         );
     }
 }

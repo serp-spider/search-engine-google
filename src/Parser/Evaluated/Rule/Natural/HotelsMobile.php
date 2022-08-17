@@ -16,6 +16,9 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class HotelsMobile implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
 
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->getAttribute('class') == 'hNKF2b'
@@ -39,6 +42,6 @@ class HotelsMobile implements \Serps\SearchEngine\Google\Parser\ParsingRuleInter
             }
         }
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::HOTELS_MOBILE, $item));
+        $resultSet->addItem(new BaseResult(NaturalResultType::HOTELS_MOBILE, $item, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 }

@@ -14,6 +14,9 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class AnswerBox implements ParsingRuleInterface
 {
 
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->getAttribute('class') == 'g mnr-c g-blk'
@@ -79,7 +82,10 @@ class AnswerBox implements ParsingRuleInterface
     {
         $item = new BaseResult(
             [NaturalResultType::ANSWER_BOX],
-            $this->parseNode($dom, $node)
+            $this->parseNode($dom, $node),
+            $node,
+            $this->hasSerpFeaturePosition,
+            $this->hasSideSerpFeaturePosition
         );
         $resultSet->addItem($item);
     }

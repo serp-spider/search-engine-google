@@ -24,6 +24,9 @@ use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 class PeopleAlsoAsk implements ParsingRuleInterface
 {
 
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+    
     public function match(GoogleDom $dom, DomElement $node)
     {
         if ($node->hasClasses(['kno-kp', 'mnr-c'])) {
@@ -54,6 +57,6 @@ class PeopleAlsoAsk implements ParsingRuleInterface
             }
         ];
 
-        $resultSet->addItem($a = new BaseResult(NaturalResultType::PEOPLE_ALSO_ASK, $data));
+        $resultSet->addItem($a = new BaseResult(NaturalResultType::PEOPLE_ALSO_ASK, $data, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 }

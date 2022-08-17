@@ -47,11 +47,11 @@ class AdsTopMobile extends AdsTop
         if (!empty($links)) {
 
             if ($node->getAttribute('id') == self::ADS_TOP_CLASS) {
-                $resultSet->addItem(new BaseResult(NaturalResultType::AdsTOP_MOBILE, $links));
+                $resultSet->addItem(new BaseResult(NaturalResultType::AdsTOP_MOBILE, $links, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
             }
 
             if ($node->getAttribute('id') == self::ADS_DOWN_CLASS) {
-                $resultSet->addItem(new BaseResult(NaturalResultType::AdsDOWN_MOBILE, $links));
+                $resultSet->addItem(new BaseResult(NaturalResultType::AdsDOWN_MOBILE, $links, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
             }
         }
     }

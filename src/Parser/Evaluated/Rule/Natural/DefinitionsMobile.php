@@ -16,6 +16,9 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class DefinitionsMobile implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
 
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+    
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->getAttribute('class') == 'lr_container wDYxhc yc7KLc'
@@ -29,6 +32,6 @@ class DefinitionsMobile implements \Serps\SearchEngine\Google\Parser\ParsingRule
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $resultSet->addItem(new BaseResult(NaturalResultType::DEFINITIONS_MOBILE, []));
+        $resultSet->addItem(new BaseResult(NaturalResultType::DEFINITIONS_MOBILE, [], $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 }

@@ -16,6 +16,9 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class Flights implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
 
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->getAttribute('class') == 'LQQ1Bd' && $node->getChildren()->count() != 0
@@ -38,5 +41,5 @@ class Flights implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
             }
         }
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::FLIGHTS, $item));    }
+        $resultSet->addItem(new BaseResult(NaturalResultType::FLIGHTS, $item, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));    }
 }

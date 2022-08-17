@@ -16,6 +16,9 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class ImageGroupCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
 
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+    
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($dom->cssQuery('._ekh image-viewer-group g-scrolling-carousel', $node)->length == 1) {
@@ -48,7 +51,7 @@ class ImageGroupCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRul
             }
         ];
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::IMAGE_GROUP, $item));
+        $resultSet->addItem(new BaseResult(NaturalResultType::IMAGE_GROUP, $item, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
     /**
      * @param GoogleDOM $googleDOM

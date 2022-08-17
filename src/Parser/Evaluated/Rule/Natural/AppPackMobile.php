@@ -9,6 +9,8 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class AppPackMobile implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->hasClass('qs-io')) {
@@ -28,7 +30,7 @@ class AppPackMobile implements \Serps\SearchEngine\Google\Parser\ParsingRuleInte
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
     {
         $resultSet->addItem(
-            new BaseResult(NaturalResultType::APP_PACK_MOBILE, [])
+            new BaseResult(NaturalResultType::APP_PACK_MOBILE, [], $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
         );
     }
 }

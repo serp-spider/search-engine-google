@@ -17,6 +17,9 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class VideoCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
 
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         $tagName = '';
@@ -25,9 +28,9 @@ class VideoCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRuleInte
         if (empty($firstChild)) {
             return self::RULE_MATCH_NOMATCH;
         }
-        
+
         $tagName = $firstChild->tagName;
-        
+
         if ($tagName == 'video-voyager') {
             return self::RULE_MATCH_MATCHED;
         }
@@ -57,7 +60,7 @@ class VideoCarousel implements \Serps\SearchEngine\Google\Parser\ParsingRuleInte
             ];
         }
         if (!empty($items)) {
-            $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL, $items));
+            $resultSet->addItem(new BaseResult(NaturalResultType::VIDEO_CAROUSEL, $items, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
         }
     }
 }

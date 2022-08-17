@@ -2,6 +2,7 @@
 
 namespace Serps\SearchEngine\Google\Parser;
 
+use Aws\Panorama\PanoramaClient;
 use Monolog\Logger;
 use Serps\SearchEngine\Google\NaturalResultType;
 
@@ -110,10 +111,7 @@ class TranslateService
 
             return;
         }
-        $url = $item->url;
-        if (empty(json_encode($item->url))) {
-            $url = utf8_encode($item->url);
-        }
+        $url = $this->parseItemUrl($item->url);
         $description =$item->description;
         if (empty(json_encode($item->description))) {
             $description = utf8_encode($item->description);
@@ -164,7 +162,7 @@ class TranslateService
             "description"       => $description,
             "video"             => "",
             "amp"               => "",
-
+            "node_path"         => $item->getNodePath()
         ];
 
         $this->response['competition'][(string)$rank] = $competitionData;
@@ -350,6 +348,11 @@ class TranslateService
             }
         }
 
+        $serpsPositionsService = new SerpFeaturesPositionService($results, $this->response['competition']);
+        $serpsPositionsService->identifySerpPositions();
+        $this->response['serp_features_positions'] = $serpsPositionsService->getSerpFeaturesPositions();
+        //$serpsPositionsService->outputSerpResultsForTest($options['keyword_name'], $options['mobile']);
+
         $this->response['list_of_urls'][0] = !empty($this->response['list_of_urls'][0]) ? array_reverse($this->response['list_of_urls'][0]):[];
         $this->response['competition'] = !empty($this->response['competition'])?array_reverse($this->response['competition'], true):[];
 
@@ -395,5 +398,12 @@ class TranslateService
 
             $this->processClassicalResult($featureSnippet, $rank, true);
         }
+    }
+
+    private function parseItemUrl($url) {
+        if (empty(json_encode($url))) {
+            $url = utf8_encode($url);
+        }
+        return $url;
     }
 }

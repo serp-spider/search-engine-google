@@ -11,6 +11,8 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class TopStories implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
+    private $hasSerpFeaturePosition = true;
+    private $hasSideSerpFeaturePosition = false;
     protected $steps = ['version1', 'version2', 'version3'];
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
@@ -63,7 +65,7 @@ class TopStories implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
 
         if (!empty($items)) {
             $resultSet->addItem(
-                new BaseResult($this->getType($isMobile), $items)
+                new BaseResult($this->getType($isMobile), $items, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
             );
         }
     }
@@ -93,7 +95,7 @@ class TopStories implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
         }
 
         if (!empty($items)) {
-            $resultSet->addItem(new BaseResult($this->getType($isMobile), $items));
+            $resultSet->addItem(new BaseResult($this->getType($isMobile), $items, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
         }
     }
 
@@ -134,7 +136,7 @@ class TopStories implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
         }
 
         if (!empty($items)) {
-            $resultSet->addItem(new BaseResult($this->getType($isMobile), $items));
+            $resultSet->addItem(new BaseResult($this->getType($isMobile), $items, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
         }
     }
 }

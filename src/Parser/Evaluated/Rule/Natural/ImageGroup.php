@@ -16,6 +16,9 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
 
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+    
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->getAttribute('id') == 'iur' &&
@@ -44,7 +47,7 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
         }
 
         $resultSet->addItem(
-            new BaseResult($this->getType($isMobile), $item)
+            new BaseResult($this->getType($isMobile), $item, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
         );
     }
 

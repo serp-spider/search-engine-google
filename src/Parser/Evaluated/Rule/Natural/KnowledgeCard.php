@@ -14,7 +14,9 @@ use Serps\SearchEngine\Google\Parser\ParsingRuleInterface;
 
 class KnowledgeCard implements ParsingRuleInterface
 {
-
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+    
     public function match(GoogleDom $dom, DomElement $node)
     {
         if ($node->hasClass('mnr-c') && $node->hasClass('kno-kp')) {
@@ -47,6 +49,6 @@ class KnowledgeCard implements ParsingRuleInterface
             }
         ];
 
-        $resultSet->addItem($a = new BaseResult(NaturalResultType::KNOWLEDGE, $data));
+        $resultSet->addItem($a = new BaseResult(NaturalResultType::KNOWLEDGE, $data, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 }

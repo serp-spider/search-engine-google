@@ -9,6 +9,9 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class AppPack implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->getAttribute('id') == 'extabar') {
@@ -24,7 +27,7 @@ class AppPack implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
             return;
         }
         $resultSet->addItem(
-            new BaseResult(NaturalResultType::APP_PACK, [])
+            new BaseResult(NaturalResultType::APP_PACK, [], $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
         );
     }
 }

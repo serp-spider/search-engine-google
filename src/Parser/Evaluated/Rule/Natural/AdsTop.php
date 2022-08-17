@@ -17,6 +17,8 @@ class AdsTop implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
     const ADS_TOP_CLASS  = 'tads';
     const ADS_DOWN_CLASS = 'tadsb';
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
@@ -65,11 +67,11 @@ class AdsTop implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
         if (!empty($links)) {
 
             if ($node->getAttribute('id') == self::ADS_TOP_CLASS) {
-                $resultSet->addItem(new BaseResult(NaturalResultType::AdsTOP, $links));
+                $resultSet->addItem(new BaseResult(NaturalResultType::AdsTOP, $links, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
             }
 
             if ($node->getAttribute('id') == self::ADS_DOWN_CLASS) {
-                $resultSet->addItem(new BaseResult(NaturalResultType::AdsDOWN, $links));
+                $resultSet->addItem(new BaseResult(NaturalResultType::AdsDOWN, $links, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
             }
         }
     }

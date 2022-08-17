@@ -9,6 +9,9 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class Recipes implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if (strpos($node->getAttribute('id'), 'isl_') !== false) {
@@ -28,7 +31,7 @@ class Recipes implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
                 $item['recipes_links'][] = ['link' => $urlNode->firstChild->getAttribute('href')];
             }
 
-            $resultSet->addItem(new BaseResult(NaturalResultType::RECIPES_GROUP , $item));
+            $resultSet->addItem(new BaseResult(NaturalResultType::RECIPES_GROUP , $item, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
         }
     }
 }

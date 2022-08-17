@@ -56,7 +56,7 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
 
         if ($naturalResults->length == 0) {
 
-            $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, []));
+            $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, [], $node));
             $this->monolog->error('Cannot identify results in html page', ['class' => self::class]);
 
             return;

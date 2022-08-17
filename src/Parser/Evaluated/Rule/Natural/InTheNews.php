@@ -15,6 +15,9 @@ use Serps\SearchEngine\Google\NaturalResultType;
 class InTheNews implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
 
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         $child = $node->firstChild;
@@ -39,7 +42,7 @@ class InTheNews implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfac
             $item['news'][] = $this->parseItem($googleDOM, $cardNode);
         }
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::IN_THE_NEWS, $item));
+        $resultSet->addItem(new BaseResult(NaturalResultType::IN_THE_NEWS, $item, $group, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
     /**
      * @param GoogleDOM $googleDOM

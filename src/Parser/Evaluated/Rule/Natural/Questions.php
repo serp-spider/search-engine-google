@@ -9,6 +9,9 @@ use Serps\SearchEngine\Google\NaturalResultType;
 
 class Questions implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 {
+    protected $hasSerpFeaturePosition = true;
+    protected $hasSideSerpFeaturePosition = false;
+    
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->hasClass('related-question-pair')) {
@@ -31,7 +34,7 @@ class Questions implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfac
             $firstUrl = $urlsNodes->item(0)->getAttribute('href');
 
             $resultSet->addItem(
-                new BaseResult($this->getType($isMobile), ['url' => $firstUrl])
+                new BaseResult($this->getType($isMobile), ['url' => $firstUrl], $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
             );
         }
     }
