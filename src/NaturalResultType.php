@@ -26,6 +26,9 @@ abstract class NaturalResultType
     const QUESTIONS_MOBILE        = 'questions_mobile';
     const JOBS                    = 'jobs';
     const JOBS_MOBILE             = 'jobs_mobile';
+    const JOBS_MINE                    = 'jobs_mine';
+    const JOBS_MINE_MOBILE             = 'jobs_mine_mobile';
+    
     const APP_PACK                = 'app_pack';
     const WIKI                = 'has_wiki';
         const SITE_LINKS_BIG          = 'site_links_big';
@@ -61,6 +64,10 @@ abstract class NaturalResultType
     const MAPS_LONGITUTDE       = 'long';
 
     const FLIGHTS                = 'flights';
+    const FLIGHTS_MOBILE                = 'flights_mobile';
+    const FLIGHTS_MINE                = 'flights_mine';
+    const FLIGHTS_MINE_MOBILE                = 'flights_mine_mobile';
+    
     const KNOWLEDGE_GRAPH        = 'knowledge_graph';
     const KNOWLEDGE_GRAPH_MOBILE = 'knowledge_graph_mobile';
 
@@ -73,15 +80,23 @@ abstract class NaturalResultType
 
     const DEFINITIONS        = 'definition';
     const DEFINITIONS_MOBILE = 'definition_mobile';
+    const DEFINITIONS_MINE        = 'definition_mine';
+    const DEFINITIONS_MINE_MOBILE = 'definition_mine_mobile';
 
     const MISSPELLING             = 'misspelling';
+    const MISSPELLING_MINE             = 'misspelling_mine';
     const MISSPELLING_OLD_VERSION = 'spell';
+    const MISSPELLING_OLD_VERSION_MINE = 'spell_mine';
     const MISSPELLING_OLD_VERSION_MOBILE = 'spell_mobile';
+    const MISSPELLING_OLD_VERSION_MINE_MOBILE = 'spell_mine_mobile';
     const MISSPELING_MOBILE       = 'misspelling_mobile';
+    const MISSPELING_MINE_MOBILE       = 'misspelling_mine_mobile';
 
     const RESULTS_NO = 'no_results';
     const DIRECTIONS = 'directions';
     const DIRECTIONS_MOBILE = 'directions_mobile';
+    const DIRECTIONS_MINE = 'directions_mine';
+    const DIRECTIONS__MINE_MOBILE = 'directions_mine_mobile';
 
     const KNOWLEDGE_GRAPH_MINE        = 'knowledge_graph_mine';
     const KNOWLEDGE_GRAPH_MINE_MOBILE = 'knowledge_graph_mine_mobile';
@@ -139,6 +154,7 @@ abstract class NaturalResultType
         self::QUESTIONS => self::QUESTIONS,
         self::QUESTIONS_MOBILE => self::QUESTIONS,
         self::FLIGHTS => self::FLIGHTS,
+        self::FLIGHTS_MOBILE => self::FLIGHTS,
         self::DEFINITIONS => self::DEFINITIONS,
         self::DEFINITIONS_MOBILE => self::DEFINITIONS,
         self::JOBS => self::JOBS,
