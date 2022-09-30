@@ -162,7 +162,7 @@ class TranslateService
             "description"       => $description,
             "video"             => "",
             "amp"               => "",
-            "node_path"         => $item->getNodePath()
+            "node_path"         => method_exists($item, 'getNodePath') ? $item->getNodePath() : $item->nodePath
         ];
 
         $this->response['competition'][(string)$rank] = $competitionData;
@@ -229,9 +229,13 @@ class TranslateService
         if ($item->is(NaturalResultType::FEATURED_SNIPPED) || $item->is(NaturalResultType::FEATURED_SNIPPED_MOBILE)) {
             if (count($item->getData()) > 1) {
                 $snippets    = $item->getData();
-                $firstResult = array_shift($snippets);
+                $snippetsWithNodePath = [];
+                foreach ($snippets as $key => $snippet) {
+                    $snippetsWithNodePath[$key] = (object)array_merge((array)$snippet, ['nodePath' => $item->getNodePath()]);
+                }
+                $firstResult = array_shift($snippetsWithNodePath);
 
-                $this->incrementCompetitionRanksAndDomainRanks($snippets);
+                $this->incrementCompetitionRanksAndDomainRanks($snippetsWithNodePath);
 
             } else {
                 $firstResult = $item->getData()[0];
