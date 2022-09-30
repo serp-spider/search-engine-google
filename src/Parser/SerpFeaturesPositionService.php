@@ -134,7 +134,10 @@ class SerpFeaturesPositionService
                     }
 
                     $processedUrl = $this->parseItemUrl($item->url);
-                    if ($processedUrl == $this->processedCompetition[$position]['full_landing_page']) {
+                    if (
+                        isset($this->processedCompetition[$position]) &&
+                        $processedUrl == $this->processedCompetition[$position]['full_landing_page']
+                    ) {
                         $position++;
                     }
                 }
