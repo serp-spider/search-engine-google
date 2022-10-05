@@ -352,10 +352,13 @@ class TranslateService
             }
         }
 
-        $serpsPositionsService = new SerpFeaturesPositionService($results, $this->response['competition']);
-        $serpsPositionsService->identifySerpPositions();
-        $this->response['serp_features_positions'] = $serpsPositionsService->getSerpFeaturesPositions();
-        //$serpsPositionsService->outputSerpResultsForTest($options['keyword_name'], $options['mobile']);
+        if (!empty($this->response['competition'])) {
+            $serpsPositionsService = new SerpFeaturesPositionService($results, $this->response['competition']);
+            $serpsPositionsService->identifySerpPositions();
+            $this->response['serp_features_positions'] = $serpsPositionsService->getSerpFeaturesPositions();
+        } else {
+            $this->response['serp_features_positions'] = [];
+        }
 
         $this->response['list_of_urls'][0] = !empty($this->response['list_of_urls'][0]) ? array_reverse($this->response['list_of_urls'][0]):[];
         $this->response['competition'] = !empty($this->response['competition'])?array_reverse($this->response['competition'], true):[];
