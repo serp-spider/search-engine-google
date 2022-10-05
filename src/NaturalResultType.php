@@ -96,7 +96,7 @@ abstract class NaturalResultType
     const DIRECTIONS = 'directions';
     const DIRECTIONS_MOBILE = 'directions_mobile';
     const DIRECTIONS_MINE = 'directions_mine';
-    const DIRECTIONS__MINE_MOBILE = 'directions_mine_mobile';
+    const DIRECTIONS_MINE_MOBILE = 'directions_mine_mobile';
 
     const KNOWLEDGE_GRAPH_MINE        = 'knowledge_graph_mine';
     const KNOWLEDGE_GRAPH_MINE_MOBILE = 'knowledge_graph_mine_mobile';
