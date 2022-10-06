@@ -27,7 +27,7 @@ class TopStories implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
             return self::RULE_MATCH_MATCHED;
         }
 
-        if(!empty($node->firstChild) &&  !empty($node->firstChild->tagName) && $node->firstChild->tagName == 'g-section-with-header' && $node->firstChild->hasClass('yG4QQe')) {
+        if($dom->xpathQuery('descendant::g-section-with-header[@class="yG4QQe TBC9ub"]', $node)->length > 0) {
             return self::RULE_MATCH_MATCHED;
         }
 
