@@ -39,7 +39,7 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
     public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ') or contains(concat(' ', normalize-space(@class), ' '), ' Ww4FFb ')]", $node);
+        $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ') or contains(concat(' ', normalize-space(@class), ' '), ' Ww4FFb ') or contains(concat(' ', normalize-space(@class), ' '), ' EtOod ')]", $node);
 
         if ($naturalResults->length == 0) {
             $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, [], $node));
