@@ -39,7 +39,7 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
     public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ') or contains(concat(' ', normalize-space(@class), ' '), ' Ww4FFb ') or contains(concat(' ', normalize-space(@class), ' '), ' EtOod ')]", $node);
+        $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ') or contains(concat(' ', normalize-space(@class), ' '), ' kvH3mc BToiNc UK95Uc ')]", $node);
 
         if ($naturalResults->length == 0) {
             $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, [], $node));
@@ -93,6 +93,9 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
         }
 
         if($dom->xpathQuery("ancestor::*[contains(concat(' ', normalize-space(@id), ' '), '  mnr-c ')]", $organicResult)->length > 0) {
+            return true;
+        }
+        if($dom->xpathQuery("descendant::*[contains(concat(' ', normalize-space(@class), ' '), ' kvH3mc BToiNc UK95Uc ')]", $organicResult)->length > 0) {
             return true;
         }
         // Inside div with class= 'mnr-c xpd O9g5cc uUPGi' are more divs with 'mnr-c xpd O9g5cc uUPGi'

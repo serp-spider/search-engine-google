@@ -31,8 +31,16 @@ class MobileV4 implements ParsingRuleByVersionInterface
         $titleTag = '';
 
         if(!empty($aTag->item(0))) {
-            $titleTag = $aTag->item(0)->lastChild;
+            $titleObj = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' MBeuO ')]", $aTag->item(0));
+            if (!empty($titleObj->item(0))) {
+                $titleTag =  $titleObj->item(0);
+            } else {
+                $titleTag = $aTag->item(0)->lastChild;
+            }
+
         }
+
+
 
         if($organicResultObject->getLink() === null) {
             $organicResultObject->setLink($dom->getUrl()->resolveAsString($aTag->item(0)->getAttribute('href')));

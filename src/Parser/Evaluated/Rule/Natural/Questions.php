@@ -11,7 +11,7 @@ class Questions implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfac
 {
     protected $hasSerpFeaturePosition = true;
     protected $hasSideSerpFeaturePosition = false;
-    
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->hasClass('related-question-pair')) {
@@ -29,13 +29,13 @@ class Questions implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfac
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
         $urlsNodes = $googleDOM->getXpath()->query('descendant::a', $node);
-
+        $firstUrl = '';
         if ($urlsNodes->length > 0) {
             $firstUrl = $urlsNodes->item(0)->getAttribute('href');
-
-            $resultSet->addItem(
-                new BaseResult($this->getType($isMobile), ['url' => $firstUrl], $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
-            );
         }
+        $resultSet->addItem(
+            new BaseResult($this->getType($isMobile), ['url' => $firstUrl], $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
+        );
+
     }
 }

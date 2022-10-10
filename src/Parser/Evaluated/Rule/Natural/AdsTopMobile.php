@@ -18,7 +18,7 @@ class AdsTopMobile extends AdsTop
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $adsNodes = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ')]",
+        $adsNodes = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ') or contains(concat(' ', normalize-space(@class), ' '), ' Ww4FFb ')]",
             $node);
         $links    = [];
 
