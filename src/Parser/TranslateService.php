@@ -289,6 +289,8 @@ class TranslateService
         }
 
         if ($item->is(NaturalResultType::MAPS_COORDONATES)) {
+            $this->response[NaturalResultType::MAP]              = true;
+            $this->response[NaturalResultType::MAPS_OLD_VERSION] = true;
             $this->response[NaturalResultType::MAPS_LATITUDE] = $item->getData()['lat'];
             $this->response[NaturalResultType::MAPS_LONGITUTDE] = $item->getData()['long'];
             $this->response[NaturalResultType::MAPS_COORDONATES] = $item->getData();
