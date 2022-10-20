@@ -16,7 +16,7 @@ class ProductListing implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
     
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->hasClass('commercial-unit-desktop-top') || $node->hasClass('cu-container')) {
+        if (str_contains($node->getAttribute('class'),  'commercial-unit-desktop-top') || str_contains($node->getAttribute('class'),  'cu-container')) {
             return self::RULE_MATCH_MATCHED;
         }
 
