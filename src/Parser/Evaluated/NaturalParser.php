@@ -109,6 +109,7 @@ class NaturalParser extends AbstractParser
             @class='C7r6Ue' or
             @class='e4xoPb' or
             @class='WVGKWb' or
+            @class='Qq3Lb' or
             @class='xpdopen' or
             @class='lr_container yc7KLc mBNN3d' or
             @class='LQQ1Bd' or

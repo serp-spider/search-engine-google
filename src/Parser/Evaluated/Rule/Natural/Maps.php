@@ -17,7 +17,7 @@ class Maps implements ParsingRuleInterface
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->getAttribute('class') == 'C7r6Ue' || str_contains($node->getAttribute('class'),  'WVGKWb')) {
+        if ($node->getAttribute('class') == 'C7r6Ue' || str_contains($node->getAttribute('class'),  'WVGKWb') || str_contains($node->getAttribute('class'),  'Qq3Lb') ) {
             return self::RULE_MATCH_MATCHED;
         }
 
