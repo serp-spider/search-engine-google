@@ -113,7 +113,7 @@ class NaturalParser extends AbstractParser
             @class='xpdopen' or
             @class='lr_container yc7KLc mBNN3d' or
             @class='LQQ1Bd' or
-            div[@class='CH6Bmd'] or
+            contains(@class, 'CH6Bmd') or
             contains(@class, 'commercial-unit-desktop-top') or
             contains(@class, 'cu-container') or
             contains(@class, 'related-question-pair') or
