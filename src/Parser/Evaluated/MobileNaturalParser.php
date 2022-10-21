@@ -70,6 +70,8 @@ class MobileNaturalParser extends AbstractParser
         // [@id='iur'] = images
         // [@id='sports-app'] = classical results
         // [contains(@class, 'scm-c')]  = maps
+        // [contains(@class, 'qixVud')]  = maps
+        // [contains(@class, 'xxAJT')]  = maps
         // [contains(@class, 'related-question-pair')] = questions
         // [@class='C7r6Ue']  = maps
         // [@class='qixVud']  = maps
@@ -104,6 +106,7 @@ class MobileNaturalParser extends AbstractParser
             contains(@class, 'related-question-pair') or
             @class='C7r6Ue' or
             contains(@class, 'qixVud') or
+            contains(@class, 'xxAJT') or
             contains(@class, 'commercial-unit-mobile-top') or
             contains(@class, 'commercial-unit-mobile-bottom') or
             contains(@class, 'osrp-blk') or
@@ -116,7 +119,7 @@ class MobileNaturalParser extends AbstractParser
             @class='cawG4b OvQkSb' or
             @class='uVMCKf mnr-c' or
             contains(@class, 'HD8Pae mnr-c') or
-            @class='hNKF2b' or
+            contains(@class, 'hNKF2b') or
             div[@class='lr_container wDYxhc yc7KLc'] or
             div[contains(@id, 'isl')] or
             contains(@class, 'kp-wholepage') or

@@ -21,7 +21,7 @@ class HotelsMobile implements \Serps\SearchEngine\Google\Parser\ParsingRuleInter
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->getAttribute('class') == 'hNKF2b'
+        if (str_contains($node->getAttribute('class'),  'hNKF2b')
         ) {
             return self::RULE_MATCH_MATCHED;
         }

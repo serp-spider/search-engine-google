@@ -16,7 +16,7 @@ class MapsMobile implements ParsingRuleInterface
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->hasClass('scm-c') || $node->hasClass('qixVud')) {
+        if (str_contains($node->getAttribute('class'),  'scm-c')|| str_contains($node->getAttribute('class'),  'qixVud') ||  str_contains($node->getAttribute('class'),  'xxAJT')) {
             return self::RULE_MATCH_MATCHED;
         }
 
