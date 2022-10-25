@@ -20,12 +20,15 @@ class ResultsNo implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfac
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $resultsText = str_replace([',', '.'], '', $node->firstChild->nodeValue);
-        $resultsText = preg_replace( '/[^0-9]/', '', $resultsText );
-        $resultsNo = (int)$resultsText;
+       if (!empty($node->firstChild)) {
+           $resultsText = str_replace([',', '.'], '', $node->firstChild->nodeValue);
+           $resultsText = preg_replace( '/[^0-9]/', '', $resultsText );
+           $resultsNo = (int)$resultsText;
 
-        if ($resultsNo > 0) {
-            $resultSet->addItem(new BaseResult(NaturalResultType::RESULTS_NO, [$resultsNo]));
-        }
+           if ($resultsNo > 0) {
+               $resultSet->addItem(new BaseResult(NaturalResultType::RESULTS_NO, [$resultsNo]));
+           }
+       }
+
     }
 }
