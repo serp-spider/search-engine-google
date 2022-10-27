@@ -78,7 +78,7 @@ class NaturalParser extends AbstractParser
         // [@id='tadsb']  = ads bottom
         // [@id='tvcap']  = ads top carousel
         // [@id='extabar']  =app pack
-        // [@class='C7r6Ue']  = maps
+        // [@class='C7r6Ue'] VT5Tde Qq3Lb WVGKWb = maps
         // [@class='xpdopen']  = features snipped/position zero
         // [@class='e4xoPb']  = videos
         // [contains(@class, 'commercial-unit-desktop-top')]  = product listing
@@ -114,6 +114,7 @@ class NaturalParser extends AbstractParser
             @class='lr_container yc7KLc mBNN3d' or
             @class='LQQ1Bd' or
             contains(@class, 'CH6Bmd') or
+            contains(@class, 'VT5Tde') or
             contains(@class, 'commercial-unit-desktop-top') or
             contains(@class, 'cu-container') or
             contains(@class, 'related-question-pair') or
