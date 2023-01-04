@@ -21,8 +21,8 @@ class Flights implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->getAttribute('class') == 'LQQ1Bd' && $node->getChildren()->count() != 0
-        ) {
+        $class = $node->getAttribute('class');
+        if (!empty($class) && strpos($class, 'LQQ1Bd') !== false && $node->getChildren()->count() != 0) {
             return self::RULE_MATCH_MATCHED;
         }
 

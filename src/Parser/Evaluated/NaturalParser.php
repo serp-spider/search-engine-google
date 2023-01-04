@@ -91,7 +91,7 @@ class NaturalParser extends AbstractParser
         // [@id='kp-wp-tab-cont-Latest'] = top stories
         //div[@class='CH6Bmd']/div[@class='ntKMYc P2hV9e'] = hotels
         //@class='lr_container yc7KLc mBNN3d' - definitions
-        //@class='LQQ1Bd' - flights
+        // [contains(@class, 'LQQ1Bd')] - flights
         //@id = 'oFNiHe' - misspelings
         //@id = 'result-stats' - no of results
         //@class = 'ULktNd rQUFld rrecc' - directions
@@ -112,7 +112,7 @@ class NaturalParser extends AbstractParser
             @class='Qq3Lb' or
             @class='xpdopen' or
             @class='lr_container yc7KLc mBNN3d' or
-            @class='LQQ1Bd' or
+            contains(@class, 'LQQ1Bd') or
             contains(@class, 'CH6Bmd') or
             contains(@class, 'VT5Tde') or
             contains(@class, 'commercial-unit-desktop-top') or
