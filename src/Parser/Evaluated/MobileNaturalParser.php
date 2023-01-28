@@ -17,6 +17,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\KnowledgeGraphMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MapsMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MisspellingMobile;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\NoMoreResults;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\PeopleAlsoAsk;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ProductListing;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ProductListingMobile;
@@ -58,7 +59,8 @@ class MobileNaturalParser extends AbstractParser
             new VideosMobile(),
             new MisspellingMobile(),
             new DirectionsMobile(),
-            new VideoCarouselMobile()
+            new VideoCarouselMobile(),
+            new NoMoreResults(),
         ];
     }
 
@@ -126,7 +128,8 @@ class MobileNaturalParser extends AbstractParser
             @id = 'oFNiHe' or
             @class='ULktNd rQUFld mnr-c rrecc' or
             video-voyager or
-            inline-video
+            inline-video or
+            @id= 'ofr'
         ][not(self::script) and not(self::style)]");
     }
 }

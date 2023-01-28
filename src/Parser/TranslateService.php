@@ -300,6 +300,10 @@ class TranslateService
             $this->response[NaturalResultType::VIDEOS][] = $item->getData()[0];
             $this->response[NaturalResultType::VIDEOS_LIST][] = $item->getData()[0];
         }
+
+        if ($item->is(NaturalResultType::NO_MORE_RESULTS)) {
+            $this->response[NaturalResultType::NO_MORE_RESULTS] = true;
+        }
     }
 
     /**

@@ -100,6 +100,7 @@ abstract class NaturalResultType
 
     const KNOWLEDGE_GRAPH_MINE        = 'knowledge_graph_mine';
     const KNOWLEDGE_GRAPH_MINE_MOBILE = 'knowledge_graph_mine_mobile';
+    const NO_MORE_RESULTS             = 'no_more_results';
 
     const SERP_FEATURES_OLD_RESPONSE_TEMPLATE = [
         self::SITE_LINKS              => 0,
@@ -130,6 +131,7 @@ abstract class NaturalResultType
         self::DIRECTIONS              =>  [],
         self::RESULTS_NO              => null,
         self::WIKI              => 0,
+        self::NO_MORE_RESULTS => null
     ];
 
     const SERP_FEATURES_TYPE_TO_OLD_RESPONSE_FOR_POSITIONS = [
