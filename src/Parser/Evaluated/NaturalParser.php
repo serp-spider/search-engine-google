@@ -21,6 +21,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\KnowledgeGraph;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Maps;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MapsCoords;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Misspelling;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\NoMoreResults;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ProductListing;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Questions;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Recipes;
@@ -62,7 +63,8 @@ class NaturalParser extends AbstractParser
             new Directions(),
             new MapsCoords(),
             new Misspelling(),
-            new VideoCarousel()
+            new VideoCarousel(),
+            new NoMoreResults(),
         ];
     }
 
@@ -126,7 +128,8 @@ class NaturalParser extends AbstractParser
             @id='kp-wp-tab-Latest' or
             @class = 'ULktNd rQUFld rrecc' or
             @class = 'H93uF' or
-            video-voyager
+            video-voyager or
+            @id= 'ofr'
         ][not(self::script) and not(self::style)]");
     }
 }
