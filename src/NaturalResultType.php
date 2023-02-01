@@ -69,6 +69,7 @@ abstract class NaturalResultType
     const FLIGHTS_MINE_MOBILE                = 'flights_mine_mobile';
     
     const KNOWLEDGE_GRAPH        = 'knowledge_graph';
+    const KNOWLEDGE_GRAPH_LINK        = 'knowledge_graph_link';
     const KNOWLEDGE_GRAPH_MOBILE = 'knowledge_graph_mobile';
 
     const ANSWER_BOX = 'answer_box';
@@ -131,7 +132,8 @@ abstract class NaturalResultType
         self::DIRECTIONS              =>  [],
         self::RESULTS_NO              => null,
         self::WIKI              => 0,
-        self::NO_MORE_RESULTS => null
+        self::NO_MORE_RESULTS => null,
+        self::KNOWLEDGE_GRAPH_LINK => null
     ];
 
     const SERP_FEATURES_TYPE_TO_OLD_RESPONSE_FOR_POSITIONS = [

@@ -30,6 +30,10 @@ class KnowledgeGraph implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
     {
         $data = [];
 
+        $links = $googleDOM->cssQuery("a[class='ab_button']", $group);
+        if($links->length > 0){
+            $data['link'] = $links->item(0)->getAttribute('href');
+        }
         /** @var \DomElement $titleNode */
         $titleNode = $googleDOM->cssQuery("div[data-attrid='subtitle']", $group)->item(0);
 
