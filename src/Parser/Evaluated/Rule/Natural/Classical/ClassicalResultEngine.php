@@ -50,6 +50,7 @@ class ClassicalResultEngine
         if (strpos($organicResultObject->getLink(), 'google.') !== false && strpos($organicResultObject->getLink(), '/search') !== false ) {
             return;
         }
+        $imbricatorParent = $dom->xpathQuery("ancestor::*[@class='FxLDp']", $organicResult);
 
         $resultSet->addItem(new BaseResult(
             [$this->resultType],
@@ -57,6 +58,7 @@ class ClassicalResultEngine
                 'title'       => $organicResultObject->getTitle(),
                 'url'         => $organicResultObject->getLink(),
                 'description' => $organicResultObject->getDescription(),
+                'imbricated'  => ($imbricatorParent->length > 0)
             ],
             $organicResult
         ));

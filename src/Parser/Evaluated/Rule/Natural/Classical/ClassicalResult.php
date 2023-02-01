@@ -32,6 +32,7 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
         }
 
         $parentWithSameClass = $dom->xpathQuery("ancestor::div[@class='g']", $organicResult);
+        
 
         if($parentWithSameClass->length > 0) {
             if( $dom->xpathQuery("descendant::table[@class='jmjoTe']", $parentWithSameClass->item(0))->length >0) {
