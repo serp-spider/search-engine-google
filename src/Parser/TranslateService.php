@@ -160,7 +160,7 @@ class TranslateService
             "height"            => "0",
             "title"             => $title,
             "description"       => $description,
-            "imbricated"        => ($item->imbricated)?$item->imbricated:false,
+            "imbricated"        => property_exists($item, 'imbricated') ? $item->imbricated : false,
             "video"             => "",
             "amp"               => "",
             "node_path"         => method_exists($item, 'getNodePath') ? $item->getNodePath() : $item->nodePath
