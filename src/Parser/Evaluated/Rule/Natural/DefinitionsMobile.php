@@ -18,11 +18,11 @@ class DefinitionsMobile implements \Serps\SearchEngine\Google\Parser\ParsingRule
 
     protected $hasSerpFeaturePosition = true;
     protected $hasSideSerpFeaturePosition = false;
-    
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->getAttribute('class') == 'lr_container wDYxhc yc7KLc'
-        ) {
+        $class = $node->getAttribute('class');
+        if (!empty($class) && strpos($class, 'lr_container wDYxhc yc7KLc') !== false) {
             return self::RULE_MATCH_MATCHED;
         }
 
