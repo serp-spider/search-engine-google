@@ -306,6 +306,9 @@ class TranslateService
         if ($item->is(NaturalResultType::NO_MORE_RESULTS)) {
             $this->response[NaturalResultType::NO_MORE_RESULTS] = true;
         }
+        if ($item->is(NaturalResultType::VISUAL_DIGEST)) {
+            $this->response[NaturalResultType::VISUAL_DIGEST] =  $item->getData();;
+        }
     }
 
     /**

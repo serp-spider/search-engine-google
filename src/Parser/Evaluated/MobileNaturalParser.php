@@ -26,6 +26,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Recipes;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStoriesMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideoCarouselMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideosMobile;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VisualDigest;
 
 /**
  * Parses natural results from a mobile google SERP
@@ -61,6 +62,7 @@ class MobileNaturalParser extends AbstractParser
             new DirectionsMobile(),
             new VideoCarouselMobile(),
             new NoMoreResults(),
+            new VisualDigest()
         ];
     }
 
@@ -97,7 +99,7 @@ class MobileNaturalParser extends AbstractParser
         //div[contains(@id, 'isl')]  = recipes
         //@id='oFNiHe' - misspelings
         //@class='ULktNd rQUFld mnr-c rrecc' - directions
-
+        //contains(@class, 'e8Ck0d') visual digest
         return $googleDom->xpathQuery("//*[@id='iur' or
             @id='sports-app' or
             @id='center_col' or
@@ -129,7 +131,8 @@ class MobileNaturalParser extends AbstractParser
             @class='ULktNd rQUFld mnr-c rrecc' or
             video-voyager or
             inline-video or
-            @id= 'ofr'
+            @id= 'ofr' or
+            contains(@class, 'e8Ck0d')
         ][not(self::script) and not(self::style)]");
     }
 }

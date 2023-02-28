@@ -29,6 +29,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ResultsNo;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStories;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Videos;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VideoCarousel;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\VisualDigest;
 
 /**
  * Parses natural results from a google SERP
@@ -65,6 +66,7 @@ class NaturalParser extends AbstractParser
             new Misspelling(),
             new VideoCarousel(),
             new NoMoreResults(),
+            new VisualDigest()
         ];
     }
 
@@ -99,6 +101,7 @@ class NaturalParser extends AbstractParser
         //@class = 'ULktNd rQUFld rrecc' - directions
 //        return $googleDom->xpathQuery("//*[@id='result-stats']/*[not(self::script) and not(self::style)]/*");
 //        @class = 'H93uF' - coords
+         //@class = 'e8Ck0d SS4zp' //VisualDigest
         return $googleDom->xpathQuery("//*[
             @id='rso' or
             @id='rhs' or
@@ -128,6 +131,7 @@ class NaturalParser extends AbstractParser
             @id='kp-wp-tab-Latest' or
             @class = 'ULktNd rQUFld rrecc' or
             @class = 'H93uF' or
+            contains(@class, 'e8Ck0d') or
             video-voyager or
             @id= 'ofr'
         ][not(self::script) and not(self::style)]");
