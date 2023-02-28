@@ -26,7 +26,7 @@ class VisualDigest implements \Serps\SearchEngine\Google\Parser\ParsingRuleInter
         $visualDigestItems = $googleDOM->getXpath()->query('descendant::*[contains( @data-attrid,"VisualDigest" )]   ', $node);
         $item = [];
 
-        if ($visualDigestItems->length > 0) {
+        if ($visualDigestItems->length > 1) {
             foreach ($visualDigestItems as $visualDigestItem) {
                 $visualDigestType = $visualDigestItem->getAttribute('data-attrid');
                 $link = $googleDOM->getXpath()->query('descendant::a', $visualDigestItem);
