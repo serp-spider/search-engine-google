@@ -14,6 +14,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\FeaturedSnipped;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flights;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\HotelsMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Jobs;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\KnowledgeGraphMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MapsMobile;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\MisspellingMobile;
@@ -54,6 +55,7 @@ class MobileNaturalParser extends AbstractParser
             new FeaturedSnipped(),
             new Recipes(),
             new Flights(),
+            new Jobs(),
             new HotelsMobile(),
             new DefinitionsMobile(),
             new VideosMobile(),
@@ -122,7 +124,7 @@ class MobileNaturalParser extends AbstractParser
             @class='uVMCKf mnr-c' or
             contains(@class, 'HD8Pae mnr-c') or
             contains(@class, 'hNKF2b') or
-            div[@class='lr_container wDYxhc yc7KLc'] or
+            contains(@class, 'lr_container wDYxhc yc7KLc') or
             div[contains(@id, 'isl')] or
             contains(@class, 'kp-wholepage') or
             @id = 'oFNiHe' or

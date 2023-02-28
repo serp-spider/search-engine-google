@@ -17,13 +17,14 @@ class Definitions implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterf
 {
     protected $hasSerpFeaturePosition = true;
     protected $hasSideSerpFeaturePosition = false;
-    
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->getAttribute('class') == 'lr_container yc7KLc mBNN3d'
-        ) {
+        $class = $node->getAttribute('class');
+        if (!empty($class) && strpos($class, 'lr_container yc7KLc mBNN3d') !== false) {
             return self::RULE_MATCH_MATCHED;
         }
+
 
         return self::RULE_MATCH_NOMATCH;
     }
