@@ -28,7 +28,7 @@ abstract class NaturalResultType
     const JOBS_MOBILE             = 'jobs_mobile';
     const JOBS_MINE                    = 'jobs_mine';
     const JOBS_MINE_MOBILE             = 'jobs_mine_mobile';
-    
+
     const APP_PACK                = 'app_pack';
     const WIKI                = 'has_wiki';
         const SITE_LINKS_BIG          = 'site_links_big';
@@ -67,7 +67,7 @@ abstract class NaturalResultType
     const FLIGHTS_MOBILE                = 'flights_mobile';
     const FLIGHTS_MINE                = 'flights_mine';
     const FLIGHTS_MINE_MOBILE                = 'flights_mine_mobile';
-    
+
     const KNOWLEDGE_GRAPH        = 'knowledge_graph';
     const KNOWLEDGE_GRAPH_LINK        = 'knowledge_graph_link';
     const KNOWLEDGE_GRAPH_MOBILE = 'knowledge_graph_mobile';
@@ -102,6 +102,7 @@ abstract class NaturalResultType
     const KNOWLEDGE_GRAPH_MINE        = 'knowledge_graph_mine';
     const KNOWLEDGE_GRAPH_MINE_MOBILE = 'knowledge_graph_mine_mobile';
     const NO_MORE_RESULTS             = 'no_more_results';
+    const VISUAL_DIGEST               = 'visual_digest';
 
     const SERP_FEATURES_OLD_RESPONSE_TEMPLATE = [
         self::SITE_LINKS              => 0,
@@ -133,6 +134,7 @@ abstract class NaturalResultType
         self::RESULTS_NO              => null,
         self::WIKI              => 0,
         self::NO_MORE_RESULTS => null,
+        self::VISUAL_DIGEST => null,
         self::KNOWLEDGE_GRAPH_LINK => null
     ];
 
