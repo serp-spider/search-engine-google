@@ -127,7 +127,7 @@ class MobileNaturalParser extends AbstractParser
             contains(@class, 'HD8Pae mnr-c') or
             contains(@class, 'hNKF2b') or
             contains(@class, 'lr_container wDYxhc yc7KLc') or
-            div[contains(@id, 'isl')] or
+            contains(@id, 'isl') or
             contains(@class, 'kp-wholepage') or
             @id = 'oFNiHe' or
             @class='ULktNd rQUFld mnr-c rrecc' or

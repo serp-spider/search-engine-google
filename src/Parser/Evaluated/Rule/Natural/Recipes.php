@@ -23,7 +23,7 @@ class Recipes implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $urls = $googleDOM->getXpath()->query('descendant::g-link', $node->childNodes->item(1));
+        $urls = $googleDOM->getXpath()->query('descendant::g-link', $node);
         $item = [];
 
         if ($urls->length > 0) {
