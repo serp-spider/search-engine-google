@@ -31,7 +31,7 @@ class HighlyLocalized implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
 
-        $highlyLocalizedNode = $googleDOM->getXpath()->query("descendant::update-location", $node);
+        $highlyLocalizedNode = $googleDOM->getXpath()->query("ancestor::*[contains(concat(' ', normalize-space(@id), ' '), ' oFNiHe ')]", $node);
 
         if ($highlyLocalizedNode->length > 0) {
             $resultSet->addItem(new BaseResult(NaturalResultType::HIGHLY_LOCALIZED, [true]));
