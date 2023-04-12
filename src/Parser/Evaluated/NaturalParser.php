@@ -136,7 +136,7 @@ class NaturalParser extends AbstractParser
             contains(@class, 'e8Ck0d') or
             video-voyager or
             @id= 'ofr' or
-            update-location
+            @class = 'vqkKIe wHYlTd'
         ][not(self::script) and not(self::style)]");
     }
 }

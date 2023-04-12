@@ -18,9 +18,11 @@ class HighlyLocalized implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        $highlyLocalizedNode = $dom->getXpath()->query("descendant::update-location", $node);
 
-        if ($highlyLocalizedNode->length > 0) {
+        if (
+            str_contains($node->getAttribute('class'),  'vqkKIe') &&
+            str_contains($node->getAttribute('class'),  'wHYlTd')
+        ) {
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -31,9 +33,10 @@ class HighlyLocalized implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
 
-        $highlyLocalizedNode = $googleDOM->getXpath()->query("ancestor::*[contains(concat(' ', normalize-space(@id), ' '), ' oFNiHe ')]", $node);
+        $highlyLocalizedNode = $googleDOM->getXpath()->query("descendant::*[contains(concat(' ', normalize-space(@class), ' '), ' BBwThe ')]", $node);
 
         if ($highlyLocalizedNode->length > 0) {
+            //$highlyLocalizedNode->item(0)->textContent - location name
             $resultSet->addItem(new BaseResult(NaturalResultType::HIGHLY_LOCALIZED, [true]));
         }
 
