@@ -309,6 +309,10 @@ class TranslateService
         if ($item->is(NaturalResultType::VISUAL_DIGEST)) {
             $this->response[NaturalResultType::VISUAL_DIGEST] =  $item->getData();;
         }
+
+        if ($item->is(NaturalResultType::HIGHLY_LOCALIZED)) {
+            $this->response[NaturalResultType::HIGHLY_LOCALIZED] =  true;
+        }
     }
 
     /**

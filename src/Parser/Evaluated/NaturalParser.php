@@ -14,6 +14,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Directions;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\FeaturedSnipped;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flight;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Flights;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\HighlyLocalized;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Hotels;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ImageGroup;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Jobs;
@@ -66,7 +67,8 @@ class NaturalParser extends AbstractParser
             new Misspelling(),
             new VideoCarousel(),
             new NoMoreResults(),
-            new VisualDigest()
+            new VisualDigest(),
+            new HighlyLocalized()
         ];
     }
 
@@ -133,7 +135,8 @@ class NaturalParser extends AbstractParser
             @class = 'H93uF' or
             contains(@class, 'e8Ck0d') or
             video-voyager or
-            @id= 'ofr'
+            @id= 'ofr' or
+            update-location
         ][not(self::script) and not(self::style)]");
     }
 }

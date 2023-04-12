@@ -103,6 +103,7 @@ abstract class NaturalResultType
     const KNOWLEDGE_GRAPH_MINE_MOBILE = 'knowledge_graph_mine_mobile';
     const NO_MORE_RESULTS             = 'no_more_results';
     const VISUAL_DIGEST               = 'visual_digest';
+    const HIGHLY_LOCALIZED            = 'highly_localized';
 
     const SERP_FEATURES_OLD_RESPONSE_TEMPLATE = [
         self::SITE_LINKS              => 0,
@@ -135,7 +136,8 @@ abstract class NaturalResultType
         self::WIKI              => 0,
         self::NO_MORE_RESULTS => null,
         self::VISUAL_DIGEST => null,
-        self::KNOWLEDGE_GRAPH_LINK => null
+        self::KNOWLEDGE_GRAPH_LINK => null,
+        self::HIGHLY_LOCALIZED => null
     ];
 
     const SERP_FEATURES_TYPE_TO_OLD_RESPONSE_FOR_POSITIONS = [
