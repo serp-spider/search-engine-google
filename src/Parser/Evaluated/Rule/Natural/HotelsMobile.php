@@ -37,8 +37,11 @@ class HotelsMobile implements \Serps\SearchEngine\Google\Parser\ParsingRuleInter
 
         if($hotels->length> 0) {
             foreach ($hotels as $urlNode) {
-                ;
-                $item['hotels_names'][] = ['name' => $urlNode->firstChild->childNodes->item(1)->firstChild->firstChild->firstChild->nodeValue];
+                try {
+                    $item['hotels_names'][] = ['name' => $urlNode->firstChild->childNodes->item(1)->firstChild->firstChild->firstChild->nodeValue];
+                } catch (\Exception $e) {
+                    $item['hotels_names'][] = ['name' => $urlNode->firstChild->childNodes->item(0)->childNodes->item(1)->firstChild->firstChild->nodeValue];
+                }
             }
         }
 
