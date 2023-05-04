@@ -98,7 +98,7 @@ class MobileNaturalParser extends AbstractParser
         //[contains(@class, 'LQQ1Bd')] - flights
         //div[@class='hNKF2b'] = hotels
         //div[@class='lr_container wDYxhc yc7KLc'] = definitions
-        //div[contains(@id, 'isl')]  = recipes
+        // @jsname='MGJTwe'  = recipes
         //@id='oFNiHe' - misspelings
         //@class='ULktNd rQUFld mnr-c rrecc' - directions
         //contains(@class, 'e8Ck0d') visual digest
@@ -127,7 +127,7 @@ class MobileNaturalParser extends AbstractParser
             contains(@class, 'HD8Pae mnr-c') or
             contains(@class, 'hNKF2b') or
             contains(@class, 'lr_container wDYxhc yc7KLc') or
-            contains(@id, 'isl') or
+            @jsname='MGJTwe'  or
             contains(@class, 'kp-wholepage') or
             @id = 'oFNiHe' or
             @class='ULktNd rQUFld mnr-c rrecc' or

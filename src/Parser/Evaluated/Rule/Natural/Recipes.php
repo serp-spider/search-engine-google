@@ -14,7 +14,7 @@ class Recipes implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if (strpos($node->getAttribute('id'), 'isl_') !== false) {
+        if (strpos($node->getAttribute('jsname'), 'MGJTwe') !== false) {
             return self::RULE_MATCH_MATCHED;
         }
 
