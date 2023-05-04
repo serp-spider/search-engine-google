@@ -32,15 +32,15 @@ class Hotels implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $hotels = $googleDOM->getXpath()->query('descendant::div[@class="Z2nCcc"]', $node);
+        $hotels = $googleDOM->getXpath()->query("descendant::*[contains(concat(' ', normalize-space(@class), ' '), ' BTPx6e')]", $node);
         $item = [];
 
         if($hotels->length> 0) {
             foreach ($hotels as $urlNode) {
-                $item['hotels_names'][] = ['name' => $urlNode->firstChild->nodeValue];
+                $item['hotels_names'][] = ['name' => $urlNode->nodeValue];
             }
+            $resultSet->addItem(new BaseResult(NaturalResultType::HOTELS, $item, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
         }
 
-        $resultSet->addItem(new BaseResult(NaturalResultType::HOTELS, $item, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
     }
 }
