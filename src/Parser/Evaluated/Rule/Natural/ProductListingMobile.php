@@ -34,7 +34,7 @@ class ProductListingMobile extends SerpFeaturesVersions
         }
 
         foreach ($productsNodes as $productNode) {
-            $productUrl = $productNode->getAttribute('href');
+            $productUrl = $productNode->getAttribute('data-dtld');
             $items[]    = ['url' => $productUrl];
         }
 
@@ -52,7 +52,7 @@ class ProductListingMobile extends SerpFeaturesVersions
             return;
         }
 
-        $items[] = ['url' => $productsNodes->item(0)->getAttribute('href')];
+        $items[] = ['url' => $productsNodes->item(0)->getAttribute('data-dtld')];
 
         $resultSet->addItem(
             new BaseResult(NaturalResultType::PRODUCT_LISTING_MOBILE, $items, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
