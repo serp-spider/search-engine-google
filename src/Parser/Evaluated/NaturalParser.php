@@ -100,7 +100,7 @@ class NaturalParser extends AbstractParser
         // [contains(@class, 'LQQ1Bd')] - flights
         //@id = 'oFNiHe' - misspelings
         //@id = 'result-stats' - no of results
-        //@class = 'ULktNd rQUFld rrecc' - directions
+        //@id = 'lud-ed' - directions
 //        return $googleDom->xpathQuery("//*[@id='result-stats']/*[not(self::script) and not(self::style)]/*");
 //        @class = 'H93uF' - coords
          //@class = 'e8Ck0d SS4zp' //VisualDigest
@@ -131,7 +131,7 @@ class NaturalParser extends AbstractParser
             @id = 'oFNiHe' or
             @id='result-stats' or
             @id='kp-wp-tab-Latest' or
-            @class = 'ULktNd rQUFld rrecc' or
+            @id = 'lud-ed' or
             @class = 'H93uF' or
             contains(@class, 'e8Ck0d') or
             video-voyager or
