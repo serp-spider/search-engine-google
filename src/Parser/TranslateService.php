@@ -213,10 +213,10 @@ class TranslateService
             }
         }
 
-//        if ($item->is(NaturalResultType::VIDEOS) || $item->is(NaturalResultType::VIDEOS_MOBILE)) {
-//            $this->response[NaturalResultType::VIDEOS]      = $item->getData();
-//            $this->response[NaturalResultType::VIDEOS_LIST] = $item->getData();
-//        }
+        if ($item->is(NaturalResultType::VIDEOS) || $item->is(NaturalResultType::VIDEOS_MOBILE)) {
+            $this->response[NaturalResultType::VIDEOS]      = $item->getData();
+            $this->response[NaturalResultType::VIDEOS_LIST] = $item->getData();
+        }
 
         if ($item->is(NaturalResultType::KNOWLEDGE_GRAPH) || $item->is(NaturalResultType::KNOWLEDGE_GRAPH_MOBILE)) {
             $this->response[NaturalResultType::KNOWLEDGE_GRAPH] = $item->getData()['title']??'';
@@ -298,7 +298,10 @@ class TranslateService
             $this->response[NaturalResultType::MAPS_COORDONATES] = $item->getData();
         }
 
-        if ($item->is(NaturalResultType::VIDEO_CAROUSEL) || $item->is(NaturalResultType::VIDEO_CAROUSEL_MOBILE)) {
+        if (
+            !isset($this->response[NaturalResultType::VIDEOS]) &&
+            ($item->is(NaturalResultType::VIDEO_CAROUSEL) || $item->is(NaturalResultType::VIDEO_CAROUSEL_MOBILE))
+        ) {
             $this->response[NaturalResultType::VIDEOS][] = $item->getData()[0];
             $this->response[NaturalResultType::VIDEOS_LIST][] = $item->getData()[0];
         }
