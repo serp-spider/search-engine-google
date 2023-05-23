@@ -15,7 +15,7 @@ class Directions implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->getAttribute('class') == 'ULktNd rQUFld rrecc'
+        if ($node->getAttribute('id') == 'lud-ed'
         ) {
             return self::RULE_MATCH_MATCHED;
         }

@@ -100,7 +100,7 @@ class MobileNaturalParser extends AbstractParser
         //div[@class='lr_container wDYxhc yc7KLc'] = definitions
         // @jsname='MGJTwe'  = recipes
         //@id='oFNiHe' - misspelings
-        //@class='ULktNd rQUFld mnr-c rrecc' - directions
+        //@id='lud-ed' directions
         //contains(@class, 'e8Ck0d') visual digest
         return $googleDom->xpathQuery("//*[@id='iur' or
             @id='sports-app' or
@@ -130,7 +130,7 @@ class MobileNaturalParser extends AbstractParser
             @jsname='MGJTwe'  or
             contains(@class, 'kp-wholepage') or
             @id = 'oFNiHe' or
-            @class='ULktNd rQUFld mnr-c rrecc' or
+            @id='lud-ed' or
             video-voyager or
             inline-video or
             @id= 'ofr' or
