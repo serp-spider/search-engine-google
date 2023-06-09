@@ -174,6 +174,7 @@ abstract class NaturalResultType
         self::TOP_STORIES => self::TOP_STORIES_OLD_VERSION,
         self::TOP_STORIES_MOBILE => self::TOP_STORIES_OLD_VERSION,
         self::MAPS_LINKS => self::MAPS_LINKS,
+        self::VIDEOS => self::VIDEOS,
         self::VIDEO_CAROUSEL => self::VIDEOS,
         self::VIDEO_CAROUSEL_MOBILE => self::VIDEOS,
         self::MAP => self::MAP,
