@@ -282,6 +282,10 @@ class TranslateService
             $this->response[NaturalResultType::RESULTS_NO] = $item->getData()[0];
         }
 
+        if ($item->is(NaturalResultType::RELATED_SEARCHES)) {
+            $this->response[NaturalResultType::RELATED_SEARCHES] = $item->getData();
+        }
+
         if ($item->is(NaturalResultType::IMAGE_GROUP) || $item->is(NaturalResultType::IMAGE_GROUP_MOBILE) ) {
             $this->response[NaturalResultType::IMAGE_GROUP] = $item->getData()['images'];
         }

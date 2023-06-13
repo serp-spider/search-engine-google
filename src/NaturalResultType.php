@@ -104,6 +104,7 @@ abstract class NaturalResultType
     const NO_MORE_RESULTS             = 'no_more_results';
     const VISUAL_DIGEST               = 'visual_digest';
     const HIGHLY_LOCALIZED            = 'highly_localized';
+    const RELATED_SEARCHES           = 'related_searches';
 
     const SERP_FEATURES_OLD_RESPONSE_TEMPLATE = [
         self::SITE_LINKS              => 0,

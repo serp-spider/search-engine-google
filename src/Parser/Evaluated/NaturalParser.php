@@ -26,6 +26,7 @@ use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\NoMoreResults;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ProductListing;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Questions;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Recipes;
+use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\RelatedSearches;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\ResultsNo;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\TopStories;
 use Serps\SearchEngine\Google\Parser\Evaluated\Rule\Natural\Videos;
@@ -68,7 +69,8 @@ class NaturalParser extends AbstractParser
             new VideoCarousel(),
             new NoMoreResults(),
             new VisualDigest(),
-            new HighlyLocalized()
+            new HighlyLocalized(),
+            new RelatedSearches()
         ];
     }
 
@@ -104,6 +106,7 @@ class NaturalParser extends AbstractParser
 //        return $googleDom->xpathQuery("//*[@id='result-stats']/*[not(self::script) and not(self::style)]/*");
 //        @class = 'H93uF' - coords
          //@class = 'e8Ck0d SS4zp' //VisualDigest
+        //@id= 'bres' -> related searches
         return $googleDom->xpathQuery("//*[
             @id='rso' or
             @id='rhs' or
@@ -136,7 +139,8 @@ class NaturalParser extends AbstractParser
             contains(@class, 'e8Ck0d') or
             video-voyager or
             @id= 'ofr' or
-            @class = 'vqkKIe wHYlTd'
+            @class = 'vqkKIe wHYlTd' or
+            @id= 'bres'
         ][not(self::script) and not(self::style)]");
     }
 }
