@@ -29,12 +29,17 @@ class Questions implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfac
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
         $urlsNodes = $googleDOM->getXpath()->query('descendant::a', $node);
+        $qTextNodes = $googleDOM->getXpath()->query('descendant::span', $node);
         $firstUrl = '';
+        $qText = '';
         if ($urlsNodes->length > 0) {
             $firstUrl = $urlsNodes->item(0)->getAttribute('href');
         }
+        if ($qTextNodes->length > 0) {
+            $qText = $qTextNodes->item(0)->getNodeValue();
+        }
         $resultSet->addItem(
-            new BaseResult($this->getType($isMobile), ['url' => $firstUrl], $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
+            new BaseResult($this->getType($isMobile), ['url' => $firstUrl, 'title' => $qText], $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
         );
 
     }
