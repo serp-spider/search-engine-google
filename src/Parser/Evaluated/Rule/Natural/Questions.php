@@ -28,7 +28,7 @@ class Questions implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfac
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $urlsNodes = $googleDOM->getXpath()->query('descendant::a', $node);
+        $urlsNodes  = $googleDOM->getXpath()->query('descendant::a', $node);
         $qTextNodes = $googleDOM->getXpath()->query('descendant::span', $node);
         $firstUrl = '';
         $qText = '';

@@ -20,13 +20,17 @@ class RelatedSearches implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $stop = true;
         $urlsNodes = $googleDOM->getXpath()->query('descendant::a[contains(concat(\' \', normalize-space(@class), \' \'), \' R0xfCb \')]', $node);
         if ($urlsNodes->length > 0 ) {
-
-            $resultSet->addItem(
-                new BaseResult(NaturalResultType::RELATED_SEARCHES, [$urlsNodes->item(0)->getNodeValue()])
-            );
+            $items = [];
+            for ($i = 0; $i < $urlsNodes->length; $i++) {
+                if (!empty($urlsNodes->item($i))){
+                    $items[] = $urlsNodes->item($i)->getNodeValue();
+                }
+            }
+            if (count($items)) {
+                $resultSet->addItem(new BaseResult(NaturalResultType::RELATED_SEARCHES, $items));
+            }
         }
 
     }
