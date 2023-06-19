@@ -59,7 +59,9 @@ class KnowledgeGraph implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
             $data['title']= $this->detectGeneralPresentationText($googleDOM, $group);
         }
 
-        if ($isMobile) {
+        $inResults = $googleDOM->getXpath()->query("ancestor-or-self::div[contains(concat(' ', normalize-space(@class), ' '), ' MjjYud ')]", $group);
+
+        if ($isMobile || $inResults->length) {
             $this->hasSideSerpFeaturePosition = false;
         }
 
