@@ -18,8 +18,8 @@ class ProductListing implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
     {
         if (str_contains($node->getAttribute('class'),  'commercial-unit-desktop-top') || str_contains($node->getAttribute('class'),  'cu-container')) {
             if (str_contains($node->getAttribute('class'), 'cu-container')) {
-                $this->hasSideSerpFeaturePosition = true;
-                //$this->checkIfSidePosition($node);
+                //$this->hasSideSerpFeaturePosition = true;
+                $this->checkIfSidePosition($node);
             }
             return self::RULE_MATCH_MATCHED;
         }
@@ -69,7 +69,7 @@ class ProductListing implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
             return false;
         }
         while ($node->parentNode !== null) {
-            if ($node->parentNode instanceof DOMDocument) {
+            if ($node->parentNode instanceof \DOMDocument) {
                 break;
             }
 
