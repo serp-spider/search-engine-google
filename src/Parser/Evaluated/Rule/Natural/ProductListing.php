@@ -19,6 +19,7 @@ class ProductListing implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
         if (str_contains($node->getAttribute('class'),  'commercial-unit-desktop-top') || str_contains($node->getAttribute('class'),  'cu-container')) {
             if (str_contains($node->getAttribute('class'), 'cu-container')) {
                 $this->hasSideSerpFeaturePosition = true;
+                //$this->checkIfSidePosition($node);
             }
             return self::RULE_MATCH_MATCHED;
         }
@@ -38,12 +39,15 @@ class ProductListing implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
 
         foreach ($productsNodes as $productNode) {
             $aHrefProduct = $productNode->childNodes[1];
+            if (!empty($aHrefProduct) && $aHrefProduct->getTagName() != 'a') {
+                $aHrefProduct = $productNode->childNodes[0];
+            }
 
             if (!$aHrefProduct instanceof DomElement) {
                 continue;
             }
 
-            if ($aHrefProduct->getTagName() != 'a') {
+            if (!empty($aHrefProduct) && $aHrefProduct->getTagName() != 'a') {
                 continue;
             }
 
@@ -55,6 +59,30 @@ class ProductListing implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
             $resultSet->addItem(
                 new BaseResult(NaturalResultType::PRODUCT_LISTING, $items, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
             );
+        }
+    }
+
+    private function checkIfSidePosition(\Serps\Core\Dom\DomElement $node) {
+        //this could be used for all side position elements
+        if ($node->getAttribute('id') === 'center_col') {
+            //item is in results list
+            return false;
+        }
+        while ($node->parentNode !== null) {
+            if ($node->parentNode instanceof DOMDocument) {
+                break;
+            }
+
+            if ( $node->parentNode->getAttribute('id') === 'center_col') {
+                //item is in results list
+                break;
+            }
+
+            if ($node->parentNode->getAttribute('role') === 'complementary') {
+                $this->hasSideSerpFeaturePosition = true;
+            }
+
+            $node = $node->parentNode;
         }
     }
 }
