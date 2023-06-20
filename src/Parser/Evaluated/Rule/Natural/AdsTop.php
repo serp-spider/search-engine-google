@@ -46,6 +46,14 @@ class AdsTop implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
         }
 
         foreach ($adsNodes as $adsNode) {
+
+            if (
+                !empty($adsNode->getAttribute('style')) &&
+                strpos($adsNode->getAttribute('style'), 'display:none') !== false
+            ) {
+                continue;
+            }
+
             $link = false;
             if (!$adsNode->hasClass('Krnil')) {
                 $linkNodes = $googleDOM->getXpath()->query('descendant::span[contains(concat(\' \', normalize-space(@role), \' \'), \' text \')]', $adsNode);
