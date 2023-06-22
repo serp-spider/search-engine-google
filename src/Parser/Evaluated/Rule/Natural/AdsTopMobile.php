@@ -18,8 +18,9 @@ class AdsTopMobile extends AdsTop
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $adsNodes = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ') or contains(concat(' ', normalize-space(@class), ' '), ' Ww4FFb ')]",
+        $adsNodes = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ') or contains(concat(' ', normalize-space(@class), ' '), ' Ww4FFb ') or contains(concat(' ', normalize-space(@class), ' '), ' uEierd ')]",
             $node);
+
         $links    = [];
 
         if ($adsNodes->length == 0) {
@@ -28,9 +29,27 @@ class AdsTopMobile extends AdsTop
 
         foreach ($adsNodes as $adsNode) {
 
-            $aHrefs = $googleDOM->getXpath()->query("descendant::a", $adsNode);
+            $aHrefs = $googleDOM->getXpath()->query("descendant::a[
+        contains(concat(' ', normalize-space(@class), ' '), ' C8nzq BmP5tf ') or
+        @class='sXtWJb' or
+        (contains(concat(' ', normalize-space(@class), ' '), ' BmP5tf ') and
+         contains(concat(' ', normalize-space(@class), ' '), ' cz3goc '))
+        ]", $adsNode);
+
+            $pla = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' commercial-unit-mobile-top ')]", $adsNode);
+            if ($pla->length != 0) {
+                //these are product listings, not just ads
+                continue;
+            }
 
             foreach ($aHrefs as $href) {
+
+                if (
+                    !empty($href->getAttribute('style')) &&
+                    strpos($href->getAttribute('style'), 'display:none') !== false
+                ) {
+                    continue;
+                }
 
                 if ($href->hasClass('gsrt')) {
                     continue;
@@ -40,7 +59,11 @@ class AdsTopMobile extends AdsTop
                     continue;
                 }
 
-                $links[] = ['url' => $href->getAttribute('href')];
+                if(empty($links) || empty(array_column($links, 'url'))){
+                    $links[] = ['url' => $href->getAttribute('href')];
+                } elseif (!in_array($href->getAttribute('href'), array_column($links, 'url'))) {
+                    $links[] = ['url' => $href->getAttribute('href')];
+                }
             }
         }
 
