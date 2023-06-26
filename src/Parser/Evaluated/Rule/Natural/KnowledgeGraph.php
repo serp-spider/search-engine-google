@@ -41,12 +41,20 @@ class KnowledgeGraph implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
                 $data['link'] = $links->item(0)->getAttribute('href');
             }
         }
-        /** @var \DomElement $titleNode */
-        $titleNode = $googleDOM->cssQuery("div[data-attrid='subtitle']", $group)->item(0);
 
+        /** @var \DomElement $titleNode */
+
+        $titleNode = $googleDOM->cssQuery("div[data-attrid='subtitle']", $group)->item(0);
         if ($titleNode instanceof \DomElement) {
             $data['title'] = $titleNode->textContent;
-        } else {
+        }
+
+        $titleNode = $googleDOM->cssQuery("*[data-attrid='title']", $group)->item(0);
+        if ($titleNode instanceof \DomElement) {
+            $data['title'] = $titleNode->textContent;
+        }
+
+        if (empty($data['title'])) {
             $titleNode = $googleDOM->getXpath()->query("descendant::h2[contains(concat(' ', normalize-space(@class), ' '), ' kno-ecr-pt ')]", $group);
 
             if($titleNode->length >0) {
