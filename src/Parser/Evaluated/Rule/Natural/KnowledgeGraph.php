@@ -51,6 +51,11 @@ class KnowledgeGraph implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
 
             if($titleNode->length >0) {
                 $data['title'] = $titleNode->item(0)->firstChild->textContent;
+            } else {
+                $titleNode = $googleDOM->cssQuery("h2[data-attrid='title']", $group)->item(0);
+                if ($titleNode instanceof \DomElement) {
+                    $data['title'] = $titleNode->textContent;
+                }
             }
         }
 
