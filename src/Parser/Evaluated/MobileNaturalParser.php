@@ -95,6 +95,7 @@ class MobileNaturalParser extends AbstractParser
         // [[contains(@class, 'ki5rnd')]]  =app pack
         // [@class='xpdopen']  = features snipped/position zero
         //[contains(@class, 'gws-plugins-horizon-jobs__li-ed')]  = jobs
+        //@jscontroller='G42bz' = jobs
         //[contains(@class, 'LQQ1Bd')] - flights
         //div[@class='hNKF2b'] = hotels
         //div[@class='lr_container wDYxhc yc7KLc'] = definitions
@@ -120,6 +121,7 @@ class MobileNaturalParser extends AbstractParser
             contains(@class, 'ki5rnd') or
             @class='xpdopen' or
             contains(@class, 'gws-plugins-horizon-jobs__li-ed') or
+            @jscontroller='G42bz' or
             contains(@class, 'LQQ1Bd') or
             @class='xSoq1' or
             @class='cawG4b OvQkSb' or

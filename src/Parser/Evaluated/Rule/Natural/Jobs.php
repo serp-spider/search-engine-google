@@ -14,8 +14,12 @@ class Jobs implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        
+
         if ($node->hasClass('gws-plugins-horizon-jobs__li-ed')) {
+            return self::RULE_MATCH_MATCHED;
+        }
+
+        if (strpos($node->getAttribute('jscontroller'), 'G42bz') !== false) {
             return self::RULE_MATCH_MATCHED;
         }
 
