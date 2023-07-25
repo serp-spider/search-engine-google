@@ -43,6 +43,8 @@ class FeaturedSnipped implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
             }
 
             $aTag = $googleDOM->getXpath()->query("descendant::a", $featureSnippetNode);
+            $h3Tag = $googleDOM->getXpath()->query("descendant::h3", $featureSnippetNode);//title
+            $description = $googleDOM->getXpath()->query("preceding-sibling::div/descendant::div[@class='LGOjhe']", $featureSnippetNode);//description
 
             if ($aTag->length == 0) {
                 continue;
@@ -50,8 +52,8 @@ class FeaturedSnipped implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
 
             $object              = new \StdClass();
             $object->url         = $aTag->item(0)->getAttribute('href');
-            $object->description = '';
-            $object->title       = '';
+            $object->description = (!empty($description) && !empty($description->item(0)) && !empty($description->item(0)->textContent)) ? $description->item(0)->textContent : '';
+            $object->title       = (!empty($h3Tag) && !empty($h3Tag->item(0)) && !empty($h3Tag->item(0)->textContent)) ? $h3Tag->item(0)->textContent : '';
 
             $results[] = $object;
         }
