@@ -244,6 +244,8 @@ class TranslateService
             }
 
             $this->response[NaturalResultType::FEATURED_SNIPPED] = $firstResult->url;
+            $this->response[NaturalResultType::FEATURED_SNIPPED.'_title'] = isset($firstResult->title) ? $firstResult->title : '';
+            $this->response[NaturalResultType::FEATURED_SNIPPED. '_description'] = isset($firstResult->description) ? $firstResult->description : '';
         }
 
         if ($item->is(NaturalResultType::PRODUCT_LISTING) || $item->is(NaturalResultType::PRODUCT_LISTING_MOBILE)) {
