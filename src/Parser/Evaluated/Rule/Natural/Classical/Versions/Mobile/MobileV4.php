@@ -20,17 +20,21 @@ class MobileV4 implements ParsingRuleByVersionInterface
          contains(concat(' ', normalize-space(@class), ' '), ' cz3goc '))
         ]", $organicResult);
 
+        if (empty($aTag->length) && $organicResult->hasClass('zwqzjb')) {
+            $aTag = $organicResult;
+        }
+
         if (empty($aTag) && $organicResultObject->getLink() === null) {
             throw new InvalidDOMException('Cannot parse a classical result.');
         }
 
-        if(empty($aTag->item(0)) && $organicResultObject->getLink() === null) {
+        if(!$organicResult->hasClass('zwqzjb') && empty($aTag->item(0)) && $organicResultObject->getLink() === null) {
             throw new InvalidDOMException('Cannot parse a classical result.');
         }
 
         $titleTag = '';
 
-        if(!empty($aTag->item(0))) {
+        if(!($aTag instanceof DomElement) && !empty($aTag->item(0))) {
             $titleObj = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' MBeuO ')]", $aTag->item(0));
             if (!empty($titleObj->item(0))) {
                 $titleTag =  $titleObj->item(0);
@@ -38,12 +42,21 @@ class MobileV4 implements ParsingRuleByVersionInterface
                 $titleTag = $aTag->item(0)->lastChild;
             }
 
+        } else if ($aTag instanceof DomElement) {
+            $titleObj =  $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' pOOXW ')]", $aTag);
+            if (!empty($titleObj->item(0))) {
+                $titleTag =  $titleObj->item(0);
+            } else {
+                $titleTag = $aTag->item(0)->lastChild;
+            }
         }
 
 
 
-        if($organicResultObject->getLink() === null) {
+        if(!($aTag instanceof DomElement)  && $organicResultObject->getLink() === null) {
             $organicResultObject->setLink($dom->getUrl()->resolveAsString($aTag->item(0)->getAttribute('href')));
+        } else if (($aTag instanceof DomElement)  && $organicResultObject->getLink() === null) {
+            $organicResultObject->setLink($dom->getUrl()->resolveAsString($aTag->getAttribute('href')));
         }
 
         if (!$titleTag instanceof DomElement && !$titleTag instanceof \DOMText ) {
@@ -53,9 +66,15 @@ class MobileV4 implements ParsingRuleByVersionInterface
         if($organicResultObject->getTitle() === null) {
             $organicResultObject->setTitle($titleTag->textContent);
         }
+        if (!($aTag instanceof DomElement) ) {
+            $descriptionNodes = $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' MUxGbd yDYNvb ')]",
+                $organicResult);
+        } else {
+            $descriptionNodes = $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' Kzca5 JQWoo ')]",
+                $organicResult);
+        }
 
-        $descriptionNodes = $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' MUxGbd yDYNvb ')]",
-            $organicResult);
+
 
         $descriptionTag = null;
 

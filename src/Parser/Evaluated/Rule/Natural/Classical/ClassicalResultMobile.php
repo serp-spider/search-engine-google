@@ -39,7 +39,7 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
     public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ') or contains(concat(' ', normalize-space(@class), ' '), ' xpd EtOod ') or contains(concat(' ', normalize-space(@class), ' '), ' svwwZ ') or contains(concat(' ', normalize-space(@class), ' '), 'UDZeY fAgajc')]", $node);
+        $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ') or contains(concat(' ', normalize-space(@class), ' '), ' xpd EtOod ') or contains(concat(' ', normalize-space(@class), ' '), ' svwwZ ') or contains(concat(' ', normalize-space(@class), ' '), 'UDZeY fAgajc')] | //a[contains(concat(' ', normalize-space(@class), ' '), 'zwqzjb')]", $node);
         if ($naturalResults->length == 0) {
             $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, [], $node));
             $this->monolog->error('Cannot identify results in html page', ['class' => self::class]);
@@ -95,6 +95,16 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
             return true;
         }
         if($dom->xpathQuery("descendant::*[contains(concat(' ', normalize-space(@class), ' '), ' xpd EtOod ')]", $organicResult)->length > 0) {
+            return true;
+        }
+        if($dom->xpathQuery("descendant::*[contains(concat(' ', normalize-space(@class), ' '), ' zwqzjb ')]", $organicResult)->length > 0) {
+            return true;
+        }
+
+        if($dom->xpathQuery("descendant::*[contains(concat(' ', normalize-space(@class), ' '), ' zwqzjb ')]", $organicResult)->length > 0) {
+            return true;
+        }
+        if ($organicResult->hasClass('zwqzjb') && $dom->xpathQuery("ancestor::g-expandable-container", $organicResult)->length > 0 ) {
             return true;
         }
         // Inside div with class= 'mnr-c xpd O9g5cc uUPGi' are more divs with 'mnr-c xpd O9g5cc uUPGi'
