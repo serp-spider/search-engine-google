@@ -52,13 +52,31 @@ class ClassicalResultEngine
         }
         $imbricatorParent = $dom->xpathQuery("ancestor::*[@class='FxLDp']", $organicResult);
 
+        $reviewsAndPricingNodes = $dom->xpathQuery("descendant::*[@class='fG8Fp uo4vr']", $organicResult);
+        $hasPricing = false;
+        $reviewsAndPricing = false;
+        if ($reviewsAndPricingNodes->length > 0) {
+            $reviewsAndPricing = $reviewsAndPricingNodes->getNodeAt(0)->textContent;
+            preg_match('([0-9,]+(\xC2\xA0)[A-Z]{0,3})',$reviewsAndPricingNodes->getNodeAt(0)->textContent, $priceMatches);
+            if (!empty($priceMatches)) {
+                $hasPricing = true;
+            }
+        }
+        $hasArticleNodes = $dom->xpathQuery("descendant::*[@class='MUxGbd wuQ4Ob WZ8Tjf']", $organicResult);
+        $hasArticleDate = false;
+        if ($hasArticleNodes->length > 0) {
+            $hasArticleDate = $hasArticleNodes->getNodeAt(0)->textContent;
+        }
         $resultSet->addItem(new BaseResult(
             [$this->resultType],
             [
                 'title'       => $organicResultObject->getTitle(),
                 'url'         => $organicResultObject->getLink(),
                 'description' => $organicResultObject->getDescription(),
-                'imbricated'  => ($imbricatorParent->length > 0)
+                'imbricated'  => ($imbricatorParent->length > 0),
+                'reviewsAndPricing' => $reviewsAndPricing,
+                'hasPricing' => $hasPricing,
+                'articleDate' => $hasArticleDate
             ],
             $organicResult
         ));

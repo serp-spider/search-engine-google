@@ -163,7 +163,10 @@ class TranslateService
             "imbricated"        => property_exists($item, 'imbricated') ? $item->imbricated : false,
             "video"             => "",
             "amp"               => "",
-            "node_path"         => method_exists($item, 'getNodePath') ? $item->getNodePath() : $item->nodePath
+            "node_path"         => method_exists($item, 'getNodePath') ? $item->getNodePath() : $item->nodePath,
+            "reviews_and_pricing" => ($item->getData()['reviewsAndPricing'])?$item->getData()['reviewsAndPricing']:false,
+            "has_pricing"       => ($item->getData()['hasPricing'])?$item->getData()['hasPricing']:false,
+            "article_date"       => ($item->getData()['articleDate'])?$item->getData()['articleDate']:false
         ];
 
         $this->response['competition'][(string)$rank] = $competitionData;
