@@ -164,9 +164,9 @@ class TranslateService
             "video"             => "",
             "amp"               => "",
             "node_path"         => method_exists($item, 'getNodePath') ? $item->getNodePath() : $item->nodePath,
-            "reviews_and_pricing" => ($item->getData()['reviewsAndPricing'])?$item->getData()['reviewsAndPricing']:false,
-            "has_pricing"       => ($item->getData()['hasPricing'])?$item->getData()['hasPricing']:false,
-            "article_date"       => ($item->getData()['articleDate'])?$item->getData()['articleDate']:false
+            "reviews_and_pricing" => (property_exists($item, 'reviewsAndPricing'))?$item->reviewsAndPricing:false,
+            "has_pricing"       =>  (property_exists($item, 'hasPricing'))?$item->hasPricing:false,
+            "article_date"       =>  (property_exists($item, 'articleDate'))?$item->articleDate:false
         ];
 
         $this->response['competition'][(string)$rank] = $competitionData;
