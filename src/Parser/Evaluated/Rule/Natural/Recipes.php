@@ -25,10 +25,19 @@ class Recipes implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
     {
         $urls = $googleDOM->getXpath()->query('descendant::g-link', $node);
         $item = [];
-
+        $urlOnAttribute  = false;
+        if ($urls->length == 0) {
+            $urlOnAttribute =  true;
+            $urls = $googleDOM->getXpath()->query('descendant::a[@data-rl]', $node);
+        }
         if ($urls->length > 0) {
             foreach ($urls as $urlNode) {
-                $item['recipes_links'][] = ['link' => $urlNode->firstChild->getAttribute('href')];
+                if ($urlOnAttribute) {
+                    $item['recipes_links'][] = ['link' => $urlNode->getAttribute('data-rl')];
+                } else {
+                    $item['recipes_links'][] = ['link' => $urlNode->firstChild->getAttribute('href')];
+                }
+
             }
 
             $resultSet->addItem(new BaseResult(NaturalResultType::RECIPES_GROUP , $item, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition));
