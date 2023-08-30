@@ -32,6 +32,10 @@ class Flights implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
+        if ($googleDOM->xpathQuery("ancestor::g-accordion-expander", $node)->length >0) {
+            return false;
+        }
+
         $urls = $googleDOM->getXpath()->query('descendant::a', $node->firstChild);
         $item = [];
 
