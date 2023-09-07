@@ -292,7 +292,11 @@ class TranslateService
         }
 
         if ($item->is(NaturalResultType::IMAGE_GROUP) || $item->is(NaturalResultType::IMAGE_GROUP_MOBILE) ) {
-            $this->response[NaturalResultType::IMAGE_GROUP] = $item->getData()['images'];
+            $data = $item->getData();
+            if (isset($data['images'])){
+                $this->response[NaturalResultType::IMAGE_GROUP] = $item->getData()['images'];
+            }
+
         }
 
         if ($item->is(NaturalResultType::TOP_STORIES) || $item->is(NaturalResultType::TOP_STORIES_MOBILE) ) {
