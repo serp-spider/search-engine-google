@@ -16,7 +16,7 @@ class ProductListing implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if (str_contains($node->getAttribute('class'),  'commercial-unit-desktop-top') || str_contains($node->getAttribute('class'),  'cu-container')) {
+        if (str_contains($node->getAttribute('class'),  'commercial-unit-desktop-top') || str_contains($node->getAttribute('class'),  'cu-container') || $node->getAttribute('data-enable-product-traversal') == true) {
             if (str_contains($node->getAttribute('class'), 'cu-container')) {
                 //$this->hasSideSerpFeaturePosition = true;
                 $this->checkIfSidePosition($node);
@@ -30,11 +30,15 @@ class ProductListing implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile=false)
     {
         $productsNodes = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' pla-unit ') or
-        contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ') ]", $node);
+        contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ')]", $node);
         $items         = [];
 
         if ($productsNodes->length == 0) {
-            return;
+
+            $productsNodes = $googleDOM->getXpath()->query("descendant::li[contains(concat(' ', normalize-space(@data-offer-surface), ' '), ' search-result-surface ')]", $node);
+            if ($productsNodes->length == 0) {
+                return;
+            }
         }
 
         foreach ($productsNodes as $productNode) {
@@ -42,16 +46,19 @@ class ProductListing implements \Serps\SearchEngine\Google\Parser\ParsingRuleInt
             if (!empty($aHrefProduct) && $aHrefProduct->getTagName() != 'a') {
                 $aHrefProduct = $productNode->childNodes[0];
             }
-
-            if (!$aHrefProduct instanceof DomElement) {
-                continue;
+            $seller = false;
+            if (!$aHrefProduct instanceof DomElement || (!empty($aHrefProduct) && $aHrefProduct->getTagName() != 'a')) {
+                $seller = $googleDOM->getXpath()->query("descendant::span[@class='WJMUdc rw5ecc']", $productNode)->item(0);
+                if (empty($seller)) {
+                    continue;
+                }
+            }
+            if (!$seller) {
+                $productUrl = $aHrefProduct->getAttribute('href');
+            } else {
+                $productUrl = explode('-',$seller->textContent)[0];
             }
 
-            if (!empty($aHrefProduct) && $aHrefProduct->getTagName() != 'a') {
-                continue;
-            }
-
-            $productUrl = $aHrefProduct->getAttribute('href');
             $items[]    = ['url' => $productUrl];
         }
 

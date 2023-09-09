@@ -90,6 +90,7 @@ class NaturalParser extends AbstractParser
         // [@class='xpdopen']  = features snipped/position zero
         // [@class='e4xoPb']  = videos
         // [contains(@class, 'commercial-unit-desktop-top')]  = product listing
+        // [contains(@data-enable-product-traversal, 'true')]  = product listing
         // [contains(@class, 'cu-container')]  = product listing on right, like ads
         // [contains(@class, 'related-question-pair')]  = questions
         // [contains(@class, 'gws-plugins-horizon-jobs__li-ed')]  = jobs
@@ -126,6 +127,7 @@ class NaturalParser extends AbstractParser
             contains(@class, 'CH6Bmd') or
             contains(@class, 'VT5Tde') or
             contains(@class, 'commercial-unit-desktop-top') or
+            contains(@data-enable-product-traversal, 'true') or
             contains(@class, 'cu-container') or
             contains(@class, 'related-question-pair') or
             contains(@class, 'gws-plugins-horizon-jobs__li-ed') or
