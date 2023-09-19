@@ -67,7 +67,7 @@ class MobileV4 implements ParsingRuleByVersionInterface
             $organicResultObject->setTitle($titleTag->textContent);
         }
         if (!($aTag instanceof DomElement) ) {
-            $descriptionNodes = $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' MUxGbd yDYNvb ')]",
+            $descriptionNodes = $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' yDYNvb ')]",
                 $organicResult);
         } else {
             $descriptionNodes = $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' Kzca5 JQWoo ')]",

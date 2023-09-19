@@ -42,7 +42,7 @@ class MobileV2 implements ParsingRuleByVersionInterface
             $organicResultObject->setTitle($titleTag->textContent);
         }
 
-        $descriptionNodes = $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' MUxGbd yDYNvb ')]",
+        $descriptionNodes = $dom->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' yDYNvb ')]",
             $organicResult);
 
         $descriptionTag = null;
