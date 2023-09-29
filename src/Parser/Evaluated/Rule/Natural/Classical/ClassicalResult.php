@@ -32,7 +32,7 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
         }
 
         $parentWithSameClass = $dom->xpathQuery("ancestor::div[@class='g']", $organicResult);
-        
+
 
         if($parentWithSameClass->length > 0) {
             if( $dom->xpathQuery("descendant::table[@class='jmjoTe']", $parentWithSameClass->item(0))->length >0) {
@@ -102,6 +102,18 @@ class ClassicalResult extends AbstractRuleDesktop implements ParsingRuleInterfac
         if( $organicResult->hasClasses(['mnr-c'])) {
             return true;
         }
+
+        if( $organicResult->hasClasses(['g-blk'])) {
+            return true;
+        }
+        
+        $fsnParent =   $googleDOM->getXpath()->query("ancestor::div[contains(concat(' ', normalize-space(@class), ' '), ' xpdopen ')]", $organicResult);
+
+        if ($fsnParent->length > 0) {
+
+            return true;
+        }
+
 
         // Avoid getting  results from questions (when clicking "Show more". When clicking "Show more" on questions)
         // The result under it looks exactly like a natural results
