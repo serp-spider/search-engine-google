@@ -12,9 +12,10 @@ class DesktopV1 implements ParsingRuleByVersionInterface
     public function parseNode(GoogleDom $dom, \DomElement $organicResult, OrganicResultObject $organicResultObject)
     {
         /* @var $aTag \DOMElement */
-        $aTag = $dom->xpathQuery("descendant::*[(self::div)]/a[not(contains(@class, 'fl'))]", $organicResult)->item(0);
-        if (!$aTag) {
+
         $aTag = $dom->xpathQuery("descendant::*[(self::span)]/a", $organicResult)->item(0);
+        if (!$aTag) {
+            $aTag = $dom->xpathQuery("descendant::*[(self::div)]/a[not(contains(@class, 'fl'))]", $organicResult)->item(0);
         }
         if (!$aTag) {
             throw new InvalidDOMException('Cannot parse a classical result.');
