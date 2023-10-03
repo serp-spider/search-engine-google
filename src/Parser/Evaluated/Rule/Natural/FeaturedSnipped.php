@@ -14,7 +14,7 @@ class FeaturedSnipped implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
-        if ($node->getAttribute('class') == 'xpdopen') {
+        if (strpos($node->getAttribute('class'), 'xpdopen') !== false || strpos($node->getAttribute('class'), 'xpdbox') !== false) {
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -31,7 +31,7 @@ class FeaturedSnipped implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
         $naturalResultNodes = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' g ')]", $node);
 
         if ($naturalResultNodes->length == 0) {
-            $naturalResultNodes = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' V3FYCf ')]", $node);
+            $naturalResultNodes = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' SALvLe ')]", $node);
             if ($naturalResultNodes->length == 0) {
                 return;
             }
@@ -48,7 +48,10 @@ class FeaturedSnipped implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
             $aTag = $googleDOM->getXpath()->query("descendant::a", $featureSnippetNode);
             $h3Tag = $googleDOM->getXpath()->query("descendant::h3", $featureSnippetNode);//title
             $description = $googleDOM->getXpath()->query("preceding-sibling::div/descendant::div[@class='LGOjhe']", $featureSnippetNode);//description
+            if ($description->length == 0)  {
+                $description = $googleDOM->getXpath()->query("descendant::div[@class='LGOjhe']", $featureSnippetNode);//description
 
+            }
             if ($aTag->length == 0) {
                 continue;
             }
