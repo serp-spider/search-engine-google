@@ -36,6 +36,11 @@ class Flights implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
             return false;
         }
 
+        //MjjYud - this is a kowledge graph class. if the flights class is inside a kowledge graph it's a how to get there option, not flight
+        if ($googleDOM->xpathQuery("ancestor::div[contains(concat(' ', normalize-space(@class), ' '), ' MjjYud ')]", $node)->length >0) {
+            return false;
+        }
+
         $urls = $googleDOM->getXpath()->query('descendant::a', $node->firstChild);
         $item = [];
 
