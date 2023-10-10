@@ -99,6 +99,7 @@ class NaturalParser extends AbstractParser
         // //*[g-section-with-header[@class='yG4QQe TBC9ub']]]/child::* = top stories
         // [@id='kp-wp-tab-cont-Latest'] = top stories
         //div[@class='CH6Bmd']/div[@class='ntKMYc P2hV9e'] = hotels
+        //div[@class='zaTIWc'] - new hotels desktop
         //@class='lr_container yc7KLc mBNN3d' - definitions
         // [contains(@class, 'LQQ1Bd')] - flights
         //@id = 'oFNiHe' - misspelings
@@ -125,6 +126,7 @@ class NaturalParser extends AbstractParser
             contains(@class, 'lr_container yc7KLc mBNN3d') or
             contains(@class, 'LQQ1Bd') or
             contains(@class, 'CH6Bmd') or
+            contains(@class, 'zaTIWc') or
             contains(@class, 'VT5Tde') or
             contains(@class, 'commercial-unit-desktop-top') or
             contains(@data-enable-product-traversal, 'true') or
