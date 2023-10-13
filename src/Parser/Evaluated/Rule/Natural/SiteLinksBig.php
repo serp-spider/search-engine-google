@@ -30,6 +30,11 @@ class SiteLinksBig implements \Serps\SearchEngine\Google\Parser\ParsingRuleInter
 
         foreach ($siteLinksNodes as $siteLinksNode) {
             $aNode   = $googleDOM->xpathQuery("descendant::a", $siteLinksNode)->item(0);
+
+            if ($aNode === null) {
+                continue;
+            }
+
             $items[] = ['title' => $aNode->textContent, 'url' => $aNode->getAttribute('href')];
         }
 
