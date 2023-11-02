@@ -55,15 +55,13 @@ class AdsTop implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
             }
 
             $link = false;
-            if (!$adsNode->hasClass('Krnil')) {
+            $link = $adsNode->getAttribute('href');
+            if (empty($link) && !$adsNode->hasClass('Krnil')) {
                 $linkNodes = $googleDOM->getXpath()->query('descendant::span[contains(concat(\' \', normalize-space(@role), \' \'), \' text \')]', $adsNode);
                 if ($linkNodes->length == 0) {
                     continue;
                 }
                 $link = $linkNodes->item(0)->textContent;
-
-            } else {
-                $link = $adsNode->getAttribute('href');
             }
 
             if (empty($link)) {
