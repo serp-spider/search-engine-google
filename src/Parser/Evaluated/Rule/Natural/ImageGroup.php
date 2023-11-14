@@ -18,7 +18,7 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
 
     protected $hasSerpFeaturePosition = true;
     protected $hasSideSerpFeaturePosition = false;
-    
+
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         if ($node->getAttribute('id') == 'iur' &&
@@ -37,7 +37,7 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $images = $googleDOM->getXpath()->query('descendant::div[@data-lpage]', $node->lastChild);
+        $images = $googleDOM->getXpath()->query('descendant::div[@data-lpage]', $node);
         $item   = [];
 
         if ($images->length > 0) {
