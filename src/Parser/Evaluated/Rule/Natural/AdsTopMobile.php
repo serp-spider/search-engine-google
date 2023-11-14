@@ -32,8 +32,12 @@ class AdsTopMobile extends AdsTop
             $aHrefs = $googleDOM->getXpath()->query("descendant::a[
         contains(concat(' ', normalize-space(@class), ' '), ' C8nzq BmP5tf ') or
         @class='sXtWJb' or
-        (contains(concat(' ', normalize-space(@class), ' '), ' BmP5tf ') and
-         contains(concat(' ', normalize-space(@class), ' '), ' cz3goc '))
+        (
+            contains(concat(' ', normalize-space(@class), ' '), ' BmP5tf ') and
+            contains(concat(' ', normalize-space(@class), ' '), ' cz3goc ')
+        ) or
+        contains(concat(' ', normalize-space(@class), ' '), ' rhgcW ')
+
         ]", $adsNode);
 
             $pla = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' commercial-unit-mobile-top ')]", $adsNode);
