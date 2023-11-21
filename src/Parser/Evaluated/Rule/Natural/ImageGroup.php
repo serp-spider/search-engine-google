@@ -31,6 +31,10 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
             return self::RULE_MATCH_MATCHED;
         }
 
+        if ($node->getAttribute('data-attrid') == 'images universal') {
+            return self::RULE_MATCH_MATCHED;
+        }
+
         return self::RULE_MATCH_NOMATCH;
     }
 
@@ -39,6 +43,10 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
     {
         $images = $googleDOM->getXpath()->query('descendant::div[@data-lpage]', $node);
         $item   = [];
+
+        if ($images->length == 0) {
+            $images = $googleDOM->getXpath()->query('ancestor::div[contains(concat(" ", @class, " "), " MjjYud ")]/descendant::div[@data-lpage]', $node);
+        }
 
         if ($images->length > 0) {
             foreach ($images as $imageNode) {
