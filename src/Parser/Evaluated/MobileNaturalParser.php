@@ -74,7 +74,7 @@ class MobileNaturalParser extends AbstractParser
     protected function getParsableItems(GoogleDom $googleDom)
     {
         // [@id='iur'] = images
-        // @data-attrid='images universal' = images
+        // @data-attrid='images universal' = images -- removed FIX IT!
         // [@id='sports-app'] = classical results
         // [contains(@class, 'scm-c')]  = maps
         // [contains(@class, 'qixVud')]  = maps
@@ -105,7 +105,6 @@ class MobileNaturalParser extends AbstractParser
         //@id='lud-ed' directions
         //contains(@class, 'e8Ck0d') visual digest
         return $googleDom->xpathQuery("//*[@id='iur' or
-            @data-attrid='images universal' or
             @id='sports-app' or
             @id='center_col' or
             @id='tads' or
