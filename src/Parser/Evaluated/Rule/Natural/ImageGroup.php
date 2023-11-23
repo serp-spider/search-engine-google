@@ -45,7 +45,8 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
         $item   = [];
 
         if ($images->length == 0) {
-            $images = $googleDOM->getXpath()->query('ancestor::div[contains(concat(" ", @class, " "), " MjjYud ")]/descendant::div[@data-lpage]', $node);
+            //TODO FIX THIS
+            //$images = $googleDOM->getXpath()->query('ancestor::div[contains(concat(" ", @class, " "), " MjjYud ")]/descendant::div[@data-lpage]', $node);
         }
 
         if ($images->length > 0) {
