@@ -39,7 +39,7 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
 
     public function parse(GoogleDom $dom, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ') or contains(concat(' ', normalize-space(@class), ' '), ' xpd EtOod ') or contains(concat(' ', normalize-space(@class), ' '), ' svwwZ ') or contains(concat(' ', normalize-space(@class), ' '), 'UDZeY fAgajc')] | //a[contains(concat(' ', normalize-space(@class), ' '), 'zwqzjb')]", $node);
+        $naturalResults = $dom->xpathQuery("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' mnr-c ') or contains(concat(' ', normalize-space(@class), ' '), ' xpd EtOod ') or contains(concat(' ', normalize-space(@class), ' '), ' svwwZ ') or contains(concat(' ', normalize-space(@class), ' '), 'UDZeY fAgajc') or (contains(concat(' ', normalize-space(@class), ' '), 'kp-wholepage') and contains(concat(' ', normalize-space(@class), ' '), 'kp-wholepage-osrp'))] | //a[contains(concat(' ', normalize-space(@class), ' '), 'zwqzjb')]", $node);
         if ($naturalResults->length == 0) {
             $resultSet->addItem(new BaseResult(NaturalResultType::EXCEPTIONS, [], $node));
             $this->monolog->error('Cannot identify results in html page', ['class' => self::class]);
@@ -79,10 +79,6 @@ class ClassicalResultMobile extends AbstractRuleMobile implements ParsingRuleInt
         }
 
         if($dom->xpathQuery("ancestor::*[contains(concat(' ', normalize-space(@id), ' '), ' tvcap ')]", $organicResult)->length > 0) {
-            return true;
-        }
-        // Knowledge graph, sometimes, is identified as an organic result
-        if ($organicResult->hasClasses(['kp-wholepage'])) {
             return true;
         }
 
