@@ -75,19 +75,20 @@ class TranslateService
     {
         $matchedSubdomains = [];
 
+        $urlDomain = $this->extractDomain($item->url);
         if ($this->crawlSubdomains || $this->mobile || $this->urlAlias) {
             if ($this->crawlSubdomains === false) {
-                preg_match('/m\.' . str_replace('.', '\.', $this->siteHost) . '/', $item->url, $matchedSubdomains);
+                preg_match('/m\.' . str_replace('.', '\.', $this->siteHost) . '/', $urlDomain, $matchedSubdomains);
 
                 if (empty($matchedSubdomains[0]) && $this->urlAlias) {
-                    preg_match('/m\.' . str_replace('.', '\.', $this->urlAlias) . '/', $item->url, $matchedSubdomains);
+                    preg_match('/m\.' . str_replace('.', '\.', $this->urlAlias) . '/', $urlDomain, $matchedSubdomains);
                 }
 
             } else {
-                preg_match('/.*\.' . str_replace('.', '\.', $this->siteHost) . '/', $item->url, $matchedSubdomains);
+                preg_match('/.*\.' . str_replace('.', '\.', $this->siteHost) . '/', $urlDomain, $matchedSubdomains);
 
                 if (empty($matchedSubdomains[0]) && $this->urlAlias) {
-                    preg_match('/.*\.' . str_replace('.', '\.', $this->urlAlias) . '/', $item->url,
+                    preg_match('/.*\.' . str_replace('.', '\.', $this->urlAlias) . '/', $urlDomain,
                         $matchedSubdomains);
                 }
             }
