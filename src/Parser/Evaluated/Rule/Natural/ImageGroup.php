@@ -25,7 +25,9 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
             (   // Mobile
                 $node->parentNode->hasAttribute('jsmodel') ||
                 // Desktop
-                $node->parentNode->parentNode->hasAttribute('jsmodel')
+                $node->parentNode->parentNode->hasAttribute('jsmodel')  ||
+                // New Mobile
+                $node->parentNode->parentNode->parentNode->parentNode->parentNode->hasAttribute('jsmodel')
             )
         ) {
             return self::RULE_MATCH_MATCHED;
@@ -46,7 +48,7 @@ class ImageGroup implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterfa
 
         if ($images->length == 0) {
             //TODO FIX THIS
-            //$images = $googleDOM->getXpath()->query('ancestor::div[contains(concat(" ", @class, " "), " MjjYud ")]/descendant::div[@data-lpage]', $node);
+            $images = $googleDOM->getXpath()->query('ancestor::div[contains(concat(" ", @class, " "), " MjjYud ")]/descendant::div[@data-lpage]', $node);
         }
 
         if ($images->length > 0) {
