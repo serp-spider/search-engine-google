@@ -66,6 +66,20 @@ class TranslateService
         return $url;
     }
 
+    protected function removeProtocolAndPath($url)
+    {
+        $url = strtolower(trim($url));
+        $url = str_replace(['http://', 'https://'], ['', ''], $url);
+        if (strpos($url, '/') != false) {
+            $url = substr($url, 0, strpos($url, '/'));
+        }
+
+        $url = ltrim($url, '.');
+        $url = ltrim($url, '/');
+
+        return $url;
+    }
+
     /**
      * @param $item
      *
@@ -75,20 +89,20 @@ class TranslateService
     {
         $matchedSubdomains = [];
 
-        $urlDomain = $this->extractDomain($item->url);
+        $url = $this->removeProtocolAndPath($item->url);
         if ($this->crawlSubdomains || $this->mobile || $this->urlAlias) {
             if ($this->crawlSubdomains === false) {
-                preg_match('/m\.' . str_replace('.', '\.', $this->siteHost) . '/', $urlDomain, $matchedSubdomains);
+                preg_match('/m\.' . str_replace('.', '\.', $this->siteHost) . '/', $url, $matchedSubdomains);
 
                 if (empty($matchedSubdomains[0]) && $this->urlAlias) {
-                    preg_match('/m\.' . str_replace('.', '\.', $this->urlAlias) . '/', $urlDomain, $matchedSubdomains);
+                    preg_match('/m\.' . str_replace('.', '\.', $this->urlAlias) . '/', $url, $matchedSubdomains);
                 }
 
             } else {
-                preg_match('/.*\.' . str_replace('.', '\.', $this->siteHost) . '/', $urlDomain, $matchedSubdomains);
+                preg_match('/.*\.' . str_replace('.', '\.', $this->siteHost) . '/', $url, $matchedSubdomains);
 
                 if (empty($matchedSubdomains[0]) && $this->urlAlias) {
-                    preg_match('/.*\.' . str_replace('.', '\.', $this->urlAlias) . '/', $urlDomain,
+                    preg_match('/.*\.' . str_replace('.', '\.', $this->urlAlias) . '/', $url,
                         $matchedSubdomains);
                 }
             }
