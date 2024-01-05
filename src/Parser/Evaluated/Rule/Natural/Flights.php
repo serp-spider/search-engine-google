@@ -18,11 +18,17 @@ class Flights implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 
     protected $hasSerpFeaturePosition = true;
     protected $hasSideSerpFeaturePosition = false;
+    private $isNewFlight = false;
 
     public function match(GoogleDom $dom, \Serps\Core\Dom\DomElement $node)
     {
         $class = $node->getAttribute('class');
         if (!empty($class) && strpos($class, 'LQQ1Bd') !== false && $node->getChildren()->count() != 0) {
+            return self::RULE_MATCH_MATCHED;
+        }
+
+        if (!empty($class) && strpos($class, 'BNeawe DwrKqd') !== false) {
+            $this->isNewFlight = true;
             return self::RULE_MATCH_MATCHED;
         }
 
@@ -32,23 +38,34 @@ class Flights implements \Serps\SearchEngine\Google\Parser\ParsingRuleInterface
 
     public function parse(GoogleDom $googleDOM, \DomElement $node, IndexedResultSet $resultSet, $isMobile = false)
     {
-        if ($googleDOM->xpathQuery("ancestor::g-accordion-expander", $node)->length >0) {
-            return false;
-        }
+        if ($this->isNewFlight) {
+            $urls = $googleDOM->getXpath()->query('ancestor::tbody/descendant::a', $node->firstChild);
+            $item = [];
 
-        //bCOlv - this is a kowledge used in things to know/people also ask. these are not flights results
-        if (
-            $googleDOM->xpathQuery("ancestor::div[contains(concat(' ', normalize-space(@class), ' '), ' bCOlv ')]", $node)->length > 0
-        ) {
-            return false;
-        }
+            if($urls->length> 0) {
+                foreach ($urls as $urlNode) {
+                    $item['flights_names'][] = ['name' => $urlNode->firstChild->textContent, 'url' => $urlNode->getAttribute('href')];
+                }
+            }
+        } else {
+            if ($googleDOM->xpathQuery("ancestor::g-accordion-expander", $node)->length >0) {
+                return false;
+            }
 
-        $urls = $googleDOM->getXpath()->query('descendant::a', $node->firstChild);
-        $item = [];
+            //bCOlv - this is a kowledge used in things to know/people also ask. these are not flights results
+            if (
+                $googleDOM->xpathQuery("ancestor::div[contains(concat(' ', normalize-space(@class), ' '), ' bCOlv ')]", $node)->length > 0
+            ) {
+                return false;
+            }
 
-        if($urls->length> 0) {
-            foreach ($urls as $urlNode) {
-                $item['flights_names'][] = ['name' => $urlNode->firstChild->textContent, 'url' => $urlNode->getAttribute('href')];
+            $urls = $googleDOM->getXpath()->query('descendant::a', $node->firstChild);
+            $item = [];
+
+            if($urls->length> 0) {
+                foreach ($urls as $urlNode) {
+                    $item['flights_names'][] = ['name' => $urlNode->firstChild->textContent, 'url' => $urlNode->getAttribute('href')];
+                }
             }
         }
 

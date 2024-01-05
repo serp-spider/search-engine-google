@@ -102,6 +102,7 @@ class NaturalParser extends AbstractParser
         //div[@class='zaTIWc'] - new hotels desktop
         //@class='lr_container yc7KLc mBNN3d' - definitions
         // [contains(@class, 'LQQ1Bd')] - flights
+        // [@class='BNeawe DwrKqd'] - new flights
         //@id = 'oFNiHe' - misspelings
         //@id = 'result-stats' - no of results
         //@id = 'lud-ed' - directions
@@ -125,6 +126,7 @@ class NaturalParser extends AbstractParser
             @class='xpdopen' or
             contains(@class, 'lr_container yc7KLc mBNN3d') or
             contains(@class, 'LQQ1Bd') or
+            @class='BNeawe DwrKqd' or
             contains(@class, 'CH6Bmd') or
             contains(@class, 'zaTIWc') or
             contains(@class, 'VT5Tde') or
