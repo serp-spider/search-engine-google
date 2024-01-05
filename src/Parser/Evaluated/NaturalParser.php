@@ -87,6 +87,7 @@ class NaturalParser extends AbstractParser
         // [@id='tvcap']  = ads top carousel
         // [@id='extabar']  =app pack
         // [@class='C7r6Ue'] VT5Tde Qq3Lb WVGKWb = maps
+        // [@id='Odp5De'] - maps
         // [@class='xpdopen']  = features snipped/position zero
         // [@class='e4xoPb']  = videos
         // [contains(@class, 'commercial-unit-desktop-top')]  = product listing
@@ -120,6 +121,7 @@ class NaturalParser extends AbstractParser
             @id='extabar' or
             @jsname='MGJTwe' or
             @class='C7r6Ue' or
+            @id='Odp5De' or
             @class='e4xoPb' or
             @class='WVGKWb' or
             @class='Qq3Lb' or
