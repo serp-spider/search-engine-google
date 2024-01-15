@@ -95,6 +95,7 @@ class MobileNaturalParser extends AbstractParser
         // [[contains(@class, 'qs-io')]]  =app pack
         // [[contains(@class, 'ki5rnd')]]  =app pack
         // [@class='xpdopen']  = features snipped/position zero
+        // [contains(@class, 'CWesnb')]  = features snipped/position zero
         //[contains(@class, 'gws-plugins-horizon-jobs__li-ed')]  = jobs
         //@jscontroller='G42bz' = jobs
         //[contains(@class, 'LQQ1Bd')] - flights
@@ -122,6 +123,7 @@ class MobileNaturalParser extends AbstractParser
             contains(@class, 'qs-io') or
             contains(@class, 'ki5rnd') or
             @class='xpdopen' or
+            contains(@class, 'CWesnb') or
             contains(@class, 'gws-plugins-horizon-jobs__li-ed') or
             @jscontroller='G42bz' or
             contains(@class, 'LQQ1Bd') or
