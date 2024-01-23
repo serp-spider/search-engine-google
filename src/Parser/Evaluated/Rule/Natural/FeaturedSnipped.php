@@ -45,7 +45,11 @@ class FeaturedSnipped implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
         if ($naturalResultNodes->length == 0) {
             $naturalResultNodes = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' SALvLe ')]", $node);
             if ($naturalResultNodes->length == 0) {
-                return;
+                // this older class is still valid
+                $naturalResultNodes = $googleDOM->getXpath()->query("descendant::div[contains(concat(' ', normalize-space(@class), ' '), ' V3FYCf ')]", $node);
+                if ($naturalResultNodes->length == 0) {
+                    return;
+                }
             }
         }
 
@@ -100,7 +104,7 @@ class FeaturedSnipped implements \Serps\SearchEngine\Google\Parser\ParsingRuleIn
             $object->title       = $aTag->item(0)->textContent;
             $results[] = $object;
         }
-        
+
         if(!empty($results)) {
             $resultSet->addItem(
                 new BaseResult($this->getType($isMobile), $results, $node, $this->hasSerpFeaturePosition, $this->hasSideSerpFeaturePosition)
