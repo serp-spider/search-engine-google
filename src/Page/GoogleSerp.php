@@ -57,10 +57,10 @@ class GoogleSerp extends GoogleDom
      * @return IndexedResultSet|void
      * @throws InvalidDOMException
      */
-    public function getNaturalResults()
+    public function getNaturalResults($mobile = false)
     {
         if ($this->javascriptIsEvaluated()) {
-            if ($this->isMobile()) {
+            if ($this->isMobile() || $mobile) {
                 $parser = new MobileNaturalParser($this->logger);
             } else {
                 $parser = new NaturalParser($this->logger);
