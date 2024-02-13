@@ -83,6 +83,7 @@ class MobileNaturalParser extends AbstractParser
         // [@class='C7r6Ue']  = maps
         // [@class='qixVud']  = maps
         // [@class='xSoq1']  = top stories
+        // [@class='lU8tTd']  = top stories
         //  @class='cawG4b OvQkSb' = videos
         //  @class='uVMCKf mnr-c' = videos
         //  @class='HD8Pae mnr-c' = videos
@@ -129,6 +130,7 @@ class MobileNaturalParser extends AbstractParser
             contains(@class, 'LQQ1Bd') or
             @class='BNeawe DwrKqd' or
             @class='xSoq1' or
+            @class='lU8tTd' or
             @class='cawG4b OvQkSb' or
             @class='uVMCKf mnr-c' or
             contains(@class, 'HD8Pae mnr-c') or

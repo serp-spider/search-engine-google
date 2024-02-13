@@ -19,6 +19,10 @@ class TopStoriesMobile extends TopStories
             return self::RULE_MATCH_MATCHED;
         }
 
+        if ($node->hasClass('lU8tTd')) {
+            return self::RULE_MATCH_MATCHED;
+        }
+
         return self::RULE_MATCH_NOMATCH;
     }
 }
